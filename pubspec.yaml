@@ -24,7 +24,7 @@ dependencies:
   permission_handler: ^11.1.0
   vibration: ^1.8.3
   extended_tabs: ^4.1.0
-  modal_bottom_sheet: ^2.1.2
+  modal_bottom_sheet: ^3.0.0-pre
   azlistview: ^2.0.0
   lpinyin: ^2.0.3
   scrollable_positioned_list: ^0.2.3
