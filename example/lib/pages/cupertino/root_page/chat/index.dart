@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 class ChatRootPage extends StatefulWidget {
   const ChatRootPage({Key? key}) : super(key: key);
@@ -43,8 +44,19 @@ class _ChatRootPageState extends State<ChatRootPage> {
   }
 }
 
-class _ChildPage extends StatelessWidget {
+class _ChildPage extends StatefulWidget {
   const _ChildPage();
+
+  @override
+  State<_ChildPage> createState() => _ChildPageState();
+}
+
+class _ChildPageState extends State<_ChildPage> {
+  @override
+  void deactivate() {
+    super.deactivate();
+    logger.i('xxx');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +70,14 @@ class _ChildPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              CupertinoButton.filled(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: false).push(
+                    CupertinoPageRoute(builder: (ctx) => const _ChildPage()),
+                  );
+                },
+                child: const Text('下一个子页面'),
+              ),
               CupertinoButton.filled(
                 onPressed: () {
                   Navigator.of(context, rootNavigator: false).push(

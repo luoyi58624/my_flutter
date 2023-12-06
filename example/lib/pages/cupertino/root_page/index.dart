@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:my_flutter/pages/cupertino.dart';
+import 'package:my_flutter/my_flutter.dart';
 import 'cart/index.dart';
 import 'chat/index.dart';
 import 'classify/index.dart';
@@ -16,6 +16,7 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
+    logger.i(context.getElementForInheritedWidgetOfExactType());
     return const CupertinoRootPage(
       pages: [
         RootPageModel('首页', CupertinoIcons.home, HomeRootPage()),

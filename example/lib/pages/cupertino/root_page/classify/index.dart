@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:my_flutter/my_flutter.dart';
 
-import '../../public_page/child.dart';
-
 class ClassifyRootPage extends StatefulWidget {
   const ClassifyRootPage({Key? key}) : super(key: key);
 

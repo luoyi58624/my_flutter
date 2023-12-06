@@ -3,16 +3,8 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:my_flutter/my_flutter.dart';
 
-class RootPageModel {
-  final String label;
-  final IconData icon;
-  final Widget page;
-
-  const RootPageModel(this.label, this.icon, this.page);
-}
-
+/// cupertino风格根页面
 class CupertinoRootPage extends StatefulWidget {
-  /// cupertino根页面
   const CupertinoRootPage({
     super.key,
     required this.pages,

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:my_flutter/my_flutter.dart';
-import 'package:my_flutter/pages/cupertino.dart';
 import 'package:my_flutter_app/controller/demo_controller.dart';
 
 class CartRootPage extends StatefulWidget {
@@ -44,7 +43,7 @@ class _CartRootPageState extends State<CartRootPage> {
               const SizedBox(height: 8),
               CupertinoButton.filled(
                 onPressed: () {
-                  rebootApp(context);
+                  RestartAppWidget.restartApp(context);
                 },
                 child: const Text('重启App'),
               ),
