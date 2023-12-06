@@ -7,6 +7,7 @@ import 'package:my_flutter/utils/toast.dart';
 export 'package:flustars/flustars.dart';
 export 'package:get/get.dart';
 export 'package:go_router/go_router.dart';
+export 'package:cupertino_icons/cupertino_icons.dart';
 
 export './modals/simple_modals.dart';
 
