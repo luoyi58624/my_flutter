@@ -66,7 +66,7 @@ class _ImageWidgetState extends State<ImageWidget> {
   Widget buildNetworkImage() {
     if (!CommonUtil.isEmpty(widget.url) && Uri.tryParse(widget.url!) != null) {
       return CachedNetworkImage(
-        imageUrl: "http://via.placeholder.com/350x150",
+        imageUrl: widget.url!,
         placeholder: (context, url) =>
             SpinKitPulse(color: Colors.grey.shade400),
         errorWidget: (context, url, error) => loadFailWidget,

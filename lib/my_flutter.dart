@@ -27,6 +27,7 @@ export './widgets/cascader.dart';
 export './widgets/flex_wrap.dart';
 export './widgets/flexible_title.dart';
 export './widgets/hide_keybord.dart';
+export './widgets/image.dart';
 export './widgets/index_list.dart';
 export './widgets/loading.dart';
 export './widgets/scroll_ripper.dart';
