@@ -1,7 +1,9 @@
 library my_flutter;
 
-import 'package:flustars/flustars.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:my_flutter/utils/local_storage.dart';
 import 'package:my_flutter/utils/toast.dart';
 
 export 'package:flustars/flustars.dart';
@@ -15,6 +17,8 @@ export './modals/simple_modals.dart';
 
 export './utils/color.dart';
 export './utils/common.dart';
+export './utils/getx.dart';
+export './utils/local_storage.dart';
 export './utils/logger.dart';
 export './utils/no_ripper.dart';
 export './utils/permission.dart';
@@ -35,9 +39,17 @@ export './widgets/simple_widgets.dart';
 export './widgets/tag.dart';
 export './widgets/tap_animate.dart';
 export './widgets/text_highlight.dart';
+export './widgets/webview.dart';
 
 Future<void> initMyFlutter() async {
-  await SpUtil.getInstance();
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  await GetStorage.init();
+  localStorage = LocalStorage();
 }
 
 /// MaterialApp或CupertinoApp顶级组件的builder构造Widget，用于一些初始化操作，例如：初始化全局Toast、解决modal_bottom_sheet动画问题
