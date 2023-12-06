@@ -48,6 +48,9 @@ enum CompareType {
 class CommonUtil {
   CommonUtil._();
 
+  /// 是否是苹果平台
+  static bool get isApplePlatform => GetPlatform.isMacOS || GetPlatform.isIOS;
+
   /// 判断一个变量是否为空，例如：null、''、[]、{}
   ///
   /// checkNum - 若为true，则判断数字是否为0
