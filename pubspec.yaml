@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flustars: ^2.0.1
   fluttertoast: ^8.2.2
   get: ^4.6.6
