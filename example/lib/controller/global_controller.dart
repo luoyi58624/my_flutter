@@ -10,6 +10,6 @@ enum AppType {
 }
 
 class GlobalController extends GetxController {
-  final appType = useLocalObs(AppType.cupertino.value, 'app_type');
+  final appType = useLocalObs(AppType.material.value, 'app_type');
   final count = 0.obs;
 }

@@ -41,6 +41,7 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
             },
       child: Scaffold(
         body: IndexedStack(
+          index: tabbarIndex,
           children: widget.pages.map((e) => e.page).toList(),
         ),
         bottomNavigationBar:
@@ -77,8 +78,8 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
       data: Theme.of(context).copyWith(
         textTheme: const TextTheme(
           labelMedium: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w900,
+            // fontSize: 13,
+            // fontWeight: FontWeight.w900,
           ),
         ),
       ),

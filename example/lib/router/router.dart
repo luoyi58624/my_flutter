@@ -1,6 +1,6 @@
 import 'package:my_flutter/my_flutter.dart';
 
-import '../pages/cupertino/root_page/index.dart';
+import '../pages/root_page.dart';
 
 final routes = [
   GoRoute(path: '/', builder: (context, state) => const RootPage()),
