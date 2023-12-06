@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flustars/flustars.dart';
-import 'package:get/get_utils/src/platform/platform.dart';
-import 'package:uuid/uuid.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:path/path.dart' as p;
+import 'package:uuid/uuid.dart';
 import 'package:html/parser.dart' as htmlparser;
 
 /// uuid生成实例
@@ -16,7 +19,10 @@ import 'package:html/parser.dart' as htmlparser;
 const _uuid = Uuid();
 
 /// 图片后缀
-const imageSuffix = ['jpg', 'png', 'gif'];
+const imageSuffix = ['jpg', 'jpeg', 'png', 'gif'];
+
+/// 静态图片图片后缀
+const staticImageSuffix = ['jpg', 'jpeg', 'png'];
 
 /// 视频后缀
 const videoSuffix = ['mkv', 'mp4', 'avi', 'mov', 'wmv'];
@@ -41,9 +47,6 @@ enum CompareType {
 
 class CommonUtil {
   CommonUtil._();
-
-  /// 是否是苹果平台
-  static bool get isApplePlatform => GetPlatform.isMacOS || GetPlatform.isIOS;
 
   /// 判断一个变量是否为空，例如：null、''、[]、{}
   ///
@@ -94,7 +97,7 @@ class CommonUtil {
   }
 
   /// 安全解析int，如果传递的value不是num类型，则返回默认值
-  static int safeInt(dynamic value, int defaultValue) {
+  static int safeInt(dynamic value, {int defaultValue = 0}) {
     if (value is int) {
       return value;
     } else if (value is double) {
@@ -107,7 +110,7 @@ class CommonUtil {
   }
 
   /// 安全解析double，如果传递的value不是num类型，则返回默认值
-  static double safeDouble(dynamic value, double defaultValue) {
+  static double safeDouble(dynamic value, {double defaultValue = 0.0}) {
     if (value is double) {
       return value;
     } else if (value is int) {
@@ -116,6 +119,19 @@ class CommonUtil {
       return double.parse(value);
     } else {
       return defaultValue;
+    }
+  }
+
+  /// 安全解析bool类型
+  static bool safeBool(dynamic value) {
+    if (value is String) {
+      return bool.parse(value, caseSensitive: false);
+    } else if (value is bool) {
+      return value;
+    } else if (value == null) {
+      return false;
+    } else {
+      return bool.tryParse(value, caseSensitive: false) ?? false;
     }
   }
 
@@ -161,14 +177,18 @@ class CommonUtil {
     }
   }
 
+  /// 安全地比较两个字符
+  static bool compareString(dynamic value1, dynamic value2) {
+    return safeString(value1) == safeString(value2);
+  }
+
   /// 安全地比较两个数字：小于、等于、大于、小于等于、大于等于。
   static bool compareNum(
     dynamic value1,
     dynamic value2, {
     CompareType compareType = CompareType.equal,
   }) {
-    return _compareResult(
-        compareType, safeDouble(value1, 0) - safeDouble(value2, 0));
+    return _compareResult(compareType, safeDouble(value1) - safeDouble(value2));
   }
 
   /// 安全地比较两个日期，允许传入2个任意类型的数据，它们都会安全地转化为DateTime类型进行比较
@@ -273,7 +293,7 @@ class CommonUtil {
 
   /// 获取当前时段：早上、上午、中午、下午、晚上、深夜
   static String formatTimeFrame(dynamic value) {
-    int time = safeInt(formatDate(value, format: 'HH'), 0);
+    int time = safeInt(formatDate(value, format: 'HH'));
     if (0 <= time && time < 6) {
       return '深夜';
     } else if (6 <= time && time < 8) {
@@ -316,6 +336,10 @@ class CommonUtil {
       return '${DateUtil.getWeekdayByMs(ms, languageCode: languageCode, short: short)}  ${formatTimeFrame(ms)}${DateUtil.formatDateMs(ms, format: 'HH:mm')}';
     }
 
+    if (DateUtil.yearIsEqualByMs(ms, locTimeMs)) {
+      return '${DateUtil.formatDateMs(ms, format: 'MM-dd')}  ${formatTimeFrame(ms)}${DateUtil.formatDateMs(ms, format: 'HH:mm')}';
+    }
+
     return '${DateUtil.formatDateMs(ms, format: 'yyyy-MM-dd')}  ${formatTimeFrame(ms)}${DateUtil.formatDateMs(ms, format: 'HH:mm')}';
   }
 
@@ -326,7 +350,7 @@ class CommonUtil {
     }
     const unitArr = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     int index;
-    var srcsize = safeDouble(size, 0);
+    var srcsize = safeDouble(size);
     index = (log(srcsize) / log(1024)).floor();
     return '${(srcsize / pow(1024, index)).toStringAsFixed(2)}${unitArr[index]}';
   }
@@ -366,6 +390,12 @@ class CommonUtil {
   static bool isImage(String fileName) {
     String? suffixName = getFileSuffix(fileName);
     return imageSuffix.contains(suffixName);
+  }
+
+  /// 判断文件名是否是静态图片
+  static bool isStaticImage(String fileName) {
+    String? suffixName = getFileSuffix(fileName);
+    return staticImageSuffix.contains(suffixName);
   }
 
   /// 判断文件名是否是视频
@@ -413,6 +443,62 @@ class CommonUtil {
       }
     }
     return SizeModel(newWidth, newHeight);
+  }
+
+  static Timer? _timer;
+
+  /// 节流
+  static void throttle(
+    Function callback, {
+    int duration = 1000,
+  }) {
+    if (_timer != null) {
+      return;
+    }
+
+    _timer = Timer(
+      Duration(milliseconds: duration),
+      () {
+        _timer = null;
+      },
+    );
+    callback();
+  }
+
+  /// 判断Getx控制器是否有加载
+  static bool isLoadGetxController<C extends GetxController>() {
+    try {
+      Get.find<C>();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// 隐藏手机软键盘但保留焦点
+  static Future<void> hideKeybord() async {
+    await SystemChannels.textInput.invokeMethod('TextInput.hide');
+  }
+
+  /// 显示手机软键盘
+  static Future<void> showKeybord() async {
+    await SystemChannels.textInput.invokeMethod('TextInput.show');
+  }
+
+  /// 隐藏手机软键盘并失去焦点
+  static Future<void> unfocus() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  /// 循环获取列表的内容，如果其索引大于列表的长度，则重头开始继续获取
+  static T loopGetListContent<T>(List<T> list, int index) {
+    if (index <= 0) {
+      return list[0];
+    } else if (index < list.length) {
+      return list[index];
+    } else {
+      return loopGetListContent(list, index - list.length);
+    }
   }
 }
 
