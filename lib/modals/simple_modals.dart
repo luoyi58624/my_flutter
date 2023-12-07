@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-/// 包含label-value结构的简单数据模型
 class LabelModel {
   final String label;
   final String value;
@@ -8,10 +7,18 @@ class LabelModel {
   LabelModel(this.label, this.value);
 }
 
-class RootPageModel {
-  final String label;
-  final IconData icon;
-  final Widget page;
+class ListTilePageModel {
+  final String title;
+  final Widget widget;
+  final IconData? icon;
 
-  const RootPageModel(this.label, this.icon, this.page);
+  const ListTilePageModel(this.title, this.widget, {this.icon});
+}
+
+class RootPageModel {
+  final String title;
+  final Widget widget;
+  final IconData icon;
+
+  const RootPageModel(this.title, this.widget, this.icon);
 }

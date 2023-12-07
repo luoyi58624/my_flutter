@@ -298,7 +298,7 @@ class CommonUtil {
   static String formatTimeFrame(dynamic value) {
     int time = safeInt(formatDate(value, format: 'HH'));
     if (0 <= time && time < 6) {
-      return '深夜';
+      return '晚上';
     } else if (6 <= time && time < 8) {
       return '早上';
     } else if (8 <= time && time < 12) {
@@ -324,7 +324,7 @@ class CommonUtil {
     int locTimeMs = locMs ?? DateTime.now().millisecondsSinceEpoch;
     int elapsed = locTimeMs - ms;
     if (elapsed < 0) {
-      return formatTimeFrame(ms) + DateUtil.formatDateMs(ms, format: 'HH:mm');
+      return '${formatTimeFrame(ms)} ${DateUtil.formatDateMs(ms, format: 'HH:mm')}';
     }
 
     if (DateUtil.isToday(ms, locMs: locTimeMs)) {
@@ -340,10 +340,10 @@ class CommonUtil {
     }
 
     if (DateUtil.yearIsEqualByMs(ms, locTimeMs)) {
-      return '${DateUtil.formatDateMs(ms, format: 'MM-dd')}  ${formatTimeFrame(ms)}${DateUtil.formatDateMs(ms, format: 'HH:mm')}';
+      return DateUtil.formatDateMs(ms, format: 'MM-dd');
     }
 
-    return '${DateUtil.formatDateMs(ms, format: 'yyyy-MM-dd')}  ${formatTimeFrame(ms)}${DateUtil.formatDateMs(ms, format: 'HH:mm')}';
+    return DateUtil.formatDateMs(ms, format: 'yyyy-MM-dd');
   }
 
   /// 格式化大小
@@ -502,6 +502,19 @@ class CommonUtil {
     } else {
       return loopGetListContent(list, index - list.length);
     }
+  }
+
+  /// 检查当前所处的组件是否包含某个祖先widget
+  static bool hasAncestorElements<T>(BuildContext context) {
+    bool flag = false;
+    context.visitAncestorElements((element) {
+      if (element.widget is T) {
+        flag = true;
+        return false;
+      }
+      return true;
+    });
+    return flag;
   }
 }
 

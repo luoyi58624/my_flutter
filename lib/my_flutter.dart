@@ -13,6 +13,8 @@ export 'package:go_router/go_router.dart';
 export 'package:collection/collection.dart';
 export 'package:flutter_animate/flutter_animate.dart';
 export 'package:cupertino_icons/cupertino_icons.dart';
+export 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+export 'package:faker/faker.dart';
 
 export 'modals/simple_modals.dart';
 
@@ -27,26 +29,30 @@ export 'utils/router.dart';
 export 'utils/toast.dart';
 export 'utils/vibrate.dart';
 
-export 'widgets/badge.dart';
-export 'widgets/cascader.dart';
-export 'widgets/flex_wrap.dart';
-export 'widgets/flexible_title.dart';
-export 'widgets/hide_keybord.dart';
-export 'widgets/image.dart';
-export 'widgets/index_list.dart';
-export 'widgets/loading.dart';
-export 'widgets/restart_app.dart';
-export 'widgets/scroll_ripper.dart';
-export 'widgets/simple_widgets.dart';
-export 'widgets/tag.dart';
-export 'widgets/tap_animate.dart';
-export 'widgets/text_highlight.dart';
-export 'widgets/webview.dart';
+export 'widgets/commons/badge.dart';
+export 'widgets/commons/cascader.dart';
+export 'widgets/commons/flex_wrap.dart';
+export 'widgets/commons/flexible_title.dart';
+export 'widgets/commons/hide_keybord.dart';
+export 'widgets/commons/image.dart';
+export 'widgets/commons/index_list.dart';
+export 'widgets/commons/loading.dart';
+export 'widgets/commons/restart_app.dart';
+export 'widgets/commons/scroll_ripper.dart';
+export 'widgets/commons/simple_widgets.dart';
+export 'widgets/commons/sliver.dart';
+export 'widgets/commons/tag.dart';
+export 'widgets/commons/tap_animate.dart';
+export 'widgets/commons/text_highlight.dart';
+export 'widgets/commons/webview.dart';
 
-export 'pages/child_page.dart';
-export 'pages/cupertino_root_page.dart';
+export 'widgets/cupertino/list_group.dart';
+export 'widgets/cupertino/list_tile.dart';
+
+export 'pages/common/child_page.dart';
 
 Future<void> initMyFlutter() async {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
   SystemChrome.setPreferredOrientations([
@@ -57,25 +63,19 @@ Future<void> initMyFlutter() async {
   localStorage = LocalStorage();
 }
 
-/// MaterialApp或CupertinoApp顶级组件的builder构造Widget，用于一些初始化操作，例如：初始化全局Toast、解决modal_bottom_sheet动画问题
-class MyRootWidget extends StatelessWidget {
-  const MyRootWidget({super.key, required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Overlay(
-      initialEntries: [
-        OverlayEntry(builder: (context) {
-          toast.init(context);
-          return MediaQuery(
-            // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
-            data: MediaQuery.of(context).copyWith(accessibleNavigation: false),
-            child: child,
-          );
-        }),
-      ],
-    );
-  }
-}
+/// MaterialApp、CupertinoApp的 builder 参数，初始化全局toast、解决modal_bottom_sheet在高版本安卓系统上动画丢失问题
+TransitionBuilder builderMyApp() => (context, _child) {
+      return Overlay(
+        initialEntries: [
+          OverlayEntry(builder: (context) {
+            toast.init(context);
+            return MediaQuery(
+              // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
+              data:
+                  MediaQuery.of(context).copyWith(accessibleNavigation: false),
+              child: _child!,
+            );
+          }),
+        ],
+      );
+    };
