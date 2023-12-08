@@ -1,6 +1,5 @@
 library my_flutter;
 
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:my_flutter/utils/local_storage.dart';
@@ -53,12 +52,6 @@ export 'pages/common/child_page.dart';
 
 Future<void> initMyFlutter() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
   await GetStorage.init();
   localStorage = LocalStorage();
 }

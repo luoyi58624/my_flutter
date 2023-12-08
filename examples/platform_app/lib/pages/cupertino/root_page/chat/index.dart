@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:my_flutter/my_flutter.dart';
 
 class ChatRootPage extends StatefulWidget {
   const ChatRootPage({Key? key}) : super(key: key);
@@ -55,7 +54,6 @@ class _ChildPageState extends State<_ChildPage> {
   @override
   void deactivate() {
     super.deactivate();
-    logger.i('xxx');
   }
 
   @override

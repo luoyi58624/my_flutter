@@ -68,18 +68,18 @@ class _ChatRootPageState extends State<ChatRootPage> {
                   ),
                   border: null,
                 ),
-                SliverPersistentHeader(
-                  pinned: true,
-                  delegate: CustomSliverPersistentHeaderDelegate.fixedHeight(
-                    height: 56,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 12),
-                      color: CupertinoTheme.of(context).scaffoldBackgroundColor,
-                      child: const CupertinoSearchTextField(),
-                    ),
-                  ),
-                ),
+                // SliverPersistentHeader(
+                //   pinned: true,
+                //   delegate: CustomSliverPersistentHeaderDelegate.fixedHeight(
+                //     height: 56,
+                //     child: Container(
+                //       padding: const EdgeInsets.symmetric(
+                //           vertical: 8, horizontal: 12),
+                //       color: CupertinoTheme.of(context).scaffoldBackgroundColor,
+                //       child: const CupertinoSearchTextField(),
+                //     ),
+                //   ),
+                // ),
                 SliverList.separated(
                   itemCount: listData.length,
                   itemBuilder: (context, index) => _ChatItem(listData[index]),
@@ -127,6 +127,11 @@ class _ChatItemState extends State<_ChatItem> {
         );
         RouterUtil.push(context, ChatItemPage(chatModel: widget.chatModel));
       },
+      onTapCancel: () {
+        setState(() {
+          _tapped = false;
+        });
+      },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         height: 64,
@@ -154,7 +159,8 @@ class _ChatItemState extends State<_ChatItem> {
                           widget.chatModel.username,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
@@ -167,6 +173,7 @@ class _ChatItemState extends State<_ChatItem> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 4),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -175,7 +182,7 @@ class _ChatItemState extends State<_ChatItem> {
                           widget.chatModel.chatContent,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: 12,
                             color: CupertinoColors.systemGrey,
                           ),
                         ),
@@ -197,7 +204,7 @@ class _ChatItemState extends State<_ChatItem> {
                             child: Text(
                               widget.chatModel.unReadNum.toString(),
                               style: const TextStyle(
-                                fontSize: 12,
+                                fontSize: 10,
                                 color: CupertinoColors.white,
                               ),
                             ),

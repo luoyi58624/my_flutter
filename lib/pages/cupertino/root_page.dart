@@ -9,7 +9,7 @@ class CupertinoRootPage extends StatefulWidget {
     super.key,
     required this.pages,
     this.tabbarInactiveColor = const CupertinoDynamicColor.withBrightness(
-      color: Color(0xFF222222),
+      color: Color(0xFF333333),
       darkColor: CupertinoColors.white,
     ),
   }) : assert(pages.length >= 2);

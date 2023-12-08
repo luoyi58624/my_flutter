@@ -6,10 +6,23 @@ import 'pages/root_page/index.dart';
 
 void main() async {
   await initMyFlutter();
-  runApp(const MyCupertinoApp(
-    home: RootPage(),
-    theme: CupertinoThemeData(
-      primaryColor: CupertinoColors.systemGreen,
+  runApp(
+    MyCupertinoApp(
+      home: const RootPage(),
+      theme: CupertinoThemeData(
+        primaryColor: CupertinoColors.systemGreen,
+        textTheme: CupertinoTextThemeData(
+          textStyle: const TextStyle(
+            color: CupertinoDynamicColor.withBrightness(
+                color: Color(0xFF222222), darkColor: Color(0xFFffffff)),
+            fontWeight: FontWeight.w500,
+          ),
+          navActionTextStyle: const CupertinoThemeData()
+              .textTheme
+              .navActionTextStyle
+              .copyWith(fontWeight: FontWeight.w500),
+        ),
+      ),
     ),
-  ));
+  );
 }
