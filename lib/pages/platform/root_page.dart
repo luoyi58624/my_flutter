@@ -11,11 +11,11 @@ class PlatformRootPage extends StatefulWidget {
   const PlatformRootPage({
     super.key,
     required this.pages,
-    this.useMaterial2NavigationBar = false,
+    this.useMaterial3NavigationBar = false,
   }) : assert(pages.length >= 2);
 
-  /// 是否使用material2风格的底部导航栏，默认false
-  final bool useMaterial2NavigationBar;
+  /// 是否使用material3风格的底部导航栏，默认false
+  final bool useMaterial3NavigationBar;
 
   /// 导航页面数组，必须至少包含2个页面
   final List<RootPageModel> pages;
@@ -58,7 +58,7 @@ class _PlatformRootPageState extends State<PlatformRootPage> {
           ? CupertinoRootPage(pages: widget.pages)
           : MaterialRootPage(
               pages: widget.pages,
-              useMaterial2NavigationBar: widget.useMaterial2NavigationBar,
+              useMaterial3NavigationBar: widget.useMaterial3NavigationBar,
             ),
     );
   }

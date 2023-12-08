@@ -19,7 +19,6 @@ class _MyApp extends GetView<GlobalController> {
     return Obx(
       () => MyMaterialApp(
         useMaterial3: controller.useMaterial3.value,
-        showTranslucenceStatusBar: true,
         home: const RootPage(),
       ),
     );

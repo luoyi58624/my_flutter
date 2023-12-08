@@ -24,20 +24,17 @@ class MyMaterialApp extends StatelessWidget {
     super.key,
     required this.home,
     this.title,
-    this.useMaterial3 = true,
+    this.useMaterial3 = false,
     this.primaryColor,
     this.theme,
     this.darkTheme,
     this.hiddenTranslucenceStatusBar = false,
-    this.showTranslucenceStatusBar = false,
     this.onlyHorizontalMode = false,
     this.onlyVerticalMode = false,
   });
 
   final Widget home;
   final String? title;
-
-  /// 是否使用flutter最新material3样式，默认true
   final bool useMaterial3;
 
   /// 主题颜色
@@ -49,11 +46,8 @@ class MyMaterialApp extends StatelessWidget {
   /// 自定义暗色主题，若你只是不满足默认配置的部分属性，你可以使用 myMaterialTheme.darkTheme.copyWith 修改部分属性
   final ThemeData? darkTheme;
 
-  /// 是否隐藏半透明状态栏遮罩，如果你使用material2风格样式，默认情况下flutter状态栏会存在半透明遮罩（高版本已移除）
+  /// 是否隐藏半透明状态栏遮罩
   final bool hiddenTranslucenceStatusBar;
-
-  /// 是否添加半透明状态栏遮罩，仅限material2风格才会生效（高版本flutte默认已移除，如果你喜欢这种风格请设置为true）
-  final bool showTranslucenceStatusBar;
 
   /// 是否只允许横屏展示
   final bool onlyHorizontalMode;
@@ -66,8 +60,7 @@ class MyMaterialApp extends StatelessWidget {
     if (hiddenTranslucenceStatusBar) {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
           statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
-    }
-    if (showTranslucenceStatusBar) {
+    } else {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
           statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
     }
