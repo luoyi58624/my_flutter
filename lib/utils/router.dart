@@ -24,7 +24,7 @@ class RouterUtil {
     bool rootNavigator = false,
     bool fullscreenDialog = false,
     bool noTransition = false,
-    PageTransitionType? transition,
+    PageTransitionType? pageTransitionType,
   }) async {
     late Route<T> routePage;
     if (noTransition) {
@@ -38,7 +38,7 @@ class RouterUtil {
         ),
       );
     } else {
-      if (transition == null) {
+      if (pageTransitionType == null) {
         switch (routePageType) {
           case RoutePageType.material:
             routePage = MaterialPageRoute(
@@ -52,7 +52,7 @@ class RouterUtil {
             );
         }
       } else {
-        routePage = PageTransition(child: page, type: transition);
+        routePage = PageTransition(child: page, type: pageTransitionType);
       }
       return await Navigator.of(
         context ?? navigatorKey.currentContext!,
