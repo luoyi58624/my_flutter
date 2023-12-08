@@ -85,20 +85,32 @@ class MyMaterialApp extends StatelessWidget {
     }
     routePageType = RoutePageType.material;
     myMaterialTheme = MyMaterialTheme(
-      _buildMyThemeData(
-        useMaterial3,
-        ColorScheme.fromSeed(
-          brightness: Brightness.light,
-          seedColor: primaryColor ?? _primaryColor,
-        ),
-      ),
-      _buildMyThemeData(
-        useMaterial3,
-        ColorScheme.fromSeed(
-          brightness: Brightness.dark,
-          seedColor: primaryColor ?? _primaryColor,
-        ),
-      ),
+      useMaterial3
+          ? _buildMaterial3ThemeData(
+              ColorScheme.fromSeed(
+                brightness: Brightness.light,
+                seedColor: primaryColor ?? _primaryColor,
+              ),
+            )
+          : _buildMaterial2ThemeData(
+              ColorScheme.fromSeed(
+                brightness: Brightness.light,
+                seedColor: primaryColor ?? _primaryColor,
+              ),
+            ),
+      useMaterial3
+          ? _buildMaterial3ThemeData(
+              ColorScheme.fromSeed(
+                brightness: Brightness.dark,
+                seedColor: primaryColor ?? _primaryColor,
+              ),
+            )
+          : _buildMaterial2ThemeData(
+              ColorScheme.fromSeed(
+                brightness: Brightness.dark,
+                seedColor: primaryColor ?? _primaryColor,
+              ),
+            ),
     );
     return MaterialApp(
       title: title ?? 'Cupertino App',
@@ -122,12 +134,29 @@ class MyMaterialApp extends StatelessWidget {
   }
 }
 
-ThemeData _buildMyThemeData(
-  bool useMaterial3,
+ThemeData _buildMaterial2ThemeData(
   ColorScheme colorScheme,
 ) {
-  return ThemeData(
-    useMaterial3: useMaterial3,
+  var themeData = ThemeData(
+    useMaterial3: false,
+    colorScheme: colorScheme,
+    textTheme: _textTheme,
+    splashFactory: InkRipple.splashFactory,
+    appBarTheme: AppBarTheme(
+      titleTextStyle: TextStyle(
+        fontSize: 18,
+        fontWeight: _textTheme.titleLarge?.fontWeight,
+      ),
+    ),
+  );
+  return themeData;
+}
+
+ThemeData _buildMaterial3ThemeData(
+  ColorScheme colorScheme,
+) {
+  var themeData = ThemeData(
+    useMaterial3: true,
     colorScheme: colorScheme,
     textTheme: _textTheme,
     splashFactory: InkRipple.splashFactory,
@@ -135,6 +164,7 @@ ThemeData _buildMyThemeData(
       surfaceTintColor: Colors.transparent,
     ),
   );
+  return themeData;
 }
 
 const _textTheme = TextTheme(

@@ -249,7 +249,7 @@ class _WebviewPageState extends State<WebviewPage> {
             });
           },
           onCreateWindow: (controller, createWindowAction) async {
-            RouterUtil.push(
+            RouterUtil.to(
               WebviewPage(
                 windowId: createWindowAction.windowId,
                 enableNavIntercept: widget.enableNavIntercept,

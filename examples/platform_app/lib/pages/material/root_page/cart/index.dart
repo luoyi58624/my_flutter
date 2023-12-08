@@ -30,7 +30,7 @@ class _CartRootPageState extends State<CartRootPage> {
               const SizedBox(height: 8),
               CupertinoButton.filled(
                 onPressed: () {
-                  RouterUtil.push(
+                  RouterUtil.to(
                     const WebviewPage(
                       title: '百度',
                       url: 'https://www.baidu.com',

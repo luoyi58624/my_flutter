@@ -18,7 +18,7 @@ class RouterUtil {
   RouterUtil._();
 
   /// 跳转到新页面
-  static Future<T?> push<T>(
+  static Future<T?> to<T>(
     Widget page, {
     BuildContext? context,
     bool rootNavigator = false,

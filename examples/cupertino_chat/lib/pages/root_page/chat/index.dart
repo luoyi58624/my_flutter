@@ -125,7 +125,7 @@ class _ChatItemState extends State<_ChatItem> {
             }
           },
         );
-        RouterUtil.push(
+        RouterUtil.to(
           ChatItemPage(chatModel: widget.chatModel),
           context: context,
         );
