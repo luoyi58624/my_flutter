@@ -17,7 +17,7 @@ class PermissionUtil {
       if (requestStatus.isGranted) {
         return true;
       } else if (requestStatus.isDenied) {
-        ToastUtils.showToast('您拒绝了权限');
+        ToastUtil.showToast('您拒绝了权限');
         return false;
       } else if (requestStatus.isPermanentlyDenied) {
         // _showModal();

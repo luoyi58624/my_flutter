@@ -23,7 +23,7 @@ class _ChatItemPageState extends State<ChatItemPage> {
         child: CupertinoButton.filled(
             child: const Text('Back'),
             onPressed: () {
-              RouterUtil.back(context);
+              RouterUtil.back(context: context);
             }),
       ),
     );

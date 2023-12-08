@@ -43,7 +43,7 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
                 return true;
               } else {
                 allowQuit = true;
-                ToastUtils.showToast('请再按一次退出应用');
+                ToastUtil.showToast('请再按一次退出应用');
                 Timer(const Duration(seconds: 2), () {
                   allowQuit = false;
                 });

@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:status_bar_control/status_bar_control.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-/// flutter官方webview
-class WebviewWidget extends StatefulWidget {
-  const WebviewWidget({super.key, this.url, this.asset, this.html});
+/// flutter官方webview，官方的很简陋，建议使用flutter_inappwebview实现的webview
+class WebviewWidget2 extends StatefulWidget {
+  const WebviewWidget2({super.key, this.url, this.asset, this.html});
 
   final String? url;
 
@@ -14,10 +14,10 @@ class WebviewWidget extends StatefulWidget {
   final String? html;
 
   @override
-  State<WebviewWidget> createState() => _WebviewWidgetState();
+  State<WebviewWidget2> createState() => _WebviewWidgetState();
 }
 
-class _WebviewWidgetState extends State<WebviewWidget> {
+class _WebviewWidgetState extends State<WebviewWidget2> {
   late WebViewController controller;
 
   @override
@@ -40,8 +40,8 @@ class _WebviewWidgetState extends State<WebviewWidget> {
   }
 }
 
-class WebviewPage extends StatefulWidget {
-  const WebviewPage({
+class WebviewPage2 extends StatefulWidget {
+  const WebviewPage2({
     super.key,
     this.title,
     this.url,
@@ -71,10 +71,10 @@ class WebviewPage extends StatefulWidget {
   final bool clearCache;
 
   @override
-  State<WebviewPage> createState() => _WebviewPageState();
+  State<WebviewPage2> createState() => _WebviewPageState();
 }
 
-class _WebviewPageState extends State<WebviewPage> {
+class _WebviewPageState extends State<WebviewPage2> {
   @override
   void initState() {
     super.initState();
@@ -112,7 +112,7 @@ class _WebviewPageState extends State<WebviewPage> {
               title: Text(widget.title!),
             )
           : null,
-      body: WebviewWidget(
+      body: WebviewWidget2(
         url: widget.url,
         asset: widget.asset,
         html: widget.html,

@@ -48,7 +48,12 @@ export 'widgets/commons/webview.dart';
 export 'widgets/cupertino/list_group.dart';
 export 'widgets/cupertino/list_tile.dart';
 
+export 'widgets/webview/webview_widget.dart';
+
 export 'pages/common/child_page.dart';
+
+/// 全局导航key，注意：你必须将此key挂载到MaterialApp或CupertinoApp下
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> initMyFlutter() async {
   WidgetsFlutterBinding.ensureInitialized();

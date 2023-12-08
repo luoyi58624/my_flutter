@@ -194,7 +194,7 @@ class _IndexListWidgetState<T> extends State<IndexListWidget> {
     } else {
       if (widget.onTap == null) {
         if (CommonUtil.isEmpty(item.data.value)) {
-          ToastUtils.showToast('该数据存在问题！');
+          ToastUtil.showToast('该数据存在问题！');
         } else {
           Navigator.pop(context, item.data);
         }

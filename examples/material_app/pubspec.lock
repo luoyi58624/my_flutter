@@ -206,6 +206,62 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.3.1"
+  flutter_inappwebview:
+    dependency: transitive
+    description:
+      name: flutter_inappwebview
+      sha256: b34fb3b0a8232a5adae1501e4beb6997717e4a17664eab528d4a0b8fd596d417
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "6.0.0-beta.31"
+  flutter_inappwebview_android:
+    dependency: transitive
+    description:
+      name: flutter_inappwebview_android
+      sha256: "297ef285b47529332dda074f3bca6dbe103f9e83534b7aca5f081be45da80610"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.7"
+  flutter_inappwebview_internal_annotations:
+    dependency: transitive
+    description:
+      name: flutter_inappwebview_internal_annotations
+      sha256: "5f80fd30e208ddded7dbbcd0d569e7995f9f63d45ea3f548d8dd4c0b473fb4c8"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
+  flutter_inappwebview_ios:
+    dependency: transitive
+    description:
+      name: flutter_inappwebview_ios
+      sha256: "6b1e3b4f46596700a2393aeb7023379e8a4cd609d2f4d05d358697bcffdcf010"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.8"
+  flutter_inappwebview_macos:
+    dependency: transitive
+    description:
+      name: flutter_inappwebview_macos
+      sha256: f341d16cf471c072e5424eed748aac90b48a7ff1b4897a254ada189bb551145f
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.6"
+  flutter_inappwebview_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_inappwebview_platform_interface
+      sha256: efc08458cde40f1b2ea213334d02892910c0f5bf2c8a8cd418d0f0522de7e016
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.5"
+  flutter_inappwebview_web:
+    dependency: transitive
+    description:
+      name: flutter_inappwebview_web
+      sha256: "77ac7a82fec6e7a84ad4ea9d219cc84c8e542fb5791f208614e82620a4c3d7f4"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -317,6 +373,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.18.1"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.6.7"
   lints:
     dependency: transitive
     description:

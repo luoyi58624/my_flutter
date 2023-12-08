@@ -45,6 +45,7 @@ class MyCupertinoApp extends StatelessWidget {
     return CupertinoApp(
       title: title ?? 'Cupertino App',
       theme: theme ?? myCupertinoTheme,
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalWidgetsLocalizations.delegate,

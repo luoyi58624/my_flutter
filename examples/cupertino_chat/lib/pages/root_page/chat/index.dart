@@ -125,7 +125,10 @@ class _ChatItemState extends State<_ChatItem> {
             }
           },
         );
-        RouterUtil.push(context, ChatItemPage(chatModel: widget.chatModel));
+        RouterUtil.push(
+          ChatItemPage(chatModel: widget.chatModel),
+          context: context,
+        );
       },
       onTapCancel: () {
         setState(() {

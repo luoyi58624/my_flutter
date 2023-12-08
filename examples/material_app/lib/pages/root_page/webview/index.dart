@@ -16,6 +16,7 @@ class _UtilRootPageState extends State<WebviewRootPage> {
     return const WebviewPage(
       title: 'Webview页面',
       url: 'https://www.bing.com',
+      enableNavIntercept: true,
     );
   }
 }

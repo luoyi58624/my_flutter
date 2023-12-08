@@ -104,6 +104,7 @@ class MyMaterialApp extends StatelessWidget {
       title: title ?? 'Cupertino App',
       theme: theme ?? myMaterialTheme.lightTheme,
       darkTheme: darkTheme ?? myMaterialTheme.darkTheme,
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalWidgetsLocalizations.delegate,

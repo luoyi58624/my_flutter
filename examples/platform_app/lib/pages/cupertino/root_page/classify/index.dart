@@ -23,8 +23,7 @@ class _ClassifyRootPageState extends State<ClassifyRootPage> {
             itemCount: 100,
             itemBuilder: (context, index) => CupertinoListTile(
               onTap: () {
-                RouterUtil.push(
-                    context, ChildPage(title: '列表详情页 - ${index + 1}'));
+                RouterUtil.push(ChildPage(title: '列表详情页 - ${index + 1}'));
               },
               title: Text('${index + 1}.列表'),
             ),
