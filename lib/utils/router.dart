@@ -23,29 +23,42 @@ class RouterUtil {
     BuildContext? context,
     bool rootNavigator = false,
     bool fullscreenDialog = false,
+    bool noTransition = false,
     PageTransitionType? transition,
   }) async {
     late Route<T> routePage;
-    if (transition == null) {
-      switch (routePageType) {
-        case RoutePageType.material:
-          routePage = MaterialPageRoute(
-            builder: (context) => page,
-            fullscreenDialog: fullscreenDialog,
-          );
-        case RoutePageType.cupertino:
-          routePage = CupertinoPageRoute(
-            builder: (context) => page,
-            fullscreenDialog: fullscreenDialog,
-          );
-      }
+    if (noTransition) {
+      return await Navigator.of(
+        context ?? navigatorKey.currentContext!,
+      ).push(
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        ),
+      );
     } else {
-      routePage = PageTransition(child: page, type: transition);
+      if (transition == null) {
+        switch (routePageType) {
+          case RoutePageType.material:
+            routePage = MaterialPageRoute(
+              builder: (context) => page,
+              fullscreenDialog: fullscreenDialog,
+            );
+          case RoutePageType.cupertino:
+            routePage = CupertinoPageRoute(
+              builder: (context) => page,
+              fullscreenDialog: fullscreenDialog,
+            );
+        }
+      } else {
+        routePage = PageTransition(child: page, type: transition);
+      }
+      return await Navigator.of(
+        context ?? navigatorKey.currentContext!,
+        rootNavigator: rootNavigator,
+      ).push<T>(routePage);
     }
-    return await Navigator.of(
-      context ?? navigatorKey.currentContext!,
-      rootNavigator: rootNavigator,
-    ).push<T>(routePage);
   }
 
   /// 返回上一页

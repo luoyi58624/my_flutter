@@ -101,7 +101,10 @@ class _HomeRootPageState extends State<HomeRootPage> {
             itemCount: 100,
             itemBuilder: (context, index) => ListTile(
               onTap: () {
-                RouterUtil.to(ChildPage(title: '子页面：${index + 1}'));
+                RouterUtil.to(
+                  ChildPage(title: '子页面：${index + 1}'),
+                  noTransition: true,
+                );
               },
               title: Text('列表 - ${index + 1}'),
             ),
