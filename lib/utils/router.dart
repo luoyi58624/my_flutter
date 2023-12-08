@@ -23,19 +23,24 @@ class RouterUtil {
     BuildContext? context,
     bool rootNavigator = false,
     bool fullscreenDialog = false,
+    PageTransitionType? transition,
   }) async {
     late Route<T> routePage;
-    switch (routePageType) {
-      case RoutePageType.material:
-        routePage = MaterialPageRoute(
-          builder: (context) => page,
-          fullscreenDialog: fullscreenDialog,
-        );
-      case RoutePageType.cupertino:
-        routePage = CupertinoPageRoute(
-          builder: (context) => page,
-          fullscreenDialog: fullscreenDialog,
-        );
+    if (transition == null) {
+      switch (routePageType) {
+        case RoutePageType.material:
+          routePage = MaterialPageRoute(
+            builder: (context) => page,
+            fullscreenDialog: fullscreenDialog,
+          );
+        case RoutePageType.cupertino:
+          routePage = CupertinoPageRoute(
+            builder: (context) => page,
+            fullscreenDialog: fullscreenDialog,
+          );
+      }
+    } else {
+      routePage = PageTransition(child: page, type: transition);
     }
     return await Navigator.of(
       context ?? navigatorKey.currentContext!,

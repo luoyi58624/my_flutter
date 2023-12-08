@@ -14,6 +14,7 @@ export 'package:flutter_animate/flutter_animate.dart';
 export 'package:cupertino_icons/cupertino_icons.dart';
 export 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 export 'package:faker/faker.dart';
+export 'package:page_transition/page_transition.dart';
 
 export 'modals/simple_modals.dart';
 

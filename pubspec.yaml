@@ -39,6 +39,7 @@ dependencies:
   status_bar_control: ^3.2.1
   flutter_platform_widgets: ^6.0.2
   faker: ^2.1.0
+  page_transition: ^2.1.0
 
 dev_dependencies:
   flutter_test:
