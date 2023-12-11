@@ -3,7 +3,7 @@ import 'package:my_flutter/my_flutter.dart';
 
 class GlobalController extends GetxController {
   final RxBool useMaterial3 = false.obs; // 使用material3风格
-  final RxBool isDark = Get.isDarkMode.obs; // 开启黑暗模式
+  final RxBool isDark = false.obs; // 开启黑暗模式
 
   ThemeData get appTheme {
     return isDark.value ? ThemeData.dark() : ThemeData.light();

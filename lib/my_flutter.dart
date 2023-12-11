@@ -5,9 +5,15 @@ import 'package:get_storage/get_storage.dart';
 import 'package:my_flutter/utils/local_storage.dart';
 import 'package:my_flutter/utils/toast.dart';
 
+// 只导出get的核心以及工具函数，排除路由、http网络连接等其他依赖
+export 'package:get/get_core/get_core.dart';
+export 'package:get/get_instance/get_instance.dart';
+export 'package:get/get_state_manager/get_state_manager.dart';
+export 'package:get/get_utils/get_utils.dart';
+export 'package:get/get_rx/get_rx.dart';
+export 'package:dio/dio.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flustars/flustars.dart';
-export 'package:get/get.dart';
 export 'package:go_router/go_router.dart';
 export 'package:collection/collection.dart';
 export 'package:flutter_animate/flutter_animate.dart';
@@ -22,6 +28,7 @@ export 'modals/simple_modals.dart';
 export 'utils/color.dart';
 export 'utils/common.dart';
 export 'utils/getx.dart';
+export 'utils/loading.dart';
 export 'utils/local_storage.dart';
 export 'utils/logger.dart';
 export 'utils/no_ripper.dart';
