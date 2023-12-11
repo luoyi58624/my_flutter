@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_flutter/my_flutter.dart';
 import 'package:status_bar_control/status_bar_control.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebviewWidget2 extends StatefulWidget {
-  const WebviewWidget2({super.key, this.url, this.asset, this.html});
+class WebviewWidget extends StatefulWidget {
+  const WebviewWidget({super.key, this.url, this.asset, this.html});
 
   final String? url;
 
@@ -13,14 +14,15 @@ class WebviewWidget2 extends StatefulWidget {
   final String? html;
 
   @override
-  State<WebviewWidget2> createState() => _WebviewWidgetState();
+  State<WebviewWidget> createState() => _WebviewWidgetState();
 }
 
-class _WebviewWidgetState extends State<WebviewWidget2> {
+class _WebviewWidgetState extends State<WebviewWidget> {
   late WebViewController controller;
 
   @override
   void initState() {
+    GetPlatform.isIOS;
     super.initState();
     controller = WebViewController();
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -35,18 +37,29 @@ class _WebviewWidgetState extends State<WebviewWidget2> {
 
   @override
   Widget build(BuildContext context) {
-    return WebViewWidget(controller: controller);
+    return WillPopScope(
+      onWillPop: () async {
+        if (await controller.canGoBack()) {
+          controller.goBack();
+          return false;
+        } else {
+          return true;
+        }
+      },
+      child: WebViewWidget(controller: controller),
+    );
   }
 }
 
-class WebviewPage2 extends StatefulWidget {
-  const WebviewPage2({
+class WebviewPage extends StatefulWidget {
+  const WebviewPage({
     super.key,
     this.title,
     this.url,
     this.asset,
     this.html,
     this.enableFullScreen = false,
+    this.enableNavIntercept = false,
     this.focusLandscape = false,
     this.clearCache = false,
   });
@@ -63,6 +76,9 @@ class WebviewPage2 extends StatefulWidget {
   /// 是否开启全屏
   final bool enableFullScreen;
 
+  /// 是否返回拦截
+  final bool enableNavIntercept;
+
   /// 是否强制横屏展示Webview
   final bool focusLandscape;
 
@@ -70,10 +86,10 @@ class WebviewPage2 extends StatefulWidget {
   final bool clearCache;
 
   @override
-  State<WebviewPage2> createState() => _WebviewPageState();
+  State<WebviewPage> createState() => _WebviewPageState();
 }
 
-class _WebviewPageState extends State<WebviewPage2> {
+class _WebviewPageState extends State<WebviewPage> {
   @override
   void initState() {
     super.initState();
@@ -109,9 +125,27 @@ class _WebviewPageState extends State<WebviewPage2> {
       appBar: widget.title != null
           ? AppBar(
               title: Text(widget.title!),
+              elevation: 1,
+              backgroundColor: ColorUtil.dynamicColor(
+                  const Color(0xFFFFFFFF), const Color(0xFF222222), context),
+              titleTextStyle:
+                  Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
+                        color: ColorUtil.dynamicColor(
+                          const Color(0xFF333333),
+                          const Color(0xFFFFFFFF),
+                          context,
+                        ),
+                      ),
+              iconTheme: IconThemeData(
+                color: ColorUtil.dynamicColor(
+                  const Color(0xFF333333),
+                  const Color(0xFFFFFFFF),
+                  context,
+                ),
+              ),
             )
           : null,
-      body: WebviewWidget2(
+      body: WebviewWidget(
         url: widget.url,
         asset: widget.asset,
         html: widget.html,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:material_app/pages/root_page/home/webview.dart';
 import 'package:my_flutter/my_flutter.dart';
 
 import 'theme.dart';
@@ -19,11 +18,11 @@ class _HomeRootPageState extends State<HomeRootPage> {
       ListTilePageModel(
         'Webview页面',
         WebviewPage(
+          title: 'Webview',
           url: 'https://www.bing.com',
           enableNavIntercept: true,
         ),
       ),
-      ListTilePageModel('Webview页面2', MyWebviewPage()),
     ];
     return Scaffold(
       drawer: Drawer(
