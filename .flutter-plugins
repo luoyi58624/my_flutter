@@ -20,7 +20,3 @@ shared_preferences_windows=/Users/luoyi/.pub-cache/hosted/pub.flutter-io.cn/shar
 sqflite=/Users/luoyi/.pub-cache/hosted/pub.flutter-io.cn/sqflite-2.3.0/
 status_bar_control=/Users/luoyi/.pub-cache/hosted/pub.flutter-io.cn/status_bar_control-3.2.1/
 vibration=/Users/luoyi/.pub-cache/hosted/pub.flutter-io.cn/vibration-1.8.4/
-webview_flutter=/Users/luoyi/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter-4.4.2/
-webview_flutter_android=/Users/luoyi/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_android-3.12.1/
-webview_flutter_web=/Users/luoyi/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_web-0.2.2+3/
-webview_flutter_wkwebview=/Users/luoyi/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_wkwebview-3.9.4/

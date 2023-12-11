@@ -25,17 +25,8 @@ class PlatformRootPage extends StatefulWidget {
 }
 
 class _PlatformRootPageState extends State<PlatformRootPage> {
-  late PlatformTabController tabController;
   int tabbarIndex = 0;
   bool allowQuit = false; // 双击返回键退出应用
-
-  @override
-  void initState() {
-    super.initState();
-    tabController = PlatformTabController(
-      initialIndex: 0,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -13,10 +13,11 @@ class _UtilRootPageState extends State<WebviewRootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const WebviewPage(
-      title: 'Webview页面',
-      url: 'https://www.bing.com',
-      enableNavIntercept: true,
-    );
+    // return const WebviewPage(
+    //   title: 'Webview页面',
+    //   url: 'https://www.bing.com',
+    //   enableNavIntercept: true,
+    // );
+    return Container();
   }
 }

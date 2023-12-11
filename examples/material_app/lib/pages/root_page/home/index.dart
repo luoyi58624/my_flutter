@@ -15,14 +15,6 @@ class _HomeRootPageState extends State<HomeRootPage> {
   Widget build(BuildContext context) {
     const List<ListTilePageModel> cellNames = [
       ListTilePageModel('主题设置', ThemePage()),
-      ListTilePageModel(
-        'Webview页面',
-        WebviewPage(
-          title: 'Webview',
-          url: 'https://www.bing.com',
-          enableNavIntercept: true,
-        ),
-      ),
     ];
     return Scaffold(
       drawer: Drawer(

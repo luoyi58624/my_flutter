@@ -30,18 +30,6 @@ class _CartRootPageState extends State<CartRootPage> {
               const SizedBox(height: 8),
               CupertinoButton.filled(
                 onPressed: () {
-                  RouterUtil.to(
-                    const WebviewPage(
-                      title: '百度',
-                      url: 'https://www.baidu.com',
-                    ),
-                  );
-                },
-                child: const Text('百度网页'),
-              ),
-              const SizedBox(height: 8),
-              CupertinoButton.filled(
-                onPressed: () {
                   RestartAppWidget.restartApp(context);
                 },
                 child: const Text('重启App'),

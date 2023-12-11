@@ -34,13 +34,10 @@ dependencies:
   flutter_spinkit: ^5.2.0
   cached_network_image: ^3.3.0
   get_storage: ^2.1.1
-  webview_flutter: ^4.4.2
   status_bar_control: ^3.2.1
   flutter_platform_widgets: ^6.0.2
   faker: ^2.1.0
   page_transition: ^2.1.0
-  webview_flutter_web: ^0.2.2+3
-  webview_flutter_platform_interface: ^2.8.0
 
 dev_dependencies:
   flutter_test:
