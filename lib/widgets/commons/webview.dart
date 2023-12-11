@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:status_bar_control/status_bar_control.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-/// flutter官方webview，官方的很简陋，建议使用flutter_inappwebview实现的webview
 class WebviewWidget2 extends StatefulWidget {
   const WebviewWidget2({super.key, this.url, this.asset, this.html});
 

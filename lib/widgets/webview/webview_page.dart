@@ -21,6 +21,7 @@ class WebviewPage extends StatefulWidget {
     this.elevation,
     this.headerBackground,
     this.headerColor,
+    this.indicatorColor,
     this.focusLandscape = false,
     this.enableNavIntercept = false,
     this.enablePullToRefresh = false,
@@ -63,6 +64,9 @@ class WebviewPage extends StatefulWidget {
 
   /// 头部内容颜色，默认根据背景色自动匹配白色和黑色
   final Color? headerColor;
+
+  /// 进度指示器颜色
+  final Color? indicatorColor;
 
   /// 是否强制横屏展示Webview
   final bool focusLandscape;
@@ -267,6 +271,8 @@ class _WebviewPageState extends State<WebviewPage> {
                   value: progress,
                   minHeight: 2,
                   backgroundColor: Colors.transparent,
+                  color: widget.indicatorColor ??
+                      Theme.of(context).colorScheme.secondary,
                 )
               : const SizedBox(),
       ],

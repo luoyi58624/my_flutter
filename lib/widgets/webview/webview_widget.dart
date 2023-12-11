@@ -14,7 +14,7 @@ class WebviewWidget extends StatefulWidget {
     this.html,
     this.windowId,
     this.showScrollbar = true,
-    this.clearCache = false,
+    this.disabledCache = false,
     this.enableGestureRecognizers = false,
     this.gestureRecognizers,
     this.enableNavIntercept = false,
@@ -39,11 +39,11 @@ class WebviewWidget extends StatefulWidget {
   /// 使用windowId创建webview，用于onCreateWindow事件
   final int? windowId;
 
-  /// 是否显示滚动条，默认false
+  /// 是否显示滚动条，默认true
   final bool showScrollbar;
 
-  /// 是否清除webview缓存
-  final bool clearCache;
+  /// 是否禁止webview缓存
+  final bool disabledCache;
 
   /// 是否开启手势识别器，默认false；如果你将webview嵌套在一个滚动容器中，
   /// 同时webview也是一个可滚动页面，那么你应该将其设置为true，否则webview无法滚动
@@ -150,7 +150,7 @@ class _WebviewWidgetState extends State<WebviewWidget>
     Map<String, dynamic> webviewSetting = {
       'forceDark': Theme.of(context).brightness == Brightness.light ? 2 : 0,
       'verticalScrollBarEnabled': widget.showScrollbar,
-      'clearCache': widget.clearCache,
+      'clearCache': widget.disabledCache,
     };
     webviewSetting.addAll(_defaultWebviewSetting);
     webViewController?.setSettings(
@@ -168,7 +168,7 @@ class _WebviewWidgetState extends State<WebviewWidget>
       'forceDark': Get.isDarkMode ? 2 : 0,
       // 是否显示滚动条
       'verticalScrollBarEnabled': widget.showScrollbar,
-      'clearCache': widget.clearCache,
+      'clearCache': widget.disabledCache,
     };
     webviewSetting.addAll(_defaultWebviewSetting);
     return WillPopScope(

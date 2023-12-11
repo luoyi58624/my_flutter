@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_app/pages/root_page/home/webview.dart';
 import 'package:my_flutter/my_flutter.dart';
 
 import 'theme.dart';
@@ -11,12 +12,19 @@ class HomeRootPage extends StatefulWidget {
 }
 
 class _HomeRootPageState extends State<HomeRootPage> {
-  final List<ListTilePageModel> cellNames = const [
-    ListTilePageModel('主题设置', ThemePage()),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    const List<ListTilePageModel> cellNames = [
+      ListTilePageModel('主题设置', ThemePage()),
+      ListTilePageModel(
+        'Webview页面',
+        WebviewPage(
+          url: 'https://www.bing.com',
+          enableNavIntercept: true,
+        ),
+      ),
+      ListTilePageModel('Webview页面2', MyWebviewPage()),
+    ];
     return Scaffold(
       drawer: Drawer(
         shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
