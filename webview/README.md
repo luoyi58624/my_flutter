@@ -1,2 +1,0 @@
-inappwebview的一个封装，主要提供2个widget：MyWebviewWidget，MyWebviewPage。
-beta版本对应inappwebview的beta版本，具体差异请自行查看它的文档。
