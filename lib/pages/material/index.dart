@@ -22,20 +22,30 @@ class MyMaterialApp extends StatelessWidget {
   /// Material预设脚手架
   const MyMaterialApp({
     super.key,
-    required this.home,
     this.title,
+    this.home,
     this.useMaterial3 = false,
     this.routePageType = RoutePageType.material,
     this.primaryColor,
     this.theme,
     this.darkTheme,
+    this.showPerformanceOverlay = false,
     this.hiddenTranslucenceStatusBar = false,
     this.onlyHorizontalMode = false,
     this.onlyVerticalMode = false,
+    this.onGenerateRoute,
+    this.navigatorObservers = const <NavigatorObserver>[],
   });
 
-  final Widget home;
+  /// app标题，当你切换到后台时，后台应用列表的名字就是它
   final String? title;
+
+  /// 第一屏页面组件(可选)，你也可以通过routes进行
+  final Widget? home;
+
+  /// 自定义首次路由生成策略，通过该参数可以实现登录拦截功能
+  final RouteFactory? onGenerateRoute;
+
   final bool useMaterial3;
 
   /// 路由跳转动画类型
@@ -50,6 +60,9 @@ class MyMaterialApp extends StatelessWidget {
   /// 自定义暗色主题，若你只是不满足默认配置的部分属性，你可以使用 myMaterialTheme.darkTheme.copyWith 修改部分属性
   final ThemeData? darkTheme;
 
+  /// 是否显示性能浮层
+  final bool showPerformanceOverlay;
+
   /// 是否隐藏半透明状态栏遮罩
   final bool hiddenTranslucenceStatusBar;
 
@@ -58,6 +71,9 @@ class MyMaterialApp extends StatelessWidget {
 
   /// 是否只允许竖屏展示
   final bool onlyVerticalMode;
+
+  /// 导航监听
+  final List<NavigatorObserver> navigatorObservers;
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +127,7 @@ class MyMaterialApp extends StatelessWidget {
       darkTheme: darkTheme ?? myMaterialTheme.darkTheme,
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
+      showPerformanceOverlay: showPerformanceOverlay,
       localizationsDelegates: const [
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -121,6 +138,8 @@ class MyMaterialApp extends StatelessWidget {
         Locale('en', 'US'),
       ],
       locale: const Locale('zh', 'CN'),
+      onGenerateRoute: onGenerateRoute,
+      navigatorObservers: navigatorObservers,
       home: home,
       builder: builderMyApp(),
     );
