@@ -7,8 +7,8 @@ import 'package:my_flutter/my_flutter.dart';
 import 'webview_widget.dart';
 
 /// 通用的webview页面，它使用material头部样式，如果需要ios风格的webview页面，你可以使用CupertinoWebviewPage
-class WebviewPage extends StatefulWidget {
-  const WebviewPage({
+class MyWebviewPage extends StatefulWidget {
+  const MyWebviewPage({
     super.key,
     this.title,
     this.url,
@@ -85,10 +85,10 @@ class WebviewPage extends StatefulWidget {
   final void Function(InAppWebViewController controller, Uri? url)? onMounted;
 
   @override
-  State<WebviewPage> createState() => _WebviewPageState();
+  State<MyWebviewPage> createState() => _WebviewPageState();
 }
 
-class _WebviewPageState extends State<WebviewPage> {
+class _WebviewPageState extends State<MyWebviewPage> {
   InAppWebViewController? webViewController;
   String? webviewTitle; // 网页标题
   double progress = 0;
@@ -187,7 +187,7 @@ class _WebviewPageState extends State<WebviewPage> {
           },
           onCreateWindow: (controller, createWindowAction) async {
             RouterUtil.to(
-              WebviewPage(
+              MyWebviewPage(
                 windowId: createWindowAction.windowId,
                 enableNavIntercept: widget.enableNavIntercept,
                 enablePullToRefresh: widget.enablePullToRefresh,

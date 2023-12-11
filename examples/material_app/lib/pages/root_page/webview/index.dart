@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/my_flutter.dart';
+import 'package:my_flutter_webview/my_flutter_webview.dart';
 
 class WebviewRootPage extends StatefulWidget {
   const WebviewRootPage({super.key});
@@ -9,15 +9,11 @@ class WebviewRootPage extends StatefulWidget {
 }
 
 class _UtilRootPageState extends State<WebviewRootPage> {
-  ScrollController controller = ScrollController();
-
   @override
   Widget build(BuildContext context) {
-    // return const WebviewPage(
-    //   title: 'Webview页面',
-    //   url: 'https://www.bing.com',
-    //   enableNavIntercept: true,
-    // );
-    return Container();
+    return const MyWebviewPage(
+      title: 'Webview页面',
+      url: 'https://www.bing.com',
+    );
   }
 }
