@@ -44,7 +44,6 @@ class _MyMaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    routePageType = RoutePageType.material;
     return MaterialApp.router(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
@@ -76,7 +75,6 @@ class _MyCupertinoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    routePageType = RoutePageType.cupertino;
     return CupertinoApp.router(
       title: 'Cupertino App',
       debugShowCheckedModeBanner: false,

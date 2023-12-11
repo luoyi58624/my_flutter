@@ -9,20 +9,23 @@ class MyPlatformApp extends StatelessWidget {
     super.key,
     required this.home,
     this.title,
+    this.routePageType = RoutePageType.material,
     this.materialTheme,
     this.cupertinoTheme,
   });
 
   final Widget home;
   final String? title;
+
+  /// 路由跳转动画类型，仅针对android平台，ios必须为cupertino
+  final RoutePageType routePageType;
   final ThemeData? materialTheme;
   final CupertinoThemeData? cupertinoTheme;
 
   @override
   Widget build(BuildContext context) {
-    routePageType = CommonUtil.isApplePlatform
-        ? RoutePageType.cupertino
-        : RoutePageType.material;
+    RouterUtil.routePageType =
+        CommonUtil.isApplePlatform ? RoutePageType.cupertino : routePageType;
     return PlatformApp(
       title: title ?? 'Platform App',
       material: (context, platform) => MaterialAppData(

@@ -25,6 +25,7 @@ class MyMaterialApp extends StatelessWidget {
     required this.home,
     this.title,
     this.useMaterial3 = false,
+    this.routePageType = RoutePageType.material,
     this.primaryColor,
     this.theme,
     this.darkTheme,
@@ -36,6 +37,9 @@ class MyMaterialApp extends StatelessWidget {
   final Widget home;
   final String? title;
   final bool useMaterial3;
+
+  /// 路由跳转动画类型
+  final RoutePageType routePageType;
 
   /// 主题颜色
   final MaterialColor? primaryColor;
@@ -76,7 +80,7 @@ class MyMaterialApp extends StatelessWidget {
         DeviceOrientation.portraitDown,
       ]);
     }
-    routePageType = RoutePageType.material;
+    RouterUtil.routePageType = routePageType;
     myMaterialTheme = MyMaterialTheme(
       useMaterial3
           ? _buildMaterial3ThemeData(

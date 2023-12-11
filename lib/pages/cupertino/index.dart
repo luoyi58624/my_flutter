@@ -41,7 +41,7 @@ class MyCupertinoApp extends StatelessWidget {
         DeviceOrientation.portraitDown,
       ]);
     }
-    routePageType = RoutePageType.cupertino;
+    RouterUtil.routePageType = RoutePageType.cupertino;
     return CupertinoApp(
       title: title ?? 'Cupertino App',
       theme: theme ?? myCupertinoTheme,

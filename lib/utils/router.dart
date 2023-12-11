@@ -12,11 +12,11 @@ enum RoutePageType {
   cupertino,
 }
 
-/// 跳转新页面的动画类型
-RoutePageType routePageType = RoutePageType.material;
-
 class RouterUtil {
   RouterUtil._();
+
+  /// 跳转新页面的动画类型
+  static RoutePageType routePageType = RoutePageType.material;
 
   /// 跳转到新页面
   static Future<T?> to<T>(
