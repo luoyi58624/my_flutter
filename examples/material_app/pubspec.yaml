@@ -8,11 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
   my_flutter:
-    git:
-      url: https://gitee.com/luoyi666/my_flutter.git
-  my_flutter_webview:
-    git:
-      url: https://gitee.com/luoyi666/my_flutter_webview.git
+    path: ../../
 
 dev_dependencies:
   flutter_test:

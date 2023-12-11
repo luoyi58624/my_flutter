@@ -86,10 +86,8 @@ class MyMaterialApp extends StatelessWidget {
               ),
             )
           : _buildMaterial2ThemeData(
-              ColorScheme.fromSeed(
-                brightness: Brightness.light,
-                seedColor: primaryColor ?? _primaryColor,
-              ),
+              Brightness.light,
+              primaryColor ?? _primaryColor,
             ),
       useMaterial3
           ? _buildMaterial3ThemeData(
@@ -99,10 +97,8 @@ class MyMaterialApp extends StatelessWidget {
               ),
             )
           : _buildMaterial2ThemeData(
-              ColorScheme.fromSeed(
-                brightness: Brightness.dark,
-                seedColor: primaryColor ?? _primaryColor,
-              ),
+              Brightness.dark,
+              primaryColor ?? _primaryColor,
             ),
     );
     return MaterialApp(
@@ -128,17 +124,20 @@ class MyMaterialApp extends StatelessWidget {
 }
 
 ThemeData _buildMaterial2ThemeData(
-  ColorScheme colorScheme,
+  Brightness brightness,
+  MaterialColor primaryColor,
 ) {
   var themeData = ThemeData(
     useMaterial3: false,
-    colorScheme: colorScheme,
+    primarySwatch: primaryColor,
+    brightness: brightness,
     textTheme: _textTheme,
     splashFactory: InkRipple.splashFactory,
     appBarTheme: AppBarTheme(
       titleTextStyle: TextStyle(
         fontSize: 18,
         fontWeight: _textTheme.titleLarge?.fontWeight,
+        color: ColorUtil.isDark(primaryColor) ? Colors.white : Colors.black,
       ),
     ),
   );
