@@ -8,14 +8,20 @@ import 'package:get_storage/get_storage.dart';
 late LocalStorage localStorage;
 
 class LocalStorage {
-  late GetStorage _storage;
+  static late GetStorage _storage;
 
-  LocalStorage([String? tag]) {
+  LocalStorage._();
+
+  /// 初始化容器
+  static Future<LocalStorage> init([String? tag]) async {
     if (tag != null) {
+      await GetStorage.init(tag);
       _storage = GetStorage(tag);
     } else {
+      await GetStorage.init();
       _storage = GetStorage();
     }
+    return LocalStorage._();
   }
 
   /// 设置本地数据

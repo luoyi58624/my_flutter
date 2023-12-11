@@ -58,13 +58,13 @@ export 'widgets/cupertino/list_tile.dart';
 
 export 'pages/common/child_page.dart';
 
-/// 全局导航key，注意：你必须将此key挂载到MaterialApp或CupertinoApp下
+/// 全局导航key，注意：如果你使用RouteUtil时不想传递context，那么你必须将此key挂载到MaterialApp或CupertinoApp下，
+/// 但还有一点需要注意，此key保存的是我们App根navigator实例，如果你在嵌套路由中进行路由跳转，则不能使用全局导航key，你需要拿嵌套路由对应的navigator的context。
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> initMyFlutter() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
-  localStorage = LocalStorage();
+  localStorage = await LocalStorage.init();
 }
 
 /// MaterialApp、CupertinoApp的 builder 参数，初始化全局toast、解决modal_bottom_sheet在高版本安卓系统上动画丢失问题
