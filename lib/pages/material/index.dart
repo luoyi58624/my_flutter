@@ -94,8 +94,10 @@ class MyMaterialApp extends StatelessWidget {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
           statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
     } else {
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-          statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
+      if (!myTheme.useMaterial3) {
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+            statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
+      }
     }
     if (onlyHorizontalMode) {
       SystemChrome.setPreferredOrientations([
