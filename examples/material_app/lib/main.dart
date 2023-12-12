@@ -5,7 +5,7 @@ import 'package:my_flutter/pages/material/index.dart';
 import 'pages/root_page/root_page.dart';
 
 void main() async {
-  await initMyFlutter();
+  await initMyFlutter(theme: MyCustomTheme());
   runApp(const _MyApp());
 }
 
@@ -20,4 +20,9 @@ class _MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+class MyCustomTheme extends MyTheme {
+  @override
+  bool get useMaterial3 => true;
 }

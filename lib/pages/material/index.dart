@@ -90,11 +90,14 @@ class MyMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RouterUtil.routePageType = routePageType;
-    if (hiddenTranslucenceStatusBar) {
+    if (myTheme.useMaterial3) {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
           statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
     } else {
-      if (!myTheme.useMaterial3) {
+      if (hiddenTranslucenceStatusBar) {
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+            statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
+      } else {
         SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
             statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
       }
