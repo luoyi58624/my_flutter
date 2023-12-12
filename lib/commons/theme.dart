@@ -12,10 +12,13 @@ List<Color> _lightGrey =
 List<Color> _darkGrey =
     List.generate(4, (index) => Colors.grey[_darkLevel[index]]!);
 
-/// 全局主题颜色实例，执行initMyFlutter函数时初始化
+/// 全局主题实例，执行initMyFlutter函数时初始化
 late MyTheme myTheme;
 
 class MyTheme {
+  /// appbar的高度
+  double get appbarHeight => 44;
+
   /// 主要颜色
   MaterialColor get primaryColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 0, 120, 212));

@@ -150,6 +150,7 @@ ThemeData _buildMaterial2ThemeData(
     textTheme: _textTheme,
     splashFactory: InkRipple.splashFactory,
     appBarTheme: AppBarTheme(
+      toolbarHeight: myTheme.appbarHeight,
       titleTextStyle: TextStyle(
         fontSize: 18,
         fontWeight: _textTheme.titleLarge?.fontWeight,
@@ -175,6 +176,9 @@ ThemeData _buildMaterial3ThemeData(
       border: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.grey),
       ),
+    ),
+    appBarTheme: AppBarTheme(
+      toolbarHeight: myTheme.appbarHeight,
     ),
   );
   return themeData;

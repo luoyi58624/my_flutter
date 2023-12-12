@@ -13,19 +13,19 @@ var _logger = Logger(
 class LoggerUtil {
   LoggerUtil._();
 
-  static void d(dynamic message, [String? title]) {
+  static void d(dynamic message, [dynamic title]) {
     _logger.d(message, error: title);
   }
 
-  static void i(dynamic message, [String? title]) {
+  static void i(dynamic message, [dynamic title]) {
     _logger.i(message, error: title);
   }
 
-  static void w(dynamic message, [String? title]) {
+  static void w(dynamic message, [dynamic title]) {
     _logger.w(message, error: title);
   }
 
-  static void e(dynamic message, [String? title]) {
+  static void e(dynamic message, [dynamic title]) {
     _logger.w(message, error: title);
   }
 }
