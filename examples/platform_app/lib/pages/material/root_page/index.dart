@@ -8,10 +8,10 @@ import 'classify/index.dart';
 import 'home/index.dart';
 import 'user/index.dart';
 
-final materialPages = [
-  RootPageModel('首页', const HomeRootPage(), Icons.home),
-  RootPageModel('分类', const ClassifyRootPage(), Icons.grid_view_rounded),
-  RootPageModel('消息', const ChatRootPage(), CupertinoIcons.chat_bubble_fill),
-  RootPageModel('购物车', const CartRootPage(), Icons.shopping_cart),
-  RootPageModel('个人中心', const UserRootPage(), Icons.person_2_rounded),
+const materialPages = [
+  NavPageModel('首页', HomeRootPage(), icon: Icons.home),
+  NavPageModel('分类', ClassifyRootPage(), icon: Icons.grid_view_rounded),
+  NavPageModel('消息', ChatRootPage(), icon: CupertinoIcons.chat_bubble_fill),
+  NavPageModel('购物车', CartRootPage(), icon: Icons.shopping_cart),
+  NavPageModel('个人中心', UserRootPage(), icon: Icons.person_2_rounded),
 ];

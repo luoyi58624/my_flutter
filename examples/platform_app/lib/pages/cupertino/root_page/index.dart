@@ -7,10 +7,10 @@ import 'classify/index.dart';
 import 'home/index.dart';
 import 'user/index.dart';
 
-final cupertinoPages = [
-  RootPageModel('首页', const HomeRootPage(), CupertinoIcons.home),
-  RootPageModel('分类', const ClassifyRootPage(), CupertinoIcons.list_bullet),
-  RootPageModel('消息', const ChatRootPage(), CupertinoIcons.chat_bubble),
-  RootPageModel('购物车', const CartRootPage(), CupertinoIcons.cart),
-  RootPageModel('个人中心', const UserRootPage(), CupertinoIcons.person),
+const cupertinoPages = [
+  NavPageModel('首页', HomeRootPage(), icon: CupertinoIcons.home),
+  NavPageModel('分类', ClassifyRootPage(), icon: CupertinoIcons.list_bullet),
+  NavPageModel('消息', ChatRootPage(), icon: CupertinoIcons.chat_bubble),
+  NavPageModel('购物车', CartRootPage(), icon: CupertinoIcons.cart),
+  NavPageModel('个人中心', UserRootPage(), icon: CupertinoIcons.person),
 ];

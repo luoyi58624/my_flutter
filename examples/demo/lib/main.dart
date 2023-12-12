@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyPlatformApp(
       home: PlatformRootPage(pages: const [
-        RootPageModel('组件', HomePage(), Icons.home),
-        RootPageModel('模版', TestPage(), Icons.grid_view),
+        NavPageModel('组件', HomePage(), icon: Icons.home),
+        NavPageModel('模版', TestPage(), icon: Icons.grid_view),
       ]),
       materialTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(

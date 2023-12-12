@@ -14,10 +14,11 @@ class RootPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoRootPage(
       pages: const [
-        RootPageModel('组件', ComponentRootPage(), CupertinoIcons.home),
-        RootPageModel('工具', UtilRootPage(), CupertinoIcons.settings_solid),
-        RootPageModel('模版', TemplateRootPage(), CupertinoIcons.list_bullet),
-        RootPageModel('示例', ExampleRootPage(), CupertinoIcons.book),
+        NavPageModel('组件', ComponentRootPage(), icon: CupertinoIcons.home),
+        NavPageModel('工具', UtilRootPage(), icon: CupertinoIcons.settings_solid),
+        NavPageModel('模版', TemplateRootPage(),
+            icon: CupertinoIcons.list_bullet),
+        NavPageModel('示例', ExampleRootPage(), icon: CupertinoIcons.book),
       ],
     );
   }

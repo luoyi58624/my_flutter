@@ -13,8 +13,8 @@ class HomeRootPage extends StatefulWidget {
 class _HomeRootPageState extends State<HomeRootPage> {
   @override
   Widget build(BuildContext context) {
-    const List<ListTilePageModel> cellNames = [
-      ListTilePageModel('主题设置', ThemePage()),
+    const List<NavPageModel> cellNames = [
+      NavPageModel('主题设置', ThemePage()),
     ];
     return Scaffold(
       drawer: Drawer(

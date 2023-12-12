@@ -15,7 +15,7 @@ class CupertinoRootPage extends StatefulWidget {
   }) : assert(pages.length >= 2);
 
   /// 页面列表
-  final List<RootPageModel> pages;
+  final List<NavPageModel> pages;
 
   /// tabbar未激活颜色
   final CupertinoDynamicColor tabbarInactiveColor;

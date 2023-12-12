@@ -8,10 +8,13 @@ import 'people/index.dart';
 import 'setting/index.dart';
 
 const _pages = [
-  RootPageModel('Chats', ChatRootPage(), CupertinoIcons.chat_bubble_2_fill),
-  RootPageModel('Calls', CallRootPage(), CupertinoIcons.phone),
-  RootPageModel('People', PeopleRootPage(), CupertinoIcons.person_alt_circle),
-  RootPageModel('Setting', SettingRootPage(), CupertinoIcons.settings_solid),
+  NavPageModel('Chats', ChatRootPage(),
+      icon: CupertinoIcons.chat_bubble_2_fill),
+  NavPageModel('Calls', CallRootPage(), icon: CupertinoIcons.phone),
+  NavPageModel('People', PeopleRootPage(),
+      icon: CupertinoIcons.person_alt_circle),
+  NavPageModel('Setting', SettingRootPage(),
+      icon: CupertinoIcons.settings_solid),
 ];
 
 class RootPage extends StatelessWidget {

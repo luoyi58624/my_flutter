@@ -14,7 +14,7 @@ class MaterialRootPage extends StatefulWidget {
   }) : assert(pages.length >= 2);
 
   /// 导航页面数组，必须至少包含2个页面
-  final List<RootPageModel> pages;
+  final List<NavPageModel> pages;
 
   /// 是否使用material2风格的底部导航栏，默认false
   final bool useMaterial3NavigationBar;

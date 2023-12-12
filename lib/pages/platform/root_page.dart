@@ -18,7 +18,7 @@ class PlatformRootPage extends StatefulWidget {
   final bool useMaterial3NavigationBar;
 
   /// 导航页面数组，必须至少包含2个页面
-  final List<RootPageModel> pages;
+  final List<NavPageModel> pages;
 
   @override
   State<PlatformRootPage> createState() => _PlatformRootPageState();

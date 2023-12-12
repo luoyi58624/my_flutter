@@ -14,10 +14,10 @@ class RootPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialRootPage(
       pages: const [
-        RootPageModel('首页', HomeRootPage(), Icons.home),
-        RootPageModel('组件', UtilRootPage(), Icons.token_outlined),
-        RootPageModel('模版', TemplateRootPage(), Icons.temple_hindu),
-        RootPageModel('示例', ExampleRootPage(), Icons.book),
+        NavPageModel('首页', HomeRootPage(), icon: Icons.home),
+        NavPageModel('组件', UtilRootPage(), icon: Icons.token_outlined),
+        NavPageModel('模版', TemplateRootPage(), icon: Icons.temple_hindu),
+        NavPageModel('示例', ExampleRootPage(), icon: Icons.book),
       ],
     );
   }

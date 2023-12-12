@@ -7,18 +7,10 @@ class LabelModel {
   LabelModel(this.label, this.value);
 }
 
-class ListTilePageModel {
+class NavPageModel {
   final String title;
   final Widget widget;
   final IconData? icon;
 
-  const ListTilePageModel(this.title, this.widget, {this.icon});
-}
-
-class RootPageModel {
-  final String title;
-  final Widget widget;
-  final IconData icon;
-
-  const RootPageModel(this.title, this.widget, this.icon);
+  const NavPageModel(this.title, this.widget, {this.icon});
 }
