@@ -46,7 +46,7 @@ export 'widgets/commons/cascader.dart';
 export 'widgets/commons/flex_wrap.dart';
 export 'widgets/commons/flexible_title.dart';
 export 'widgets/commons/hide_keybord.dart';
-export 'widgets/commons/image.dart';
+export 'widgets/commons/image/image.dart';
 export 'widgets/commons/index_list.dart';
 export 'widgets/commons/loading.dart';
 export 'widgets/commons/restart_app.dart';
@@ -71,7 +71,7 @@ const bool isRelease = bool.fromEnvironment("dart.vm.product");
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 /// 初始化
-/// * theme 自定义主题，你可以通过继承MyTheme类重写变量以实现自定义主题，设计上不支持主题动态化，没有哪款app会做动态主题这样花里胡哨的功能，实际上让开发者再兼容一套黑暗模式都比较费劲。
+/// * theme 自定义主题
 Future<void> initMyFlutter({
   MyTheme? theme,
 }) async {

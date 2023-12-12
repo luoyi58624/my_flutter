@@ -16,15 +16,13 @@ class _MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const RestartAppWidget(
-      child: MyMaterialApp(
-        home: RootPage(),
-      ),
+    return const MyMaterialApp(
+      home: RootPage(),
     );
   }
 }
 
 class MyCustomTheme extends MyTheme {
   @override
-  bool get useMaterial3 => true;
+  bool get useMaterial3 => false;
 }

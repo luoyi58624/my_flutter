@@ -14,7 +14,6 @@ class RootPage extends GetView<GlobalController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => MaterialRootPage(
-          useMaterial3NavigationBar: true,
           pages: [
             RootPageModel(
               '首页',

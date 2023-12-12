@@ -2,12 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../../utils/common.dart';
+import '../../../utils/common.dart';
 
-/// 封装通用的图片组件，统一项目中的用法
-class ImageWidget extends StatefulWidget {
+/// 加载本地文件图片，注意：一旦你使用它，web将无法使用，web无法使用dart.io库
+class FileImageWidget extends StatefulWidget {
   /// 默认图片构造器，它无法渲染完整的圆角，若你需要圆角请使用circle构造器，它将使用CircleAvatar组件进行渲染
-  const ImageWidget(
+  const FileImageWidget(
     this.url, {
     super.key,
     this.width,
@@ -21,7 +21,7 @@ class ImageWidget extends StatefulWidget {
   }) : circleImage = false;
 
   /// 圆形图片构造器
-  const ImageWidget.circle(
+  const FileImageWidget.circle(
     this.url,
     this.radius, {
     super.key,
@@ -62,10 +62,10 @@ class ImageWidget extends StatefulWidget {
   final GestureTapCallback? onTap;
 
   @override
-  State<ImageWidget> createState() => _ImageWidgetState();
+  State<FileImageWidget> createState() => _FileImageWidgetState();
 }
 
-class _ImageWidgetState extends State<ImageWidget> {
+class _FileImageWidgetState extends State<FileImageWidget> {
   @override
   Widget build(BuildContext context) {
     late Widget imageWidget;
