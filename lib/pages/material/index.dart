@@ -178,6 +178,11 @@ ThemeData _buildMaterial3ThemeData(
     cardTheme: const CardTheme(
       surfaceTintColor: Colors.transparent,
     ),
+    inputDecorationTheme: const InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.grey),
+      ),
+    ),
   );
   return themeData;
 }

@@ -27,6 +27,7 @@ export 'modals/simple_modals.dart';
 
 export 'utils/color.dart';
 export 'utils/common.dart';
+export 'utils/event_bus.dart';
 export 'utils/getx.dart';
 export 'utils/loading.dart';
 export 'utils/local_storage.dart';
@@ -57,6 +58,9 @@ export 'widgets/cupertino/list_group.dart';
 export 'widgets/cupertino/list_tile.dart';
 
 export 'pages/common/child_page.dart';
+
+/// 是否为release版
+const bool isRelease = bool.fromEnvironment("dart.vm.product");
 
 /// 全局导航key，注意：如果你使用RouteUtil时不想传递context，那么你必须将此key挂载到MaterialApp或CupertinoApp下，
 /// 但还有一点需要注意，此key保存的是我们App根navigator实例，如果你在嵌套路由中进行路由跳转，则不能使用全局导航key，你需要拿嵌套路由对应的navigator的context。
