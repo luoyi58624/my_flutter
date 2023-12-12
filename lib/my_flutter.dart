@@ -24,6 +24,7 @@ export 'package:status_bar_control/status_bar_control.dart';
 export 'package:page_transition/page_transition.dart';
 
 export 'commons/modal.dart';
+export 'commons/theme.dart';
 
 export 'utils/color.dart';
 export 'utils/common.dart';

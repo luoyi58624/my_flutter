@@ -12,22 +12,27 @@ List<Color> _lightGrey =
 List<Color> _darkGrey =
     List.generate(4, (index) => Colors.grey[_darkLevel[index]]!);
 
-/// 全局主题颜色实例
+/// 全局主题颜色实例，执行initMyFlutter函数时初始化
 late MyTheme myTheme;
 
 class MyTheme {
+  /// 主要颜色
   MaterialColor get primaryColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 0, 120, 212));
 
+  /// 成功提示颜色
   MaterialColor get successColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 16, 185, 129));
 
+  /// 警告提示颜色
   MaterialColor get warningColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 245, 158, 11));
 
+  /// 错误提示颜色
   MaterialColor get errorColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 239, 68, 68));
 
+  /// 普通提示颜色
   MaterialColor get infoColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 127, 137, 154));
 
