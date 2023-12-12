@@ -84,7 +84,7 @@ class _CupertinoRootPageState extends State<CupertinoRootPage> {
           return CupertinoTabView(
               navigatorKey: tabbarNavigatorKey[index],
               builder: (BuildContext context) {
-                return widget.pages[index].widget;
+                return widget.pages[index].page;
               });
         },
       ),

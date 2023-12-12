@@ -48,7 +48,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
                         trailing:
                             const Icon(Icons.keyboard_arrow_right_outlined),
                         onTap: () {
-                          RouterUtil.to(e.widget);
+                          RouterUtil.to(e.page);
                         },
                       ))
                   .toList(),

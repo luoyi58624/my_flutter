@@ -18,8 +18,8 @@ class IconModel {
 
 class NavPageModel {
   final String title;
-  final Widget widget;
+  final Widget page;
   final IconData? icon;
 
-  const NavPageModel(this.title, this.widget, {this.icon});
+  const NavPageModel(this.title, this.page, {this.icon});
 }

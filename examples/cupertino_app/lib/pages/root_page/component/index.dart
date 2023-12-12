@@ -38,7 +38,7 @@ class _ComponentRootPageState extends State<ComponentRootPage> {
             itemCount: listData.length,
             itemBuilder: (context, index) => MyCupertinoListTile(
               title: listData[index].title,
-              page: listData[index].widget,
+              page: listData[index].page,
             ),
           ),
         ],

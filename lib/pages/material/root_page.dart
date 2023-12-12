@@ -53,7 +53,7 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
       child: Scaffold(
         body: IndexedStack(
           index: tabbarIndex,
-          children: widget.pages.map((e) => e.widget).toList(),
+          children: widget.pages.map((e) => e.page).toList(),
         ),
         bottomNavigationBar: widget.bottomNavigationBar ??
             (widget.useMaterial3NavigationBar
