@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_flutter/commons/theme.dart';
 import 'package:my_flutter/my_flutter.dart';
 
 export 'root_page.dart';
@@ -17,7 +16,7 @@ late MyMaterialTheme myMaterialTheme;
 
 class MyMaterialApp extends StatelessWidget {
   /// Material预设脚手架
-  const MyMaterialApp({
+  MyMaterialApp({
     super.key,
     this.title,
     this.home,
@@ -31,7 +30,33 @@ class MyMaterialApp extends StatelessWidget {
     this.onlyVerticalMode = false,
     this.onGenerateRoute,
     this.navigatorObservers = const <NavigatorObserver>[],
-  });
+  }) {
+    RouterUtil.routePageType = routePageType;
+    myMaterialTheme = MyMaterialTheme(
+      useMaterial3
+          ? _buildMaterial3ThemeData(
+              ColorScheme.fromSeed(
+                brightness: Brightness.light,
+                seedColor: myTheme.primaryColor,
+              ),
+            )
+          : _buildMaterial2ThemeData(
+              Brightness.light,
+              myTheme.primaryColor,
+            ),
+      useMaterial3
+          ? _buildMaterial3ThemeData(
+              ColorScheme.fromSeed(
+                brightness: Brightness.dark,
+                seedColor: myTheme.primaryColor,
+              ),
+            )
+          : _buildMaterial2ThemeData(
+              Brightness.dark,
+              myTheme.primaryColor,
+            ),
+    );
+  }
 
   /// app标题，当你切换到后台时，后台应用列表的名字就是它
   final String? title;
@@ -89,31 +114,6 @@ class MyMaterialApp extends StatelessWidget {
         DeviceOrientation.portraitDown,
       ]);
     }
-    RouterUtil.routePageType = routePageType;
-    myMaterialTheme = MyMaterialTheme(
-      useMaterial3
-          ? _buildMaterial3ThemeData(
-              ColorScheme.fromSeed(
-                brightness: Brightness.light,
-                seedColor: myTheme.primaryColor,
-              ),
-            )
-          : _buildMaterial2ThemeData(
-              Brightness.light,
-              myTheme.primaryColor,
-            ),
-      useMaterial3
-          ? _buildMaterial3ThemeData(
-              ColorScheme.fromSeed(
-                brightness: Brightness.dark,
-                seedColor: myTheme.primaryColor,
-              ),
-            )
-          : _buildMaterial2ThemeData(
-              Brightness.dark,
-              myTheme.primaryColor,
-            ),
-    );
     return MaterialApp(
       title: title ?? 'Cupertino App',
       theme: theme ?? myMaterialTheme.lightTheme,
