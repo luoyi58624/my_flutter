@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_flutter/commons/theme.dart';
 import 'package:my_flutter/my_flutter.dart';
 
 export 'root_page.dart';
@@ -10,10 +11,6 @@ class MyMaterialTheme {
 
   MyMaterialTheme(this.lightTheme, this.darkTheme);
 }
-
-/// 自定义material3的主题样式
-final _primaryColor =
-    ColorUtil.createMaterialColor(const Color.fromARGB(255, 0, 120, 212));
 
 /// 自定义Material全局默认样式，material和cupertino不一样，它区分theme和darkTheme，同时配置上比cupertino复杂很多
 late MyMaterialTheme myMaterialTheme;
@@ -26,7 +23,6 @@ class MyMaterialApp extends StatelessWidget {
     this.home,
     this.useMaterial3 = false,
     this.routePageType = RoutePageType.material,
-    this.primaryColor,
     this.theme,
     this.darkTheme,
     this.showPerformanceOverlay = false,
@@ -50,9 +46,6 @@ class MyMaterialApp extends StatelessWidget {
 
   /// 路由跳转动画类型
   final RoutePageType routePageType;
-
-  /// 主题颜色
-  final MaterialColor? primaryColor;
 
   /// 自定义亮色主题，若你只是不满足默认配置的部分属性，你可以使用 myMaterialTheme.lightTheme.copyWith 修改部分属性
   final ThemeData? theme;
@@ -102,23 +95,23 @@ class MyMaterialApp extends StatelessWidget {
           ? _buildMaterial3ThemeData(
               ColorScheme.fromSeed(
                 brightness: Brightness.light,
-                seedColor: primaryColor ?? _primaryColor,
+                seedColor: myTheme.primaryColor,
               ),
             )
           : _buildMaterial2ThemeData(
               Brightness.light,
-              primaryColor ?? _primaryColor,
+              myTheme.primaryColor,
             ),
       useMaterial3
           ? _buildMaterial3ThemeData(
               ColorScheme.fromSeed(
                 brightness: Brightness.dark,
-                seedColor: primaryColor ?? _primaryColor,
+                seedColor: myTheme.primaryColor,
               ),
             )
           : _buildMaterial2ThemeData(
               Brightness.dark,
-              primaryColor ?? _primaryColor,
+              myTheme.primaryColor,
             ),
     );
     return MaterialApp(

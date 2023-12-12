@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:my_flutter/commons/theme.dart';
 import 'package:my_flutter/my_flutter.dart';
 
 export 'root_page.dart';
@@ -44,7 +45,27 @@ class MyCupertinoApp extends StatelessWidget {
     RouterUtil.routePageType = RoutePageType.cupertino;
     return CupertinoApp(
       title: title ?? 'Cupertino App',
-      theme: theme ?? myCupertinoTheme,
+      theme: theme ??
+          CupertinoThemeData(
+            primaryColor: myTheme.primaryColor,
+            textTheme: CupertinoTextThemeData(
+              // 通用文字样式
+              textStyle: const CupertinoThemeData()
+                  .textTheme
+                  .textStyle
+                  .copyWith(fontWeight: FontWeight.w500),
+              // 顶部导航文字样式
+              navActionTextStyle: const CupertinoThemeData()
+                  .textTheme
+                  .navActionTextStyle
+                  .copyWith(fontWeight: FontWeight.w500),
+              // 底部导航栏文字样式
+              tabLabelTextStyle: const CupertinoThemeData()
+                  .textTheme
+                  .tabLabelTextStyle
+                  .copyWith(fontSize: 12),
+            ),
+          ),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
@@ -62,25 +83,3 @@ class MyCupertinoApp extends StatelessWidget {
     );
   }
 }
-
-/// 自定义Cupertino全局默认样式
-final myCupertinoTheme = CupertinoThemeData(
-  primaryColor: const Color.fromARGB(255, 0, 120, 212),
-  textTheme: CupertinoTextThemeData(
-    // 通用文字样式
-    textStyle: const CupertinoThemeData()
-        .textTheme
-        .textStyle
-        .copyWith(fontWeight: FontWeight.w500),
-    // 顶部导航文字样式
-    navActionTextStyle: const CupertinoThemeData()
-        .textTheme
-        .navActionTextStyle
-        .copyWith(fontWeight: FontWeight.w500),
-    // 底部导航栏文字样式
-    tabLabelTextStyle: const CupertinoThemeData()
-        .textTheme
-        .tabLabelTextStyle
-        .copyWith(fontSize: 12),
-  ),
-);
