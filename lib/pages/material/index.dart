@@ -12,11 +12,35 @@ class MyMaterialTheme {
 }
 
 /// 自定义Material全局默认样式，material和cupertino不一样，它区分theme和darkTheme，同时配置上比cupertino复杂很多
-late MyMaterialTheme myMaterialTheme;
+MyMaterialTheme get myMaterial2Theme => MyMaterialTheme(
+      _buildMaterial2ThemeData(
+        Brightness.light,
+        myTheme.primaryColor,
+      ),
+      _buildMaterial2ThemeData(
+        Brightness.dark,
+        myTheme.primaryColor,
+      ),
+    );
+
+MyMaterialTheme get myMaterial3Theme => MyMaterialTheme(
+      _buildMaterial3ThemeData(
+        ColorScheme.fromSeed(
+          brightness: Brightness.light,
+          seedColor: myTheme.primaryColor,
+        ),
+      ),
+      _buildMaterial3ThemeData(
+        ColorScheme.fromSeed(
+          brightness: Brightness.dark,
+          seedColor: myTheme.primaryColor,
+        ),
+      ),
+    );
 
 class MyMaterialApp extends StatelessWidget {
   /// Material预设脚手架
-  MyMaterialApp({
+  const MyMaterialApp({
     super.key,
     this.title,
     this.home,
@@ -30,33 +54,7 @@ class MyMaterialApp extends StatelessWidget {
     this.onlyVerticalMode = false,
     this.onGenerateRoute,
     this.navigatorObservers = const <NavigatorObserver>[],
-  }) {
-    RouterUtil.routePageType = routePageType;
-    myMaterialTheme = MyMaterialTheme(
-      useMaterial3
-          ? _buildMaterial3ThemeData(
-              ColorScheme.fromSeed(
-                brightness: Brightness.light,
-                seedColor: myTheme.primaryColor,
-              ),
-            )
-          : _buildMaterial2ThemeData(
-              Brightness.light,
-              myTheme.primaryColor,
-            ),
-      useMaterial3
-          ? _buildMaterial3ThemeData(
-              ColorScheme.fromSeed(
-                brightness: Brightness.dark,
-                seedColor: myTheme.primaryColor,
-              ),
-            )
-          : _buildMaterial2ThemeData(
-              Brightness.dark,
-              myTheme.primaryColor,
-            ),
-    );
-  }
+  });
 
   /// app标题，当你切换到后台时，后台应用列表的名字就是它
   final String? title;
@@ -95,6 +93,7 @@ class MyMaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RouterUtil.routePageType = routePageType;
     if (hiddenTranslucenceStatusBar) {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
           statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
@@ -116,8 +115,14 @@ class MyMaterialApp extends StatelessWidget {
     }
     return MaterialApp(
       title: title ?? 'Cupertino App',
-      theme: theme ?? myMaterialTheme.lightTheme,
-      darkTheme: darkTheme ?? myMaterialTheme.darkTheme,
+      theme: theme ??
+          (useMaterial3
+              ? myMaterial3Theme.lightTheme
+              : myMaterial2Theme.lightTheme),
+      darkTheme: darkTheme ??
+          (useMaterial3
+              ? myMaterial3Theme.darkTheme
+              : myMaterial2Theme.darkTheme),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       showPerformanceOverlay: showPerformanceOverlay,
