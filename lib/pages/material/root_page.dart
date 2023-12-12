@@ -8,6 +8,7 @@ class MaterialRootPage extends StatefulWidget {
   const MaterialRootPage({
     super.key,
     required this.pages,
+    this.useMaterial2NavigationBar = false,
     this.useMaterial3NavigationBar = false,
     this.selectedTabColor,
     this.bottomNavigationBar,
@@ -17,6 +18,9 @@ class MaterialRootPage extends StatefulWidget {
   final List<NavPageModel> pages;
 
   /// 是否使用material2风格的底部导航栏，默认false
+  final bool useMaterial2NavigationBar;
+
+  /// 是否使用material3风格的底部导航栏，默认false，若2者都为false，则根据useMaterial3自动切换
   final bool useMaterial3NavigationBar;
 
   /// 选中的tabbar颜色，注意：仅限material2风格的导航栏
@@ -56,11 +60,13 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
           children: widget.pages.map((e) => e.page).toList(),
         ),
         bottomNavigationBar: widget.bottomNavigationBar ??
-            (widget.useMaterial3NavigationBar
-                ? navigationBar3
-                : Theme.of(context).useMaterial3
+            (widget.useMaterial2NavigationBar
+                ? navigationBar2
+                : widget.useMaterial3NavigationBar
                     ? navigationBar3
-                    : navigationBar2),
+                    : Theme.of(context).useMaterial3
+                        ? navigationBar3
+                        : navigationBar2),
       ),
     );
   }

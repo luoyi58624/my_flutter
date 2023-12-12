@@ -13,6 +13,7 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialRootPage(
+      useMaterial2NavigationBar: true,
       pages: const [
         NavPageModel('首页', HomeRootPage(), icon: Icons.home),
         NavPageModel('组件', UtilRootPage(), icon: Icons.token_outlined),
