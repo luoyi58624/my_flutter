@@ -24,6 +24,7 @@ export 'package:status_bar_control/status_bar_control.dart';
 export 'package:page_transition/page_transition.dart';
 export 'package:shimmer/shimmer.dart';
 export 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+export 'package:permission_handler/permission_handler.dart';
 
 export 'commons/modal.dart';
 export 'commons/theme.dart';
