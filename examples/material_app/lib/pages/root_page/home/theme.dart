@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:material_app/controllers/global_controller.dart';
-import 'package:my_flutter/my_flutter.dart';
 
-class ThemePage extends GetView<GlobalController> {
+class ThemePage extends StatelessWidget {
   const ThemePage({super.key});
 
   @override
@@ -18,36 +16,16 @@ class ThemePage extends GetView<GlobalController> {
   Widget buildCell() {
     return Container(
       padding: const EdgeInsets.all(8.0),
-      child: Material(
+      child: const Material(
         elevation: 2,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              title: const Text('开启Material3'),
-              trailing: Obx(
-                () => Switch(
-                  // This bool value toggles the switch.
-                  value: controller.useMaterial3.value,
-                  onChanged: (bool value) {
-                    // This is called when the user toggles the switch.
-                    controller.useMaterial3.value = value;
-                  },
-                ),
-              ),
+              title: Text('开启Material3'),
             ),
             ListTile(
-              title: const Text('黑暗模式'),
-              trailing: Obx(
-                () => Switch(
-                  // This bool value toggles the switch.
-                  value: controller.isDark.value,
-                  onChanged: (bool value) {
-                    // This is called when the user toggles the switch.
-                    controller.isDark.value = value;
-                  },
-                ),
-              ),
+              title: Text('黑暗模式'),
             )
           ],
         ),

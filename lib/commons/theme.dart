@@ -16,8 +16,11 @@ List<Color> _darkGrey =
 late MyTheme myTheme;
 
 class MyTheme {
+  /// 是否使用material3主题
+  bool get useMaterial3 => false;
+
   /// appbar的高度
-  double get appbarHeight => 44;
+  double get appbarHeight => 56;
 
   /// 主要颜色
   MaterialColor get primaryColor =>

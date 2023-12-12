@@ -5,7 +5,6 @@ import 'package:my_flutter/commons/theme.dart';
 import 'package:my_flutter/utils/local_storage.dart';
 import 'package:my_flutter/utils/toast.dart';
 
-// 只导出get的核心以及工具函数，排除路由、http网络连接等其他依赖
 export 'package:get/get_core/get_core.dart';
 export 'package:get/get_instance/get_instance.dart';
 export 'package:get/get_state_manager/get_state_manager.dart';
@@ -71,6 +70,8 @@ const bool isRelease = bool.fromEnvironment("dart.vm.product");
 /// 但还有一点需要注意，此key保存的是我们App根navigator实例，如果你在嵌套路由中进行路由跳转，则不能使用全局导航key，你需要拿嵌套路由对应的navigator的context。
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+/// 初始化
+/// * theme 自定义主题，你可以通过继承MyTheme类重写变量以实现自定义主题，设计上不支持主题动态化，没有哪款app会做动态主题这样花里胡哨的功能，实际上让开发者再兼容一套黑暗模式都比较费劲。
 Future<void> initMyFlutter({
   MyTheme? theme,
 }) async {

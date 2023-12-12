@@ -61,7 +61,6 @@ class _HomeRootPageState extends State<HomeRootPage> {
           SliverAppBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
             elevation: 4,
-            centerTitle: false,
             flexibleSpace: FlexibleSpaceBar(
               title: FlexibleTitleWidget(
                 child: Text(

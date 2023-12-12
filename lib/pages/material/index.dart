@@ -12,30 +12,29 @@ class MyMaterialTheme {
 }
 
 /// 自定义Material全局默认样式，material和cupertino不一样，它区分theme和darkTheme，同时配置上比cupertino复杂很多
-MyMaterialTheme get myMaterial2Theme => MyMaterialTheme(
-      _buildMaterial2ThemeData(
-        Brightness.light,
-        myTheme.primaryColor,
-      ),
-      _buildMaterial2ThemeData(
-        Brightness.dark,
-        myTheme.primaryColor,
-      ),
-    );
-
-MyMaterialTheme get myMaterial3Theme => MyMaterialTheme(
-      _buildMaterial3ThemeData(
-        ColorScheme.fromSeed(
-          brightness: Brightness.light,
-          seedColor: myTheme.primaryColor,
-        ),
-      ),
-      _buildMaterial3ThemeData(
-        ColorScheme.fromSeed(
-          brightness: Brightness.dark,
-          seedColor: myTheme.primaryColor,
-        ),
-      ),
+MyMaterialTheme get myMaterialTheme => MyMaterialTheme(
+      myTheme.useMaterial3
+          ? _buildMaterial3ThemeData(
+              ColorScheme.fromSeed(
+                brightness: Brightness.light,
+                seedColor: myTheme.primaryColor,
+              ),
+            )
+          : _buildMaterial2ThemeData(
+              Brightness.light,
+              myTheme.primaryColor,
+            ),
+      myTheme.useMaterial3
+          ? _buildMaterial3ThemeData(
+              ColorScheme.fromSeed(
+                brightness: Brightness.dark,
+                seedColor: myTheme.primaryColor,
+              ),
+            )
+          : _buildMaterial2ThemeData(
+              Brightness.dark,
+              myTheme.primaryColor,
+            ),
     );
 
 class MyMaterialApp extends StatelessWidget {
@@ -44,7 +43,6 @@ class MyMaterialApp extends StatelessWidget {
     super.key,
     this.title,
     this.home,
-    this.useMaterial3 = false,
     this.routePageType = RoutePageType.material,
     this.theme,
     this.darkTheme,
@@ -64,8 +62,6 @@ class MyMaterialApp extends StatelessWidget {
 
   /// 自定义首次路由生成策略，通过该参数可以实现登录拦截功能
   final RouteFactory? onGenerateRoute;
-
-  final bool useMaterial3;
 
   /// 路由跳转动画类型
   final RoutePageType routePageType;
@@ -114,15 +110,9 @@ class MyMaterialApp extends StatelessWidget {
       ]);
     }
     return MaterialApp(
-      title: title ?? 'Cupertino App',
-      theme: theme ??
-          (useMaterial3
-              ? myMaterial3Theme.lightTheme
-              : myMaterial2Theme.lightTheme),
-      darkTheme: darkTheme ??
-          (useMaterial3
-              ? myMaterial3Theme.darkTheme
-              : myMaterial2Theme.darkTheme),
+      title: title ?? 'Material App',
+      theme: theme ?? myMaterialTheme.lightTheme,
+      darkTheme: darkTheme ?? myMaterialTheme.darkTheme,
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       showPerformanceOverlay: showPerformanceOverlay,
@@ -156,6 +146,7 @@ ThemeData _buildMaterial2ThemeData(
     splashFactory: InkRipple.splashFactory,
     appBarTheme: AppBarTheme(
       toolbarHeight: myTheme.appbarHeight,
+      centerTitle: false,
       titleTextStyle: TextStyle(
         fontSize: 18,
         fontWeight: _textTheme.titleLarge?.fontWeight,
