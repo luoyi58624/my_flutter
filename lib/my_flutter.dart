@@ -1,7 +1,6 @@
 library my_flutter;
 
 import 'package:flutter/widgets.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:my_flutter/utils/local_storage.dart';
 import 'package:my_flutter/utils/toast.dart';
 
@@ -49,6 +48,7 @@ export 'widgets/commons/loading.dart';
 export 'widgets/commons/restart_app.dart';
 export 'widgets/commons/scroll_ripper.dart';
 export 'widgets/commons/simple_widgets.dart';
+export 'widgets/commons/skeleton.dart';
 export 'widgets/commons/sliver.dart';
 export 'widgets/commons/tag.dart';
 export 'widgets/commons/tap_animate.dart';
