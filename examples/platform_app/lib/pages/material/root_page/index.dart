@@ -9,9 +9,9 @@ import 'home/index.dart';
 import 'user/index.dart';
 
 const materialPages = [
-  NavPageModel('首页', HomeRootPage(), icon: Icons.home),
-  NavPageModel('分类', ClassifyRootPage(), icon: Icons.grid_view_rounded),
-  NavPageModel('消息', ChatRootPage(), icon: CupertinoIcons.chat_bubble_fill),
-  NavPageModel('购物车', CartRootPage(), icon: Icons.shopping_cart),
-  NavPageModel('个人中心', UserRootPage(), icon: Icons.person_2_rounded),
+  RootPageModel('首页', HomeRootPage(), icon: Icons.home),
+  RootPageModel('分类', ClassifyRootPage(), icon: Icons.grid_view_rounded),
+  RootPageModel('消息', ChatRootPage(), icon: CupertinoIcons.chat_bubble_fill),
+  RootPageModel('购物车', CartRootPage(), icon: Icons.shopping_cart),
+  RootPageModel('个人中心', UserRootPage(), icon: Icons.person_2_rounded),
 ];

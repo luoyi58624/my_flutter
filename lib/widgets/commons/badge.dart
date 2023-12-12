@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 class BadgeWidget extends StatelessWidget {
   const BadgeWidget({
@@ -20,6 +21,9 @@ class BadgeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (CommonUtil.isEmpty(bagde)) {
+      return child;
+    }
     if (bagde is num) {
       return Badge(
         label: Container(

@@ -15,7 +15,7 @@ class MaterialRootPage extends StatefulWidget {
   }) : assert(pages.length >= 2);
 
   /// 导航页面数组，必须至少包含2个页面
-  final List<NavPageModel> pages;
+  final List<RootPageModel> pages;
 
   /// 是否使用material2风格的底部导航栏，默认false
   final bool useMaterial2NavigationBar;
@@ -93,7 +93,10 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
         type: BottomNavigationBarType.fixed,
         items: widget.pages
             .map((e) => BottomNavigationBarItem(
-                  icon: Icon(e.icon),
+                  icon: BadgeWidget(
+                    bagde: e.badge,
+                    child: Icon(e.icon),
+                  ),
                   label: e.title,
                 ))
             .toList(),
@@ -119,7 +122,10 @@ class _MaterialRootPageState extends State<MaterialRootPage> {
           },
           destinations: widget.pages
               .map((e) => NavigationDestination(
-                    icon: Icon(e.icon),
+                    icon: BadgeWidget(
+                      bagde: e.badge,
+                      child: Icon(e.icon),
+                    ),
                     label: e.title,
                   ))
               .toList(),
