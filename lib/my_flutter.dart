@@ -1,6 +1,7 @@
 library my_flutter;
 
 import 'package:flutter/widgets.dart';
+import 'package:my_flutter/commons/theme.dart';
 import 'package:my_flutter/utils/local_storage.dart';
 import 'package:my_flutter/utils/toast.dart';
 
@@ -22,7 +23,7 @@ export 'package:faker/faker.dart';
 export 'package:status_bar_control/status_bar_control.dart';
 export 'package:page_transition/page_transition.dart';
 
-export 'modals/simple_modals.dart';
+export 'commons/modal.dart';
 
 export 'utils/color.dart';
 export 'utils/common.dart';
@@ -66,8 +67,11 @@ const bool isRelease = bool.fromEnvironment("dart.vm.product");
 /// 但还有一点需要注意，此key保存的是我们App根navigator实例，如果你在嵌套路由中进行路由跳转，则不能使用全局导航key，你需要拿嵌套路由对应的navigator的context。
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-Future<void> initMyFlutter() async {
+Future<void> initMyFlutter({
+  MyTheme? theme,
+}) async {
   WidgetsFlutterBinding.ensureInitialized();
+  myTheme = theme ?? MyTheme();
   localStorage = await LocalStorage.init();
 }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/my_flutter.dart';
+import 'package:my_flutter/commons/theme.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SkeletonWidget extends StatelessWidget {
@@ -17,8 +17,8 @@ class SkeletonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: MyBaseColors.skeletonColor(context),
-      highlightColor: MyBaseColors.skeletonHighlightColor(context),
+      baseColor: myTheme.skeletonColor(context),
+      highlightColor: myTheme.skeletonHighlightColor(context),
       period: Duration(milliseconds: duration),
       child: child,
     );
@@ -156,8 +156,8 @@ class BlockSkeletonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (loading) {
       return Shimmer.fromColors(
-        baseColor: MyBaseColors.skeletonColor(context),
-        highlightColor: MyBaseColors.skeletonHighlightColor(context),
+        baseColor: myTheme.skeletonColor(context),
+        highlightColor: myTheme.skeletonHighlightColor(context),
         period: const Duration(milliseconds: 1500),
         child: Container(
           height: height,

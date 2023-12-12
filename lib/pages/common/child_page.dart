@@ -38,7 +38,12 @@ class ChildPage extends StatelessWidget {
             onPressed: () {
               RouterUtil.back(context: context);
             },
-            child: const Text('返回'),
+            child: const Text(
+              '返回',
+              style: TextStyle(
+                  // color: MyColor.
+                  ),
+            ),
           ),
         ),
       );
