@@ -16,19 +16,19 @@ List<Color> _darkGrey =
 late MyTheme myTheme;
 
 class MyTheme {
-  MaterialColor primaryColor =
+  MaterialColor get primaryColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 0, 120, 212));
 
-  MaterialColor successColor =
+  MaterialColor get successColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 16, 185, 129));
 
-  MaterialColor warningColor =
+  MaterialColor get warningColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 245, 158, 11));
 
-  MaterialColor errorColor =
+  MaterialColor get errorColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 239, 68, 68));
 
-  MaterialColor infoColor =
+  MaterialColor get infoColor =>
       ColorUtil.createMaterialColor(const Color.fromARGB(255, 127, 137, 154));
 
   Color baseColor(BuildContext context, {ColorMode? mode}) {
