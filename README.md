@@ -32,11 +32,3 @@
 
 > flutter build apk --flavor prod -t lib/main_prod.dart --target-platform android-arm64
 > flutter install --use-application-binary build/app/outputs/flutter-apk/app-prod-release.apk
-
-- 根据json生成model
-
-> 注：不要用使用这玩意了，简单的模型直接Map一把梭，若需要生成模型类就去百度搜索json to dart，
-> 例如：https://javiercbk.github.io/json_to_dart/
-> 因为这玩意生成的源码不可控，你每次运行都会覆盖之前所有的文件，你不能对生成的源码做任何修改，而且生成文件的性能极低
-
-> flutter packages pub run json_model --nullable
