@@ -11,7 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   my_flutter_util:
-    path: ../my_flutter_util
+    git:
+      url: https://gitee.com/luoyi666/my_flutter.git
+      path: my_flutter_util
 
 dev_dependencies:
   flutter_test:

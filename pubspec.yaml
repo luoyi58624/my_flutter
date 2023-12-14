@@ -11,17 +11,25 @@ dependencies:
   flutter:
     sdk: flutter
   my_flutter_common:
-    path: ./my_flutter_common
+    git:
+      url: https://gitee.com/luoyi666/my_flutter.git
+      path: my_flutter_common
   my_flutter_page:
-    path: ./my_flutter_page
+    git:
+      url: https://gitee.com/luoyi666/my_flutter.git
+      path: my_flutter_page
   my_flutter_plugin:
-    path: ./my_flutter_plugin
+    git:
+      url: https://gitee.com/luoyi666/my_flutter.git
+      path: my_flutter_plugin
   my_flutter_util:
-    path: ./my_flutter_util
+    git:
+      url: https://gitee.com/luoyi666/my_flutter.git
+      path: my_flutter_util
   my_flutter_widget:
-    path: ./my_flutter_widget
-  multi_split_view: ^2.4.0
-  status_bar_control: ^3.2.1
+    git:
+      url: https://gitee.com/luoyi666/my_flutter.git
+      path: my_flutter_widget
 
 dev_dependencies:
   flutter_test:
