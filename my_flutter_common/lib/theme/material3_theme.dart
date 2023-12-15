@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'theme.dart';
+
 /// 构建Material3主题数据
-ThemeData buildMaterial3ThemeData(ColorScheme colorScheme) {
+ThemeData buildMaterial3ThemeData({
+  Brightness brightness = Brightness.light,
+}) {
   return ThemeData(
     useMaterial3: true,
-    colorScheme: colorScheme,
+    colorScheme: ColorScheme.fromSeed(
+      brightness: brightness,
+      seedColor: myTheme.primaryColor,
+    ),
     platform: TargetPlatform.iOS,
     textTheme: const TextTheme(
       displaySmall: TextStyle(
