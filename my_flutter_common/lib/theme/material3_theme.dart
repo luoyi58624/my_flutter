@@ -12,7 +12,6 @@ ThemeData buildMaterial3ThemeData({
       brightness: brightness,
       seedColor: myTheme.primaryColor,
     ),
-    platform: TargetPlatform.iOS,
     textTheme: const TextTheme(
       displaySmall: TextStyle(
         fontWeight: FontWeight.w500,
