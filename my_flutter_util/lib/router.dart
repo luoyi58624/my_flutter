@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class RouterUtil {
   RouterUtil._();
@@ -23,13 +24,24 @@ class RouterUtil {
         ),
       );
     } else {
-      return await Navigator.of(
-        context,
-        rootNavigator: rootNavigator,
-      ).push<T>(CupertinoPageRoute(
-        builder: (context) => page,
-        fullscreenDialog: fullscreenDialog,
-      ));
+      if (Theme.of(context).platform == TargetPlatform.iOS ||
+          Theme.of(context).platform == TargetPlatform.macOS) {
+        return await Navigator.of(
+          context,
+          rootNavigator: rootNavigator,
+        ).push<T>(CupertinoPageRoute(
+          builder: (context) => page,
+          fullscreenDialog: fullscreenDialog,
+        ));
+      } else {
+        return await Navigator.of(
+          context,
+          rootNavigator: rootNavigator,
+        ).push<T>(MaterialPageRoute(
+          builder: (context) => page,
+          fullscreenDialog: fullscreenDialog,
+        ));
+      }
     }
   }
 
