@@ -59,5 +59,11 @@ ThemeData buildMaterial3ThemeData({
         borderSide: BorderSide(color: Colors.grey),
       ),
     ),
+    appBarTheme: const AppBarTheme(
+      titleTextStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
   );
 }

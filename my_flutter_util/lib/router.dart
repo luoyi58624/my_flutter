@@ -11,6 +11,8 @@ class RouterUtil {
     bool rootNavigator = false,
     bool fullscreenDialog = false,
     bool noTransition = false,
+    bool forceMaterial = false,
+    bool forceCupertino = false,
   }) async {
     if (noTransition) {
       return await Navigator.of(
@@ -24,6 +26,24 @@ class RouterUtil {
         ),
       );
     } else {
+      if (forceMaterial) {
+        return await Navigator.of(
+          context,
+          rootNavigator: rootNavigator,
+        ).push<T>(MaterialPageRoute(
+          builder: (context) => page,
+          fullscreenDialog: fullscreenDialog,
+        ));
+      }
+      if (forceCupertino) {
+        return await Navigator.of(
+          context,
+          rootNavigator: rootNavigator,
+        ).push<T>(CupertinoPageRoute(
+          builder: (context) => page,
+          fullscreenDialog: fullscreenDialog,
+        ));
+      }
       if (Theme.of(context).platform == TargetPlatform.iOS ||
           Theme.of(context).platform == TargetPlatform.macOS) {
         return await Navigator.of(
