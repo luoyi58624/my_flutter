@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_util/my_flutter_util.dart';
-
-/// material3主题
-class MyMaterial3Theme {
-  /// material3主要颜色
-  MaterialColor get primaryColor =>
-      ColorUtil.createMaterialColor(const Color.fromARGB(255, 0, 120, 212));
-}
 
 /// 构建Material3主题数据
 ThemeData buildMaterial3ThemeData(ColorScheme colorScheme) {
   return ThemeData(
     useMaterial3: true,
     colorScheme: colorScheme,
+    platform: TargetPlatform.iOS,
     textTheme: const TextTheme(
       displaySmall: TextStyle(
         fontWeight: FontWeight.w500,
