@@ -25,14 +25,10 @@ class NavPageModel {
   const NavPageModel(this.title, this.page, {this.icon});
 }
 
-/// 根页面模型，在导航页面模型基础上新增了徽章badge
+/// 根页面模型
 class RootPageModel extends NavPageModel {
-  final dynamic badge;
+  /// 跳转地址
+  final String path;
 
-  const RootPageModel(
-    super.title,
-    super.page, {
-    super.icon,
-    this.badge,
-  });
+  const RootPageModel(super.title, this.path, super.page, {super.icon});
 }
