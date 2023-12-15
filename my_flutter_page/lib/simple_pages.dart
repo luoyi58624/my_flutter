@@ -19,14 +19,15 @@ class ChildPage extends StatelessWidget {
           previousPageTitle: previousPageTitle,
         ),
         child: SafeArea(
-            child: Center(
-          child: CupertinoButton.filled(
-            child: const Text('返回'),
-            onPressed: () {
-              RouterUtil.back(context);
-            },
+          child: Center(
+            child: CupertinoButton.filled(
+              onPressed: () {
+                RouterUtil.back(context);
+              },
+              child: const Text('返回'),
+            ),
           ),
-        )),
+        ),
       );
     } else {
       return Scaffold(
@@ -38,12 +39,7 @@ class ChildPage extends StatelessWidget {
             onPressed: () {
               RouterUtil.back(context);
             },
-            child: const Text(
-              '返回',
-              style: TextStyle(
-                  // color: MyColor.
-                  ),
-            ),
+            child: const Text('返回'),
           ),
         ),
       );

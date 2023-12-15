@@ -14,26 +14,22 @@ List<Color> _darkGrey =
 /// 全局主题实例，执行initMyFlutter函数时初始化
 late MyTheme myTheme;
 
+/// 通用的颜色主题
 class MyTheme {
   /// 主要颜色
-  MaterialColor get primaryColor =>
-      ColorUtil.createMaterialColor(const Color.fromARGB(255, 0, 120, 212));
+  Color get primaryColor => const Color.fromARGB(255, 0, 120, 212);
 
-  /// 成功提示颜色
-  MaterialColor get successColor =>
-      ColorUtil.createMaterialColor(const Color.fromARGB(255, 16, 185, 129));
+  /// 成功颜色
+  Color get successColor => const Color.fromARGB(255, 16, 185, 129);
 
-  /// 警告提示颜色
-  MaterialColor get warningColor =>
-      ColorUtil.createMaterialColor(const Color.fromARGB(255, 245, 158, 11));
+  /// 警告颜色
+  Color get warningColor => const Color.fromARGB(255, 245, 158, 11);
 
-  /// 错误提示颜色
-  MaterialColor get errorColor =>
-      ColorUtil.createMaterialColor(const Color.fromARGB(255, 239, 68, 68));
+  /// 错误颜色
+  Color get errorColor => const Color.fromARGB(255, 239, 68, 68);
 
-  /// 普通提示颜色
-  MaterialColor get infoColor =>
-      ColorUtil.createMaterialColor(const Color.fromARGB(255, 127, 137, 154));
+  /// 普通颜色
+  Color get infoColor => const Color.fromARGB(255, 127, 137, 154);
 
   Color baseColor(BuildContext context, {ColorMode? mode}) {
     return dynamicColor(
