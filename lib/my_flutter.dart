@@ -1,14 +1,15 @@
 library my_flutter;
 
 import 'package:flutter/widgets.dart';
-import 'package:my_flutter_common/my_flutter_common.dart';
-import 'package:my_flutter_util/my_flutter_util.dart';
 
-export 'package:my_flutter_common/my_flutter_common.dart';
-export 'package:my_flutter_page/my_flutter_page.dart';
-export 'package:my_flutter_plugin/my_flutter_plugin.dart';
-export 'package:my_flutter_util/my_flutter_util.dart';
-export 'package:my_flutter_widget/my_flutter_widget.dart';
+import 'common/index.dart';
+import 'utils/toast.dart';
+
+export 'common/index.dart';
+export 'pages/index.dart';
+export 'plugins/index.dart';
+export 'utils/index.dart';
+export 'widgets/index.dart';
 
 /// 初始化
 /// * theme 自定义主题
