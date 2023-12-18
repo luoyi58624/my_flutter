@@ -18,7 +18,7 @@ enum BottomNavigationType {
 late AppType appType;
 
 class MyApp extends StatelessWidget {
-  /// 构建flutter默认风格的App：MaterialApp
+  /// 构建Android风格的App
   const MyApp(
     this.router, {
     super.key,
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   })  : _appType = AppType.material,
         cupertinoTheme = null;
 
-  /// 构建ios风格的App，注意：开发一款App前请确定好以什么为主，因为它们二者有很大的差异，material的主题系统比cupertino复杂很多倍。
+  /// 构建IOS风格的App
   const MyApp.cupertino(
     this.router, {
     super.key,

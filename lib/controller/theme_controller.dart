@@ -9,8 +9,10 @@ class ThemeController extends GetxController {
   static ThemeController get of => Get.find();
 
   /// 主要颜色
-  final primaryColor =
-      useLocalObs(const Color.fromARGB(255, 0, 120, 212), 'primaryColor');
+  final primaryColor = useLocalObs(
+      const Color.fromARGB(255, 0, 120, 212), 'primaryColor', setFun: (value) {
+    // localStorage.setItem(key, v.toHex());
+  });
 
   /// 成功颜色
   final successColor =
@@ -73,6 +75,23 @@ class ThemeController extends GetxController {
         // 指定material2的主题颜色
         primarySwatch: ColorUtil.createMaterialColor(primaryColor.value),
         splashFactory: InkRipple.splashFactory,
+        appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: ColorUtil.isDark(primaryColor.value)
+                ? Colors.white
+                : Colors.black,
+          ),
+          actionsIconTheme: IconThemeData(
+            color: ColorUtil.isDark(primaryColor.value)
+                ? Colors.white
+                : Colors.black,
+          ),
+          foregroundColor: ColorUtil.isDark(primaryColor.value)
+              ? Colors.white
+              : Colors.black,
+        ),
       );
     }
   }

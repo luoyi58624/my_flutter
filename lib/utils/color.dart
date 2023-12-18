@@ -14,7 +14,7 @@ class ColorUtil {
 
   /// 判断一个颜色是否是暗色
   static bool isDark(Color color) {
-    return getColorHsp(color) <= 165;
+    return getColorHsp(color) <= 150;
   }
 
   /// 返回一个颜色的hsp (颜色的感知亮度)
@@ -31,6 +31,20 @@ class ColorUtil {
     final newColor = originalColor.withLightness(newLightness.clamp(0.0, 1.0));
     return newColor.toColor();
   }
+
+  // /// Color对象转16进制颜色
+  // static String colorToHex(Color color) {
+  //   return '#${color.value.toRadixString(16).substring(2, 8)}';
+  // }
+  //
+  // /// 16进制颜色转Color对象
+  // static Color hexToColor(String hexColor) {
+  //   hexColor = hexColor.toUpperCase().replaceAll("#", "");
+  //   if (hexColor.length == 6) {
+  //     hexColor = "FF$hexColor";
+  //   }
+  //   return Color(int.parse(hexColor, radix: 16));
+  // }
 
   /// 创建material颜色
   static MaterialColor createMaterialColor(Color color) {
@@ -75,4 +89,21 @@ class ColorUtil {
         return darkColor;
     }
   }
+}
+
+extension HexColor on Color {
+  /// 通过HexColor.fromHex('#ffffff')创建一个Color
+  static Color fromHex(String hexString) {
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+
+  /// 将Color对象转成16进制
+  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
+      '${alpha.toRadixString(16).padLeft(2, '0')}'
+      '${red.toRadixString(16).padLeft(2, '0')}'
+      '${green.toRadixString(16).padLeft(2, '0')}'
+      '${blue.toRadixString(16).padLeft(2, '0')}';
 }

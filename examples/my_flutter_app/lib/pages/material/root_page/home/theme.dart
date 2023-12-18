@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/controller/theme_controller.dart';
 import 'package:my_flutter/my_flutter.dart';
-import 'package:my_flutter_app/controller/global_controller.dart';
+
+import '../../../../common/data.dart';
 
 class ThemePage extends StatelessWidget {
   const ThemePage({super.key});
@@ -12,7 +12,14 @@ class ThemePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('App主题设置'),
       ),
-      body: buildCell(),
+      body: Container(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(children: [
+          buildCell(),
+          const SizedBox(height: 8),
+          buildPrimaryTheme(),
+        ]),
+      ),
     );
   }
 
@@ -49,6 +56,47 @@ class ThemePage extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildPrimaryTheme() {
+    return Material(
+      elevation: 2,
+      child: ExpansionTile(
+        leading: const Icon(Icons.color_lens),
+        title: const Text('主题颜色'),
+        initiallyExpanded: true,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: colorList.map((color) {
+                return InkWell(
+                  onTap: () {
+                    ThemeController.of.primaryColor.value = color;
+                  },
+                  child: Obx(
+                    () => Container(
+                      width: 40,
+                      height: 40,
+                      color: color,
+                      // ignore: unrelated_type_equality_checks
+                      child: ThemeController.of.primaryColor.value == color
+                          ? const Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            )
+                          : null,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }
