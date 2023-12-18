@@ -502,6 +502,11 @@ class CommonUtil {
     });
     return flag;
   }
+
+  /// 延迟指定毫秒时间执行函数
+  static void delayed(int milliseconds, void Function() fun) {
+    Future.delayed(Duration(milliseconds: milliseconds), fun);
+  }
 }
 
 bool _compareResult(CompareType compareType, num result) {

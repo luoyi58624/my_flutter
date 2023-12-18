@@ -1,12 +1,14 @@
 library my_flutter;
 
 import 'package:flutter/widgets.dart';
+import 'package:get/instance_manager.dart';
+import 'package:my_flutter/controller/theme_controller.dart';
 
-import 'common/index.dart';
 import 'utils/local_storage.dart';
 import 'utils/toast.dart';
 
 export 'app.dart';
+export 'controller/index.dart';
 export 'common/index.dart';
 export 'pages/index.dart';
 export 'plugins/index.dart';
@@ -29,11 +31,9 @@ late LocalStorage localStorage;
 
 /// 初始化
 /// * theme 自定义主题
-Future<void> initMyFlutter({
-  MyTheme? theme,
-}) async {
-  myTheme = theme ?? MyTheme();
+Future<void> initMyFlutter() async {
   localStorage = await LocalStorage.init();
+  Get.put(ThemeController());
 }
 
 /// MaterialApp、CupertinoApp的 builder 参数，初始化全局toast、解决modal_bottom_sheet在高版本安卓系统上动画丢失问题

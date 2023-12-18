@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 
 import '../my_flutter.dart';
 
-/// 创建根页面
+/// 创建包含多个一级页面的根页面集合，它是基于go_router的[StatefulShellRoute.indexedStack]实现。
+///
+/// 它实现了嵌套路由、路由懒加载(如果你直接使用[IndexedStack]构建页面，它会直接构建所有的子组件)等功能。
 RouteBase createRootPage(List<RootPageModel> rootPages) {
-  Get.put(RootPageController._(rootPages));
+  Get.put(BottomNavigationController._(rootPages));
   return StatefulShellRoute.indexedStack(
     builder: (context, state, navigationShell) =>
         _RootPage(navigationShell, rootPages),
@@ -26,23 +28,48 @@ RouteBase createRootPage(List<RootPageModel> rootPages) {
   );
 }
 
-class RootPageController extends GetxController {
-  static RootPageController get of => Get.find();
+/// 底部导航栏控制器，当你使用[createRootPage]函数创建包含多个一级页面的app时，将会注入构造器，
+/// 你可以在任何地方通过[BottomNavigationController.of]直接获取它的实例。
+class BottomNavigationController extends GetxController {
+  static BottomNavigationController get of => Get.find();
   static String localKey = 'bottom_navigation_badge';
 
   final List<RootPageModel> _rootPages;
-  final bottomNavigationBadges = RxMap<String, int>();
 
-  RootPageController._(this._rootPages) {
+  /// 底部导航徽标，key-路由path，value-徽标数值
+  final badge = RxMap<String, int>();
+
+  BottomNavigationController._(this._rootPages) {
     Map<String, int> badgeMap = {};
     for (var page in _rootPages) {
       badgeMap[page.path] = 0;
     }
-    ever(bottomNavigationBadges, (v) {
+    ever(badge, (v) {
       localStorage.setItem(localKey, jsonEncode(v));
     });
-    bottomNavigationBadges.value =
-        localStorage.getItem<Map<String, int>>(localKey, badgeMap);
+    LoggerUtil.i(badgeMap.runtimeType);
+    var str = localStorage.getItem(localKey, jsonEncode(badgeMap));
+    badge.value = (jsonDecode(str) as Map).cast<String, int>();
+  }
+
+  /// 设置徽标数字
+  void setBadge(String path, int badgeNum) {
+    badge.update(path, (value) => badgeNum);
+  }
+
+  /// 徽标数字增加指定数值
+  void addBadge(String path, int badgeNum) {
+    badge.update(path, (value) => value + badgeNum);
+  }
+
+  /// 徽标数字减少指定数值
+  void subtractBadge(String path, int badgeNum) {
+    badge.update(path, (value) => value - badgeNum);
+  }
+
+  /// 清除徽标
+  void clearBadge(String path) {
+    badge.update(path, (value) => 0);
   }
 }
 
@@ -60,7 +87,7 @@ class _RootPage extends StatefulWidget {
 
 class _RootPageState extends State<_RootPage> {
   bool allowQuit = false; // 双击返回键退出应用
-  final RootPageController controller = Get.find();
+  final BottomNavigationController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +136,7 @@ class _RootPageState extends State<_RootPage> {
             .map((e) => BottomNavigationBarItem(
                   icon: Obx(
                     () => BadgeWidget(
-                      bagde: controller.bottomNavigationBadges.value[e.path],
+                      bagde: controller.badge.value[e.path],
                       child: Icon(e.icon),
                     ),
                   ),

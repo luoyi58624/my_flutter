@@ -39,6 +39,7 @@ dependencies:
   html: ^0.15.4
   vibration: ^1.8.4
   permission_handler: ^11.1.0
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

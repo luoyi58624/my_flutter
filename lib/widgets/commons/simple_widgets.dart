@@ -21,3 +21,28 @@ Widget buildListViewDemo() {
     ),
   );
 }
+
+Widget buildPopupMenuButton({
+  Offset? offset,
+}) {
+  return PopupMenuButton(
+    elevation: 2,
+    offset: const Offset(0, 50),
+    padding: const EdgeInsets.all(0),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(6),
+    ),
+    itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+      const PopupMenuItem(
+        child: Text('MaterialApp'),
+      ),
+      const PopupMenuItem(
+        child: Text('CupertinoApp'),
+      ),
+      const PopupMenuItem(
+        child: Text(
+            '重启App                                                                                   '),
+      ),
+    ],
+  );
+}

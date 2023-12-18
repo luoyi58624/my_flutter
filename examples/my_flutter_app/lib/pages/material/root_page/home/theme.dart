@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter/controller/theme_controller.dart';
 import 'package:my_flutter/my_flutter.dart';
 import 'package:my_flutter_app/controller/global_controller.dart';
 
@@ -28,9 +29,9 @@ class ThemePage extends StatelessWidget {
               title: const Text('开启Material3'),
               trailing: Obx(
                 () => Switch(
-                  value: GlobalController.of.useMaterial3.value,
+                  value: ThemeController.of.useMaterial3.value,
                   onChanged: (bool value) {
-                    GlobalController.of.useMaterial3.value = value;
+                    ThemeController.of.useMaterial3.value = value;
                   },
                 ),
               ),
@@ -39,9 +40,9 @@ class ThemePage extends StatelessWidget {
               title: const Text('黑暗模式'),
               trailing: Obx(
                 () => Switch(
-                  value: GlobalController.of.useDark.value,
+                  value: ThemeController.of.useDark.value,
                   onChanged: (bool value) {
-                    GlobalController.of.useDark.value = value;
+                    ThemeController.of.useDark.value = value;
                   },
                 ),
               ),

@@ -17,7 +17,10 @@ class LocalStorage {
     return LocalStorage._();
   }
 
-  /// 设置本地数据
+  /// 设置本地数据，注意：value如果是Object、Map等类型数据，你必须使用jsonEncode将其转换为String，
+  /// 否则你取数据时将会出现类型转换错误，dart在类型方面上很蠢，数据类型转换要开发者全部手动进行解析。
+  ///
+  /// 例如，dynamic as int会报运行时错误，你必须先手动判断需要转换的数据类型，dynamic is int，然后再使用int.parse(dynamic)。
   void setItem(String key, dynamic value) {
     _storage.write(key, value);
   }

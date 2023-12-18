@@ -8,7 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initMyFlutter();
   Get.put(GlobalController());
-  runApp(const _MyApp());
+  runApp(const RestartAppWidget(child: _MyApp()));
 }
 
 class _MyApp extends StatelessWidget {
@@ -16,20 +16,6 @@ class _MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => MyApp(
-        router,
-        theme: buildMaterialThemeData(
-          brightness: GlobalController.of.useDark.value
-              ? Brightness.dark
-              : Brightness.light,
-          useMaterial3: GlobalController.of.useMaterial3.value,
-        ),
-        darkTheme: buildMaterialThemeData(
-          brightness: Brightness.dark,
-          useMaterial3: GlobalController.of.useMaterial3.value,
-        ),
-      ),
-    );
+    return MyApp(router);
   }
 }

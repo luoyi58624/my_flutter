@@ -16,21 +16,6 @@ late MyTheme myTheme;
 
 /// 通用的颜色主题
 class MyTheme {
-  /// 主要颜色
-  Color get primaryColor => const Color.fromARGB(255, 0, 120, 212);
-
-  /// 成功颜色
-  Color get successColor => const Color.fromARGB(255, 16, 185, 129);
-
-  /// 警告颜色
-  Color get warningColor => const Color.fromARGB(255, 245, 158, 11);
-
-  /// 错误颜色
-  Color get errorColor => const Color.fromARGB(255, 239, 68, 68);
-
-  /// 普通颜色
-  Color get infoColor => const Color.fromARGB(255, 127, 137, 154);
-
   Color baseColor(BuildContext context, {ColorMode? mode}) {
     return dynamicColor(
       Colors.white,
@@ -178,76 +163,3 @@ class MyTheme {
     return ColorUtil.dynamicColor(lightColor, darkColor, context, mode: mode);
   }
 }
-
-/// 构建Material主题数据
-ThemeData buildMaterialThemeData({
-  bool useMaterial3 = true,
-  Brightness brightness = Brightness.light,
-}) {
-  if (useMaterial3) {
-    return ThemeData(
-      useMaterial3: true,
-      textTheme: _textTheme,
-      colorScheme: ColorScheme.fromSeed(
-        brightness: brightness,
-        seedColor: myTheme.primaryColor,
-      ),
-      splashFactory: InkRipple.splashFactory,
-      cardTheme: const CardTheme(
-        surfaceTintColor: Colors.transparent,
-      ),
-      inputDecorationTheme: const InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
-        ),
-      ),
-    );
-  } else {
-    return ThemeData(
-      useMaterial3: false,
-      textTheme: _textTheme,
-      brightness: brightness,
-      primarySwatch: ColorUtil.createMaterialColor(myTheme.primaryColor),
-      splashFactory: InkRipple.splashFactory,
-    );
-  }
-}
-
-const _textTheme = TextTheme(
-  displaySmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  displayMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  displayLarge: TextStyle(
-    fontWeight: FontWeight.w600,
-  ),
-  titleSmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  titleMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  titleLarge: TextStyle(
-    fontWeight: FontWeight.w600,
-  ),
-  bodySmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  bodyMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  bodyLarge: TextStyle(
-    fontWeight: FontWeight.w600,
-  ),
-  labelSmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  labelMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  labelLarge: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-);

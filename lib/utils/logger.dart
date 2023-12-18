@@ -2,7 +2,7 @@ import 'package:logger/logger.dart';
 
 var _logger = Logger(
   printer: PrettyPrinter(
-    methodCount: 1,
+    methodCount: 2,
     errorMethodCount: 2,
     printEmojis: false,
     noBoxingByDefault: false,

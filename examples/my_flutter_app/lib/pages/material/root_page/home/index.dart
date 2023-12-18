@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter/my_flutter.dart';
 
+import 'bottom_badge.dart';
 import 'demo/page.dart';
 import 'theme.dart';
 
@@ -12,12 +13,12 @@ class HomeRootPage extends StatefulWidget {
 }
 
 class _HomeRootPageState extends State<HomeRootPage> {
-  bool allowQuit = false; // 双击返回键退出应用
   @override
   Widget build(BuildContext context) {
     LoggerUtil.i('home build');
     const List<NavPageModel> cellNames = [
       NavPageModel('主题设置', ThemePage()),
+      NavPageModel('底部Badge设置', BottomBadgePage()),
     ];
     return Scaffold(
       drawer: Drawer(
@@ -88,16 +89,32 @@ class _HomeRootPageState extends State<HomeRootPage> {
             //   onPressed: () {},
             //   icon: const Icon(Icons.menu),
             // ),
-            // actions: <Widget>[
-            //   IconButton(
-            //     onPressed: () {},
-            //     icon: const Icon(Icons.add),
-            //   ),
-            //   IconButton(
-            //     onPressed: () {},
-            //     icon: const Icon(Icons.more_horiz),
-            //   ),
-            // ],
+            actions: <Widget>[
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.add),
+              ),
+              PopupMenuButton(
+                elevation: 2,
+                offset: const Offset(0, 50),
+                padding: const EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                  const PopupMenuItem(
+                    child: Text('MaterialApp'),
+                  ),
+                  const PopupMenuItem(
+                    child: Text('CupertinoApp'),
+                  ),
+                  const PopupMenuItem(
+                    child: Text(
+                        '重启App                                                                                   '),
+                  ),
+                ],
+              ),
+            ],
           ),
           SliverList.builder(
             itemCount: 100,

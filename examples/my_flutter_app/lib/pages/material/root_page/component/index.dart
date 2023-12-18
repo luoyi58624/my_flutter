@@ -28,14 +28,14 @@ class ComponentRootPage extends StatelessWidget {
               },
               child: const Text('切换-我的'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                RootPageController.of.bottomNavigationBadges
-                    .update('/', (value) => value + 1);
-              },
-              child: Obx(() => Text(
-                  '首页badge: ${RootPageController.of.bottomNavigationBadges.value['/']}')),
-            ),
+            Obx(() {
+              return Switch(
+                value: ThemeController.of.useMaterial3.value,
+                onChanged: (bool value) {
+                  ThemeController.of.useMaterial3.value = value;
+                },
+              );
+            }),
           ],
         ),
       ),
