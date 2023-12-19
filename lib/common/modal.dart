@@ -1,4 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
+
+abstract class SerializeModel {
+  // SerializeModel();
+
+  // SerializeModel.formJson(Map<String, dynamic> json);
+
+  T fromJson<T>(Map<String, dynamic> json);
+
+  Map<String, dynamic> toJson();
+
+  @override
+  String toString() {
+    return jsonEncode(this);
+  }
+}
 
 /// 包含label-value结构的简单数据模型
 class LabelModel {

@@ -53,6 +53,14 @@ class ColorUtil {
     return MaterialColor(color.value, swatch);
   }
 
+  /// 16进制字符串格式颜色转Color对象
+  static Color hexToColor(String hexString){
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+
   /// 是否为黑暗模式，要想保持响应式必须以函数形式使用
   static bool isDarkMode(BuildContext context) {
     return Theme.of(context).colorScheme.brightness == Brightness.dark;
@@ -78,15 +86,7 @@ class ColorUtil {
 }
 
 extension HexColor on Color {
-  /// 通过HexColor.fromHex('#ffffff')创建一个Color
-  static Color fromHex(String hexString) {
-    final buffer = StringBuffer();
-    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
-    buffer.write(hexString.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
-  }
-
-  /// 将Color对象转成16进制字符串
+  /// Color对象转16进制字符串格式颜色
   String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
       '${alpha.toRadixString(16).padLeft(2, '0')}'
       '${red.toRadixString(16).padLeft(2, '0')}'

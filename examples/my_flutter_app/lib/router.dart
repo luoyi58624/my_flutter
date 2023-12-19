@@ -1,6 +1,6 @@
 import 'package:my_flutter/my_flutter.dart';
 
-import 'pages/material/root_page/index.dart';
+import 'page/material/root_page/index.dart';
 
 final router = GoRouter(
   navigatorKey: globalNavigatorKey,

@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
   ///
   /// 注意：如果你使用自定义theme，同时需要响应式更新Theme，请使用Obx进行包裹，否则你无法实现响应式更新Theme。
   ///
-  /// 例子：
+  /// 示例：
   /// ```dart
   /// Obx(() => MyApp(
   ///   router,

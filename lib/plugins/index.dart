@@ -4,10 +4,8 @@ export 'package:flutter_localizations/flutter_localizations.dart';
 // flutter官方路由库
 export 'package:go_router/go_router.dart';
 
-// flutter官方collection库部分集合增强方法
+// flutter官方collection库，扩展集合函数
 export 'package:collection/collection.dart';
-// export 'package:collection/src/iterable_extensions.dart';
-// export 'package:collection/src/list_extensions.dart';
 
 // getx状态管理，排除路由等其他功能
 export 'package:get/get_core/get_core.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter/my_flutter.dart';
+import 'package:my_flutter_app/model/user_model.dart';
 
 import '../../../../controller/global_controller.dart';
 
@@ -14,12 +15,9 @@ class ComponentRootPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              var length = GlobalController.of.userLocalMap.length + 1;
-              // GlobalController.of.userLocalMap.value['列表项-$length'] =
-              //     length.toString();
-              GlobalController.of.userLocalMap.addAll({
-                '列表项-$length': length.toString(),
-              });
+              var length = GlobalController.of.localMap.length + 1;
+              GlobalController.of.localMap['列表项-$length'] =
+                  UserModel('label-$length', length);
             },
             icon: const Icon(Icons.add),
           ),
@@ -30,9 +28,7 @@ class ComponentRootPage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.go('/component/child');
-                // context.go('/my/child');
-                // RouterUtil.to(() => const _ChildPage());
+                RouterUtil.to(context, const _ChildPage());
               },
               child: const Text('子页面'),
             ),
@@ -50,27 +46,8 @@ class ComponentRootPage extends StatelessWidget {
                 },
               );
             }),
-            GetBuilder<GlobalController>(
-              builder: (_) => Text(_.userMap.toString()),
-            ),
-            GetBuilder<GlobalController>(builder: (_) {
-              return ElevatedButton(
-                onPressed: () {
-                  GlobalController.of.increment();
-                },
-                child: Text(_.count.toString()),
-              );
-            }),
-            Obx(() {
-              return ElevatedButton(
-                onPressed: () {
-                  GlobalController.of.countObs.value++;
-                },
-                child: Text(GlobalController.of.countObs.value.toString()),
-              );
-            }),
             Obx(
-              () => Text(GlobalController.of.userLocalMap.value.toString()),
+              () => Text(GlobalController.of.localMap.value.toString()),
             ),
           ],
         ),
@@ -80,7 +57,7 @@ class ComponentRootPage extends StatelessWidget {
 }
 
 class _ChildPage extends StatelessWidget {
-  const _ChildPage({super.key});
+  const _ChildPage();
 
   @override
   Widget build(BuildContext context) {

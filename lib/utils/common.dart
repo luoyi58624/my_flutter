@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:my_flutter/my_flutter.dart';
 import 'package:path/path.dart' as p;
 import 'package:uuid/uuid.dart';
 import 'package:html/parser.dart' as htmlparser;
@@ -165,7 +164,11 @@ class CommonUtil {
   /// 安全解析bool类型
   static bool safeBool(dynamic value) {
     if (value is String) {
-      return bool.parse(value, caseSensitive: false);
+      try {
+        return bool.parse(value, caseSensitive: false);
+      } catch (e) {
+        return false;
+      }
     } else if (value is bool) {
       return value;
     } else if (value == null) {
@@ -201,6 +204,21 @@ class CommonUtil {
       return value;
     } else {
       return _defaultDate(defaultValue);
+    }
+  }
+
+  /// 将动态类型转换成基础数据类型
+  static dynamic dynamicToBaseType(dynamic value, String type) {
+    if (type == 'String') {
+      return CommonUtil.safeString(value);
+    } else if (type == 'num' || type == 'double') {
+      return CommonUtil.safeDouble(value);
+    } else if (type == 'int') {
+      return CommonUtil.safeInt(value);
+    } else if (type == 'bool') {
+      return CommonUtil.safeBool(value);
+    } else {
+      return null;
     }
   }
 

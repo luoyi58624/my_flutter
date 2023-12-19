@@ -35,7 +35,7 @@ class BottomNavigationController extends GetxController {
   final List<RootPageModel> _rootPages;
 
   /// 底部导航徽标，key-路由path，value-徽标数值
-  final badge = useLocalMapObs<String, int>({}, 'bottom_navigation_badge');
+  final badge = useLocalMapObs<int>({}, 'bottom_navigation_badge');
 
   BottomNavigationController._(this._rootPages) {
     for (var page in _rootPages) {

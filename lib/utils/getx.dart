@@ -10,7 +10,7 @@ typedef DeserializeFun<T> = T Function(String newValue);
 /// 创建一个响应式变量，更新时会同步至本地，重新加载时会取本地数据作为初始值
 /// * value - 初始值
 /// * key - 本地缓存key
-/// * serializeFun - 序列化函数，如果你传入的是对象，例如[Color]、[List]、[Map]，你必须将其转换为字符串才能缓存在本地。
+/// * serializeFun - 序列化函数，如果你传入的是对象，例如[Color]，你必须将其转换为字符串才能缓存在本地。
 /// * deserializeFun - 反序列化函数，将本地存储的字符串转回目标对象
 Rx<T> useLocalObs<T>(
   T value,
@@ -19,23 +19,10 @@ Rx<T> useLocalObs<T>(
   DeserializeFun<T>? deserializeFun,
 }) {
   late Rx<T> $value;
-  // 设置Map基本数据类型序列化函数
-  // if (value is Map) {
-  //   String mapKeyType = CommonUtil.getMapKeyType(value);
-  //   String mapValueType = CommonUtil.getMapValueType(value);
-  //   if (CommonUtil.isBaseTypeString(mapKeyType) &&
-  //       CommonUtil.isBaseTypeString(mapValueType)) {
-  //     serializeFun ??= (value) => jsonEncode(value);
-  //     deserializeFun ??= (value) {
-  //       Map map = (jsonDecode(value) as Map);
-  //       return map as T;
-  //     };
-  //   }
-  // }
-  // 设置Color默认的序列化函数
+  // 设置Color默认的序列化函数，如果你需要缓存其他对象类型，请参照下面的写法即可
   if (value is Color) {
     serializeFun ??= (value) => (value as Color).toHex();
-    deserializeFun ??= (value) => HexColor.fromHex((value)) as T;
+    deserializeFun ??= (value) => ColorUtil.hexToColor((value)) as T;
   }
   dynamic localValue = localStorage.getItem(key);
   if (localValue == null) {
@@ -55,18 +42,40 @@ Rx<T> useLocalObs<T>(
   return $value;
 }
 
-/// 创建一个响应式Map变量，更新时会同步至本地，重新加载时会取本地数据作为初始值。
+/// 创建一个响应式Map变量，key强制为String，更新时会同步至本地，重新加载时会取本地数据作为初始值。
 /// * value - 初始值
 /// * key - 本地缓存key
+/// * clear - 是否清除本地值
 /// * serializeFun - 序列化函数，如果你传入的是对象，例如[Color]、[List]、[Map]，你必须将其转换为字符串才能缓存在本地。
 /// * deserializeFun - 反序列化函数，将本地存储的字符串转回目标对象
-RxMap<K, V> useLocalMapObs<K, V>(Map<K, V> value, String key) {
-  late RxMap<K, V> $value;
+///
+/// 示例：
+/// ```dart
+/// final localMap = useLocalMapObs<int>({}, 'localMap');
+///
+/// // 注意：操作响应式Map不要加.value
+/// controller.localMap['key'] = 1;
+/// controller.localMap.addAll({'key': 1});
+///
+/// controller.localMap.update('key',(value)=>value+1);
+/// ```
+RxMap<String, V> useLocalMapObs<V>(
+  Map<String, V> value,
+  String key, {
+  bool clear = false,
+}) {
+  if (clear) localStorage.removeItem(key);
+  late RxMap<String, V> $value;
   dynamic localValue = localStorage.getItem(key);
   if (localValue == null) {
     $value = value.obs;
   } else {
-    $value = (jsonDecode(localValue) as Map).cast<K, V>().obs;
+    var mapData = (jsonDecode(localValue) as Map);
+    mapData = mapData.map((key, value) {
+      value = CommonUtil.dynamicToBaseType(value, V.toString());
+      return MapEntry(key, value);
+    });
+    $value = mapData.cast<String, V>().obs;
   }
   ever($value, (v) {
     localStorage.setItem(key, jsonEncode(v));
