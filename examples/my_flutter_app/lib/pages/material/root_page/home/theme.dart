@@ -24,38 +24,35 @@ class ThemePage extends StatelessWidget {
   }
 
   Widget buildCell() {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      child: Material(
-        elevation: 2,
-        borderRadius: BorderRadius.circular(6),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              title: const Text('开启Material3'),
-              trailing: Obx(
-                () => Switch(
-                  value: ThemeController.of.useMaterial3.value,
-                  onChanged: (bool value) {
-                    ThemeController.of.useMaterial3.value = value;
-                  },
-                ),
+    return Material(
+      elevation: 2,
+      borderRadius: BorderRadius.circular(6),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            title: const Text('开启Material3'),
+            trailing: Obx(
+              () => Switch(
+                value: ThemeController.of.useMaterial3.value,
+                onChanged: (bool value) {
+                  ThemeController.of.useMaterial3.value = value;
+                },
               ),
             ),
-            ListTile(
-              title: const Text('黑暗模式'),
-              trailing: Obx(
-                () => Switch(
-                  value: ThemeController.of.useDark.value,
-                  onChanged: (bool value) {
-                    ThemeController.of.useDark.value = value;
-                  },
-                ),
+          ),
+          ListTile(
+            title: const Text('黑暗模式'),
+            trailing: Obx(
+              () => Switch(
+                value: ThemeController.of.useDark.value,
+                onChanged: (bool value) {
+                  ThemeController.of.useDark.value = value;
+                },
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

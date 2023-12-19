@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:my_flutter/my_flutter.dart';
 import 'package:path/path.dart' as p;
 import 'package:uuid/uuid.dart';
 import 'package:html/parser.dart' as htmlparser;
@@ -25,6 +26,9 @@ const staticImageSuffix = ['jpg', 'jpeg', 'png'];
 
 /// 视频后缀
 const videoSuffix = ['mkv', 'mp4', 'avi', 'mov', 'wmv'];
+
+/// 基本类型字符串
+const baseTypeString = ['String', 'num', 'int', 'double', 'bool'];
 
 /// 比较两个值的条件类型
 enum CompareType {
@@ -75,6 +79,43 @@ class CommonUtil {
       return value == {};
     } else {
       return false;
+    }
+  }
+
+  /// 判断变量是否是基本数据类型
+  static bool isBaseType(dynamic value) {
+    return (value is num || value is String || value is bool);
+  }
+
+  /// 判断变量是否不是基本数据类型
+  static bool isNotBaseType(dynamic value) {
+    return !isBaseType(value);
+  }
+
+  /// 检查传入的类型字符串是否是基本类型字符串
+  static bool isBaseTypeString(String typeString) {
+    return baseTypeString.contains(typeString);
+  }
+
+  /// 获取Map-key泛型类型
+  static String getMapKeyType(dynamic value) {
+    if (value is Map) {
+      var strList = value.runtimeType.toString().split(',');
+      return strList.first.trim().replaceAll('_Map<', '');
+    } else {
+      return 'dynamic';
+    }
+  }
+
+  /// 获取Map-value泛型类型
+  static String getMapValueType(dynamic value) {
+    if (value is Map) {
+      var typeString = value.runtimeType.toString();
+      var index = typeString.indexOf(',');
+      var str = typeString.substring(index + 1, typeString.length).trim();
+      return str.substring(0, str.length - 1);
+    } else {
+      return 'dynamic';
     }
   }
 

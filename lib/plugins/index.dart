@@ -5,15 +5,20 @@ export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:go_router/go_router.dart';
 
 // flutter官方collection库部分集合增强方法
-export 'package:collection/src/iterable_extensions.dart';
-export 'package:collection/src/list_extensions.dart';
+export 'package:collection/collection.dart';
+// export 'package:collection/src/iterable_extensions.dart';
+// export 'package:collection/src/list_extensions.dart';
 
 // getx状态管理，排除路由等其他功能
 export 'package:get/get_core/get_core.dart';
 export 'package:get/get_instance/get_instance.dart';
 export 'package:get/get_state_manager/get_state_manager.dart';
-export 'package:get/get_utils/get_utils.dart';
+
 export 'package:get/get_rx/get_rx.dart';
+export 'package:get/get_utils/src/extensions/export.dart';
+export 'package:get/get_utils/src/get_utils/get_utils.dart';
+export 'package:get/get_utils/src/platform/platform.dart';
+export 'package:get/get_utils/src/queue/get_queue.dart';
 
 // 网络请求库
 export 'package:dio/dio.dart';

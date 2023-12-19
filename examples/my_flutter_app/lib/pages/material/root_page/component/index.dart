@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter/my_flutter.dart';
 
+import '../../../../controller/global_controller.dart';
+
 class ComponentRootPage extends StatelessWidget {
   const ComponentRootPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    LoggerUtil.i('component build');
     return Scaffold(
       appBar: AppBar(
         title: const Text('组件'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              var length = GlobalController.of.userLocalMap.length + 1;
+              // GlobalController.of.userLocalMap.value['列表项-$length'] =
+              //     length.toString();
+              GlobalController.of.userLocalMap.addAll({
+                '列表项-$length': length.toString(),
+              });
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -36,6 +50,28 @@ class ComponentRootPage extends StatelessWidget {
                 },
               );
             }),
+            GetBuilder<GlobalController>(
+              builder: (_) => Text(_.userMap.toString()),
+            ),
+            GetBuilder<GlobalController>(builder: (_) {
+              return ElevatedButton(
+                onPressed: () {
+                  GlobalController.of.increment();
+                },
+                child: Text(_.count.toString()),
+              );
+            }),
+            Obx(() {
+              return ElevatedButton(
+                onPressed: () {
+                  GlobalController.of.countObs.value++;
+                },
+                child: Text(GlobalController.of.countObs.value.toString()),
+              );
+            }),
+            Obx(
+              () => Text(GlobalController.of.userLocalMap.value.toString()),
+            ),
           ],
         ),
       ),

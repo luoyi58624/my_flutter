@@ -9,10 +9,8 @@ class ThemeController extends GetxController {
   static ThemeController get of => Get.find();
 
   /// 主要颜色
-  final primaryColor = useLocalObs(
-      const Color.fromARGB(255, 0, 120, 212), 'primaryColor', setFun: (value) {
-    // localStorage.setItem(key, v.toHex());
-  });
+  final primaryColor =
+      useLocalObs(const Color.fromARGB(255, 0, 120, 212), 'primaryColor');
 
   /// 成功颜色
   final successColor =
@@ -113,14 +111,14 @@ class ThemeController extends GetxController {
 }
 
 void _showTranslucenceStatusBar() {
-  CommonUtil.delayed(100, () {
+  CommonUtil.delayed(200, () {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
   });
 }
 
 void _hideTranslucenceStatusBar() {
-  CommonUtil.delayed(100, () {
+  CommonUtil.delayed(200, () {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
   });

@@ -26,7 +26,7 @@ class LocalStorage {
   }
 
   /// 读取指定key数据
-  T getItem<T>(String key, T defaultValue) {
+  T? getItem<T>(String key, [T? defaultValue]) {
     return _storage.read<T>(key) ?? defaultValue;
   }
 

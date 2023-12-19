@@ -32,20 +32,6 @@ class ColorUtil {
     return newColor.toColor();
   }
 
-  // /// Color对象转16进制颜色
-  // static String colorToHex(Color color) {
-  //   return '#${color.value.toRadixString(16).substring(2, 8)}';
-  // }
-  //
-  // /// 16进制颜色转Color对象
-  // static Color hexToColor(String hexColor) {
-  //   hexColor = hexColor.toUpperCase().replaceAll("#", "");
-  //   if (hexColor.length == 6) {
-  //     hexColor = "FF$hexColor";
-  //   }
-  //   return Color(int.parse(hexColor, radix: 16));
-  // }
-
   /// 创建material颜色
   static MaterialColor createMaterialColor(Color color) {
     List strengths = <double>[.05];
@@ -100,7 +86,7 @@ extension HexColor on Color {
     return Color(int.parse(buffer.toString(), radix: 16));
   }
 
-  /// 将Color对象转成16进制
+  /// 将Color对象转成16进制字符串
   String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
       '${alpha.toRadixString(16).padLeft(2, '0')}'
       '${red.toRadixString(16).padLeft(2, '0')}'

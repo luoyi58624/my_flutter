@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
@@ -32,24 +31,16 @@ RouteBase createRootPage(List<RootPageModel> rootPages) {
 /// 你可以在任何地方通过[BottomNavigationController.of]直接获取它的实例。
 class BottomNavigationController extends GetxController {
   static BottomNavigationController get of => Get.find();
-  static String localKey = 'bottom_navigation_badge';
 
   final List<RootPageModel> _rootPages;
 
   /// 底部导航徽标，key-路由path，value-徽标数值
-  final badge = RxMap<String, int>();
+  final badge = useLocalMapObs<String, int>({}, 'bottom_navigation_badge');
 
   BottomNavigationController._(this._rootPages) {
-    Map<String, int> badgeMap = {};
     for (var page in _rootPages) {
-      badgeMap[page.path] = 0;
+      if (badge[page.path] == null) badge[page.path] = 0;
     }
-    ever(badge, (v) {
-      localStorage.setItem(localKey, jsonEncode(v));
-    });
-    LoggerUtil.i(badgeMap.runtimeType);
-    var str = localStorage.getItem(localKey, jsonEncode(badgeMap));
-    badge.value = (jsonDecode(str) as Map).cast<String, int>();
   }
 
   /// 设置徽标数字
