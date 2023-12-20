@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:my_flutter/my_flutter.dart';
+import 'package:package/index.dart';
 
 class MyCupertinoListTile extends StatelessWidget {
   const MyCupertinoListTile({

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../my_flutter.dart';
+import 'package:package/index.dart';
 
 /// 判断当前页面是否已经打开loading，如果有，则下次打开新的loading需要移除上一个loading
 bool _isShowLoading = false;

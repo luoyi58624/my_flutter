@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'my_flutter.dart';
+
+import 'package:package/index.dart';
 
 enum AppType {
   material,

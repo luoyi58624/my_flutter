@@ -1,7 +1,7 @@
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:lpinyin/lpinyin.dart';
-import 'package:my_flutter/my_flutter.dart';
+import 'package:package/index.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 /// 继承分组序号实例

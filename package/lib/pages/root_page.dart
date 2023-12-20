@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../my_flutter.dart';
+import 'package:package/index.dart';
 
 /// 创建包含多个一级页面的根页面集合，它是基于go_router的[StatefulShellRoute.indexedStack]实现。
 ///

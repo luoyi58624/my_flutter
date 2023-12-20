@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:my_flutter/my_flutter.dart';
+import 'package:package/index.dart';
 
 /// 封装通用的图片组件，统一项目中的用法
 class ImageWidget extends StatefulWidget {

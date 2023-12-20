@@ -397,13 +397,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.0-pre"
-  my_flutter:
-    dependency: "direct main"
-    description:
-      path: "../.."
-      relative: true
-    source: path
-    version: "0.0.1"
   octo_image:
     dependency: transitive
     description:
@@ -412,6 +405,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.0"
+  package:
+    dependency: "direct main"
+    description:
+      path: "../../package"
+      relative: true
+    source: path
+    version: "0.0.1"
   path:
     dependency: transitive
     description:

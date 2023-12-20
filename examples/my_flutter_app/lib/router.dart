@@ -1,4 +1,4 @@
-import 'package:my_flutter/my_flutter.dart';
+import 'package:package/index.dart';
 
 import 'page/material/root_page/index.dart';
 

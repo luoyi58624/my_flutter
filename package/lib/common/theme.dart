@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_flutter/my_flutter.dart';
+
+import '../utils/color.dart';
 
 List<int> _lightLevel = [100, 200, 300, 400];
 List<int> _darkLevel = [900, 800, 700, 600];

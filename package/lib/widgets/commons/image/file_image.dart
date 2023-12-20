@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:my_flutter/my_flutter.dart';
+import 'package:package/index.dart';
 
 /// 加载本地文件图片，注意：它不兼容web
 class FileImageWidget extends StatefulWidget {

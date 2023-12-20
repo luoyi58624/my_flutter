@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_flutter/my_flutter.dart';
+
+import '../index.dart';
 
 /// 全局主题控制器，执行[initMyFlutter]函数后初始化，你可以在任何地方访问它。
 class ThemeController extends GetxController {

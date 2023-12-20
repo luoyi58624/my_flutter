@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/my_flutter.dart';
+import 'package:package/index.dart';
 
 class ComponentRootPage extends StatelessWidget {
   const ComponentRootPage({super.key});
