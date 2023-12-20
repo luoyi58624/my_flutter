@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter/my_flutter.dart';
-import 'package:my_flutter_app/model/user_model.dart';
-
-import '../../../../controller/global_controller.dart';
 
 class ComponentRootPage extends StatelessWidget {
   const ComponentRootPage({super.key});
@@ -12,15 +9,6 @@ class ComponentRootPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('组件'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              GlobalController.of.userModel.value =
-                  UserModel.fromJson({'username': 'luoyi', 'password': 123456});
-            },
-            icon: const Icon(Icons.add),
-          ),
-        ],
       ),
       body: Center(
         child: Column(
@@ -45,18 +33,6 @@ class ComponentRootPage extends StatelessWidget {
                 },
               );
             }),
-            Obx(
-              () => ElevatedButton(
-                onPressed: () {
-                  GlobalController.of.count.value++;
-                  // GlobalController.of.count.value = '10';
-                },
-                child: Text('count: ${GlobalController.of.count.value}'),
-              ),
-            ),
-            Obx(
-              () => Text(GlobalController.of.userModel.value.toString()),
-            ),
           ],
         ),
       ),

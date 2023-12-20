@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
 
+import '../../common/modal.dart';
+import '../../utils/router.dart';
+
+/// 构建通用分割线Widget
+Widget buildDividerWidget({
+  double height = 0,
+  double thickness = 0.5,
+  double indent = 0,
+}) {
+  return Divider(
+    height: height,
+    thickness: thickness,
+    indent: indent,
+  );
+}
+
 /// 构建通用的列表分割线widget
 IndexedWidgetBuilder buildSeparatorWidget({
   double height = 0,
   double thickness = 0.5,
   double indent = 0,
 }) {
-  return (context, index) => Divider(
+  return (context, index) => buildDividerWidget(
         height: height,
         thickness: thickness,
         indent: indent,
@@ -40,9 +56,55 @@ Widget buildPopupMenuButton({
         child: Text('CupertinoApp'),
       ),
       const PopupMenuItem(
-        child: Text(
-            '重启App                                                                                   '),
+        child: Text('重启App'),
       ),
     ],
+  );
+}
+
+Widget buildCenterColumn(List<Widget> children) {
+  return Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: children,
+    ),
+  );
+}
+
+Widget buildListSection(
+    BuildContext context, String title, List<NavPageModel> cellItems) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+        child: Text(
+          title,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      _buildCell(context, cellItems)
+    ],
+  );
+}
+
+Widget _buildCell(BuildContext context, List<NavPageModel> cellItems) {
+  return Column(
+    children: cellItems
+        .map(
+          (e) => Column(
+            children: [
+              ListTile(
+                title: Text(e.title),
+                trailing: const Icon(Icons.keyboard_arrow_right_outlined),
+                onTap: () {
+                  RouterUtil.to(context, e.page);
+                },
+              ),
+              buildDividerWidget(),
+            ],
+          ),
+        )
+        .toList(),
   );
 }

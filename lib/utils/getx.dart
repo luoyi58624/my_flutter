@@ -39,12 +39,15 @@ Rx<T> useLocalObs<T>(
   DeserializeFun<T>? deserializeFun,
 }) {
   String valueType = T.toString();
-  late Rx<T> $value;
+  bool isBaseType = CommonUtil.isBaseTypeString(valueType);
   // 序列化Color对象
   if (value is Color) {
     serializeFun ??= (value) => (value as Color).toHex();
     deserializeFun ??= (value) => ColorUtil.hexToColor((value)) as T;
   }
+  assert(isBaseType || (serializeFun != null && deserializeFun != null),
+      '请为响应式持久化变量[$key]提供序列化和反序列化函数');
+  late Rx<T> $value;
   dynamic localData = localStorage.getItem(key);
   if (localData == null) {
     $value = value.obs;
@@ -55,11 +58,10 @@ Rx<T> useLocalObs<T>(
       localStorage.removeItem(key);
       $value = value.obs;
     } else {
-      if (deserializeFun == null) {
-        assert(CommonUtil.isBaseType(localDataModel.data), '请提供反序列化函数');
+      if (isBaseType) {
         $value = (localDataModel.data as T).obs;
       } else {
-        $value = deserializeFun(localDataModel.data).obs;
+        $value = deserializeFun!(localDataModel.data).obs;
       }
     }
   }
@@ -86,9 +88,9 @@ Rx<T> useLocalObs<T>(
 /// final localMap = useLocalMapObs<int>({}, 'localMap');
 ///
 /// // value为Model实体对象类型的Map，必须包含序列化方法toJson、fromJson
-/// final localModelMap = useLocalMapObs<Model>(
+/// final userModelMap = useLocalMapObs<UserModel>(
 ///   {},
-///   'localModelMap',
+///   'userModelMap',
 ///   serializeFun: (value) => jsonEncode(value.toJson()),
 ///   deserializeFun: (value) => UserModel.fromJson(jsonDecode(value)),
 /// );
@@ -106,6 +108,9 @@ RxMap<String, T> useLocalMapObs<T>(
   DeserializeFun<T>? deserializeFun,
 }) {
   String valueType = T.toString();
+  bool isBaseType = CommonUtil.isBaseTypeString(valueType);
+  assert(isBaseType || (serializeFun != null && deserializeFun != null),
+      '请为响应式持久化变量[$key]提供序列化和反序列化函数');
   late RxMap<String, T> $value;
   dynamic localData = localStorage.getItem(key);
   if (localData == null) {
@@ -122,7 +127,6 @@ RxMap<String, T> useLocalMapObs<T>(
       if (CommonUtil.isBaseTypeString(valueType)) {
         $value = mapData.cast<String, T>().obs;
       } else {
-        assert(deserializeFun != null, '请提供反序列化函数');
         $value = mapData
             .map((key, value) => MapEntry(key, deserializeFun!(value)))
             .cast<String, T>()

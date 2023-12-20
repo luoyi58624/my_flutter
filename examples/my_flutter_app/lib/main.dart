@@ -16,6 +16,12 @@ class _MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyApp(router);
+    return Obx(
+      () => MyApp(
+        router,
+        darkTheme: ThemeController.of
+            .buildMaterialThemeData(brightness: Brightness.dark),
+      ),
+    );
   }
 }
