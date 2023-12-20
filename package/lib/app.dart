@@ -100,30 +100,30 @@ class MyApp extends StatelessWidget {
         DeviceOrientation.portraitDown,
       ]);
     }
+    late Widget childWidget;
     switch (_appType) {
       case AppType.material:
-        return Obx(() {
-          return MaterialApp.router(
-            title: title,
-            theme: theme ?? ThemeController.of.buildMaterialThemeData(),
-            darkTheme: darkTheme ?? ThemeController.of.buildMaterialThemeData(),
-            routerConfig: router,
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: const [
-              GlobalWidgetsLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('zh', 'CH'),
-              Locale('en', 'US'),
-            ],
-            locale: const Locale('zh', 'CN'),
-            builder: builderMyApp(),
-          );
-        });
+        childWidget = Obx(() => MaterialApp.router(
+              title: title,
+              theme: theme ?? ThemeController.of.buildMaterialThemeData(),
+              darkTheme:
+                  darkTheme ?? ThemeController.of.buildMaterialThemeData(),
+              routerConfig: router,
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: const [
+                GlobalWidgetsLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('zh', 'CH'),
+                Locale('en', 'US'),
+              ],
+              locale: const Locale('zh', 'CN'),
+              builder: builderMyApp(),
+            ));
       case AppType.cupertino:
-        return CupertinoApp.router(
+        childWidget = CupertinoApp.router(
           title: title,
           theme: cupertinoTheme,
           routerConfig: router,
@@ -141,5 +141,7 @@ class MyApp extends StatelessWidget {
           builder: builderMyApp(),
         );
     }
+
+    return childWidget;
   }
 }

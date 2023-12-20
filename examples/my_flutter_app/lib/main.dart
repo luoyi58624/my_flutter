@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:package/index.dart';
 import 'package:my_flutter_app/controller/global_controller.dart';
+import 'package:provider/provider.dart';
 
 import 'router.dart';
 
@@ -17,10 +18,13 @@ class _MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => MyApp(
-        router,
-        darkTheme: ThemeController.of
-            .buildMaterialThemeData(brightness: Brightness.dark),
+      () => Provider(
+        create: (context) => LabelModel('root', 'hello'),
+        child: MyApp(
+          router,
+          darkTheme: ThemeController.of
+              .buildMaterialThemeData(brightness: Brightness.dark),
+        ),
       ),
     );
   }

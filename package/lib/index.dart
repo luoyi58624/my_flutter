@@ -1,11 +1,7 @@
 library package;
 
 import 'package:flutter/widgets.dart';
-import 'package:get/instance_manager.dart';
-
-import 'controller/index.dart';
-import 'utils/local_storage.dart';
-import 'utils/toast.dart';
+import 'index.dart';
 
 export 'app.dart';
 export 'controller/index.dart';
@@ -24,8 +20,7 @@ BuildContext? get globalContext => globalNavigatorKey.currentContext;
 
 /// 本地存储，它基于get_storage，该库允许你根据tag创建多个实例，例如：
 /// ```dart
-///   await GetStorage.init('http');
-///   httpLocalStorage = LocalStorage('http');
+///   httpLocalStorage = await LocalStorage.init('http');
 /// ```
 late LocalStorage localStorage;
 

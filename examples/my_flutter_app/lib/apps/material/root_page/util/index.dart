@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:package/index.dart';
-import 'package:my_flutter_app/page/material/root_page/util/getx_util/page.dart';
+
+import 'getx_util/page.dart';
+import 'inherited_widget_test.dart';
 
 class UtilRootPage extends StatefulWidget {
   const UtilRootPage({super.key});
@@ -16,6 +18,7 @@ class _UtilRootPageState extends State<UtilRootPage> {
   Widget build(BuildContext context) {
     List<NavPageModel> utilCellItems = [
       NavPageModel('Getx工具类测试', GetxUtilPage()),
+      const NavPageModel('InheritedWidget测试', InheritedWidgetTestPage()),
     ];
     return Scaffold(
       appBar: AppBar(

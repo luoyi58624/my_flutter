@@ -7,8 +7,8 @@ import 'package:package/index.dart';
 /// 创建包含多个一级页面的根页面集合，它是基于go_router的[StatefulShellRoute.indexedStack]实现。
 ///
 /// 它实现了嵌套路由、路由懒加载(如果你直接使用[IndexedStack]构建页面，它会直接构建所有的子组件)等功能。
-RouteBase createRootPage(List<RootPageModel> rootPages) {
-  Get.put(BottomNavigationController._(rootPages));
+RouteBase createRootPage(List<RootPageModel> rootPages, [String? parentPath]) {
+  Get.put(BottomNavigationController._(rootPages, parentPath));
   return StatefulShellRoute.indexedStack(
     builder: (context, state, navigationShell) =>
         _RootPage(navigationShell, rootPages),
@@ -17,7 +17,7 @@ RouteBase createRootPage(List<RootPageModel> rootPages) {
           (e) => StatefulShellBranch(
             routes: [
               GoRoute(
-                path: e.path,
+                path: CommonUtil.joinParentPath(e.path, parentPath),
                 builder: (context, state) => e.page,
               ),
             ],
@@ -33,13 +33,16 @@ class BottomNavigationController extends GetxController {
   static BottomNavigationController get of => Get.find();
 
   final List<RootPageModel> _rootPages;
+  final String? _parentPath;
 
   /// 底部导航徽标，key-路由path，value-徽标数值
   final badge = useLocalMapObs<int>({}, 'bottom_navigation_badge');
 
-  BottomNavigationController._(this._rootPages) {
+  BottomNavigationController._(this._rootPages, [this._parentPath]) {
     for (var page in _rootPages) {
-      if (badge[page.path] == null) badge[page.path] = 0;
+      if (badge[page.path] == null) {
+        badge[CommonUtil.joinParentPath(page.path, _parentPath)] = 0;
+      }
     }
   }
 
@@ -82,25 +85,9 @@ class _RootPageState extends State<_RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: allowQuit,
-      onPopInvoked: (_) async {
-        if (!allowQuit) {
-          setState(() {
-            allowQuit = true;
-          });
-          ToastUtil.showToast('请再按一次退出应用');
-          Timer(const Duration(seconds: 2), () {
-            setState(() {
-              allowQuit = false;
-            });
-          });
-        }
-      },
-      child: Scaffold(
-        body: widget.navigationShell,
-        bottomNavigationBar: navigationBar2,
-      ),
+    return Scaffold(
+      body: widget.navigationShell,
+      bottomNavigationBar: navigationBar2,
     );
   }
 

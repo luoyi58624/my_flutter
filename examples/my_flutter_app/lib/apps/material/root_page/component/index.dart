@@ -21,7 +21,7 @@ class ComponentRootPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                context.go('/my');
+                context.go('/material/my');
               },
               child: const Text('切换-我的'),
             ),

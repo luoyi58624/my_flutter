@@ -1,3 +1,3 @@
 library my_flutter;
 
-export '';
+export 'package:package/index.dart' hide builderMyApp;

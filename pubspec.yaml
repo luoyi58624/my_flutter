@@ -10,6 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  package:
+    git:
+      url: https://gitee.com/luoyi666/my_flutter.git
+      path: package
 
 dev_dependencies:
   flutter_test:

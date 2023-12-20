@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:package/index.dart';
 import 'package:path/path.dart' as p;
 import 'package:uuid/uuid.dart';
 import 'package:html/parser.dart' as htmlparser;
@@ -467,6 +468,14 @@ class CommonUtil {
       }
     }
     return false;
+  }
+
+  static String joinParentPath(String path, [String? parentPath]) {
+    String $path = parentPath != null ? parentPath + path : path;
+    if ($path.endsWith('/') && parentPath != null) {
+      $path = $path.substring(0, $path.length - 1);
+    }
+    return $path;
   }
 
   /// 计算限制后的元素尺寸，返回类似于自适应大小的图片尺寸
