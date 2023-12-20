@@ -15,9 +15,8 @@ class ComponentRootPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              var length = GlobalController.of.localMap.length + 1;
-              GlobalController.of.localMap['列表项-$length'] =
-                  UserModel('label-$length', length);
+              GlobalController.of.userModel.value =
+                  UserModel.fromJson({'username': 'luoyi', 'password': 123456});
             },
             icon: const Icon(Icons.add),
           ),
@@ -47,7 +46,16 @@ class ComponentRootPage extends StatelessWidget {
               );
             }),
             Obx(
-              () => Text(GlobalController.of.localMap.value.toString()),
+              () => ElevatedButton(
+                onPressed: () {
+                  GlobalController.of.count.value++;
+                  // GlobalController.of.count.value = '10';
+                },
+                child: Text('count: ${GlobalController.of.count.value}'),
+              ),
+            ),
+            Obx(
+              () => Text(GlobalController.of.userModel.value.toString()),
             ),
           ],
         ),

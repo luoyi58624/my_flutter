@@ -107,14 +107,26 @@ class CommonUtil {
   }
 
   /// 获取Map-value泛型类型
-  static String getMapValueType(dynamic value) {
-    if (value is Map) {
-      var typeString = value.runtimeType.toString();
-      var index = typeString.indexOf(',');
-      var str = typeString.substring(index + 1, typeString.length).trim();
-      return str.substring(0, str.length - 1);
+  static String getMapValueType(Map value) {
+    var typeString = value.runtimeType.toString();
+    var index = typeString.indexOf(',');
+    var str = typeString.substring(index + 1, typeString.length).trim();
+    return str.substring(0, str.length - 1);
+  }
+
+  /// 将动态类型转换成基础数据类型，转换后的值可以安全使用case确定类型。
+  /// 注意：dart中的List、Map等集合的cast方法只是用于编译时，当实际变量类型并非cast的目标类型，则会报运行时错误。
+  static dynamic dynamicToTargetType(dynamic value, String type) {
+    if (type == 'String') {
+      return CommonUtil.safeString(value);
+    } else if (type == 'num' || type == 'double') {
+      return CommonUtil.safeDouble(value);
+    } else if (type == 'int') {
+      return CommonUtil.safeInt(value);
+    } else if (type == 'bool') {
+      return CommonUtil.safeBool(value);
     } else {
-      return 'dynamic';
+      return null;
     }
   }
 
@@ -204,21 +216,6 @@ class CommonUtil {
       return value;
     } else {
       return _defaultDate(defaultValue);
-    }
-  }
-
-  /// 将动态类型转换成基础数据类型
-  static dynamic dynamicToBaseType(dynamic value, String type) {
-    if (type == 'String') {
-      return CommonUtil.safeString(value);
-    } else if (type == 'num' || type == 'double') {
-      return CommonUtil.safeDouble(value);
-    } else if (type == 'int') {
-      return CommonUtil.safeInt(value);
-    } else if (type == 'bool') {
-      return CommonUtil.safeBool(value);
-    } else {
-      return null;
     }
   }
 
