@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:package/index.dart';
+import 'package:get/get_utils/src/platform/platform.dart';
 import 'package:path/path.dart' as p;
 import 'package:uuid/uuid.dart';
 import 'package:html/parser.dart' as htmlparser;
@@ -50,6 +50,9 @@ enum CompareType {
 
 class CommonUtil {
   CommonUtil._();
+
+  /// 是否是苹果平台
+  static bool get isApplePlatform => GetPlatform.isMacOS || GetPlatform.isIOS;
 
   /// 判断一个变量是否为空，例如：null、''、[]、{}
   ///
@@ -129,6 +132,11 @@ class CommonUtil {
     } else {
       return null;
     }
+  }
+
+  static List<T> concatArray<T>(List<T> sourceList, List<T> newList) {
+    sourceList.addAll(newList);
+    return sourceList;
   }
 
   /// 安全解析String，如果传递的value为空，则返回一个默认值

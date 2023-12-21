@@ -21,16 +21,17 @@ class _ExitInterceptWidgetState extends State<ExitInterceptWidget> {
     return PopScope(
       canPop: allowQuit,
       onPopInvoked: (_) async {
-        LoggerUtil.i(_);
         if (!allowQuit) {
           setState(() {
             allowQuit = true;
           });
           ToastUtil.showToast('请再按一次退出应用');
           Timer(const Duration(seconds: 2), () {
-            setState(() {
-              allowQuit = false;
-            });
+            if (mounted) {
+              setState(() {
+                allowQuit = false;
+              });
+            }
           });
         }
       },

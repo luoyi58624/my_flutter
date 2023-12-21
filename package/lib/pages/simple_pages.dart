@@ -19,14 +19,20 @@ class ChildPage extends StatelessWidget {
           previousPageTitle: previousPageTitle,
         ),
         child: SafeArea(
-          child: Center(
-            child: CupertinoButton.filled(
+          child: buildCenterColumn([
+            CupertinoButton.filled(
+              onPressed: () {
+                RouterUtil.to(context, ChildPage(title: title));
+              },
+              child: const Text('进入下一个子页面'),
+            ),
+            CupertinoButton.filled(
               onPressed: () {
                 RouterUtil.back(context);
               },
               child: const Text('返回'),
             ),
-          ),
+          ]),
         ),
       );
     } else {
@@ -34,14 +40,20 @@ class ChildPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
         ),
-        body: Center(
-          child: ElevatedButton(
+        body: buildCenterColumn([
+          ElevatedButton(
+            onPressed: () {
+              RouterUtil.to(context, ChildPage(title: title));
+            },
+            child: const Text('进入下一个子页面'),
+          ),
+          ElevatedButton(
             onPressed: () {
               RouterUtil.back(context);
             },
             child: const Text('返回'),
           ),
-        ),
+        ]),
       );
     }
   }

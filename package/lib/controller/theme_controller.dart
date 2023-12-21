@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:package/index.dart';
@@ -41,60 +40,6 @@ class ThemeController extends GetxController {
   /// 当主题是material2时，是否显示半透明状态栏
   final translucenceStatusBar = useLocalObs(true, 'translucenceStatusBar');
 
-  /// 构建Material主题数据
-  ThemeData buildMaterialThemeData({
-    Brightness? brightness, // 强制指定亮色主题或黑色主题
-  }) {
-    brightness = brightness ??
-        (ThemeController.of.useDark.value ? Brightness.dark : Brightness.light);
-    if (useMaterial3.value) {
-      return ThemeData(
-        useMaterial3: true,
-        textTheme: _textTheme,
-        // 根据主题色创建material3的主题系统
-        colorScheme: ColorScheme.fromSeed(
-          brightness: brightness,
-          seedColor: primaryColor.value,
-        ),
-        splashFactory: InkRipple.splashFactory,
-        cardTheme: const CardTheme(
-          surfaceTintColor: Colors.transparent,
-        ),
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
-          ),
-        ),
-      );
-    } else {
-      return ThemeData(
-        useMaterial3: false,
-        textTheme: _textTheme,
-        brightness: brightness,
-        // 指定material2的主题颜色
-        primarySwatch: ColorUtil.createMaterialColor(primaryColor.value),
-        splashFactory: InkRipple.splashFactory,
-        appBarTheme: AppBarTheme(
-          titleTextStyle: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: ColorUtil.isDark(primaryColor.value)
-                ? Colors.white
-                : Colors.black,
-          ),
-          actionsIconTheme: IconThemeData(
-            color: ColorUtil.isDark(primaryColor.value)
-                ? Colors.white
-                : Colors.black,
-          ),
-          foregroundColor: ColorUtil.isDark(primaryColor.value)
-              ? Colors.white
-              : Colors.black,
-        ),
-      );
-    }
-  }
-
   @override
   void onInit() {
     super.onInit();
@@ -124,42 +69,3 @@ void _hideTranslucenceStatusBar() {
         const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
   });
 }
-
-const _textTheme = TextTheme(
-  displaySmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  displayMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  displayLarge: TextStyle(
-    fontWeight: FontWeight.w600,
-  ),
-  titleSmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  titleMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  titleLarge: TextStyle(
-    fontWeight: FontWeight.w600,
-  ),
-  bodySmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  bodyMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  bodyLarge: TextStyle(
-    fontWeight: FontWeight.w600,
-  ),
-  labelSmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  labelMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  labelLarge: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-);

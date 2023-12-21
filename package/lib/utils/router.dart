@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:package/app.dart';
 
 class RouterUtil {
   RouterUtil._();
@@ -44,8 +45,7 @@ class RouterUtil {
           fullscreenDialog: fullscreenDialog,
         ));
       }
-      if (Theme.of(context).platform == TargetPlatform.iOS ||
-          Theme.of(context).platform == TargetPlatform.macOS) {
+      if (MyTheme.of(context)?.appType == AppType.cupertino) {
         return await Navigator.of(
           context,
           rootNavigator: rootNavigator,

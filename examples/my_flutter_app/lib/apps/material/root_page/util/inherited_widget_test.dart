@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:package/index.dart';
-import 'package:provider/provider.dart';
+
+class MyData {
+  static InheritedWidgetTestPageState? of(BuildContext context) {
+    MyInheritedWidget? myInheritedWidget =
+        context.dependOnInheritedWidgetOfExactType<MyInheritedWidget>();
+    return myInheritedWidget?.instance;
+  }
+}
 
 /// 用于向子组件共享的表单数据
 class MyInheritedWidget extends InheritedWidget {
   const MyInheritedWidget({
     super.key,
     required super.child,
-    required this.count,
-    required this.increment,
+    required this.instance,
   });
 
-  final int count;
-  final void Function() increment;
-
-  static MyInheritedWidget? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<MyInheritedWidget>();
-  }
+  final InheritedWidgetTestPageState instance;
 
   @override
   bool updateShouldNotify(MyInheritedWidget oldWidget) {
-    return oldWidget.count != count;
+    // return oldWidget.count != count;
+    return true;
   }
 }
 
@@ -29,10 +30,10 @@ class InheritedWidgetTestPage extends StatefulWidget {
 
   @override
   State<InheritedWidgetTestPage> createState() =>
-      _InheritedWidgetTestPageState();
+      InheritedWidgetTestPageState();
 }
 
-class _InheritedWidgetTestPageState extends State<InheritedWidgetTestPage> {
+class InheritedWidgetTestPageState extends State<InheritedWidgetTestPage> {
   int count = 0;
 
   void increment() {
@@ -43,43 +44,26 @@ class _InheritedWidgetTestPageState extends State<InheritedWidgetTestPage> {
 
   @override
   Widget build(BuildContext context) {
+    Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('InheritedWidget测试'),
       ),
-      body: Provider(
-        create: (context) => LabelModel('InheritedWidgetTestPage', 'xxxx'),
-        child: MyInheritedWidget(
-          count: count,
-          increment: increment,
-          child: Center(
-            child: Column(
-              children: [
-                Consumer<LabelModel>(
-                  builder: (context, vable, child) => Text(vable.label),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      count++;
-                    });
-                  },
-                  child: Text('count: $count'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    RouterUtil.to(context, const _ChildPage());
-                  },
-                  child: const Text('进入下一个InheritedWidget页面'),
-                ),
-                const _ChildWidget(),
-                const _ProviderWidget(),
-                Provider(
-                  create: (context) => LabelModel('child', 'xxx'),
-                  child: const _ProviderWidget(),
-                ),
-              ],
-            ),
+      body: MyInheritedWidget(
+        instance: this,
+        child: Center(
+          child: Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    count++;
+                  });
+                },
+                child: Text('count: $count'),
+              ),
+              const _ChildWidget(),
+            ],
           ),
         ),
       ),
@@ -88,53 +72,16 @@ class _InheritedWidgetTestPageState extends State<InheritedWidgetTestPage> {
 }
 
 class _ChildWidget extends StatelessWidget {
-  const _ChildWidget({super.key});
+  const _ChildWidget();
 
   @override
   Widget build(BuildContext context) {
+    var instance = MyData.of(context);
     return ElevatedButton(
       onPressed: () {
-        MyInheritedWidget.of(context)?.increment();
+        instance?.increment();
       },
-      child: Text('上一个页面的count: ${MyInheritedWidget.of(context)?.count}'),
-    );
-  }
-}
-
-class _ProviderWidget extends StatelessWidget {
-  const _ProviderWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<LabelModel>(
-      builder: (context, vable, child) => Text(vable.label),
-    );
-  }
-}
-
-class _ChildPage extends StatelessWidget {
-  const _ChildPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('子页面'),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Consumer<LabelModel>(
-              builder: (context, vable, child) => Text(vable.label),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child:
-                  Text('上一个页面的count: ${MyInheritedWidget.of(context)?.count}'),
-            ),
-          ],
-        ),
-      ),
+      child: Text('上一个页面的count: ${instance?.count}'),
     );
   }
 }
