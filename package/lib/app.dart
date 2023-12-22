@@ -182,6 +182,8 @@ class MyTheme {
   }
 }
 
+late MyThemeData _myThemeData;
+
 /// MyApp主题数据
 class MyThemeData {
   final AppType appType;
@@ -394,7 +396,7 @@ class MyApp extends StatelessWidget {
         DeviceOrientation.portraitDown,
       ]);
     }
-    MyThemeData myThemeData = MyThemeData(
+    _myThemeData = MyThemeData(
       appType: _appType,
       primaryColor: primaryColor ?? _primaryColor,
       successColor: successColor ?? _successColor,
@@ -409,46 +411,41 @@ class MyApp extends StatelessWidget {
             (supportedLocales ?? []).toList(), _supportedLocales)
         .map((e) => e);
     late Widget appWidget;
-    switch (myThemeData.appType) {
+    switch (_myThemeData.appType) {
       case AppType.material2:
         appWidget = buildMaterial2App(
           context,
-          myThemeData: myThemeData,
           localizationsDelegates: $localizationsDelegates,
           supportedLocales: $supportedLocales,
         );
       case AppType.material3:
         appWidget = buildMaterial3App(
           context,
-          myThemeData: myThemeData,
           localizationsDelegates: $localizationsDelegates,
           supportedLocales: $supportedLocales,
         );
       case AppType.cupertino:
         appWidget = buildCupertinoApp(
           context,
-          myThemeData: myThemeData,
           localizationsDelegates: $localizationsDelegates,
           supportedLocales: $supportedLocales,
         );
     }
-    return buildMyAppTheme(context, child: appWidget, myThemeData: myThemeData);
+    return buildMyAppTheme(context, child: appWidget);
   }
 
   Widget buildMyAppTheme(
     BuildContext context, {
     required Widget child,
-    required MyThemeData myThemeData,
   }) {
     return _MyThemeInheritedWidget(
-      themeData: myThemeData,
+      themeData: _myThemeData,
       child: child,
     );
   }
 
   Widget buildMaterial2App(
     BuildContext context, {
-    required MyThemeData myThemeData,
     required Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates,
     required Iterable<Locale> supportedLocales,
   }) {

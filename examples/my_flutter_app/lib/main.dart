@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package/index.dart';
 
-import 'apps/cupertino/index.dart';
 import 'apps/material/root_page/index.dart';
 
 void main() async {
@@ -23,14 +22,6 @@ class _MyApp extends StatelessWidget {
             builder: (context, state) => const HomePage(),
             routes: [
               createRootPage(materialRootPages, 'material'),
-              GoRoute(
-                path: 'cupertino',
-                builder: (context, state) => const MyCupertinoApp(),
-              ),
-              GoRoute(
-                path: 'child_app',
-                builder: (context, state) => const _ChildApp(),
-              ),
               GoRoute(
                 path: 'child',
                 builder: (context, state) =>
@@ -73,38 +64,8 @@ class _HomePageState extends State<HomePage> {
             },
             child: const Text('Material App'),
           ),
-          ElevatedButton(
-            onPressed: () {
-              context.go('/cupertino');
-            },
-            child: const Text('Cupertino App'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              RouterUtil.to(context, _ChildApp());
-              // context.go('/child_app');
-            },
-            child: const Text('Child App'),
-          ),
         ]),
       ),
     );
-  }
-}
-
-class _ChildApp extends StatelessWidget {
-  const _ChildApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MyApp.material2(
-        router: GoRouter(routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => ChildPage(
-          title: '子页面',
-        ),
-      )
-    ]));
   }
 }

@@ -1,3 +1,3 @@
-export 'root_page.dart';
-export 'cupertino_root_page.dart';
-export 'simple_pages.dart';
+export 'material/root_page.dart';
+export 'cupertino/root_page.dart';
+export 'common/simple_pages.dart';
