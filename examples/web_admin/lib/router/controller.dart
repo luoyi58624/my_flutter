@@ -1,4 +1,4 @@
-import 'package:my_flutter/my_flutter.dart';
+import 'package:package/index.dart';
 
 class RouterController extends GetxController {
   static RouterController get of => Get.find();

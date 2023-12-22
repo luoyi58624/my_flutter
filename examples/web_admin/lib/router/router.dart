@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_admin/layout/layout.dart';
-import 'package:flutter_admin/pages/home.dart';
-import 'package:flutter_admin/pages/login.dart';
-import 'package:flutter_admin/pages/menu.dart';
-import 'package:flutter_admin/pages/system.dart';
-import 'package:flutter_admin/pages/user.dart';
-import 'package:flutter_admin/router/controller.dart';
-import 'package:my_flutter/my_flutter.dart';
+import 'package:package/index.dart';
+
+import '../pages/home.dart';
+import '../pages/login.dart';
+import '../pages/menu.dart';
+import '../pages/system.dart';
+import '../pages/user.dart';
+import '../router/controller.dart';
 
 import 'utils.dart';
 
@@ -18,7 +18,7 @@ final router = GoRouter(
   initialLocation: '/',
   redirect: (BuildContext context, GoRouterState state) {
     RouterController.of.activePath.value = state.fullPath ?? '/';
-    if (SpUtil.getBool('auth', defValue: false) == true) {
+    if (localStorage.getItem('auth', false) == true) {
       return state.fullPath;
     } else {
       return '/login';

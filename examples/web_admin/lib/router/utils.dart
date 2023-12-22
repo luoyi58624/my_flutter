@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:my_flutter/my_flutter.dart';
+import 'package:package/index.dart';
 
 CustomTransitionPage buildPageWithDefaultTransition<T>({
   required BuildContext context,

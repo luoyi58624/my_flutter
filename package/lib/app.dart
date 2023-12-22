@@ -4,13 +4,6 @@ import 'package:flutter/services.dart';
 
 import 'package:package/index.dart';
 
-/// 默认的主题颜色
-Color _primaryColor = const Color.fromARGB(255, 0, 120, 212);
-Color _successColor = const Color.fromARGB(255, 16, 185, 129);
-Color _warningColor = const Color.fromARGB(255, 245, 158, 11);
-Color _errorColor = const Color.fromARGB(255, 239, 68, 68);
-Color _infoColor = const Color.fromARGB(255, 127, 137, 154);
-
 /// 默认的国际化配置
 const List<LocalizationsDelegate<dynamic>> _localizationsDelegates = [
   GlobalWidgetsLocalizations.delegate,
@@ -18,220 +11,19 @@ const List<LocalizationsDelegate<dynamic>> _localizationsDelegates = [
   GlobalCupertinoLocalizations.delegate,
 ];
 
+/// 默认支持的语言
 const _supportedLocales = [
   Locale('zh', 'CH'),
   Locale('en', 'US'),
 ];
 
-/// material加粗后的文字主题
-const _materialBoldTextTheme = TextTheme(
-  displaySmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  displayMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  displayLarge: TextStyle(
-    fontWeight: FontWeight.w600,
-  ),
-  titleSmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  titleMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  titleLarge: TextStyle(
-    fontWeight: FontWeight.w600,
-  ),
-  bodySmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  bodyMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  bodyLarge: TextStyle(
-    fontWeight: FontWeight.w600,
-  ),
-  labelSmall: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  labelMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-  labelLarge: TextStyle(
-    fontWeight: FontWeight.w500,
-  ),
-);
-
-/// 底部导航栏类型
-enum BottomNavigationType {
-  material2,
-  material3,
-  cupertino,
-}
-
-/// app风格类型
-enum AppType {
-  material2,
-  material3,
-  cupertino,
-}
-
-/// MyApp全局主题
-class MyTheme {
-  MyTheme._();
-
-  static MyThemeData? of(BuildContext context) {
-    _MyThemeInheritedWidget? themeInheritedWidget =
-        context.dependOnInheritedWidgetOfExactType<_MyThemeInheritedWidget>();
-    return themeInheritedWidget?.themeData;
-  }
-
-  /// 构建material2主题
-  static ThemeData buildMaterial2ThemeData({
-    required Color primaryColor, // 主要颜色
-    Brightness? brightness, // 强制指定亮色主题或黑色主题
-    bool boldText = true, // 是否要全局加粗文字
-  }) {
-    return ThemeData(
-      useMaterial3: false,
-      textTheme: boldText ? _materialBoldTextTheme : null,
-      brightness: brightness,
-      // 指定material2的主题颜色
-      primarySwatch: ColorUtil.createMaterialColor(primaryColor),
-      splashFactory: InkRipple.splashFactory,
-      appBarTheme: AppBarTheme(
-        titleTextStyle: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: ColorUtil.isDark(primaryColor) ? Colors.white : Colors.black,
-        ),
-        actionsIconTheme: IconThemeData(
-          color: ColorUtil.isDark(primaryColor) ? Colors.white : Colors.black,
-        ),
-        foregroundColor:
-            ColorUtil.isDark(primaryColor) ? Colors.white : Colors.black,
-      ),
-    );
-  }
-
-  /// 构建material3主题
-  static ThemeData buildMaterial3ThemeData({
-    required Color primaryColor, // 主要颜色
-    Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
-    bool boldText = true, // 是否要全局加粗文字
-  }) {
-    return ThemeData(
-      useMaterial3: true,
-      textTheme: boldText ? _materialBoldTextTheme : null,
-      // 根据主题色创建material3的主题系统
-      colorScheme: ColorScheme.fromSeed(
-        brightness: brightness,
-        seedColor: primaryColor,
-      ),
-      splashFactory: InkRipple.splashFactory,
-      cardTheme: const CardTheme(
-        surfaceTintColor: Colors.transparent,
-      ),
-      inputDecorationTheme: const InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
-        ),
-      ),
-    );
-  }
-
-  /// 构建cupertino主题
-  static CupertinoThemeData buildCupertinoTheme({
-    required Color primaryColor, // 主要颜色
-    Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
-    bool boldText = true, // 是否要全局加粗文字
-  }) {
-    var textTheme = const CupertinoThemeData().textTheme;
-    return CupertinoThemeData(
-      primaryColor: primaryColor,
-      textTheme: boldText
-          ? CupertinoTextThemeData(
-              textStyle:
-                  textTheme.textStyle.copyWith(fontWeight: FontWeight.w500),
-              tabLabelTextStyle:
-                  textTheme.tabLabelTextStyle.copyWith(fontSize: 12),
-              navActionTextStyle: textTheme.navActionTextStyle.copyWith(
-                fontWeight: FontWeight.w500,
-                color: primaryColor,
-              ),
-            )
-          : null,
-    );
-  }
-
-  /// 显示半透明状态栏
-  static void showTranslucenceStatusBar() {
-    CommonUtil.delayed(200, () {
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-          statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
-    });
-  }
-
-  /// 隐藏半透明状态栏
-  static void hideTranslucenceStatusBar() {
-    CommonUtil.delayed(200, () {
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-          statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
-    });
-  }
-}
-
-late MyThemeData _myThemeData;
-
-/// MyApp主题数据
-class MyThemeData {
-  final AppType appType;
-
-  final Color primaryColor;
-  final Color successColor;
-  final Color warningColor;
-  final Color errorColor;
-  final Color infoColor;
-
-  MyThemeData({
-    required this.appType,
-    required this.primaryColor,
-    required this.successColor,
-    required this.warningColor,
-    required this.errorColor,
-    required this.infoColor,
-  });
-}
-
-/// 用于向子组件共享的表单数据
-class _MyThemeInheritedWidget extends InheritedWidget {
-  const _MyThemeInheritedWidget({
-    required super.child,
-    required this.themeData,
-  });
-
-  final MyThemeData themeData;
-
-  @override
-  bool updateShouldNotify(_MyThemeInheritedWidget oldWidget) {
-    return true;
-  }
-}
-
 class MyApp extends StatelessWidget {
-  /// 构建Android Material2风格的App
-  const MyApp.material2({
+  /// 以[MaterialApp]构建应用程序
+  const MyApp({
     super.key,
     this.title = '',
     this.home,
     this.router,
-    this.primaryColor,
-    this.successColor,
-    this.warningColor,
-    this.errorColor,
-    this.infoColor,
-    this.boldText = true,
     this.theme,
     this.darkTheme,
     this.localizationsDelegates,
@@ -241,53 +33,17 @@ class MyApp extends StatelessWidget {
     this.onlyVerticalMode = false,
     this.translucenceStatusBar = true,
     this.locale = const Locale('zh', 'CN'),
-  })  : assert(
-            (home != null && router == null) ||
-                (home == null && router != null),
-            'home和router选项必须二选一'),
-        _appType = AppType.material2,
+  })  : assert((home != null && router == null) || (home == null && router != null), 'home和router选项必须二选一'),
+        _appType = AppType.material,
+        textBold = true,
         cupertinoTheme = null;
 
-  /// 构建Android Material3风格的App
-  const MyApp.material3({
-    super.key,
-    this.title = '',
-    this.home,
-    this.router,
-    this.primaryColor,
-    this.successColor,
-    this.warningColor,
-    this.errorColor,
-    this.infoColor,
-    this.boldText = true,
-    this.theme,
-    this.darkTheme,
-    this.localizationsDelegates,
-    this.supportedLocales,
-    this.bottomNavigationType,
-    this.onlyHorizontalMode = false,
-    this.onlyVerticalMode = false,
-    this.locale = const Locale('zh', 'CN'),
-  })  : assert(
-            (home != null && router == null) ||
-                (home == null && router != null),
-            'home和router选项必须二选一'),
-        _appType = AppType.material3,
-        translucenceStatusBar = false,
-        cupertinoTheme = null;
-
-  /// 构建IOS风格的App
+  /// 以[CupertinoApp]构建应用程序
   const MyApp.cupertino({
     super.key,
     this.title = '',
     this.home,
     this.router,
-    this.primaryColor,
-    this.successColor,
-    this.warningColor,
-    this.errorColor,
-    this.infoColor,
-    this.boldText = true,
     this.cupertinoTheme,
     this.localizationsDelegates,
     this.supportedLocales,
@@ -295,13 +51,11 @@ class MyApp extends StatelessWidget {
     this.onlyHorizontalMode = false,
     this.onlyVerticalMode = false,
     this.locale = const Locale('zh', 'CN'),
-  })  : assert(
-            (home != null && router == null) ||
-                (home == null && router != null),
-            'home和router选项必须二选一'),
+  })  : assert((home != null && router == null) || (home == null && router != null), 'home和router选项必须二选一'),
         _appType = AppType.cupertino,
         theme = null,
         darkTheme = null,
+        textBold = false,
         translucenceStatusBar = false;
 
   /// app类型
@@ -310,21 +64,11 @@ class MyApp extends StatelessWidget {
   /// App标题，默认空
   final String title;
 
-  /// 直接为App提供首屏组件，home和router二选一
+  /// App首屏页面，注意：此选项建议用于简单App，复杂App请使用router参数
   final Widget? home;
 
   /// 基于[GoRouter]的router配置，支持(路由拦截、深度链接、命名路由)等功能
   final GoRouter? router;
-
-  /// 主题颜色
-  final Color? primaryColor;
-  final Color? successColor;
-  final Color? warningColor;
-  final Color? errorColor;
-  final Color? infoColor;
-
-  /// 是否全局加粗文字，默认true，设置为false将使用flutter默认配置
-  final bool boldText;
 
   /// Material亮色主题
   final ThemeData? theme;
@@ -382,8 +126,17 @@ class MyApp extends StatelessWidget {
   /// material2主题是否显示半透明状态栏
   final bool translucenceStatusBar;
 
+  /// 文字是否全局加粗
+  final bool textBold;
+
+  ThemeController get themeController => Get.find();
+
   @override
   Widget build(BuildContext context) {
+    themeController.appType.value = _appType.name;
+    themeController.textBold.value = textBold;
+    themeController.translucenceStatusBar.value = translucenceStatusBar;
+
     if (onlyHorizontalMode) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
@@ -396,52 +149,32 @@ class MyApp extends StatelessWidget {
         DeviceOrientation.portraitDown,
       ]);
     }
-    _myThemeData = MyThemeData(
-      appType: _appType,
-      primaryColor: primaryColor ?? _primaryColor,
-      successColor: successColor ?? _successColor,
-      warningColor: warningColor ?? _warningColor,
-      errorColor: errorColor ?? _errorColor,
-      infoColor: infoColor ?? _infoColor,
-    );
-    var $localizationsDelegates = CommonUtil.concatArray(
-            (localizationsDelegates ?? []).toList(), _localizationsDelegates)
-        .map((e) => e);
-    var $supportedLocales = CommonUtil.concatArray(
-            (supportedLocales ?? []).toList(), _supportedLocales)
-        .map((e) => e);
-    late Widget appWidget;
-    switch (_myThemeData.appType) {
-      case AppType.material2:
-        appWidget = buildMaterial2App(
-          context,
-          localizationsDelegates: $localizationsDelegates,
-          supportedLocales: $supportedLocales,
-        );
-      case AppType.material3:
-        appWidget = buildMaterial3App(
-          context,
-          localizationsDelegates: $localizationsDelegates,
-          supportedLocales: $supportedLocales,
-        );
-      case AppType.cupertino:
-        appWidget = buildCupertinoApp(
-          context,
-          localizationsDelegates: $localizationsDelegates,
-          supportedLocales: $supportedLocales,
-        );
-    }
-    return buildMyAppTheme(context, child: appWidget);
-  }
 
-  Widget buildMyAppTheme(
-    BuildContext context, {
-    required Widget child,
-  }) {
-    return _MyThemeInheritedWidget(
-      themeData: _myThemeData,
-      child: child,
-    );
+    var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
+    var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
+    return Obx(() {
+      if (themeController.appType.value == AppType.material.name) {
+        return themeController.useMaterial3.value
+            ? buildMaterial3App(
+                context,
+                localizationsDelegates: $localizationsDelegates,
+                supportedLocales: $supportedLocales,
+              )
+            : buildMaterial2App(
+                context,
+                localizationsDelegates: $localizationsDelegates,
+                supportedLocales: $supportedLocales,
+              );
+      } else if (themeController.appType.value == AppType.cupertino.name) {
+        return buildCupertinoApp(
+          context,
+          localizationsDelegates: $localizationsDelegates,
+          supportedLocales: $supportedLocales,
+        );
+      } else {
+        throw Exception('未知App类型');
+      }
+    });
   }
 
   Widget buildMaterial2App(
@@ -449,21 +182,14 @@ class MyApp extends StatelessWidget {
     required Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates,
     required Iterable<Locale> supportedLocales,
   }) {
-    translucenceStatusBar
-        ? MyTheme.showTranslucenceStatusBar()
-        : MyTheme.hideTranslucenceStatusBar();
+    translucenceStatusBar ? themeController.showTranslucenceStatusBar() : themeController.hideTranslucenceStatusBar();
+    final defaultTheme =
+        themeController.buildMaterial2ThemeData(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light);
     if (home != null) {
       return MaterialApp(
         title: title,
-        theme: theme ??
-            MyTheme.buildMaterial2ThemeData(
-              primaryColor: myThemeData.primaryColor,
-            ),
-        darkTheme: darkTheme ??
-            MyTheme.buildMaterial2ThemeData(
-              primaryColor: myThemeData.primaryColor,
-              brightness: Brightness.dark,
-            ),
+        theme: theme ?? defaultTheme,
+        darkTheme: darkTheme ?? themeController.buildMaterial2ThemeData(brightness: Brightness.dark),
         home: home,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
@@ -474,15 +200,8 @@ class MyApp extends StatelessWidget {
     } else {
       return MaterialApp.router(
         title: title,
-        theme: theme ??
-            MyTheme.buildMaterial2ThemeData(
-              primaryColor: myThemeData.primaryColor,
-            ),
-        darkTheme: darkTheme ??
-            MyTheme.buildMaterial2ThemeData(
-              primaryColor: myThemeData.primaryColor,
-              brightness: Brightness.dark,
-            ),
+        theme: theme ?? defaultTheme,
+        darkTheme: darkTheme ?? themeController.buildMaterial2ThemeData(brightness: Brightness.dark),
         routerConfig: router,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
@@ -495,23 +214,17 @@ class MyApp extends StatelessWidget {
 
   Widget buildMaterial3App(
     BuildContext context, {
-    required MyThemeData myThemeData,
     required Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates,
     required Iterable<Locale> supportedLocales,
   }) {
-    MyTheme.hideTranslucenceStatusBar();
+    themeController.hideTranslucenceStatusBar();
+    final defaultTheme =
+        themeController.buildMaterial3ThemeData(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light);
     if (home != null) {
       return MaterialApp(
         title: title,
-        theme: theme ??
-            MyTheme.buildMaterial3ThemeData(
-              primaryColor: myThemeData.primaryColor,
-            ),
-        darkTheme: darkTheme ??
-            MyTheme.buildMaterial3ThemeData(
-              primaryColor: myThemeData.primaryColor,
-              brightness: Brightness.dark,
-            ),
+        theme: theme ?? defaultTheme,
+        darkTheme: darkTheme ?? themeController.buildMaterial3ThemeData(brightness: Brightness.dark),
         home: home,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
@@ -522,15 +235,8 @@ class MyApp extends StatelessWidget {
     } else {
       return MaterialApp.router(
         title: title,
-        theme: theme ??
-            MyTheme.buildMaterial3ThemeData(
-              primaryColor: myThemeData.primaryColor,
-            ),
-        darkTheme: darkTheme ??
-            MyTheme.buildMaterial3ThemeData(
-              primaryColor: myThemeData.primaryColor,
-              brightness: Brightness.dark,
-            ),
+        theme: theme ?? defaultTheme,
+        darkTheme: darkTheme ?? themeController.buildMaterial3ThemeData(brightness: Brightness.dark),
         routerConfig: router,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
@@ -543,19 +249,16 @@ class MyApp extends StatelessWidget {
 
   Widget buildCupertinoApp(
     BuildContext context, {
-    required MyThemeData myThemeData,
     required Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates,
     required Iterable<Locale> supportedLocales,
   }) {
-    MyTheme.hideTranslucenceStatusBar();
+    themeController.hideTranslucenceStatusBar();
+    final defaultTheme =
+        themeController.buildCupertinoTheme(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light);
     if (home != null) {
       return CupertinoApp(
         title: title,
-        theme: cupertinoTheme ??
-            MyTheme.buildCupertinoTheme(
-              primaryColor: myThemeData.primaryColor,
-              boldText: boldText,
-            ),
+        theme: cupertinoTheme ?? defaultTheme,
         home: home,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
@@ -566,11 +269,7 @@ class MyApp extends StatelessWidget {
     } else {
       return CupertinoApp.router(
         title: title,
-        theme: cupertinoTheme ??
-            MyTheme.buildCupertinoTheme(
-              primaryColor: myThemeData.primaryColor,
-              boldText: boldText,
-            ),
+        theme: cupertinoTheme ?? defaultTheme,
         routerConfig: router,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
@@ -594,8 +293,7 @@ TransitionBuilder initBuilder() => (context, child) {
               toast.init(context);
               return MediaQuery(
                 // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
-                data: MediaQuery.of(context)
-                    .copyWith(accessibleNavigation: false),
+                data: MediaQuery.of(context).copyWith(accessibleNavigation: false),
                 child: child!,
               );
             }),

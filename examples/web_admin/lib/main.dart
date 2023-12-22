@@ -6,7 +6,7 @@ import 'router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initMyFlutter();
+  await initMyFlutter(themeModel: const ThemeModel(useMaterial3: false));
   Get.put(RouterController());
   runApp(const MainApp());
 }
@@ -16,12 +16,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyApp.material3(
+    return MyApp(
       router: router,
-      theme: MyTheme.buildMaterial3ThemeData(
-        primaryColor: primaryColor,
-        brightness: Brightness.dark,
-      ),
+      // theme: ThemeController.of.buildMaterial3ThemeData(
+      //   brightness: Brightness.dark,
+      // ),
     );
   }
 }
