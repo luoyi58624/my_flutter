@@ -1,53 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:package/index.dart';
 
+import 'image_test.dart';
+
 class ComponentRootPage extends StatelessWidget {
   const ComponentRootPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<NavPageModel> customComponentItems = [
+      const NavPageModel('Image图片组件', ImageTestPage()),
+    ];
     return Scaffold(
       appBar: AppBar(
-        title: const Text('组件'),
+        title: const Text('组件列表'),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: () {
-                RouterUtil.to(context, const _ChildPage());
-              },
-              child: const Text('子页面'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.go('/material/my');
-              },
-              child: const Text('切换-我的'),
-            ),
+            buildListSection(context, '自定义组件', customComponentItems),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ChildPage extends StatelessWidget {
-  const _ChildPage();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('子页面'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // context.go('/component/child');
-            // RouterUtil.to(const ChildPage(title: '组件子页面'), context: context);
-          },
-          child: const Text('我的子页面'),
         ),
       ),
     );

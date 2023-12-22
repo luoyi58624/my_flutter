@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:package/index.dart';
 
-/// 封装通用的图片组件，统一项目中的用法
+/// 图片组件，统一项目中的用法
 class ImageWidget extends StatefulWidget {
   /// 默认图片构造器，它无法渲染完整的圆角，若你需要圆角请使用circle构造器，它将使用CircleAvatar组件进行渲染
   const ImageWidget(
@@ -10,6 +10,7 @@ class ImageWidget extends StatefulWidget {
     super.key,
     this.width,
     this.height,
+    this.size,
     this.radius = 6,
     this.borderRadius,
     this.fit = BoxFit.cover,
@@ -21,7 +22,7 @@ class ImageWidget extends StatefulWidget {
   /// 圆形图片构造器
   const ImageWidget.circle(
     this.url,
-    this.radius, {
+    this.size, {
     super.key,
     this.fit = BoxFit.cover,
     this.heroTag,
@@ -30,11 +31,18 @@ class ImageWidget extends StatefulWidget {
   })  : circleImage = true,
         width = null,
         height = null,
+        radius = 0,
         borderRadius = null;
 
-  /// 从网络地址加载
-  final String? url;
+  /// 图片地址，如果是http开头的将从网络地址加载，否则将加载assets中的图片。
+  ///
+  /// 提示：如果你需要从本地加载图片，那你将会用到io包，若你用了io包将不再支持web。
+  final String url;
 
+  /// 图片尺寸，它将取代宽高属性，强制宽高一致
+  final double? size;
+
+  /// 限制图片宽高
   final double? width;
   final double? height;
 
@@ -69,13 +77,12 @@ class _ImageWidgetState extends State<ImageWidget> {
     late Widget imageWidget;
     if (widget.circleImage) {
       imageWidget = CircleAvatar(
-        radius: widget.radius,
+        radius: widget.size! / 2,
         backgroundImage: buildImageProvider(),
       );
     } else {
       imageWidget = ClipRRect(
-        borderRadius:
-            widget.borderRadius ?? BorderRadius.circular(widget.radius),
+        borderRadius: widget.borderRadius ?? BorderRadius.circular(widget.radius),
         child: buildNetworkImage(),
       );
     }
@@ -86,9 +93,9 @@ class _ImageWidgetState extends State<ImageWidget> {
   }
 
   ImageProvider? buildImageProvider() {
-    if (!CommonUtil.isEmpty(widget.url) && Uri.tryParse(widget.url!) != null) {
+    if (!CommonUtil.isEmpty(widget.url) && Uri.tryParse(widget.url) != null) {
       return CachedNetworkImageProvider(
-        widget.url!,
+        widget.url,
       );
     } else {
       return null;
@@ -96,13 +103,13 @@ class _ImageWidgetState extends State<ImageWidget> {
   }
 
   Widget buildNetworkImage() {
-    if (!CommonUtil.isEmpty(widget.url) && Uri.tryParse(widget.url!) != null) {
+    if (!CommonUtil.isEmpty(widget.url) && Uri.tryParse(widget.url) != null) {
       return CachedNetworkImage(
-        imageUrl: widget.url!,
-        width: widget.width,
-        height: widget.height,
-        placeholder: (context, url) =>
-            SpinKitPulse(color: Colors.grey.shade400),
+        imageUrl: widget.url,
+        width: widget.size ?? widget.width,
+        height: widget.size ?? widget.height,
+        fit: widget.fit,
+        placeholder: (context, url) => SpinKitPulse(color: Colors.grey.shade400),
         errorWidget: (context, url, error) => loadFailWidget,
       );
     } else {
