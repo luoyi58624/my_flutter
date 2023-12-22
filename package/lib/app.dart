@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
     this.locale = const Locale('zh', 'CN'),
   })  : assert((home != null && router == null) || (home == null && router != null), 'home和router选项必须二选一'),
         _appType = AppType.material,
-        textBold = true,
         cupertinoTheme = null;
 
   /// 以[CupertinoApp]构建应用程序
@@ -55,7 +54,6 @@ class MyApp extends StatelessWidget {
         _appType = AppType.cupertino,
         theme = null,
         darkTheme = null,
-        textBold = false,
         translucenceStatusBar = false;
 
   /// app类型
@@ -126,15 +124,11 @@ class MyApp extends StatelessWidget {
   /// material2主题是否显示半透明状态栏
   final bool translucenceStatusBar;
 
-  /// 文字是否全局加粗
-  final bool textBold;
-
   ThemeController get themeController => Get.find();
 
   @override
   Widget build(BuildContext context) {
     themeController.appType.value = _appType.name;
-    themeController.textBold.value = textBold;
     themeController.translucenceStatusBar.value = translucenceStatusBar;
 
     if (onlyHorizontalMode) {
