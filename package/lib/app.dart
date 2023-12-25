@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
     this.title = '',
-    required this.home,
+    this.home,
+    this.useMaterial3 = true,
     this.theme,
     this.darkTheme,
     this.onGenerateRoute,
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
     super.key,
     this.title = '',
     required this.router,
+    this.useMaterial3 = true,
     this.theme,
     this.darkTheme,
     this.localizationsDelegates,
@@ -60,6 +62,9 @@ class MyApp extends StatelessWidget {
   /// 基于[GoRouter]的router配置，支持(路由拦截、深度链接、命名路由)等功能
   final GoRouter? router;
 
+  /// 是否开启material3主题，flutter3.16版本后默认为true
+  final bool useMaterial3;
+
   /// Material亮色主题
   final ThemeData? theme;
 
@@ -80,8 +85,10 @@ class MyApp extends StatelessWidget {
   /// ```
   final ThemeData? darkTheme;
 
+  /// 自定义生成首屏页，此选项一般用于拦截用户是否登录
   final RouteFactory? onGenerateRoute;
 
+  /// 监听路由跳转
   final List<NavigatorObserver> navigatorObservers;
 
   /// 国际化配置，你传入的新配置将合并至默认配置，默认配置为：
@@ -267,8 +274,10 @@ class MyCupertinoApp extends StatelessWidget {
   /// ios主题
   final CupertinoThemeData? cupertinoTheme;
 
+  /// 自定义生成首屏页，此选项一般用于拦截用户是否登录
   final RouteFactory? onGenerateRoute;
 
+  /// 监听路由跳转
   final List<NavigatorObserver> navigatorObservers;
 
   /// 国际化配置，你传入的新配置将合并至默认配置，默认配置为：
