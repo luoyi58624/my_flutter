@@ -68,7 +68,7 @@ class ThemeController extends GetxController {
   late final Rx<bool> useDark;
 
   /// 当主题是material2时，是否显示半透明状态栏
-  final translucenceStatusBar = useLocalObs(true, 'translucenceStatusBar');
+  final translucenceStatusBar = useLocalObs(false, 'translucenceStatusBar');
 
   /// 文字是否全局加粗，默认情况下，只有material2类型App同时设备为安卓才会以较粗的文本展示(400->500)，这样会提升观感
   final textBold = useLocalObs(false, 'textBold');

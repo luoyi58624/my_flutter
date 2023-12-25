@@ -22,42 +22,34 @@ class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
     this.title = '',
-    this.home,
-    this.router,
+    required this.home,
     this.theme,
     this.darkTheme,
+    this.onGenerateRoute,
+    this.navigatorObservers = const <NavigatorObserver>[],
     this.localizationsDelegates,
     this.supportedLocales,
-    this.bottomNavigationType,
     this.onlyHorizontalMode = false,
     this.onlyVerticalMode = false,
     this.translucenceStatusBar = true,
     this.locale = const Locale('zh', 'CN'),
-  })  : assert((home != null && router == null) || (home == null && router != null), 'home和router选项必须二选一'),
-        _appType = AppType.material,
-        cupertinoTheme = null;
+  }) : router = null;
 
-  /// 以[CupertinoApp]构建应用程序
-  const MyApp.cupertino({
+  const MyApp.router({
     super.key,
     this.title = '',
-    this.home,
-    this.router,
-    this.cupertinoTheme,
+    required this.router,
+    this.theme,
+    this.darkTheme,
     this.localizationsDelegates,
     this.supportedLocales,
-    this.bottomNavigationType,
     this.onlyHorizontalMode = false,
     this.onlyVerticalMode = false,
+    this.translucenceStatusBar = true,
     this.locale = const Locale('zh', 'CN'),
-  })  : assert((home != null && router == null) || (home == null && router != null), 'home和router选项必须二选一'),
-        _appType = AppType.cupertino,
-        theme = null,
-        darkTheme = null,
-        translucenceStatusBar = false;
-
-  /// app类型
-  final AppType _appType;
+  })  : home = null,
+        onGenerateRoute = null,
+        navigatorObservers = const <NavigatorObserver>[];
 
   /// App标题，默认空
   final String title;
@@ -88,8 +80,9 @@ class MyApp extends StatelessWidget {
   /// ```
   final ThemeData? darkTheme;
 
-  /// ios主题
-  final CupertinoThemeData? cupertinoTheme;
+  final RouteFactory? onGenerateRoute;
+
+  final List<NavigatorObserver> navigatorObservers;
 
   /// 国际化配置，你传入的新配置将合并至默认配置，默认配置为：
   /// ```dart
@@ -112,9 +105,6 @@ class MyApp extends StatelessWidget {
   /// 默认的语言，默认为：const Locale('zh', 'CN')
   final Locale locale;
 
-  /// 底部导航栏类型
-  final BottomNavigationType? bottomNavigationType;
-
   /// 是否只允许横屏展示
   final bool onlyHorizontalMode;
 
@@ -128,7 +118,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    themeController.appType.value = _appType.name;
+    themeController.appType.value = AppType.material.name;
     themeController.translucenceStatusBar.value = translucenceStatusBar;
 
     if (onlyHorizontalMode) {
@@ -147,27 +137,17 @@ class MyApp extends StatelessWidget {
     var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
     var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
     return Obx(() {
-      if (themeController.appType.value == AppType.material.name) {
-        return themeController.useMaterial3.value
-            ? buildMaterial3App(
-                context,
-                localizationsDelegates: $localizationsDelegates,
-                supportedLocales: $supportedLocales,
-              )
-            : buildMaterial2App(
-                context,
-                localizationsDelegates: $localizationsDelegates,
-                supportedLocales: $supportedLocales,
-              );
-      } else if (themeController.appType.value == AppType.cupertino.name) {
-        return buildCupertinoApp(
-          context,
-          localizationsDelegates: $localizationsDelegates,
-          supportedLocales: $supportedLocales,
-        );
-      } else {
-        throw Exception('未知App类型');
-      }
+      return themeController.useMaterial3.value
+          ? buildMaterial3App(
+              context,
+              localizationsDelegates: $localizationsDelegates,
+              supportedLocales: $supportedLocales,
+            )
+          : buildMaterial2App(
+              context,
+              localizationsDelegates: $localizationsDelegates,
+              supportedLocales: $supportedLocales,
+            );
     });
   }
 
@@ -185,6 +165,8 @@ class MyApp extends StatelessWidget {
         theme: theme ?? defaultTheme,
         darkTheme: darkTheme ?? themeController.buildMaterial2ThemeData(brightness: Brightness.dark),
         home: home,
+        onGenerateRoute: onGenerateRoute,
+        navigatorObservers: navigatorObservers,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
@@ -220,6 +202,8 @@ class MyApp extends StatelessWidget {
         theme: theme ?? defaultTheme,
         darkTheme: darkTheme ?? themeController.buildMaterial3ThemeData(brightness: Brightness.dark),
         home: home,
+        onGenerateRoute: onGenerateRoute,
+        navigatorObservers: navigatorObservers,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
@@ -240,6 +224,108 @@ class MyApp extends StatelessWidget {
       );
     }
   }
+}
+
+class MyCupertinoApp extends StatelessWidget {
+  const MyCupertinoApp({
+    super.key,
+    required this.home,
+    this.title = '',
+    this.cupertinoTheme,
+    this.onGenerateRoute,
+    this.navigatorObservers = const <NavigatorObserver>[],
+    this.localizationsDelegates,
+    this.supportedLocales,
+    this.onlyHorizontalMode = false,
+    this.onlyVerticalMode = false,
+    this.locale = const Locale('zh', 'CN'),
+  }) : router = null;
+
+  const MyCupertinoApp.router({
+    super.key,
+    required this.router,
+    this.title = '',
+    this.cupertinoTheme,
+    this.localizationsDelegates,
+    this.supportedLocales,
+    this.onlyHorizontalMode = false,
+    this.onlyVerticalMode = false,
+    this.locale = const Locale('zh', 'CN'),
+  })  : home = null,
+        onGenerateRoute = null,
+        navigatorObservers = const <NavigatorObserver>[];
+
+  /// App标题，默认空
+  final String title;
+
+  /// App首屏页面，注意：此选项建议用于简单App，复杂App请使用router参数
+  final Widget? home;
+
+  /// 基于[GoRouter]的router配置，支持(路由拦截、深度链接、命名路由)等功能
+  final GoRouter? router;
+
+  /// ios主题
+  final CupertinoThemeData? cupertinoTheme;
+
+  final RouteFactory? onGenerateRoute;
+
+  final List<NavigatorObserver> navigatorObservers;
+
+  /// 国际化配置，你传入的新配置将合并至默认配置，默认配置为：
+  /// ```dart
+  /// [
+  ///  GlobalWidgetsLocalizations.delegate,
+  ///  GlobalMaterialLocalizations.delegate,
+  ///  GlobalCupertinoLocalizations.delegate,
+  /// ]
+  /// ```
+  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
+
+  /// 支持的语言数组，你传入的新配置将合并至默认配置，默认配置为：
+  /// ```dart
+  /// [
+  ///   Locale('zh', 'CH'),
+  ///   Locale('en', 'US'),
+  /// ]
+  final Iterable<Locale>? supportedLocales;
+
+  /// 默认的语言，默认为：const Locale('zh', 'CN')
+  final Locale locale;
+
+  /// 是否只允许横屏展示
+  final bool onlyHorizontalMode;
+
+  /// 是否只允许竖屏展示
+  final bool onlyVerticalMode;
+
+  ThemeController get themeController => Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    themeController.appType.value = AppType.cupertino.name;
+    if (onlyHorizontalMode) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    }
+    if (onlyVerticalMode) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+    }
+
+    var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
+    var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
+    return Obx(() {
+      return buildCupertinoApp(
+        context,
+        localizationsDelegates: $localizationsDelegates,
+        supportedLocales: $supportedLocales,
+      );
+    });
+  }
 
   Widget buildCupertinoApp(
     BuildContext context, {
@@ -254,6 +340,8 @@ class MyApp extends StatelessWidget {
         title: title,
         theme: cupertinoTheme ?? defaultTheme,
         home: home,
+        onGenerateRoute: onGenerateRoute,
+        navigatorObservers: navigatorObservers,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,

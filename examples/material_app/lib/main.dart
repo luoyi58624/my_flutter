@@ -14,7 +14,7 @@ class _MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyApp(
+    return MyApp.router(
       router: GoRouter(
         routes: [
           createRootPage(materialRootPages),

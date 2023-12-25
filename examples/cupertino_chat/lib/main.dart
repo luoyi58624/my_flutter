@@ -7,7 +7,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initMyFlutter();
   ThemeController.of.primaryColor.value = CupertinoColors.systemGreen;
-  runApp(const MyApp.cupertino(
+  runApp(const MyCupertinoApp(
     home: RootPage(),
   ));
 }
