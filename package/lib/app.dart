@@ -169,7 +169,19 @@ class MyApp extends StatelessWidget {
     translucenceStatusBar ? themeController.showTranslucenceStatusBar() : themeController.hideTranslucenceStatusBar();
     final defaultTheme =
         themeController.buildMaterial2ThemeData(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light);
-    if (home != null) {
+    if (router != null) {
+      return MaterialApp.router(
+        title: title,
+        theme: theme ?? defaultTheme,
+        darkTheme: darkTheme ?? themeController.buildMaterial2ThemeData(brightness: Brightness.dark),
+        routerConfig: router,
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: localizationsDelegates,
+        supportedLocales: supportedLocales,
+        locale: locale,
+        builder: initBuilder(),
+      );
+    } else {
       return MaterialApp(
         title: title,
         theme: theme ?? defaultTheme,
@@ -178,18 +190,6 @@ class MyApp extends StatelessWidget {
         navigatorKey: _initContext == null ? globalNavigatorKey : null,
         onGenerateRoute: onGenerateRoute,
         navigatorObservers: navigatorObservers,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: localizationsDelegates,
-        supportedLocales: supportedLocales,
-        locale: locale,
-        builder: initBuilder(),
-      );
-    } else {
-      return MaterialApp.router(
-        title: title,
-        theme: theme ?? defaultTheme,
-        darkTheme: darkTheme ?? themeController.buildMaterial2ThemeData(brightness: Brightness.dark),
-        routerConfig: router,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
@@ -207,7 +207,19 @@ class MyApp extends StatelessWidget {
     themeController.hideTranslucenceStatusBar();
     final defaultTheme =
         themeController.buildMaterial3ThemeData(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light);
-    if (home != null) {
+    if (router != null) {
+      return MaterialApp.router(
+        title: title,
+        theme: theme ?? defaultTheme,
+        darkTheme: darkTheme ?? themeController.buildMaterial3ThemeData(brightness: Brightness.dark),
+        routerConfig: router,
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: localizationsDelegates,
+        supportedLocales: supportedLocales,
+        locale: locale,
+        builder: initBuilder(),
+      );
+    } else {
       return MaterialApp(
         title: title,
         theme: theme ?? defaultTheme,
@@ -216,18 +228,6 @@ class MyApp extends StatelessWidget {
         navigatorKey: _initContext == null ? globalNavigatorKey : null,
         onGenerateRoute: onGenerateRoute,
         navigatorObservers: navigatorObservers,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: localizationsDelegates,
-        supportedLocales: supportedLocales,
-        locale: locale,
-        builder: initBuilder(),
-      );
-    } else {
-      return MaterialApp.router(
-        title: title,
-        theme: theme ?? defaultTheme,
-        darkTheme: darkTheme ?? themeController.buildMaterial3ThemeData(brightness: Brightness.dark),
-        routerConfig: router,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
@@ -349,14 +349,11 @@ class MyCupertinoApp extends StatelessWidget {
     themeController.hideTranslucenceStatusBar();
     final defaultTheme =
         themeController.buildCupertinoTheme(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light);
-    if (home != null) {
-      return CupertinoApp(
+    if (router != null) {
+      return CupertinoApp.router(
         title: title,
         theme: cupertinoTheme ?? defaultTheme,
-        home: home,
-        navigatorKey: _initContext == null ? globalNavigatorKey : null,
-        onGenerateRoute: onGenerateRoute,
-        navigatorObservers: navigatorObservers,
+        routerConfig: router,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
@@ -364,10 +361,13 @@ class MyCupertinoApp extends StatelessWidget {
         builder: initBuilder(),
       );
     } else {
-      return CupertinoApp.router(
+      return CupertinoApp(
         title: title,
         theme: cupertinoTheme ?? defaultTheme,
-        routerConfig: router,
+        home: home,
+        navigatorKey: _initContext == null ? globalNavigatorKey : null,
+        onGenerateRoute: onGenerateRoute,
+        navigatorObservers: navigatorObservers,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
