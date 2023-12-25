@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
     super.key,
     this.title = '',
     this.home,
-    this.useMaterial3 = true,
     this.theme,
     this.darkTheme,
     this.onGenerateRoute,
@@ -43,7 +42,6 @@ class MyApp extends StatelessWidget {
     super.key,
     this.title = '',
     required this.router,
-    this.useMaterial3 = true,
     this.theme,
     this.darkTheme,
     this.localizationsDelegates,
@@ -64,9 +62,6 @@ class MyApp extends StatelessWidget {
 
   /// 基于[GoRouter]的router配置，支持(路由拦截、深度链接、命名路由)等功能
   final GoRouter? router;
-
-  /// 是否开启material3主题，flutter3.16版本后默认为true
-  final bool useMaterial3;
 
   /// Material亮色主题
   final ThemeData? theme;

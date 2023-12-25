@@ -101,10 +101,10 @@ packages:
     dependency: transitive
     description:
       name: csslib
-      sha256: "706b5707578e0c1b4b7550f64078f0a0f19dec3f50a178ffae7006b0a9ca58fb"
+      sha256: "831883fb353c8bdc1d71979e5b342c7d88acfbc643113c14ae51e2442ea0f20f"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.0"
+    version: "0.17.3"
   cupertino_icons:
     dependency: transitive
     description:
@@ -145,6 +145,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.4.0"
+  dio_smart_retry:
+    dependency: transitive
+    description:
+      name: dio_smart_retry
+      sha256: "1a2d0cf73ab56bf5998b375cda2d51f45c77268e712e4073f232cdc7753a94b2"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.0.0"
   event_bus:
     dependency: transitive
     description:
@@ -238,6 +246,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.3.1"
+  flutter_html:
+    dependency: transitive
+    description:
+      name: flutter_html
+      sha256: "02ad69e813ecfc0728a455e4bf892b9379983e050722b1dce00192ee2e41d1ee"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0-beta.2"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -389,6 +405,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.1"
+  list_counter:
+    dependency: transitive
+    description:
+      name: list_counter
+      sha256: c447ae3dfcd1c55f0152867090e67e219d42fe6d4f2807db4bbe8b8d69912237
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   logger:
     dependency: transitive
     description:
@@ -461,6 +485,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.0"
+  open_file_plus:
+    dependency: transitive
+    description:
+      name: open_file_plus
+      sha256: f087e32722ffe4bac71925e7a1a9848a1008fd789e47c6628da3ed7845922227
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.4.1"
   package:
     dependency: "direct main"
     description:
