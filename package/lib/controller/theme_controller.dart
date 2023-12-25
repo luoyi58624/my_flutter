@@ -155,17 +155,6 @@ class ThemeController extends GetxController {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
     });
   }
-
-  @override
-  void onInit() {
-    super.onInit();
-    ever(useMaterial3, (_) {
-      _ ? hideTranslucenceStatusBar() : (translucenceStatusBar.value ? showTranslucenceStatusBar() : hideTranslucenceStatusBar());
-    });
-    ever(translucenceStatusBar, (_) {
-      _ ? showTranslucenceStatusBar() : hideTranslucenceStatusBar();
-    });
-  }
 }
 
 /// material加粗后的文字主题

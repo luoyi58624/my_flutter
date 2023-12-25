@@ -27,6 +27,9 @@ export 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 // ios下的图标
 export 'package:cupertino_icons/cupertino_icons.dart';
 
+// 常用工具类
+export 'package:flustars/flustars.dart';
+
 // 适应平台风格的组件集合
 export 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
