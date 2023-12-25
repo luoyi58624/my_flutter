@@ -36,7 +36,7 @@ export 'package:flustars/flustars.dart';
 // 多平台查找文件系统上的常用位置
 export 'package:path_provider/path_provider.dart';
 
-export 'package:path/path.dart' hide context;
+export 'package:path/path.dart' hide context, Style;
 
 // 加密解密工具包
 export 'package:crypto/crypto.dart';
@@ -58,3 +58,5 @@ export 'package:extended_tabs/extended_tabs.dart';
 
 // 打开文件
 export 'package:open_file_plus/open_file_plus.dart';
+
+export 'package:flutter_html/flutter_html.dart';
