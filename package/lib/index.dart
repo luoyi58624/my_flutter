@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'index.dart';
-import 'util/http.dart';
 
 export 'app.dart';
 export 'controller/index.dart';

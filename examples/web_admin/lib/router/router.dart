@@ -35,8 +35,7 @@ final router = GoRouter(
       // pageBuilder: (context, state, child) => NoTransitionPage(
       //   child: LayoutPage(child: child),
       // ),
-      builder: (context, state, navigationShell) =>
-          LayoutPage(navigationShell: navigationShell),
+      builder: (context, state, navigationShell) => LayoutPage(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           routes: [

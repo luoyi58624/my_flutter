@@ -21,6 +21,9 @@ export 'package:get/get_utils/src/queue/get_queue.dart';
 // 网络请求库
 export 'package:dio/dio.dart';
 
+// 权限处理
+export 'package:permission_handler/permission_handler.dart';
+
 // 底部弹窗库
 export 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 

@@ -19,4 +19,4 @@ export 'commons/text_highlight.dart';
 export 'cupertino/list_group.dart';
 export 'cupertino/list_tile.dart';
 
-export 'extendeds/flutter/cupertino/list_tile/list_tile.dart';
+export 'extendeds/index.dart';
