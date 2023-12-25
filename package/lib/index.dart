@@ -13,7 +13,7 @@ export 'util/index.dart';
 export 'widget/index.dart';
 
 /// 全局context，注意：请尽量不要使用全局context，除非你对BuildContext有一个清晰的认识
-BuildContext? globalContext;
+late BuildContext globalContext;
 
 /// 本地存储，它基于get_storage，该库允许你根据tag创建多个实例，例如：
 /// ```dart

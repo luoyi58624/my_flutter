@@ -372,12 +372,15 @@ class MyCupertinoApp extends StatelessWidget {
   }
 }
 
+BuildContext? _initContext;
+
 /// MaterialApp、CupertinoApp的 builder 参数，初始化全局toast、解决modal_bottom_sheet在高版本安卓系统上动画丢失问题
 TransitionBuilder initBuilder() => (context, child) {
-      globalContext ??= context;
-      if (globalContext != context) {
+      _initContext ??= context;
+      if (_initContext != context) {
         return child!;
       } else {
+        globalContext = context;
         return Overlay(
           initialEntries: [
             OverlayEntry(builder: (context) {
