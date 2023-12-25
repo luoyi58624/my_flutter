@@ -35,8 +35,8 @@ class MyRootPage extends StatelessWidget {
             itemBuilder: (context, index) => ListTile(
               onTap: () {
                 RouterUtil.to(
-                  context,
                   const ChildPage(title: '子页面'),
+                  context: context,
                   rootNavigator: true,
                 );
               },

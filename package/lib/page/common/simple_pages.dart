@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:package/index.dart';
 
 class ChildPage extends StatelessWidget {
-  const ChildPage(
-      {super.key, required this.title, this.previousPageTitle = '返回'});
+  const ChildPage({super.key, required this.title, this.previousPageTitle = '返回'});
 
   final String title;
   final String? previousPageTitle;
@@ -22,13 +21,13 @@ class ChildPage extends StatelessWidget {
           child: buildCenterColumn([
             CupertinoButton.filled(
               onPressed: () {
-                RouterUtil.to(context, ChildPage(title: title));
+                RouterUtil.to(ChildPage(title: title));
               },
               child: const Text('进入下一个子页面'),
             ),
             CupertinoButton.filled(
               onPressed: () {
-                RouterUtil.back(context);
+                RouterUtil.back();
               },
               child: const Text('返回'),
             ),
@@ -43,13 +42,13 @@ class ChildPage extends StatelessWidget {
         body: buildCenterColumn([
           ElevatedButton(
             onPressed: () {
-              RouterUtil.to(context, ChildPage(title: title));
+              RouterUtil.to(ChildPage(title: title));
             },
             child: const Text('进入下一个子页面'),
           ),
           ElevatedButton(
             onPressed: () {
-              RouterUtil.back(context);
+              RouterUtil.back();
             },
             child: const Text('返回'),
           ),

@@ -71,8 +71,7 @@ Widget buildCenterColumn(List<Widget> children) {
   );
 }
 
-Widget buildListSection(
-    BuildContext context, String title, List<NavPageModel> cellItems) {
+Widget buildListSection(BuildContext context, String title, List<NavPageModel> cellItems) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -98,7 +97,7 @@ Widget _buildCell(BuildContext context, List<NavPageModel> cellItems) {
                 title: Text(e.title),
                 trailing: const Icon(Icons.keyboard_arrow_right_outlined),
                 onTap: () {
-                  RouterUtil.to(context, e.page);
+                  RouterUtil.to(e.page, context: context);
                 },
               ),
               buildDividerWidget(),

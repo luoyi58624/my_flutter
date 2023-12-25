@@ -4,6 +4,9 @@ import 'package:flutter/services.dart';
 
 import 'package:package/index.dart';
 
+/// 第一次使用MyApp时创建的context，防止用户嵌套多个MyApp或其他顶级App时重复初始化某些内容，例如[globalNavigatorKey],[initBuilder]
+BuildContext? _initContext;
+
 /// 默认的国际化配置
 const List<LocalizationsDelegate<dynamic>> _localizationsDelegates = [
   GlobalWidgetsLocalizations.delegate,
@@ -56,7 +59,7 @@ class MyApp extends StatelessWidget {
   /// App标题，默认空
   final String title;
 
-  /// App首屏页面，注意：此选项建议用于简单App，复杂App请使用router参数
+  /// App首屏页面
   final Widget? home;
 
   /// 基于[GoRouter]的router配置，支持(路由拦截、深度链接、命名路由)等功能
@@ -172,6 +175,7 @@ class MyApp extends StatelessWidget {
         theme: theme ?? defaultTheme,
         darkTheme: darkTheme ?? themeController.buildMaterial2ThemeData(brightness: Brightness.dark),
         home: home,
+        navigatorKey: _initContext == null ? globalNavigatorKey : null,
         onGenerateRoute: onGenerateRoute,
         navigatorObservers: navigatorObservers,
         debugShowCheckedModeBanner: false,
@@ -209,6 +213,7 @@ class MyApp extends StatelessWidget {
         theme: theme ?? defaultTheme,
         darkTheme: darkTheme ?? themeController.buildMaterial3ThemeData(brightness: Brightness.dark),
         home: home,
+        navigatorKey: _initContext == null ? globalNavigatorKey : null,
         onGenerateRoute: onGenerateRoute,
         navigatorObservers: navigatorObservers,
         debugShowCheckedModeBanner: false,
@@ -349,6 +354,7 @@ class MyCupertinoApp extends StatelessWidget {
         title: title,
         theme: cupertinoTheme ?? defaultTheme,
         home: home,
+        navigatorKey: _initContext == null ? globalNavigatorKey : null,
         onGenerateRoute: onGenerateRoute,
         navigatorObservers: navigatorObservers,
         debugShowCheckedModeBanner: false,
@@ -372,15 +378,12 @@ class MyCupertinoApp extends StatelessWidget {
   }
 }
 
-BuildContext? _initContext;
-
 /// MaterialApp、CupertinoApp的 builder 参数，初始化全局toast、解决modal_bottom_sheet在高版本安卓系统上动画丢失问题
 TransitionBuilder initBuilder() => (context, child) {
       _initContext ??= context;
       if (_initContext != context) {
         return child!;
       } else {
-        globalContext = context;
         return Overlay(
           initialEntries: [
             OverlayEntry(builder: (context) {

@@ -38,8 +38,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
                 image: DecorationImage(
                   image: const AssetImage('assets/images/home_bg.png'),
                   fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                      Colors.grey.withOpacity(0.8), BlendMode.hardLight),
+                  colorFilter: ColorFilter.mode(Colors.grey.withOpacity(0.8), BlendMode.hardLight),
                 ),
               ),
             ),
@@ -48,10 +47,9 @@ class _HomeRootPageState extends State<HomeRootPage> {
               children: cellNames
                   .map((e) => ListTile(
                         title: Text(e.title),
-                        trailing:
-                            const Icon(Icons.keyboard_arrow_right_outlined),
+                        trailing: const Icon(Icons.keyboard_arrow_right_outlined),
                         onTap: () {
-                          RouterUtil.to(context, e.page);
+                          RouterUtil.to(e.page, context: context);
                         },
                       ))
                   .toList(),
@@ -74,8 +72,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
               //         : null,
               //   ),
               // ),
-              background:
-                  Image.asset("assets/images/home_bg.png", fit: BoxFit.fill),
+              background: Image.asset("assets/images/home_bg.png", fit: BoxFit.fill),
               collapseMode: CollapseMode.pin,
             ),
             expandedHeight: 200,
@@ -108,8 +105,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
                     child: Text('CupertinoApp'),
                   ),
                   const PopupMenuItem(
-                    child: Text(
-                        '重启App                                                                                   '),
+                    child: Text('重启App                                                                                   '),
                   ),
                 ],
               ),
@@ -120,7 +116,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
             itemBuilder: (context, index) => ListTile(
               onTap: () {
                 // RouterUtil.to(ChildPage(title: '子页面：${index + 1}'));
-                RouterUtil.to(context, const _ChildPage2());
+                RouterUtil.to(const _ChildPage2(), context: context);
               },
               title: Text('列表 - ${index + 1}'),
             ),

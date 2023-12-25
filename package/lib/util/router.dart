@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:package/controller/index.dart';
+import 'package:package/index.dart';
 
 class RouterUtil {
   RouterUtil._();
 
   /// 跳转到新页面
   static Future<T?> to<T>(
-    BuildContext context,
     Widget page, {
+    BuildContext? context,
     bool rootNavigator = false,
     bool fullscreenDialog = false,
     bool noTransition = false,
@@ -17,7 +17,7 @@ class RouterUtil {
   }) async {
     if (noTransition) {
       return await Navigator.of(
-        context,
+        context ?? globalContext,
         rootNavigator: rootNavigator,
       ).push(
         PageRouteBuilder(
@@ -29,7 +29,7 @@ class RouterUtil {
     } else {
       if (forceMaterial) {
         return await Navigator.of(
-          context,
+          context ?? globalContext,
           rootNavigator: rootNavigator,
         ).push<T>(MaterialPageRoute(
           builder: (context) => page,
@@ -38,7 +38,7 @@ class RouterUtil {
       }
       if (forceCupertino) {
         return await Navigator.of(
-          context,
+          context ?? globalContext,
           rootNavigator: rootNavigator,
         ).push<T>(CupertinoPageRoute(
           builder: (context) => page,
@@ -47,7 +47,7 @@ class RouterUtil {
       }
       if (ThemeController.of.appType.value == AppType.cupertino.name) {
         return await Navigator.of(
-          context,
+          context ?? globalContext,
           rootNavigator: rootNavigator,
         ).push<T>(CupertinoPageRoute(
           builder: (context) => page,
@@ -55,7 +55,7 @@ class RouterUtil {
         ));
       } else {
         return await Navigator.of(
-          context,
+          context ?? globalContext,
           rootNavigator: rootNavigator,
         ).push<T>(MaterialPageRoute(
           builder: (context) => page,
@@ -66,26 +66,26 @@ class RouterUtil {
   }
 
   /// 返回上一页
-  static void back<T>(
-    BuildContext context, {
+  static void back<T>({
+    BuildContext? context,
     T? data,
     int backNum = 1,
   }) async {
     for (int i = 0; i < backNum; i++) {
-      Navigator.of(context).pop(data);
+      Navigator.of(context ?? globalContext).pop(data);
     }
   }
 
   /// 重定向页面，先跳转新页面，再删除之前的页面
   static Future<T?> redirect<T>(
-    BuildContext context,
     Widget page, {
+    BuildContext? context,
     bool rootNavigator = false,
     bool fullscreenDialog = false,
     RouteSettings? settings,
   }) async {
     return await Navigator.of(
-      context,
+      context ?? globalContext,
       rootNavigator: rootNavigator,
     ).pushReplacement(CupertinoPageRoute(
       builder: (context) => page,
@@ -101,12 +101,12 @@ class RouterUtil {
   /// 当然，一般app有多个tabbar页面，它们都属于根页面，你若要指定tabbar页面还需要自己做处理，
   /// 你可以使用 "事件总线" 或者 "全局状态"。
   static void pushUntil(
-    BuildContext context,
     Widget page,
     String routePath, {
+    BuildContext? context,
     RouteSettings? settings,
   }) async {
-    Navigator.of(context).pushAndRemoveUntil(
+    Navigator.of(context ?? globalContext).pushAndRemoveUntil(
       CupertinoPageRoute(
         builder: (context) => page,
         settings: settings,
@@ -116,15 +116,21 @@ class RouterUtil {
   }
 
   /// 原理和pushUntil一样，只不过这是退出到指定位置
-  static void popUntil(BuildContext context, String routePath) async {
-    Navigator.of(context).popUntil(
+  static void popUntil(
+    String routePath, {
+    BuildContext? context,
+  }) async {
+    Navigator.of(context ?? globalContext).popUntil(
       ModalRoute.withName(routePath),
     );
   }
 
   /// 进入新的页面并删除之前所有路
-  static void pushAndPopAll(BuildContext context, Widget page) async {
-    Navigator.of(context).pushAndRemoveUntil(
+  static void pushAndPopAll(
+    Widget page, {
+    BuildContext? context,
+  }) async {
+    Navigator.of(context ?? globalContext).pushAndRemoveUntil(
       CupertinoPageRoute(
         builder: (context) => page,
       ),

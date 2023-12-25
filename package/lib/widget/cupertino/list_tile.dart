@@ -59,7 +59,7 @@ class MyCupertinoListTile extends StatelessWidget {
               if (onTap != null) {
                 onTap!();
               } else {
-                RouterUtil.to(context, page!);
+                RouterUtil.to(page!, context: context);
               }
             },
       leading: leading,
@@ -69,9 +69,7 @@ class MyCupertinoListTile extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       additionalInfo: additionalInfo,
-      trailing: disabledTrailing
-          ? null
-          : trailing ?? const CupertinoListTileChevron(),
+      trailing: disabledTrailing ? null : trailing ?? const CupertinoListTileChevron(),
     );
   }
 }

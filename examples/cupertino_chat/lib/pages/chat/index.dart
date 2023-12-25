@@ -119,7 +119,7 @@ class _ChatItemState extends State<_ChatItem> {
             }
           },
         );
-        RouterUtil.to(context, ChatItemPage(chatModel: widget.chatModel));
+        RouterUtil.to(ChatItemPage(chatModel: widget.chatModel), context: context);
       },
       onTapCancel: () {
         setState(() {
@@ -138,7 +138,7 @@ class _ChatItemState extends State<_ChatItem> {
             : CupertinoTheme.of(context).scaffoldBackgroundColor,
         child: Row(
           children: [
-            ImageWidget.circle(url: widget.chatModel.face, size: 24),
+            ImageWidget.circle(url: widget.chatModel.face, size: 36),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
