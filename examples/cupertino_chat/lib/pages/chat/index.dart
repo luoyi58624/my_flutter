@@ -12,8 +12,7 @@ class ChatModel {
   final String sendTime;
   final int unReadNum;
 
-  ChatModel(this.username, this.face, this.chatContent, this.sendTime,
-      this.unReadNum);
+  ChatModel(this.username, this.face, this.chatContent, this.sendTime, this.unReadNum);
 }
 
 class ChatRootPage extends StatefulWidget {
@@ -30,11 +29,7 @@ class _ChatRootPageState extends State<ChatRootPage> {
       faker.person.name(),
       faker.image.image(random: true),
       faker.lorem.sentence(),
-      CommonUtil.formatDate(
-          faker.date
-              .dateTime(minYear: 2023, maxYear: 2023)
-              .millisecondsSinceEpoch,
-          format: 'HH:mm'),
+      CommonUtil.formatDate(faker.date.dateTime(minYear: 2023, maxYear: 2023).millisecondsSinceEpoch, format: 'HH:mm'),
       Random().nextInt(99) - 50,
     ),
   ).toList();
@@ -55,14 +50,12 @@ class _ChatRootPageState extends State<ChatRootPage> {
                     children: [
                       CupertinoButton(
                         padding: EdgeInsets.zero,
-                        child: const Icon(
-                            IconData(0xe660, fontFamily: 'iconfont')),
+                        child: const Icon(IconData(0xe660, fontFamily: 'iconfont')),
                         onPressed: () {},
                       ),
                       CupertinoButton(
                         padding: EdgeInsets.zero,
-                        child: const Icon(
-                            IconData(0xe66e, fontFamily: 'iconfont')),
+                        child: const Icon(IconData(0xe66e, fontFamily: 'iconfont')),
                         onPressed: () {},
                       ),
                     ],
@@ -145,7 +138,7 @@ class _ChatItemState extends State<_ChatItem> {
             : CupertinoTheme.of(context).scaffoldBackgroundColor,
         child: Row(
           children: [
-            ImageWidget.circle(widget.chatModel.face, 24),
+            ImageWidget.circle(url: widget.chatModel.face, size: 24),
             const SizedBox(width: 12),
             Expanded(
               child: Column(

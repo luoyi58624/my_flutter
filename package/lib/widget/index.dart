@@ -4,7 +4,7 @@ export 'commons/exit_intercept.dart';
 export 'commons/flex_wrap.dart';
 export 'commons/flexible_title.dart';
 export 'commons/hide_keybord.dart';
-export 'commons/image/image.dart';
+export 'commons/image.dart';
 export 'commons/index_list.dart';
 export 'commons/loading.dart';
 export 'commons/restart_app.dart';

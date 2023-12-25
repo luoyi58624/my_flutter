@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package/index.dart';
 
-import 'image2.dart';
-
 const String imageUrl = 'https://images.pexels.com/photos/2286895/pexels-photo-2286895.jpeg';
 
 class ImageTestPage extends StatefulWidget {
@@ -21,11 +19,11 @@ class _ImageTestPageState extends State<ImageTestPage> {
       ),
       body: buildCenterColumn([
         const ImageWidget(
-          imageUrl,
+          url: imageUrl,
           width: 64,
           height: 64,
         ),
-        const ImageWidget.circle(imageUrl, 64),
+        const ImageWidget.circle(url: imageUrl, size: 64),
       ]),
     );
   }

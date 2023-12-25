@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:package/index.dart';
 
+const String imageUrl = 'https://images.pexels.com/photos/2286895/pexels-photo-2286895.jpeg';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -22,6 +24,35 @@ class _HomePageState extends State<HomePage> {
             child: const Text('首页'),
           ),
           Text(demo(context).toString()),
+          ElevatedButton(
+            onPressed: () {
+              ToastUtil.showToast('hello');
+            },
+            child: const Text('Toast'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              ToastUtil.showSuccessToast('hello');
+            },
+            child: const Text('Success Toast'),
+          ),
+          Image.network(imageUrl),
+          const ImageWidget.circle(
+            url: imageUrl,
+            size: 64,
+          ),
+          const ImageWidget(
+            url: imageUrl,
+            width: 64,
+            height: 64,
+            // fit: BoxFit.contain,
+          ),
+          ImageWidget.circle(
+            file: 'D://',
+          ),
+          ImageWidget(
+            file: 'D://',
+          ),
         ],
       ),
     );
