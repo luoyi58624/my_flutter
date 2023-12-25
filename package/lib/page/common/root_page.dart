@@ -86,13 +86,13 @@ class _RootPageState extends State<_RootPage> {
     return ExitInterceptWidget(
       child: Scaffold(
         body: widget.navigationShell,
-        bottomNavigationBar: ThemeController.of.appType.value == AppType.material.name ? navigationBar2 : cupertinoNavigationBar,
+        bottomNavigationBar: ThemeController.of.appType.value == AppType.material.name ? material2Tabbar : cupertinoTabbar,
       ),
     );
   }
 
-  /// material2风格的底部导航栏
-  Widget get navigationBar2 => BottomNavigationBar(
+  /// material2底部导航栏
+  Widget get material2Tabbar => BottomNavigationBar(
         onTap: (int index) {
           setState(() {
             widget.navigationShell.goBranch(index);
@@ -123,7 +123,40 @@ class _RootPageState extends State<_RootPage> {
             .toList(),
       );
 
-  Widget get cupertinoNavigationBar => CupertinoTabBar(
+  /// material3底部导航栏
+  Widget get material3Tabbar => BottomNavigationBar(
+        onTap: (int index) {
+          setState(() {
+            widget.navigationShell.goBranch(index);
+          });
+        },
+        currentIndex: widget.navigationShell.currentIndex,
+        unselectedFontSize: 12,
+        selectedFontSize: 12,
+        iconSize: 26,
+        unselectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+        selectedItemColor: ThemeController.of.primaryColor.value,
+        selectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.w900,
+        ),
+        type: BottomNavigationBarType.fixed,
+        items: widget.pages
+            .map((e) => BottomNavigationBarItem(
+                  icon: Obx(
+                    () => BadgeWidget(
+                      bagde: controller.badge.value[e.path],
+                      child: Icon(e.icon),
+                    ),
+                  ),
+                  label: e.title,
+                ))
+            .toList(),
+      );
+
+  /// cupertino底部导航栏
+  Widget get cupertinoTabbar => CupertinoTabBar(
         onTap: (index) {
           setState(() {
             widget.navigationShell.goBranch(index);
