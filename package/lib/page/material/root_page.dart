@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:package/index.dart';
@@ -85,7 +86,7 @@ class _RootPageState extends State<_RootPage> {
     return ExitInterceptWidget(
       child: Scaffold(
         body: widget.navigationShell,
-        bottomNavigationBar: navigationBar2,
+        bottomNavigationBar: ThemeController.of.appType.value == AppType.material.name ? navigationBar2 : cupertinoNavigationBar,
       ),
     );
   }
@@ -104,7 +105,7 @@ class _RootPageState extends State<_RootPage> {
         unselectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
-        selectedItemColor: Theme.of(context).colorScheme.primary,
+        selectedItemColor: ThemeController.of.primaryColor.value,
         selectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.w900,
         ),
@@ -118,6 +119,22 @@ class _RootPageState extends State<_RootPage> {
                     ),
                   ),
                   label: e.title,
+                ))
+            .toList(),
+      );
+
+  Widget get cupertinoNavigationBar => CupertinoTabBar(
+        onTap: (index) {
+          setState(() {
+            widget.navigationShell.goBranch(index);
+          });
+        },
+        currentIndex: widget.navigationShell.currentIndex,
+        iconSize: 26,
+        items: widget.pages
+            .map((e) => BottomNavigationBarItem(
+                  label: e.title,
+                  icon: Icon(e.icon),
                 ))
             .toList(),
       );

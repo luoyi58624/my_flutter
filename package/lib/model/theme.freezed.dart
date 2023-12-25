@@ -23,6 +23,7 @@ mixin _$ThemeModel {
   Color? get infoColor => throw _privateConstructorUsedError;
   bool? get useMaterial3 => throw _privateConstructorUsedError;
   bool? get useDark => throw _privateConstructorUsedError;
+  bool? get textBold => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ThemeModelCopyWith<ThemeModel> get copyWith =>
@@ -42,7 +43,8 @@ abstract class $ThemeModelCopyWith<$Res> {
       Color? errorColor,
       Color? infoColor,
       bool? useMaterial3,
-      bool? useDark});
+      bool? useDark,
+      bool? textBold});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$ThemeModelCopyWithImpl<$Res, $Val extends ThemeModel>
     Object? infoColor = freezed,
     Object? useMaterial3 = freezed,
     Object? useDark = freezed,
+    Object? textBold = freezed,
   }) {
     return _then(_value.copyWith(
       primaryColor: freezed == primaryColor
@@ -95,6 +98,10 @@ class _$ThemeModelCopyWithImpl<$Res, $Val extends ThemeModel>
           ? _value.useDark
           : useDark // ignore: cast_nullable_to_non_nullable
               as bool?,
+      textBold: freezed == textBold
+          ? _value.textBold
+          : textBold // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -114,7 +121,8 @@ abstract class _$$ThemeModelImplCopyWith<$Res>
       Color? errorColor,
       Color? infoColor,
       bool? useMaterial3,
-      bool? useDark});
+      bool? useDark,
+      bool? textBold});
 }
 
 /// @nodoc
@@ -135,6 +143,7 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
     Object? infoColor = freezed,
     Object? useMaterial3 = freezed,
     Object? useDark = freezed,
+    Object? textBold = freezed,
   }) {
     return _then(_$ThemeModelImpl(
       primaryColor: freezed == primaryColor
@@ -165,6 +174,10 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
           ? _value.useDark
           : useDark // ignore: cast_nullable_to_non_nullable
               as bool?,
+      textBold: freezed == textBold
+          ? _value.textBold
+          : textBold // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -179,7 +192,8 @@ class _$ThemeModelImpl implements _ThemeModel {
       this.errorColor,
       this.infoColor,
       this.useMaterial3,
-      this.useDark});
+      this.useDark,
+      this.textBold});
 
   @override
   final Color? primaryColor;
@@ -195,10 +209,12 @@ class _$ThemeModelImpl implements _ThemeModel {
   final bool? useMaterial3;
   @override
   final bool? useDark;
+  @override
+  final bool? textBold;
 
   @override
   String toString() {
-    return 'ThemeModel(primaryColor: $primaryColor, successColor: $successColor, warningColor: $warningColor, errorColor: $errorColor, infoColor: $infoColor, useMaterial3: $useMaterial3, useDark: $useDark)';
+    return 'ThemeModel(primaryColor: $primaryColor, successColor: $successColor, warningColor: $warningColor, errorColor: $errorColor, infoColor: $infoColor, useMaterial3: $useMaterial3, useDark: $useDark, textBold: $textBold)';
   }
 
   @override
@@ -218,12 +234,14 @@ class _$ThemeModelImpl implements _ThemeModel {
                 other.infoColor == infoColor) &&
             (identical(other.useMaterial3, useMaterial3) ||
                 other.useMaterial3 == useMaterial3) &&
-            (identical(other.useDark, useDark) || other.useDark == useDark));
+            (identical(other.useDark, useDark) || other.useDark == useDark) &&
+            (identical(other.textBold, textBold) ||
+                other.textBold == textBold));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, primaryColor, successColor,
-      warningColor, errorColor, infoColor, useMaterial3, useDark);
+      warningColor, errorColor, infoColor, useMaterial3, useDark, textBold);
 
   @JsonKey(ignore: true)
   @override
@@ -240,7 +258,8 @@ abstract class _ThemeModel implements ThemeModel {
       final Color? errorColor,
       final Color? infoColor,
       final bool? useMaterial3,
-      final bool? useDark}) = _$ThemeModelImpl;
+      final bool? useDark,
+      final bool? textBold}) = _$ThemeModelImpl;
 
   @override
   Color? get primaryColor;
@@ -256,6 +275,8 @@ abstract class _ThemeModel implements ThemeModel {
   bool? get useMaterial3;
   @override
   bool? get useDark;
+  @override
+  bool? get textBold;
   @override
   @JsonKey(ignore: true)
   _$$ThemeModelImplCopyWith<_$ThemeModelImpl> get copyWith =>

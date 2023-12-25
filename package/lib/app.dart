@@ -25,22 +25,6 @@ class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
     this.title = '',
-    this.home,
-    this.theme,
-    this.darkTheme,
-    this.onGenerateRoute,
-    this.navigatorObservers = const <NavigatorObserver>[],
-    this.localizationsDelegates,
-    this.supportedLocales,
-    this.onlyHorizontalMode = false,
-    this.onlyVerticalMode = false,
-    this.translucenceStatusBar = true,
-    this.locale = const Locale('zh', 'CN'),
-  }) : router = null;
-
-  const MyApp.router({
-    super.key,
-    this.title = '',
     required this.router,
     this.theme,
     this.darkTheme,
@@ -50,17 +34,31 @@ class MyApp extends StatelessWidget {
     this.onlyVerticalMode = false,
     this.translucenceStatusBar = true,
     this.locale = const Locale('zh', 'CN'),
-  })  : home = null,
-        onGenerateRoute = null,
-        navigatorObservers = const <NavigatorObserver>[];
+  })  : _appType = AppType.material,
+        cupertinoTheme = null;
+
+  /// 以[CupertinoApp]构建应用程序
+  const MyApp.cupertino({
+    super.key,
+    this.title = '',
+    required this.router,
+    this.cupertinoTheme,
+    this.localizationsDelegates,
+    this.supportedLocales,
+    this.onlyHorizontalMode = false,
+    this.onlyVerticalMode = false,
+    this.translucenceStatusBar = true,
+    this.locale = const Locale('zh', 'CN'),
+  })  : _appType = AppType.cupertino,
+        theme = null,
+        darkTheme = null;
+
+  final AppType _appType;
 
   /// App标题，默认空
   final String title;
 
-  /// App首屏页面
-  final Widget? home;
-
-  /// 基于[GoRouter]的router配置，支持(路由拦截、深度链接、命名路由)等功能
+  /// 基于[GoRouter]的router配置
   final GoRouter? router;
 
   /// Material亮色主题
@@ -83,11 +81,8 @@ class MyApp extends StatelessWidget {
   /// ```
   final ThemeData? darkTheme;
 
-  /// 自定义生成首屏页，此选项一般用于拦截用户是否登录
-  final RouteFactory? onGenerateRoute;
-
-  /// 监听路由跳转
-  final List<NavigatorObserver> navigatorObservers;
+  /// cupertino主题
+  final CupertinoThemeData? cupertinoTheme;
 
   /// 国际化配置，你传入的新配置将合并至默认配置，默认配置为：
   /// ```dart
@@ -123,7 +118,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    themeController.appType.value = AppType.material.name;
+    themeController.appType.value = _appType.name;
     themeController.translucenceStatusBar.value = translucenceStatusBar;
 
     if (onlyHorizontalMode) {
@@ -141,234 +136,34 @@ class MyApp extends StatelessWidget {
 
     var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
     var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
-    return Obx(() {
-      return themeController.useMaterial3.value
-          ? buildMaterial3App(
-              context,
-              localizationsDelegates: $localizationsDelegates,
-              supportedLocales: $supportedLocales,
-            )
-          : buildMaterial2App(
-              context,
-              localizationsDelegates: $localizationsDelegates,
-              supportedLocales: $supportedLocales,
-            );
-    });
-  }
-
-  Widget buildMaterial2App(
-    BuildContext context, {
-    required Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates,
-    required Iterable<Locale> supportedLocales,
-  }) {
-    translucenceStatusBar ? themeController.showTranslucenceStatusBar() : themeController.hideTranslucenceStatusBar();
-    final defaultTheme =
-        themeController.buildMaterial2ThemeData(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light);
-    if (router != null) {
-      return MaterialApp.router(
-        title: title,
-        theme: theme ?? defaultTheme,
-        darkTheme: darkTheme ?? themeController.buildMaterial2ThemeData(brightness: Brightness.dark),
-        routerConfig: router,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: localizationsDelegates,
-        supportedLocales: supportedLocales,
-        locale: locale,
-        builder: initBuilder(),
-      );
-    } else {
-      return MaterialApp(
-        title: title,
-        theme: theme ?? defaultTheme,
-        darkTheme: darkTheme ?? themeController.buildMaterial2ThemeData(brightness: Brightness.dark),
-        home: home,
-        navigatorKey: _initContext == null ? globalNavigatorKey : null,
-        onGenerateRoute: onGenerateRoute,
-        navigatorObservers: navigatorObservers,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: localizationsDelegates,
-        supportedLocales: supportedLocales,
-        locale: locale,
-        builder: initBuilder(),
-      );
-    }
-  }
-
-  Widget buildMaterial3App(
-    BuildContext context, {
-    required Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates,
-    required Iterable<Locale> supportedLocales,
-  }) {
-    themeController.hideTranslucenceStatusBar();
-    final defaultTheme =
-        themeController.buildMaterial3ThemeData(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light);
-    if (router != null) {
-      return MaterialApp.router(
-        title: title,
-        theme: theme ?? defaultTheme,
-        darkTheme: darkTheme ?? themeController.buildMaterial3ThemeData(brightness: Brightness.dark),
-        routerConfig: router,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: localizationsDelegates,
-        supportedLocales: supportedLocales,
-        locale: locale,
-        builder: initBuilder(),
-      );
-    } else {
-      return MaterialApp(
-        title: title,
-        theme: theme ?? defaultTheme,
-        darkTheme: darkTheme ?? themeController.buildMaterial3ThemeData(brightness: Brightness.dark),
-        home: home,
-        navigatorKey: _initContext == null ? globalNavigatorKey : null,
-        onGenerateRoute: onGenerateRoute,
-        navigatorObservers: navigatorObservers,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: localizationsDelegates,
-        supportedLocales: supportedLocales,
-        locale: locale,
-        builder: initBuilder(),
-      );
-    }
-  }
-}
-
-class MyCupertinoApp extends StatelessWidget {
-  const MyCupertinoApp({
-    super.key,
-    required this.home,
-    this.title = '',
-    this.cupertinoTheme,
-    this.onGenerateRoute,
-    this.navigatorObservers = const <NavigatorObserver>[],
-    this.localizationsDelegates,
-    this.supportedLocales,
-    this.onlyHorizontalMode = false,
-    this.onlyVerticalMode = false,
-    this.locale = const Locale('zh', 'CN'),
-  }) : router = null;
-
-  const MyCupertinoApp.router({
-    super.key,
-    required this.router,
-    this.title = '',
-    this.cupertinoTheme,
-    this.localizationsDelegates,
-    this.supportedLocales,
-    this.onlyHorizontalMode = false,
-    this.onlyVerticalMode = false,
-    this.locale = const Locale('zh', 'CN'),
-  })  : home = null,
-        onGenerateRoute = null,
-        navigatorObservers = const <NavigatorObserver>[];
-
-  /// App标题，默认空
-  final String title;
-
-  /// App首屏页面，注意：此选项建议用于简单App，复杂App请使用router参数
-  final Widget? home;
-
-  /// 基于[GoRouter]的router配置，支持(路由拦截、深度链接、命名路由)等功能
-  final GoRouter? router;
-
-  /// ios主题
-  final CupertinoThemeData? cupertinoTheme;
-
-  /// 自定义生成首屏页，此选项一般用于拦截用户是否登录
-  final RouteFactory? onGenerateRoute;
-
-  /// 监听路由跳转
-  final List<NavigatorObserver> navigatorObservers;
-
-  /// 国际化配置，你传入的新配置将合并至默认配置，默认配置为：
-  /// ```dart
-  /// [
-  ///  GlobalWidgetsLocalizations.delegate,
-  ///  GlobalMaterialLocalizations.delegate,
-  ///  GlobalCupertinoLocalizations.delegate,
-  /// ]
-  /// ```
-  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
-
-  /// 支持的语言数组，你传入的新配置将合并至默认配置，默认配置为：
-  /// ```dart
-  /// [
-  ///   Locale('zh', 'CH'),
-  ///   Locale('en', 'US'),
-  /// ]
-  final Iterable<Locale>? supportedLocales;
-
-  /// 默认的语言，默认为：const Locale('zh', 'CN')
-  final Locale locale;
-
-  /// 是否只允许横屏展示
-  final bool onlyHorizontalMode;
-
-  /// 是否只允许竖屏展示
-  final bool onlyVerticalMode;
-
-  ThemeController get themeController => Get.find();
-
-  @override
-  Widget build(BuildContext context) {
-    themeController.appType.value = AppType.cupertino.name;
-    if (onlyHorizontalMode) {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-    }
-    if (onlyVerticalMode) {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-    }
-
-    var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
-    var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
-    return Obx(() {
-      return buildCupertinoApp(
-        context,
-        localizationsDelegates: $localizationsDelegates,
-        supportedLocales: $supportedLocales,
-      );
-    });
-  }
-
-  Widget buildCupertinoApp(
-    BuildContext context, {
-    required Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates,
-    required Iterable<Locale> supportedLocales,
-  }) {
-    themeController.hideTranslucenceStatusBar();
-    final defaultTheme =
-        themeController.buildCupertinoTheme(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light);
-    if (router != null) {
-      return CupertinoApp.router(
-        title: title,
-        theme: cupertinoTheme ?? defaultTheme,
-        routerConfig: router,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: localizationsDelegates,
-        supportedLocales: supportedLocales,
-        locale: locale,
-        builder: initBuilder(),
-      );
-    } else {
-      return CupertinoApp(
-        title: title,
-        theme: cupertinoTheme ?? defaultTheme,
-        home: home,
-        navigatorKey: _initContext == null ? globalNavigatorKey : null,
-        onGenerateRoute: onGenerateRoute,
-        navigatorObservers: navigatorObservers,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: localizationsDelegates,
-        supportedLocales: supportedLocales,
-        locale: locale,
-        builder: initBuilder(),
-      );
+    switch (_appType) {
+      case AppType.material:
+        return MaterialApp.router(
+          title: title,
+          theme: theme ??
+              themeController.buildMaterialThemeData(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light),
+          darkTheme: darkTheme,
+          routerConfig: router,
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: $localizationsDelegates,
+          supportedLocales: $supportedLocales,
+          locale: locale,
+          builder: initBuilder(),
+        );
+      case AppType.cupertino:
+        return CupertinoApp.router(
+          title: title,
+          theme: cupertinoTheme ??
+              themeController.buildCupertinoTheme(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light),
+          routerConfig: router,
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: $localizationsDelegates,
+          supportedLocales: $supportedLocales,
+          locale: locale,
+          builder: initBuilder(),
+        );
+      default:
+        throw Exception('未知App - ${_appType.name}');
     }
   }
 }

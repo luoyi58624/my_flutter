@@ -28,9 +28,9 @@ BuildContext get globalContext => globalNavigatorKey.currentContext!;
 late LocalStorage localStorage;
 
 /// 初始化
-/// * theme 自定义主题
+/// * themeModel 自定义主题，你也可以直接通过ThemeController.of修改主题
 Future<void> initMyFlutter({
-  ThemeModel? themeModel, // 初始化主题模型
+  ThemeModel? themeModel,
 }) async {
   // 取消验证ssl证书
   if (!kIsWeb) HttpOverrides.global = GlobalHttpOverrides();

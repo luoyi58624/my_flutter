@@ -5,21 +5,25 @@ import 'root_page/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initMyFlutter(themeModel: const ThemeModel(useMaterial3: false));
+  await initMyFlutter(themeModel: const ThemeModel(useMaterial3: false, textBold: true));
   runApp(const RestartAppWidget(child: _MyApp()));
 }
+
+final router = GoRouter(
+  routes: [
+    createRootPage(materialRootPages),
+  ],
+);
 
 class _MyApp extends StatelessWidget {
   const _MyApp();
 
   @override
   Widget build(BuildContext context) {
-    return MyApp.router(
-      router: GoRouter(
-        routes: [
-          createRootPage(materialRootPages),
-        ],
-      ),
-    );
+    return Obx(() {
+      return MyApp(
+        router: router,
+      );
+    });
   }
 }

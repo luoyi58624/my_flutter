@@ -41,6 +41,7 @@ class ThemeController extends GetxController {
     infoColor = useLocalObs(_?.infoColor ?? _infoColor, 'infoColor');
     useMaterial3 = useLocalObs(_?.useMaterial3 ?? true, 'useMaterial3');
     useDark = useLocalObs(_?.useDark ?? false, 'useDark');
+    textBold = (_?.textBold ?? false).obs;
   }
 
   /// app构建类型
@@ -67,65 +68,65 @@ class ThemeController extends GetxController {
   /// 是否使用黑暗模式
   late final Rx<bool> useDark;
 
+  /// 文字是否全局加粗，若为true，基础字重将从400->500，它可以改善某些安卓设备的观感。
+  late final Rx<bool> textBold;
+
   /// 当主题是material2时，是否显示半透明状态栏
   final translucenceStatusBar = useLocalObs(false, 'translucenceStatusBar');
 
-  /// 文字是否全局加粗，默认情况下，只有material2类型App同时设备为安卓才会以较粗的文本展示(400->500)，这样会提升观感
-  final textBold = useLocalObs(false, 'textBold');
-
-  /// 构建material2主题
-  ThemeData buildMaterial2ThemeData({
-    Brightness? brightness, // 强制指定亮色主题或黑色主题
-  }) {
-    return ThemeData(
-      useMaterial3: false,
-      textTheme: textBold.value ? _materialBoldTextTheme : null,
-      brightness: brightness,
-      // 指定material2的主题颜色
-      primarySwatch: ColorUtil.createMaterialColor(primaryColor.value),
-      splashFactory: InkRipple.splashFactory,
-      appBarTheme: AppBarTheme(
-        titleTextStyle: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: ColorUtil.isDark(primaryColor.value) ? Colors.white : Colors.black,
-        ),
-        actionsIconTheme: IconThemeData(
-          color: ColorUtil.isDark(primaryColor.value) ? Colors.white : Colors.black,
-        ),
-        foregroundColor: ColorUtil.isDark(primaryColor.value) ? Colors.white : Colors.black,
-      ),
-    );
-  }
-
-  /// 构建material3主题
-  ThemeData buildMaterial3ThemeData({
+  /// 构建material主题
+  ThemeData buildMaterialThemeData({
     Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
   }) {
-    return ThemeData(
-      useMaterial3: true,
-      textTheme: textBold.value ? _materialBoldTextTheme : null,
-      // 根据主题色创建material3的主题系统
-      colorScheme: ColorScheme.fromSeed(
-        brightness: brightness,
-        seedColor: primaryColor.value,
-      ),
-      splashFactory: InkRipple.splashFactory,
-      cardTheme: const CardTheme(
-        surfaceTintColor: Colors.transparent,
-      ),
-      inputDecorationTheme: const InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+    if (useMaterial3.value) {
+      hideTranslucenceStatusBar();
+      return ThemeData(
+        useMaterial3: true,
+        textTheme: textBold.value ? _materialBoldTextTheme : null,
+        // 根据主题色创建material3的主题系统
+        colorScheme: ColorScheme.fromSeed(
+          brightness: brightness,
+          seedColor: primaryColor.value,
         ),
-      ),
-    );
+        splashFactory: InkRipple.splashFactory,
+        cardTheme: const CardTheme(
+          surfaceTintColor: Colors.transparent,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+        ),
+      );
+    } else {
+      translucenceStatusBar.value ? showTranslucenceStatusBar() : hideTranslucenceStatusBar();
+      return ThemeData(
+        useMaterial3: false,
+        textTheme: textBold.value ? _materialBoldTextTheme : null,
+        brightness: brightness,
+        // 指定material2的主题颜色
+        primarySwatch: ColorUtil.createMaterialColor(primaryColor.value),
+        splashFactory: InkRipple.splashFactory,
+        appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: ColorUtil.isDark(primaryColor.value) ? Colors.white : Colors.black,
+          ),
+          actionsIconTheme: IconThemeData(
+            color: ColorUtil.isDark(primaryColor.value) ? Colors.white : Colors.black,
+          ),
+          foregroundColor: ColorUtil.isDark(primaryColor.value) ? Colors.white : Colors.black,
+        ),
+      );
+    }
   }
 
   /// 构建cupertino主题
   CupertinoThemeData buildCupertinoTheme({
     Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
   }) {
+    hideTranslucenceStatusBar();
     var textTheme = const CupertinoThemeData().textTheme;
     return CupertinoThemeData(
       primaryColor: primaryColor.value,

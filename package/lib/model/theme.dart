@@ -14,5 +14,6 @@ class ThemeModel with _$ThemeModel {
     Color? infoColor,
     bool? useMaterial3,
     bool? useDark,
+    bool? textBold,
   }) = _ThemeModel;
 }

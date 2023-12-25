@@ -16,9 +16,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyApp.router(
+    return MyApp(
       router: router,
-      theme: ThemeController.of.buildMaterial3ThemeData(
+      theme: ThemeController.of.buildMaterialThemeData(
         brightness: Brightness.dark,
       ),
     );
