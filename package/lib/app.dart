@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:package/index.dart';
 
@@ -31,9 +30,6 @@ class MyApp extends StatelessWidget {
     this.navigatorObservers = const <NavigatorObserver>[],
     this.localizationsDelegates,
     this.supportedLocales,
-    this.onlyHorizontalMode = false,
-    this.onlyVerticalMode = false,
-    this.translucenceStatusBar = false,
     this.locale = const Locale('zh', 'CN'),
   });
 
@@ -76,52 +72,26 @@ class MyApp extends StatelessWidget {
   /// 默认的语言，默认为：const Locale('zh', 'CN')
   final Locale locale;
 
-  /// 是否只允许横屏展示
-  final bool onlyHorizontalMode;
-
-  /// 是否只允许竖屏展示
-  final bool onlyVerticalMode;
-
-  /// material2主题是否显示半透明状态栏
-  final bool translucenceStatusBar;
-
   ThemeController get themeController => Get.find();
 
   @override
   Widget build(BuildContext context) {
-    themeController.translucenceStatusBar.value = translucenceStatusBar;
-    if (onlyHorizontalMode) {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-    }
-    if (onlyVerticalMode) {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-    }
-
     var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
     var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
-    return Obx(() {
-      return MaterialApp(
-        title: title,
-        home: home,
-        onGenerateRoute: onGenerateRoute,
-        navigatorObservers: navigatorObservers,
-        navigatorKey: globalNavigatorKey,
-        theme:
-            theme ?? themeController.buildMaterialThemeData(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light),
-        darkTheme: darkTheme,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: $localizationsDelegates,
-        supportedLocales: $supportedLocales,
-        locale: locale,
-        builder: initBuilder(),
-      );
-    });
+    return MaterialApp(
+      title: title,
+      home: home,
+      onGenerateRoute: onGenerateRoute,
+      navigatorObservers: navigatorObservers,
+      navigatorKey: globalNavigatorKey,
+      theme: theme ?? themeController.buildMaterialThemeData(),
+      darkTheme: darkTheme,
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: $localizationsDelegates,
+      supportedLocales: $supportedLocales,
+      locale: locale,
+      builder: initBuilder(),
+    );
   }
 }
 

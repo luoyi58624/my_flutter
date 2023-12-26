@@ -11,25 +11,6 @@ class MyRootPage extends StatelessWidget {
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          CupertinoSliverNavigationBar(
-            largeTitle: const Text('Chats'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CupertinoButton(
-                  padding: EdgeInsets.zero,
-                  child: const Icon(IconData(0xe660, fontFamily: 'iconfont')),
-                  onPressed: () {},
-                ),
-                CupertinoButton(
-                  padding: EdgeInsets.zero,
-                  child: const Icon(IconData(0xe66e, fontFamily: 'iconfont')),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-            border: null,
-          ),
           SliverList.builder(
             itemCount: 100,
             itemBuilder: (context, index) => ListTile(

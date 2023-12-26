@@ -34,17 +34,6 @@ class _ThemePageState extends State<ThemePage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            title: const Text('开启Material3'),
-            trailing: Obx(
-              () => Switch(
-                value: ThemeController.of.useMaterial3.value,
-                onChanged: (bool value) {
-                  ThemeController.of.useMaterial3.value = value;
-                },
-              ),
-            ),
-          ),
-          ListTile(
             title: const Text('黑暗模式'),
             trailing: Obx(
               () => Switch(
