@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:package/index.dart';
@@ -31,7 +32,10 @@ class MyApp extends StatelessWidget {
     this.localizationsDelegates,
     this.supportedLocales,
     this.locale = const Locale('zh', 'CN'),
-  });
+  }) : assert(
+            (home != null && onGenerateRoute == null) ||
+                (home == null && onGenerateRoute != null),
+            'home和onGenerateRoute参数必须二选一');
 
   /// App标题，默认空
   final String title;
@@ -76,12 +80,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
-    var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
+    var $localizationsDelegates = CommonUtil.concatArray(
+            (localizationsDelegates ?? []).toList(), _localizationsDelegates)
+        .map((e) => e);
+    var $supportedLocales = CommonUtil.concatArray(
+            (supportedLocales ?? []).toList(), _supportedLocales)
+        .map((e) => e);
     return MaterialApp(
       title: title,
-      home: home,
-      onGenerateRoute: onGenerateRoute,
+      onGenerateRoute: onGenerateRoute ??
+          (setting) {
+            return CupertinoPageRoute(builder: (context) => home!);
+          },
       navigatorObservers: navigatorObservers,
       navigatorKey: globalNavigatorKey,
       theme: theme ?? themeController.buildMaterialThemeData(),
@@ -107,7 +117,8 @@ TransitionBuilder initBuilder() => (context, child) {
               toast.init(context);
               return MediaQuery(
                 // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
-                data: MediaQuery.of(context).copyWith(accessibleNavigation: false),
+                data: MediaQuery.of(context)
+                    .copyWith(accessibleNavigation: false),
                 child: child!,
               );
             }),
