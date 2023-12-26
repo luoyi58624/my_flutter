@@ -9,6 +9,8 @@ import 'package:path/path.dart' as p;
 import 'package:uuid/uuid.dart';
 import 'package:html/parser.dart' as htmlparser;
 
+import '../common/modal.dart';
+
 /// uuid生成实例
 ///
 /// 示例：
@@ -308,9 +310,7 @@ class CommonUtil {
     dynamic date1,
     dynamic date2,
   ) {
-    return ((CommonUtil.safeDate(date1).millisecondsSinceEpoch -
-            CommonUtil.safeDate(date2).millisecondsSinceEpoch))
-        .truncate();
+    return ((CommonUtil.safeDate(date1).millisecondsSinceEpoch - CommonUtil.safeDate(date2).millisecondsSinceEpoch)).truncate();
   }
 
   /// 获取date1和date2相差的天数
@@ -318,12 +318,7 @@ class CommonUtil {
     dynamic date1,
     dynamic date2,
   ) {
-    return ((CommonUtil.safeDate(date1).millisecondsSinceEpoch -
-                CommonUtil.safeDate(date2).millisecondsSinceEpoch) /
-            1000 /
-            60 /
-            60 /
-            24)
+    return ((CommonUtil.safeDate(date1).millisecondsSinceEpoch - CommonUtil.safeDate(date2).millisecondsSinceEpoch) / 1000 / 60 / 60 / 24)
         .truncate();
   }
 
@@ -350,8 +345,7 @@ class CommonUtil {
   }
 
   /// 以指定格式解析日期
-  static String formatDate(dynamic value,
-      {String format = 'yyyy-MM-dd HH:mm:ss'}) {
+  static String formatDate(dynamic value, {String format = 'yyyy-MM-dd HH:mm:ss'}) {
     return DateUtil.formatDate(safeDate(value), format: format);
   }
 
@@ -478,6 +472,7 @@ class CommonUtil {
     return false;
   }
 
+  /// 拼接上级地址，返回新的path，主要过滤新地址尾部多余的/
   static String joinParentPath(String path, [String? parentPath]) {
     String $path = parentPath != null ? parentPath + path : path;
     if ($path.endsWith('/') && parentPath != null) {
@@ -594,17 +589,5 @@ bool _compareResult(CompareType compareType, num result) {
       return result > 0;
     case CompareType.thanEqual:
       return result >= 0;
-  }
-}
-
-class SizeModel {
-  final double width;
-  final double height;
-
-  SizeModel(this.width, this.height);
-
-  @override
-  String toString() {
-    return 'SizeModel{width: $width, height: $height}';
   }
 }

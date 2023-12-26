@@ -17,7 +17,7 @@ class RouterUtil {
   }) async {
     if (noTransition) {
       return await Navigator.of(
-        context ?? globalContext,
+        context ?? rootContext,
         rootNavigator: rootNavigator,
       ).push(
         PageRouteBuilder(
@@ -29,7 +29,7 @@ class RouterUtil {
     } else {
       if (forceMaterial) {
         return await Navigator.of(
-          context ?? globalContext,
+          context ?? rootContext,
           rootNavigator: rootNavigator,
         ).push<T>(MaterialPageRoute(
           builder: (context) => page,
@@ -38,7 +38,7 @@ class RouterUtil {
       }
       if (forceCupertino) {
         return await Navigator.of(
-          context ?? globalContext,
+          context ?? rootContext,
           rootNavigator: rootNavigator,
         ).push<T>(CupertinoPageRoute(
           builder: (context) => page,
@@ -47,7 +47,7 @@ class RouterUtil {
       }
       if (ThemeController.of.appType.value == AppType.cupertino.name) {
         return await Navigator.of(
-          context ?? globalContext,
+          context ?? rootContext,
           rootNavigator: rootNavigator,
         ).push<T>(CupertinoPageRoute(
           builder: (context) => page,
@@ -55,7 +55,7 @@ class RouterUtil {
         ));
       } else {
         return await Navigator.of(
-          context ?? globalContext,
+          context ?? rootContext,
           rootNavigator: rootNavigator,
         ).push<T>(MaterialPageRoute(
           builder: (context) => page,
@@ -72,7 +72,7 @@ class RouterUtil {
     int backNum = 1,
   }) async {
     for (int i = 0; i < backNum; i++) {
-      Navigator.of(context ?? globalContext).pop(data);
+      Navigator.of(context ?? rootContext).pop(data);
     }
   }
 
@@ -85,7 +85,7 @@ class RouterUtil {
     RouteSettings? settings,
   }) async {
     return await Navigator.of(
-      context ?? globalContext,
+      context ?? rootContext,
       rootNavigator: rootNavigator,
     ).pushReplacement(CupertinoPageRoute(
       builder: (context) => page,
@@ -106,7 +106,7 @@ class RouterUtil {
     BuildContext? context,
     RouteSettings? settings,
   }) async {
-    Navigator.of(context ?? globalContext).pushAndRemoveUntil(
+    Navigator.of(context ?? rootContext).pushAndRemoveUntil(
       CupertinoPageRoute(
         builder: (context) => page,
         settings: settings,
@@ -120,7 +120,7 @@ class RouterUtil {
     String routePath, {
     BuildContext? context,
   }) async {
-    Navigator.of(context ?? globalContext).popUntil(
+    Navigator.of(context ?? rootContext).popUntil(
       ModalRoute.withName(routePath),
     );
   }
@@ -130,7 +130,7 @@ class RouterUtil {
     Widget page, {
     BuildContext? context,
   }) async {
-    Navigator.of(context ?? globalContext).pushAndRemoveUntil(
+    Navigator.of(context ?? rootContext).pushAndRemoveUntil(
       CupertinoPageRoute(
         builder: (context) => page,
       ),

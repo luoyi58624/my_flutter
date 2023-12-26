@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import 'package:package/index.dart';
 
-/// 第一次使用MyApp时创建的context，防止用户嵌套多个MyApp或其他顶级App时重复初始化某些内容，例如[globalNavigatorKey],[initBuilder]
+/// 第一次使用MyApp时创建的context，防止用户嵌套多个MyApp或其他顶级App时重复初始化某些内容，例如[rootNavigatorKey],[initBuilder]
 BuildContext? _initContext;
 
 /// 默认的国际化配置

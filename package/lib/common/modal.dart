@@ -32,3 +32,15 @@ class RootPageModel extends NavPageModel {
 
   const RootPageModel(super.title, this.path, super.page, {super.icon});
 }
+
+class SizeModel {
+  final double width;
+  final double height;
+
+  SizeModel(this.width, this.height);
+
+  @override
+  String toString() {
+    return 'SizeModel{width: $width, height: $height}';
+  }
+}

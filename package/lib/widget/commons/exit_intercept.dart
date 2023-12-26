@@ -5,16 +5,20 @@ import 'package:flutter/widgets.dart';
 import '../../util/toast.dart';
 
 class ExitInterceptWidget extends StatefulWidget {
-  const ExitInterceptWidget({super.key, required this.child});
+  /// 拦截用户退出应用
+  const ExitInterceptWidget({super.key, required this.child, this.message = '请再按一次退出应用'});
 
   final Widget child;
+
+  final String message;
 
   @override
   State<ExitInterceptWidget> createState() => _ExitInterceptWidgetState();
 }
 
 class _ExitInterceptWidgetState extends State<ExitInterceptWidget> {
-  bool allowQuit = false; // 双击返回键退出应用
+  bool allowQuit = false;
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -24,7 +28,7 @@ class _ExitInterceptWidgetState extends State<ExitInterceptWidget> {
           setState(() {
             allowQuit = true;
           });
-          ToastUtil.showToast('请再按一次退出应用');
+          ToastUtil.showToast(widget.message);
           Timer(const Duration(seconds: 2), () {
             if (mounted) {
               setState(() {

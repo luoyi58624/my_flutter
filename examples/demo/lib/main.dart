@@ -14,7 +14,7 @@ class _MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyApp(
       router: GoRouter(
-        navigatorKey: globalNavigatorKey,
+        navigatorKey: rootNavigatorKey,
         routes: [
           GoRoute(path: '/', builder: (context, state) => HomePage()),
         ],

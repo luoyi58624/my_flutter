@@ -79,7 +79,7 @@ Widget buildListSection(BuildContext context, String title, List<NavPageModel> c
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
         child: Text(
           title,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
       _buildCell(context, cellItems)

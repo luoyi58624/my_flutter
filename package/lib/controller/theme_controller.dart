@@ -14,8 +14,19 @@ enum AppType {
 
 /// 底部导航栏类型
 enum BottomNavigationType {
+  /// 根据平台自动切换
+  auto,
+
+  /// 自定义底部导航栏
+  custom,
+
+  /// material2风格导航栏
   material2,
+
+  /// material3风格导航栏
   material3,
+
+  /// ios风格导航栏
   cupertino,
 }
 
@@ -41,6 +52,7 @@ class ThemeController extends GetxController {
     infoColor = useLocalObs(_?.infoColor ?? _infoColor, 'infoColor');
     useMaterial3 = useLocalObs(_?.useMaterial3 ?? true, 'useMaterial3');
     useDark = useLocalObs(_?.useDark ?? false, 'useDark');
+    bottomNavigationType = useLocalObs(_?.bottomNavigationType ?? BottomNavigationType.auto.name, 'bottomNavigationType');
     textBold = (_?.textBold ?? false).obs;
   }
 
@@ -68,6 +80,9 @@ class ThemeController extends GetxController {
   /// 是否使用黑暗模式
   late final Rx<bool> useDark;
 
+  /// 底部导航栏类型，默认auto，根据平台自动切换
+  late final Rx<String> bottomNavigationType;
+
   /// 文字是否全局加粗，若为true，基础字重将从400->500，它可以改善某些安卓设备的观感。
   late final Rx<bool> textBold;
 
@@ -80,6 +95,13 @@ class ThemeController extends GetxController {
   }) {
     if (useMaterial3.value) {
       hideTranslucenceStatusBar();
+      var $theme = ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          brightness: brightness,
+          seedColor: primaryColor.value,
+        ),
+      );
       return ThemeData(
         useMaterial3: true,
         textTheme: textBold.value ? _materialBoldTextTheme : null,
@@ -96,6 +118,11 @@ class ThemeController extends GetxController {
           border: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),
           ),
+        ),
+        expansionTileTheme: ExpansionTileThemeData(
+          textColor: $theme.primaryColor,
+          shape: Border.all(width: 0, style: BorderStyle.none),
+          collapsedShape: Border.all(width: 0, style: BorderStyle.none),
         ),
       );
     } else {
@@ -117,6 +144,10 @@ class ThemeController extends GetxController {
             color: ColorUtil.isDark(primaryColor.value) ? Colors.white : Colors.black,
           ),
           foregroundColor: ColorUtil.isDark(primaryColor.value) ? Colors.white : Colors.black,
+        ),
+        expansionTileTheme: ExpansionTileThemeData(
+          shape: Border.all(width: 0, style: BorderStyle.none),
+          collapsedShape: Border.all(width: 0, style: BorderStyle.none),
         ),
       );
     }
@@ -162,38 +193,50 @@ class ThemeController extends GetxController {
 const _materialBoldTextTheme = TextTheme(
   displaySmall: TextStyle(
     fontWeight: FontWeight.w500,
+    fontSize: 14,
   ),
   displayMedium: TextStyle(
     fontWeight: FontWeight.w500,
+    fontSize: 15,
   ),
   displayLarge: TextStyle(
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
   ),
   titleSmall: TextStyle(
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
   ),
   titleMedium: TextStyle(
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w700,
+    fontSize: 18,
   ),
   titleLarge: TextStyle(
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w700,
+    fontSize: 20,
   ),
   bodySmall: TextStyle(
     fontWeight: FontWeight.w500,
+    fontSize: 14,
   ),
   bodyMedium: TextStyle(
     fontWeight: FontWeight.w500,
+    fontSize: 15,
   ),
   bodyLarge: TextStyle(
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
   ),
   labelSmall: TextStyle(
     fontWeight: FontWeight.w500,
+    fontSize: 13,
   ),
   labelMedium: TextStyle(
     fontWeight: FontWeight.w500,
+    fontSize: 14,
   ),
   labelLarge: TextStyle(
     fontWeight: FontWeight.w500,
+    fontSize: 15,
   ),
 );

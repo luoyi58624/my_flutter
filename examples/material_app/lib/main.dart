@@ -10,7 +10,7 @@ void main() async {
 }
 
 final router = GoRouter(
-  navigatorKey: globalNavigatorKey,
+  navigatorKey: rootNavigatorKey,
   routes: [
     createRootPage(materialRootPages),
   ],

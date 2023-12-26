@@ -11,6 +11,7 @@ void main() async {
   await initMyFlutter(themeModel: const ThemeModel(primaryColor: CupertinoColors.systemGreen, textBold: true));
   runApp(MyApp.cupertino(
     router: GoRouter(
+      navigatorKey: rootNavigatorKey,
       routes: [
         createRootPage(const [
           RootPageModel('聊 天', '/', ChatRootPage(), icon: CupertinoIcons.chat_bubble_2),

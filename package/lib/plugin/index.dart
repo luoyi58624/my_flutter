@@ -11,7 +11,6 @@ export 'package:collection/collection.dart';
 export 'package:get/get_core/get_core.dart';
 export 'package:get/get_instance/get_instance.dart';
 export 'package:get/get_state_manager/get_state_manager.dart';
-
 export 'package:get/get_rx/get_rx.dart';
 export 'package:get/get_utils/src/extensions/export.dart';
 export 'package:get/get_utils/src/get_utils/get_utils.dart';
@@ -35,8 +34,6 @@ export 'package:flustars/flustars.dart';
 
 // 多平台查找文件系统上的常用位置
 export 'package:path_provider/path_provider.dart';
-
-export 'package:path/path.dart' hide context, Style;
 
 // 加密解密工具包
 export 'package:crypto/crypto.dart';

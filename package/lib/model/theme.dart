@@ -15,5 +15,6 @@ class ThemeModel with _$ThemeModel {
     bool? useMaterial3,
     bool? useDark,
     bool? textBold,
+    String? bottomNavigationType,
   }) = _ThemeModel;
 }

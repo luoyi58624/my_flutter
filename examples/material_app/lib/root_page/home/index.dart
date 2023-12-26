@@ -15,6 +15,7 @@ class HomeRootPage extends StatefulWidget {
 class _HomeRootPageState extends State<HomeRootPage> {
   @override
   Widget build(BuildContext context) {
+    LoggerUtil.i('home build');
     const List<NavPageModel> cellNames = [
       NavPageModel('主题设置', ThemePage()),
       NavPageModel('底部Badge设置', BottomBadgePage()),
@@ -116,7 +117,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
             itemBuilder: (context, index) => ListTile(
               onTap: () {
                 // RouterUtil.to(ChildPage(title: '子页面：${index + 1}'));
-                RouterUtil.to(const _ChildPage2(), context: context);
+                RouterUtil.to(const _ChildPage2());
               },
               title: Text('列表 - ${index + 1}'),
             ),

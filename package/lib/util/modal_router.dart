@@ -13,7 +13,7 @@ class ModalRouterUtil {
     BuildContext? context,
   }) async {
     return await Navigator.of(
-      context ?? globalContext,
+      context ?? rootContext,
     ).push<T>(
       modal_bottom_sheet.MaterialWithModalsPageRoute(
         builder: (context) => page,
@@ -27,7 +27,7 @@ class ModalRouterUtil {
     BuildContext? context,
     RouteSettings? settings,
   }) async {
-    return await Navigator.of(context ?? globalContext).push<T>(
+    return await Navigator.of(context ?? rootContext).push<T>(
       CupertinoWithModalsPageRoute(
         builder: (context) => page,
         settings: settings,
@@ -40,7 +40,7 @@ class ModalRouterUtil {
     BuildContext? context,
     RouteSettings? settings,
   }) async {
-    return await Navigator.of(context ?? globalContext).pushReplacement(
+    return await Navigator.of(context ?? rootContext).pushReplacement(
       CupertinoWithModalsPageRoute(
         builder: (context) => page,
         settings: settings,
@@ -54,7 +54,7 @@ class ModalRouterUtil {
     BuildContext? context,
     RouteSettings? settings,
   }) async {
-    Navigator.of(context ?? globalContext).pushAndRemoveUntil(
+    Navigator.of(context ?? rootContext).pushAndRemoveUntil(
       CupertinoWithModalsPageRoute(
         builder: (context) => page,
         settings: settings,

@@ -3,19 +3,25 @@ import 'package:package/index.dart';
 
 import '../../../../common/data.dart';
 
-class ThemePage extends StatelessWidget {
+class ThemePage extends StatefulWidget {
   const ThemePage({super.key});
 
+  @override
+  State<ThemePage> createState() => _ThemePageState();
+}
+
+class _ThemePageState extends State<ThemePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('App主题设置'),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(8.0),
+      body: SingleChildScrollView(
         child: Column(children: [
           buildCell(),
+          const SizedBox(height: 8),
+          buildBottomNavigationType(),
           const SizedBox(height: 8),
           buildPrimaryTheme(),
         ]),
@@ -24,9 +30,8 @@ class ThemePage extends StatelessWidget {
   }
 
   Widget buildCell() {
-    return Material(
+    return Card(
       elevation: 2,
-      borderRadius: BorderRadius.circular(6),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -57,16 +62,59 @@ class ThemePage extends StatelessWidget {
     );
   }
 
+  Widget buildBottomNavigationType() {
+    return Card(
+        elevation: 2,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Text(
+                '底部导航栏类型',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+            Column(
+                children: BottomNavigationType.values
+                    .map(
+                      (e) => ListTile(
+                        title: Text(
+                          e.name,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        dense: true,
+                        trailing: Obx(
+                          () => Radio<String>(
+                            value: e.name,
+                            groupValue: ThemeController.of.bottomNavigationType.value,
+                            onChanged: (value) {
+                              ThemeController.of.bottomNavigationType.value = value!;
+                            },
+                          ),
+                        ),
+                        onTap: () {
+                          ThemeController.of.bottomNavigationType.value = e.name;
+                        },
+                      ),
+                    )
+                    .toList())
+          ],
+        ));
+  }
+
   Widget buildPrimaryTheme() {
-    return Material(
+    return Card(
       elevation: 2,
+      clipBehavior: Clip.hardEdge,
       child: ExpansionTile(
         leading: const Icon(Icons.color_lens),
         title: const Text('主题颜色'),
         initiallyExpanded: true,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Wrap(
               spacing: 8,
               runSpacing: 8,
