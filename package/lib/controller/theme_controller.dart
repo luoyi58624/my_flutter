@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import 'package:package/index.dart';
 
-/// app类型
+/// app类型，设置该选项实现不同平台的行为，例如：路由过渡，滚动行为
 enum AppType {
   material,
   cupertino,
@@ -45,6 +45,7 @@ class ThemeController extends GetxController {
   static ThemeController get of => Get.find();
 
   ThemeController([ThemeModel? _]) {
+    appType = (_?.appType?.name ?? '').obs;
     primaryColor = useLocalObs(_?.primaryColor ?? _primaryColor, 'primaryColor');
     successColor = useLocalObs(_?.successColor ?? _successColor, 'successColor');
     warningColor = useLocalObs(_?.warningColor ?? _warningColor, 'warningColor');
@@ -57,7 +58,7 @@ class ThemeController extends GetxController {
   }
 
   /// app构建类型
-  final appType = useLocalObs(AppType.material.name, 'appType');
+  late final Rx<String> appType;
 
   /// 主要颜色
   late final Rx<Color> primaryColor;
@@ -93,6 +94,12 @@ class ThemeController extends GetxController {
   ThemeData buildMaterialThemeData({
     Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
   }) {
+    var platform = (appType.value == AppType.cupertino.name || CommonUtil.isApplePlatform) ? TargetPlatform.iOS : TargetPlatform.android;
+    var pageTransitionsTheme = PageTransitionsTheme(builders: {
+      TargetPlatform.android: platform == TargetPlatform.iOS ? const CupertinoPageTransitionsBuilder() : const ZoomPageTransitionsBuilder(),
+      TargetPlatform.iOS: const CupertinoPageTransitionsBuilder(),
+      TargetPlatform.macOS: const CupertinoPageTransitionsBuilder(),
+    });
     if (useMaterial3.value) {
       hideTranslucenceStatusBar();
       var $theme = ThemeData(
@@ -104,6 +111,8 @@ class ThemeController extends GetxController {
       );
       return ThemeData(
         useMaterial3: true,
+        platform: platform,
+        pageTransitionsTheme: pageTransitionsTheme,
         textTheme: textBold.value ? _materialBoldTextTheme : null,
         // 根据主题色创建material3的主题系统
         colorScheme: ColorScheme.fromSeed(
@@ -129,6 +138,8 @@ class ThemeController extends GetxController {
       translucenceStatusBar.value ? showTranslucenceStatusBar() : hideTranslucenceStatusBar();
       return ThemeData(
         useMaterial3: false,
+        platform: platform,
+        pageTransitionsTheme: pageTransitionsTheme,
         textTheme: textBold.value ? _materialBoldTextTheme : null,
         brightness: brightness,
         // 指定material2的主题颜色

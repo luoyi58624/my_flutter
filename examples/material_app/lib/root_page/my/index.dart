@@ -35,7 +35,7 @@ class MyRootPage extends StatelessWidget {
             itemBuilder: (context, index) => ListTile(
               onTap: () {
                 RouterUtil.to(
-                  const ChildPage(title: '子页面'),
+                  const _SecondPage(title: '子页面'),
                   context: context,
                   rootNavigator: true,
                 );
@@ -45,6 +45,22 @@ class MyRootPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _SecondPage extends StatelessWidget {
+  const _SecondPage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(title),
+      ),
+      child: Container(),
     );
   }
 }

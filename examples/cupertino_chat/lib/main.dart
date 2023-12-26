@@ -8,8 +8,14 @@ import './pages/setting/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initMyFlutter(themeModel: const ThemeModel(primaryColor: CupertinoColors.systemGreen, textBold: true));
-  runApp(MyApp.cupertino(
+  await initMyFlutter(
+      themeModel: const ThemeModel(
+    appType: AppType.cupertino,
+    useMaterial3: false,
+    primaryColor: CupertinoColors.systemGreen,
+    textBold: true,
+  ));
+  runApp(MyApp(
     router: GoRouter(
       navigatorKey: rootNavigatorKey,
       routes: [

@@ -84,6 +84,9 @@ class RouterUtil {
     bool fullscreenDialog = false,
     RouteSettings? settings,
   }) async {
+    // if (context != null) {
+    //   context.go(location);
+    // }
     return await Navigator.of(
       context ?? rootContext,
       rootNavigator: rootNavigator,

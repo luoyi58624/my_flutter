@@ -21,6 +21,7 @@ RouteBase createRootPage(
 }) {
   Get.put(BottomNavigationController._(rootPages, parentPath));
   return StatefulShellRoute.indexedStack(
+    parentNavigatorKey: rootNavigatorKey,
     builder: (context, state, navigationShell) => rootPageWidget == null
         ? _RootPage(
             navigationShell,

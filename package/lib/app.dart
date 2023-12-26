@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
     this.supportedLocales,
     this.onlyHorizontalMode = false,
     this.onlyVerticalMode = false,
-    this.translucenceStatusBar = true,
+    this.translucenceStatusBar = false,
     this.locale = const Locale('zh', 'CN'),
   })  : _appType = AppType.material,
         cupertinoTheme = null;
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
     this.supportedLocales,
     this.onlyHorizontalMode = false,
     this.onlyVerticalMode = false,
-    this.translucenceStatusBar = true,
+    this.translucenceStatusBar = false,
     this.locale = const Locale('zh', 'CN'),
   })  : _appType = AppType.cupertino,
         theme = null,
@@ -116,9 +116,17 @@ class MyApp extends StatelessWidget {
 
   ThemeController get themeController => Get.find();
 
+  get platform => GetPlatform.isIOS ? TargetPlatform.iOS : TargetPlatform.android;
+
+  get pageTransitionsTheme => const PageTransitionsTheme(builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+      });
+
   @override
   Widget build(BuildContext context) {
-    themeController.appType.value = _appType.name;
+    if (themeController.appType.value == '') themeController.appType.value = _appType.name;
     themeController.translucenceStatusBar.value = translucenceStatusBar;
 
     if (onlyHorizontalMode) {
