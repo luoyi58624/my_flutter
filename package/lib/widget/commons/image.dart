@@ -20,12 +20,7 @@ class ImageWidget extends StatefulWidget {
     this.heroTag,
     this.failWidget,
     this.onTap,
-  })  : assert(
-            (url != null && asset == null && file == null) ||
-                (asset != null && url == null && file == null) ||
-                (file != null && url == null && asset == null),
-            '注意，image参数url、assert、file必须三选一'),
-        circleImage = false,
+  })  : circleImage = false,
         size = null;
 
   /// 圆形图片构造器
@@ -38,12 +33,7 @@ class ImageWidget extends StatefulWidget {
     this.heroTag,
     this.failWidget,
     this.onTap,
-  })  : assert(
-            (url != null && asset == null && file == null) ||
-                (asset != null && url == null && file == null) ||
-                (file != null && url == null && asset == null),
-            '注意，image参数url、assert、file必须三选一'),
-        circleImage = true,
+  })  : circleImage = true,
         fit = BoxFit.cover,
         width = null,
         height = null,
