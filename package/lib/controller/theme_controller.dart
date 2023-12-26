@@ -4,32 +4,6 @@ import 'package:flutter/services.dart';
 
 import 'package:package/index.dart';
 
-/// app类型，设置该选项实现不同平台的行为，例如：路由过渡，滚动行为
-enum AppType {
-  material,
-  cupertino,
-  pc,
-  web,
-}
-
-/// 底部导航栏类型
-enum BottomNavigationType {
-  /// 根据平台自动切换
-  auto,
-
-  /// 自定义底部导航栏
-  custom,
-
-  /// material2风格导航栏
-  material2,
-
-  /// material3风格导航栏
-  material3,
-
-  /// ios风格导航栏
-  cupertino,
-}
-
 const Color _primaryColor = Color.fromARGB(255, 0, 120, 212);
 const Color _successColor = Color.fromARGB(255, 16, 185, 129);
 const Color _warningColor = Color.fromARGB(255, 245, 158, 11);
@@ -45,7 +19,6 @@ class ThemeController extends GetxController {
   static ThemeController get of => Get.find();
 
   ThemeController([ThemeModel? _]) {
-    appType = (_?.appType?.name ?? '').obs;
     primaryColor = useLocalObs(_?.primaryColor ?? _primaryColor, 'primaryColor');
     successColor = useLocalObs(_?.successColor ?? _successColor, 'successColor');
     warningColor = useLocalObs(_?.warningColor ?? _warningColor, 'warningColor');
@@ -53,12 +26,7 @@ class ThemeController extends GetxController {
     infoColor = useLocalObs(_?.infoColor ?? _infoColor, 'infoColor');
     useMaterial3 = useLocalObs(_?.useMaterial3 ?? true, 'useMaterial3');
     useDark = useLocalObs(_?.useDark ?? false, 'useDark');
-    bottomNavigationType = useLocalObs(_?.bottomNavigationType ?? BottomNavigationType.auto.name, 'bottomNavigationType');
-    textBold = (_?.textBold ?? false).obs;
   }
-
-  /// app构建类型
-  late final Rx<String> appType;
 
   /// 主要颜色
   late final Rx<Color> primaryColor;
@@ -81,24 +49,17 @@ class ThemeController extends GetxController {
   /// 是否使用黑暗模式
   late final Rx<bool> useDark;
 
-  /// 底部导航栏类型，默认auto，根据平台自动切换
-  late final Rx<String> bottomNavigationType;
-
-  /// 文字是否全局加粗，若为true，基础字重将从400->500，它可以改善某些安卓设备的观感。
-  late final Rx<bool> textBold;
-
   /// 当主题是material2时，是否显示半透明状态栏
-  final translucenceStatusBar = useLocalObs(false, 'translucenceStatusBar');
+  final translucenceStatusBar = false.obs;
 
   /// 构建material主题
   ThemeData buildMaterialThemeData({
     Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
   }) {
-    var platform = (appType.value == AppType.cupertino.name || CommonUtil.isApplePlatform) ? TargetPlatform.iOS : TargetPlatform.android;
-    var pageTransitionsTheme = PageTransitionsTheme(builders: {
-      TargetPlatform.android: platform == TargetPlatform.iOS ? const CupertinoPageTransitionsBuilder() : const ZoomPageTransitionsBuilder(),
-      TargetPlatform.iOS: const CupertinoPageTransitionsBuilder(),
-      TargetPlatform.macOS: const CupertinoPageTransitionsBuilder(),
+    var pageTransitionsTheme = const PageTransitionsTheme(builders: {
+      TargetPlatform.android: ZoomPageTransitionsBuilder(),
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
     });
     if (useMaterial3.value) {
       hideTranslucenceStatusBar();
@@ -111,9 +72,8 @@ class ThemeController extends GetxController {
       );
       return ThemeData(
         useMaterial3: true,
-        platform: platform,
         pageTransitionsTheme: pageTransitionsTheme,
-        textTheme: textBold.value ? _materialBoldTextTheme : null,
+        textTheme: _materialBoldTextTheme,
         // 根据主题色创建material3的主题系统
         colorScheme: ColorScheme.fromSeed(
           brightness: brightness,
@@ -138,9 +98,8 @@ class ThemeController extends GetxController {
       translucenceStatusBar.value ? showTranslucenceStatusBar() : hideTranslucenceStatusBar();
       return ThemeData(
         useMaterial3: false,
-        platform: platform,
         pageTransitionsTheme: pageTransitionsTheme,
-        textTheme: textBold.value ? _materialBoldTextTheme : null,
+        textTheme: _materialBoldTextTheme,
         brightness: brightness,
         // 指定material2的主题颜色
         primarySwatch: ColorUtil.createMaterialColor(primaryColor.value),
@@ -172,16 +131,14 @@ class ThemeController extends GetxController {
     var textTheme = const CupertinoThemeData().textTheme;
     return CupertinoThemeData(
       primaryColor: primaryColor.value,
-      textTheme: textBold.value
-          ? CupertinoTextThemeData(
-              textStyle: textTheme.textStyle.copyWith(fontWeight: FontWeight.w500),
-              tabLabelTextStyle: textTheme.tabLabelTextStyle.copyWith(fontSize: 12),
-              navActionTextStyle: textTheme.navActionTextStyle.copyWith(
-                fontWeight: FontWeight.w500,
-                color: primaryColor.value,
-              ),
-            )
-          : null,
+      textTheme: CupertinoTextThemeData(
+        textStyle: textTheme.textStyle.copyWith(fontWeight: FontWeight.w500),
+        tabLabelTextStyle: textTheme.tabLabelTextStyle.copyWith(fontSize: 12),
+        navActionTextStyle: textTheme.navActionTextStyle.copyWith(
+          fontWeight: FontWeight.w500,
+          color: primaryColor.value,
+        ),
+      ),
     );
   }
 

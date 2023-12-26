@@ -36,8 +36,6 @@ class MyRootPage extends StatelessWidget {
               onTap: () {
                 RouterUtil.to(
                   const _SecondPage(title: '子页面'),
-                  context: context,
-                  rootNavigator: true,
                 );
               },
               title: Text('item-${index + 1}'),

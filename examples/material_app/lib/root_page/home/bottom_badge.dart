@@ -19,29 +19,28 @@ class _BottomBadgePageState extends State<BottomBadgePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Obx(() => Text(
-                '首页badge: ${BottomNavigationController.of.badge.value['/']}')),
+            Obx(() => Text('首页badge: ${RootPageController.of.badge.value['/']}')),
             ElevatedButton(
               onPressed: () {
-                BottomNavigationController.of.addBadge('/', 1);
+                RootPageController.of.addBadge('/', 1);
               },
               child: const Text('首页badge+1'),
             ),
             ElevatedButton(
               onPressed: () {
-                BottomNavigationController.of.subtractBadge('/', 1);
+                RootPageController.of.subtractBadge('/', 1);
               },
               child: const Text('首页badge-1'),
             ),
             ElevatedButton(
               onPressed: () {
-                BottomNavigationController.of.setBadge('/', 10);
+                RootPageController.of.setBadge('/', 10);
               },
               child: const Text('首页badge=10'),
             ),
             ElevatedButton(
               onPressed: () {
-                BottomNavigationController.of.clearBadge('/');
+                RootPageController.of.clearBadge('/');
               },
               child: const Text('清除badge'),
             ),

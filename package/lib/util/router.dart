@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:package/index.dart';
 
 class RouterUtil {
@@ -8,96 +7,34 @@ class RouterUtil {
   /// 跳转到新页面
   static Future<T?> to<T>(
     Widget page, {
-    BuildContext? context,
-    bool rootNavigator = false,
-    bool fullscreenDialog = false,
-    bool noTransition = false,
-    bool forceMaterial = false,
-    bool forceCupertino = false,
+    RouteSettings? settings,
   }) async {
-    if (noTransition) {
-      return await Navigator.of(
-        context ?? rootContext,
-        rootNavigator: rootNavigator,
-      ).push(
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => page,
-          transitionDuration: Duration.zero,
-          reverseTransitionDuration: Duration.zero,
-        ),
-      );
-    } else {
-      if (forceMaterial) {
-        return await Navigator.of(
-          context ?? rootContext,
-          rootNavigator: rootNavigator,
-        ).push<T>(MaterialPageRoute(
-          builder: (context) => page,
-          fullscreenDialog: fullscreenDialog,
-        ));
-      }
-      if (forceCupertino) {
-        return await Navigator.of(
-          context ?? rootContext,
-          rootNavigator: rootNavigator,
-        ).push<T>(CupertinoPageRoute(
-          builder: (context) => page,
-          fullscreenDialog: fullscreenDialog,
-        ));
-      }
-      if (ThemeController.of.appType.value == AppType.cupertino.name) {
-        return await Navigator.of(
-          context ?? rootContext,
-          rootNavigator: rootNavigator,
-        ).push<T>(CupertinoPageRoute(
-          builder: (context) => page,
-          fullscreenDialog: fullscreenDialog,
-        ));
-      } else {
-        return await Navigator.of(
-          context ?? rootContext,
-          rootNavigator: rootNavigator,
-        ).push<T>(MaterialPageRoute(
-          builder: (context) => page,
-          fullscreenDialog: fullscreenDialog,
-        ));
-      }
-    }
+    return await Navigator.of(globalContext).push<T>(CupertinoPageRoute(
+      builder: (context) => page,
+      settings: settings,
+    ));
   }
 
   /// 返回上一页
   static void back<T>({
-    BuildContext? context,
     T? data,
     int backNum = 1,
   }) async {
-    var $context = (context ?? rootContext);
     for (int i = 0; i < backNum; i++) {
-      if ($context.canPop()) {
-        // Navigator.of($context).pop(data);
-        $context.pop(data);
-      }
+      Navigator.of(globalContext).pop(data);
     }
   }
 
   /// 重定向页面，先跳转新页面，再删除之前的页面
   static Future<T?> redirect<T>(
     Widget page, {
-    BuildContext? context,
-    bool rootNavigator = false,
-    bool fullscreenDialog = false,
     RouteSettings? settings,
   }) async {
-    // if (context != null) {
-    //   context.go(location);
-    // }
     return await Navigator.of(
-      context ?? rootContext,
-      rootNavigator: rootNavigator,
+      globalContext,
     ).pushReplacement(CupertinoPageRoute(
       builder: (context) => page,
       settings: settings,
-      fullscreenDialog: fullscreenDialog,
     ));
   }
 
@@ -110,10 +47,9 @@ class RouterUtil {
   static void pushUntil(
     Widget page,
     String routePath, {
-    BuildContext? context,
     RouteSettings? settings,
   }) async {
-    Navigator.of(context ?? rootContext).pushAndRemoveUntil(
+    Navigator.of(globalContext).pushAndRemoveUntil(
       CupertinoPageRoute(
         builder: (context) => page,
         settings: settings,
@@ -123,21 +59,15 @@ class RouterUtil {
   }
 
   /// 原理和pushUntil一样，只不过这是退出到指定位置
-  static void popUntil(
-    String routePath, {
-    BuildContext? context,
-  }) async {
-    Navigator.of(context ?? rootContext).popUntil(
+  static void popUntil(String routePath) async {
+    Navigator.of(globalContext).popUntil(
       ModalRoute.withName(routePath),
     );
   }
 
   /// 进入新的页面并删除之前所有路
-  static void pushAndPopAll(
-    Widget page, {
-    BuildContext? context,
-  }) async {
-    Navigator.of(context ?? rootContext).pushAndRemoveUntil(
+  static void pushAndPopAll(Widget page) async {
+    Navigator.of(globalContext).pushAndRemoveUntil(
       CupertinoPageRoute(
         builder: (context) => page,
       ),

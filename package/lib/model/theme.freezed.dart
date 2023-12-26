@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ThemeModel {
-  AppType? get appType => throw _privateConstructorUsedError;
   Color? get primaryColor => throw _privateConstructorUsedError;
   Color? get successColor => throw _privateConstructorUsedError;
   Color? get warningColor => throw _privateConstructorUsedError;
@@ -39,8 +38,7 @@ abstract class $ThemeModelCopyWith<$Res> {
       _$ThemeModelCopyWithImpl<$Res, ThemeModel>;
   @useResult
   $Res call(
-      {AppType? appType,
-      Color? primaryColor,
+      {Color? primaryColor,
       Color? successColor,
       Color? warningColor,
       Color? errorColor,
@@ -64,7 +62,6 @@ class _$ThemeModelCopyWithImpl<$Res, $Val extends ThemeModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? appType = freezed,
     Object? primaryColor = freezed,
     Object? successColor = freezed,
     Object? warningColor = freezed,
@@ -76,10 +73,6 @@ class _$ThemeModelCopyWithImpl<$Res, $Val extends ThemeModel>
     Object? bottomNavigationType = freezed,
   }) {
     return _then(_value.copyWith(
-      appType: freezed == appType
-          ? _value.appType
-          : appType // ignore: cast_nullable_to_non_nullable
-              as AppType?,
       primaryColor: freezed == primaryColor
           ? _value.primaryColor
           : primaryColor // ignore: cast_nullable_to_non_nullable
@@ -129,8 +122,7 @@ abstract class _$$ThemeModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {AppType? appType,
-      Color? primaryColor,
+      {Color? primaryColor,
       Color? successColor,
       Color? warningColor,
       Color? errorColor,
@@ -152,7 +144,6 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? appType = freezed,
     Object? primaryColor = freezed,
     Object? successColor = freezed,
     Object? warningColor = freezed,
@@ -164,10 +155,6 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
     Object? bottomNavigationType = freezed,
   }) {
     return _then(_$ThemeModelImpl(
-      appType: freezed == appType
-          ? _value.appType
-          : appType // ignore: cast_nullable_to_non_nullable
-              as AppType?,
       primaryColor: freezed == primaryColor
           ? _value.primaryColor
           : primaryColor // ignore: cast_nullable_to_non_nullable
@@ -212,8 +199,7 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
 
 class _$ThemeModelImpl implements _ThemeModel {
   const _$ThemeModelImpl(
-      {this.appType,
-      this.primaryColor,
+      {this.primaryColor,
       this.successColor,
       this.warningColor,
       this.errorColor,
@@ -223,8 +209,6 @@ class _$ThemeModelImpl implements _ThemeModel {
       this.textBold,
       this.bottomNavigationType});
 
-  @override
-  final AppType? appType;
   @override
   final Color? primaryColor;
   @override
@@ -246,7 +230,7 @@ class _$ThemeModelImpl implements _ThemeModel {
 
   @override
   String toString() {
-    return 'ThemeModel(appType: $appType, primaryColor: $primaryColor, successColor: $successColor, warningColor: $warningColor, errorColor: $errorColor, infoColor: $infoColor, useMaterial3: $useMaterial3, useDark: $useDark, textBold: $textBold, bottomNavigationType: $bottomNavigationType)';
+    return 'ThemeModel(primaryColor: $primaryColor, successColor: $successColor, warningColor: $warningColor, errorColor: $errorColor, infoColor: $infoColor, useMaterial3: $useMaterial3, useDark: $useDark, textBold: $textBold, bottomNavigationType: $bottomNavigationType)';
   }
 
   @override
@@ -254,7 +238,6 @@ class _$ThemeModelImpl implements _ThemeModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ThemeModelImpl &&
-            (identical(other.appType, appType) || other.appType == appType) &&
             (identical(other.primaryColor, primaryColor) ||
                 other.primaryColor == primaryColor) &&
             (identical(other.successColor, successColor) ||
@@ -277,7 +260,6 @@ class _$ThemeModelImpl implements _ThemeModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      appType,
       primaryColor,
       successColor,
       warningColor,
@@ -297,8 +279,7 @@ class _$ThemeModelImpl implements _ThemeModel {
 
 abstract class _ThemeModel implements ThemeModel {
   const factory _ThemeModel(
-      {final AppType? appType,
-      final Color? primaryColor,
+      {final Color? primaryColor,
       final Color? successColor,
       final Color? warningColor,
       final Color? errorColor,
@@ -308,8 +289,6 @@ abstract class _ThemeModel implements ThemeModel {
       final bool? textBold,
       final String? bottomNavigationType}) = _$ThemeModelImpl;
 
-  @override
-  AppType? get appType;
   @override
   Color? get primaryColor;
   @override

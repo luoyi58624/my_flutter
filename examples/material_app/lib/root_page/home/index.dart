@@ -50,7 +50,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
                         title: Text(e.title),
                         trailing: const Icon(Icons.keyboard_arrow_right_outlined),
                         onTap: () {
-                          RouterUtil.to(e.page, context: context);
+                          RouterUtil.to(e.page);
                         },
                       ))
                   .toList(),
@@ -117,7 +117,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
             itemBuilder: (context, index) => ListTile(
               onTap: () {
                 // RouterUtil.to(ChildPage(title: '子页面：${index + 1}'));
-                RouterUtil.to(const _ChildPage2(), context: context);
+                RouterUtil.to(const _ChildPage2());
               },
               title: Text('列表 - ${index + 1}'),
             ),
@@ -142,7 +142,7 @@ class _ChildPage2 extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                RouterUtil.to(const _ChildPage3(), context: context, rootNavigator: true);
+                RouterUtil.to(const _ChildPage3());
               },
               child: const Text('三级子页面'),
             ),
@@ -182,13 +182,13 @@ class _ChildPage3 extends StatelessWidget {
       body: buildCenterColumn([
         ElevatedButton(
           onPressed: () {
-            RouterUtil.to(const _ChildPage4(), context: context);
+            RouterUtil.to(const _ChildPage4());
           },
           child: const Text('四级子页面'),
         ),
         ElevatedButton(
           onPressed: () {
-            RouterUtil.back(backNum: 2, context: context);
+            RouterUtil.back(backNum: 2);
           },
           child: const Text('返回首页'),
         ),

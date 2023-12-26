@@ -1,9 +1,6 @@
 // flutter官方国际化库
 export 'package:flutter_localizations/flutter_localizations.dart';
 
-// flutter官方路由库
-export 'package:go_router/go_router.dart';
-
 // flutter官方collection库，扩展集合函数
 export 'package:collection/collection.dart';
 

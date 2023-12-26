@@ -59,7 +59,7 @@ class LoadingUtil {
     _loadingDuration = delayClose;
     _createLoadingStartTime = DateTime.now().millisecondsSinceEpoch;
     showDialog(
-      context: rootContext,
+      context: globalContext,
       barrierColor: Colors.black26,
       // 允许IOS直接点击遮罩关闭弹窗，安卓上则是侧滑返回关闭遮罩
       barrierDismissible: GetPlatform.isIOS ? true : false,

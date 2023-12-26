@@ -1,4 +1,2 @@
-export 'common/index.dart';
-export 'material/index.dart';
-export 'cupertino/index.dart';
-export 'web_admin/index.dart';
+export 'root_page.dart';
+export 'simple_pages.dart';

@@ -97,7 +97,7 @@ Widget _buildCell(BuildContext context, List<NavPageModel> cellItems) {
                 title: Text(e.title),
                 trailing: const Icon(Icons.keyboard_arrow_right_outlined),
                 onTap: () {
-                  RouterUtil.to(e.page, context: context);
+                  RouterUtil.to(e.page);
                 },
               ),
               buildDividerWidget(),

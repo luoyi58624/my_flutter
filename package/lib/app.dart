@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:package/index.dart';
 
-/// 第一次使用MyApp时创建的context，防止用户嵌套多个MyApp或其他顶级App时重复初始化某些内容，例如[rootNavigatorKey],[initBuilder]
+/// 第一次使用MyApp时创建的context，防止用户嵌套多个MyApp或其他顶级App时重复初始化某些内容，例如[globalNavigatorKey],[initBuilder]
 BuildContext? _initContext;
 
 /// 默认的国际化配置
@@ -25,64 +24,36 @@ class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
     this.title = '',
-    required this.router,
+    this.home,
     this.theme,
     this.darkTheme,
+    this.onGenerateRoute,
+    this.navigatorObservers = const <NavigatorObserver>[],
     this.localizationsDelegates,
     this.supportedLocales,
     this.onlyHorizontalMode = false,
     this.onlyVerticalMode = false,
     this.translucenceStatusBar = false,
     this.locale = const Locale('zh', 'CN'),
-  })  : _appType = AppType.material,
-        cupertinoTheme = null;
-
-  /// 以[CupertinoApp]构建应用程序
-  const MyApp.cupertino({
-    super.key,
-    this.title = '',
-    required this.router,
-    this.cupertinoTheme,
-    this.localizationsDelegates,
-    this.supportedLocales,
-    this.onlyHorizontalMode = false,
-    this.onlyVerticalMode = false,
-    this.translucenceStatusBar = false,
-    this.locale = const Locale('zh', 'CN'),
-  })  : _appType = AppType.cupertino,
-        theme = null,
-        darkTheme = null;
-
-  final AppType _appType;
+  });
 
   /// App标题，默认空
   final String title;
 
-  /// 基于[GoRouter]的router配置
-  final GoRouter? router;
+  /// 首屏页面
+  final Widget? home;
 
   /// Material亮色主题
   final ThemeData? theme;
 
   /// 当设备设置为黑暗模式时App使用的主题，默认策略和flutter保持一致：[Brightness.light]。
-  ///
-  /// 如果你需要为app适配黑暗模式，请指定[Brightness.dark]。
-  ///
-  /// 注意：如果你使用自定义theme，同时需要响应式更新Theme，请使用Obx进行包裹，否则你无法实现响应式更新Theme。
-  ///
-  /// 示例：
-  /// ```dart
-  /// Obx(() => MyApp(
-  ///   router,
-  ///   darkTheme: ThemeController.of.buildMaterialThemeData(
-  ///     brightness: Brightness.dark,
-  ///   ),
-  /// ))
-  /// ```
   final ThemeData? darkTheme;
 
-  /// cupertino主题
-  final CupertinoThemeData? cupertinoTheme;
+  /// 自定义生成首屏页，此选项一般用于拦截用户是否登录
+  final RouteFactory? onGenerateRoute;
+
+  /// 监听路由跳转
+  final List<NavigatorObserver> navigatorObservers;
 
   /// 国际化配置，你传入的新配置将合并至默认配置，默认配置为：
   /// ```dart
@@ -116,19 +87,9 @@ class MyApp extends StatelessWidget {
 
   ThemeController get themeController => Get.find();
 
-  get platform => GetPlatform.isIOS ? TargetPlatform.iOS : TargetPlatform.android;
-
-  get pageTransitionsTheme => const PageTransitionsTheme(builders: {
-        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-      });
-
   @override
   Widget build(BuildContext context) {
-    if (themeController.appType.value == '') themeController.appType.value = _appType.name;
     themeController.translucenceStatusBar.value = translucenceStatusBar;
-
     if (onlyHorizontalMode) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
@@ -144,35 +105,23 @@ class MyApp extends StatelessWidget {
 
     var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
     var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
-    switch (_appType) {
-      case AppType.material:
-        return MaterialApp.router(
-          title: title,
-          theme: theme ??
-              themeController.buildMaterialThemeData(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light),
-          darkTheme: darkTheme,
-          routerConfig: router,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: $localizationsDelegates,
-          supportedLocales: $supportedLocales,
-          locale: locale,
-          builder: initBuilder(),
-        );
-      case AppType.cupertino:
-        return CupertinoApp.router(
-          title: title,
-          theme: cupertinoTheme ??
-              themeController.buildCupertinoTheme(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light),
-          routerConfig: router,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: $localizationsDelegates,
-          supportedLocales: $supportedLocales,
-          locale: locale,
-          builder: initBuilder(),
-        );
-      default:
-        throw Exception('未知App - ${_appType.name}');
-    }
+    return Obx(() {
+      return MaterialApp(
+        title: title,
+        home: home,
+        onGenerateRoute: onGenerateRoute,
+        navigatorObservers: navigatorObservers,
+        navigatorKey: globalNavigatorKey,
+        theme:
+            theme ?? themeController.buildMaterialThemeData(brightness: themeController.useDark.value ? Brightness.dark : Brightness.light),
+        darkTheme: darkTheme,
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: $localizationsDelegates,
+        supportedLocales: $supportedLocales,
+        locale: locale,
+        builder: initBuilder(),
+      );
+    });
   }
 }
 
