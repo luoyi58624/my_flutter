@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:package/index.dart';
 
@@ -45,15 +46,24 @@ class _HomeRootPageState extends State<HomeRootPage> {
             ),
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: cellNames
-                  .map((e) => ListTile(
-                        title: Text(e.title),
-                        trailing: const Icon(Icons.keyboard_arrow_right_outlined),
-                        onTap: () {
-                          RouterUtil.to(e.page);
-                        },
-                      ))
-                  .toList(),
+              children: [
+                ...cellNames
+                    .map((e) => ListTile(
+                  title: Text(e.title),
+                  trailing: const Icon(Icons.keyboard_arrow_right_outlined),
+                  onTap: () {
+                    RouterUtil.to(e.page);
+                  },
+                ))
+                    .toList(),
+                ListTile(
+                  title: const Text('关闭弹窗'),
+                  trailing: const Icon(Icons.keyboard_arrow_right_outlined),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
             ),
           ],
         ),
@@ -116,8 +126,10 @@ class _HomeRootPageState extends State<HomeRootPage> {
             itemCount: 100,
             itemBuilder: (context, index) => ListTile(
               onTap: () {
-                // RouterUtil.to(ChildPage(title: '子页面：${index + 1}'));
-                RouterUtil.to(const _ChildPage2());
+                // RouterUtil.to(const _ChildPage2());
+                Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (context) => _ChildPage2(),
+                ));
               },
               title: Text('列表 - ${index + 1}'),
             ),

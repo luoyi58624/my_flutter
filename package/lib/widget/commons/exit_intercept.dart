@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-
-import '../../util/toast.dart';
+import 'package:package/index.dart';
 
 class ExitInterceptWidget extends StatefulWidget {
   /// 拦截用户退出应用
-  const ExitInterceptWidget({super.key, required this.child, this.message = '请再按一次退出应用'});
+  const ExitInterceptWidget(
+      {super.key, required this.child, this.message = '请再按一次退出应用'});
 
   final Widget child;
 
@@ -21,21 +21,22 @@ class _ExitInterceptWidgetState extends State<ExitInterceptWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: allowQuit,
-      onPopInvoked: (_) async {
-        if (!allowQuit) {
-          setState(() {
+    return WillPopScope(
+      onWillPop: () async {
+        if (globalNavigatorKey.currentState?.canPop() == true) {
+          globalNavigatorKey.currentState?.pop();
+          return false;
+        } else {
+          if (!allowQuit) {
             allowQuit = true;
-          });
-          ToastUtil.showToast(widget.message);
-          Timer(const Duration(seconds: 2), () {
-            if (mounted) {
-              setState(() {
-                allowQuit = false;
-              });
-            }
-          });
+            ToastUtil.showToast(widget.message);
+            Timer(const Duration(seconds: 2), () {
+              allowQuit = false;
+            });
+            return false;
+          } else {
+            return true;
+          }
         }
       },
       child: widget.child,

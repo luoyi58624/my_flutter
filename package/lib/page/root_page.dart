@@ -61,43 +61,45 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Scaffold(
-        body: IndexedStack(
-          index: controller.tabIndex.value,
-          children: widget.pages.map((e) => e.page).toList(),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (int index) {
-            setState(() {
-              controller.tabIndex.value = index;
-            });
-          },
-          currentIndex: controller.tabIndex.value,
-          unselectedFontSize: 12,
-          selectedFontSize: 12,
-          iconSize: 26,
-          unselectedLabelStyle: const TextStyle(
-            fontWeight: FontWeight.bold,
+    return ExitInterceptWidget(
+      child: Obx(() {
+        return Scaffold(
+          body: IndexedStack(
+            index: controller.tabIndex.value,
+            children: widget.pages.map((e) => e.page).toList(),
           ),
-          selectedItemColor: themeController.primaryColor.value,
-          selectedLabelStyle: const TextStyle(
-            fontWeight: FontWeight.w900,
-          ),
-          type: BottomNavigationBarType.fixed,
-          items: widget.pages
-              .map((e) => BottomNavigationBarItem(
-                    icon: Obx(
-                      () => BadgeWidget(
-                        bagde: controller.badge.value[e.path],
-                        child: Icon(e.icon),
+          bottomNavigationBar: BottomNavigationBar(
+            onTap: (int index) {
+              setState(() {
+                controller.tabIndex.value = index;
+              });
+            },
+            currentIndex: controller.tabIndex.value,
+            unselectedFontSize: 12,
+            selectedFontSize: 12,
+            iconSize: 26,
+            unselectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+            selectedItemColor: themeController.primaryColor.value,
+            selectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.w900,
+            ),
+            type: BottomNavigationBarType.fixed,
+            items: widget.pages
+                .map((e) => BottomNavigationBarItem(
+                      icon: Obx(
+                        () => BadgeWidget(
+                          bagde: controller.badge.value[e.path],
+                          child: Icon(e.icon),
+                        ),
                       ),
-                    ),
-                    label: e.title,
-                  ))
-              .toList(),
-        ),
-      );
-    });
+                      label: e.title,
+                    ))
+                .toList(),
+          ),
+        );
+      }),
+    );
   }
 }
