@@ -117,7 +117,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
             itemBuilder: (context, index) => ListTile(
               onTap: () {
                 // RouterUtil.to(ChildPage(title: '子页面：${index + 1}'));
-                RouterUtil.to(const _ChildPage2());
+                RouterUtil.to(const _ChildPage2(), context: context);
               },
               title: Text('列表 - ${index + 1}'),
             ),
@@ -142,7 +142,7 @@ class _ChildPage2 extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                // RouterUtil.to(() => const _ChildPage3());
+                RouterUtil.to(const _ChildPage3(), context: context, rootNavigator: true);
               },
               child: const Text('三级子页面'),
             ),
@@ -179,12 +179,40 @@ class _ChildPage3 extends StatelessWidget {
       appBar: AppBar(
         title: const Text('三级子页面'),
       ),
+      body: buildCenterColumn([
+        ElevatedButton(
+          onPressed: () {
+            RouterUtil.to(const _ChildPage4(), context: context);
+          },
+          child: const Text('四级子页面'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            RouterUtil.back(backNum: 2, context: context);
+          },
+          child: const Text('返回首页'),
+        ),
+      ]),
+    );
+  }
+}
+
+class _ChildPage4 extends StatelessWidget {
+  const _ChildPage4();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('四级子页面'),
+      ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            // RouterUtil.back(backNum: 2);
+            // context.p
+            // RouterUtil.back(backNum: 2, context: context);
           },
-          child: const Text('返回首页'),
+          child: const Text('返回二级子页面'),
         ),
       ),
     );

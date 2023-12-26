@@ -71,8 +71,12 @@ class RouterUtil {
     T? data,
     int backNum = 1,
   }) async {
+    var $context = (context ?? rootContext);
     for (int i = 0; i < backNum; i++) {
-      Navigator.of(context ?? rootContext).pop(data);
+      if ($context.canPop()) {
+        // Navigator.of($context).pop(data);
+        $context.pop(data);
+      }
     }
   }
 
