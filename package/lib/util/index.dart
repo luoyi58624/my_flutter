@@ -1,6 +1,5 @@
 export 'color.dart';
 export 'common.dart';
-export 'event_bus.dart';
 export 'local_storage.dart';
 export 'logger.dart';
 export 'modal_router.dart';

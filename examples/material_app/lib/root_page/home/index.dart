@@ -124,10 +124,7 @@ class _HomeRootPageState extends State<HomeRootPage> {
             itemCount: 100,
             itemBuilder: (context, index) => ListTile(
               onTap: () {
-                // RouterUtil.to(const _ChildPage2());
-                Navigator.of(context).push(CupertinoPageRoute(
-                  builder: (context) => _ChildPage2(),
-                ));
+                RouterUtil.to(const _ChildPage2());
               },
               title: Text('列表 - ${index + 1}'),
             ),
@@ -165,17 +162,13 @@ class _ChildPage2 extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                RouterUtil.to(GetxDemoPage());
+                RouterUtil.to(const GetxDemoPage());
               },
               child: const Text('GetxDemo'),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const DemoPage(
-                          index: 1,
-                        )));
-                // RouterUtil.to(() => const DemoPage());
+                RouterUtil.to(const DemoPage(index: 1));
               },
               child: const Text('Demo页面'),
             ),

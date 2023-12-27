@@ -5,7 +5,7 @@ import 'root_page/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initMyFlutter();
+  await initMyFlutter(themeModel: const ThemeModel(primaryColor: Colors.cyan));
   runApp(const RestartAppWidget(child: _MyApp()));
 }
 

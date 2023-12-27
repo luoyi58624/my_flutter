@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:package/index.dart';
 
 import 'controller.dart';
 
@@ -13,8 +13,7 @@ class DemoPage extends StatefulWidget {
 }
 
 class _DemoPageState extends State<DemoPage> {
-  late final controller =
-      Get.put(DemoController(), tag: widget.index.toString());
+  late final controller = Get.put(DemoController(), tag: widget.index.toString());
 
   @override
   void dispose() {
@@ -34,10 +33,7 @@ class _DemoPageState extends State<DemoPage> {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => DemoPage(
-                          index: widget.index + 1,
-                        )));
+                RouterUtil.to(DemoPage(index: widget.index + 1));
               },
               child: Text('进入Demo${widget.index + 1}页面'),
             ),
@@ -47,7 +43,7 @@ class _DemoPageState extends State<DemoPage> {
               },
               child: const Text('返回'),
             ),
-            ElevatedButton(
+            FilledButton(
               onPressed: () {
                 controller.count.value++;
               },
