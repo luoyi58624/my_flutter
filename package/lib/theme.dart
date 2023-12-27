@@ -184,7 +184,7 @@ class MyTheme {
     Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
   }) {
     var pageTransitionsTheme = const PageTransitionsTheme(builders: {
-      TargetPlatform.android: ZoomPageTransitionsBuilder(),
+      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
       TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
     });
