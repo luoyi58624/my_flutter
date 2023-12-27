@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/router_report.dart';
 
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 /// 第一次使用MyApp时创建的context，防止用户嵌套多个MyApp或其他顶级App时重复初始化某些内容，例如[globalNavigatorKey],[initBuilder]
 BuildContext? _initContext;

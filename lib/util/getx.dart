@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 class _LocalDataModel {
   /// 持久化数据类型字符串，如果类型发生变化将清除旧的本地数据

@@ -9,8 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  package:
-    path: ../../package
+  my_flutter:
+    path: ../..
   extended_image: ^8.2.0
 
 dev_dependencies:

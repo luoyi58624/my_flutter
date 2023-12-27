@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 class TemplateRootPage extends StatefulWidget {
   const TemplateRootPage({super.key});

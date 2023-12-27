@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as modal_bottom_sheet;
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 /// 模态路由工具类，对modal_bottom_sheet进行的封装
 class ModalRouterUtil {

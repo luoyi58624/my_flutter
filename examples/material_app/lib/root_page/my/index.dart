@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 class MyRootPage extends StatelessWidget {
   const MyRootPage({super.key});

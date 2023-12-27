@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 /// 底部导航栏控制器，当你使用[createRootPage]函数创建包含多个一级页面的app时，将会注入构造器，
 /// 你可以在任何地方通过[BottomNavigationController.of]直接获取它的实例。

@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  package:
-    path: ../../package
+  my_flutter:
+    path: ../..
   go_router: ^13.0.0
 
 dev_dependencies:

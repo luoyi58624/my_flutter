@@ -1,7 +1,7 @@
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:lpinyin/lpinyin.dart';
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 /// 继承分组序号实例
@@ -217,12 +217,10 @@ class _IndexListWidgetState<T> extends State<IndexListWidget> {
     bool selected = false;
     if (widget.multiple) {
       if (!CommonUtil.isEmpty(widget.initListValue)) {
-        selected = CommonUtil.listContains(widget.initListValue!,
-            (element) => CommonUtil.compareString(element, data.value));
+        selected = CommonUtil.listContains(widget.initListValue!, (element) => CommonUtil.compareString(element, data.value));
       }
       if (!CommonUtil.isEmpty(widget.initDisabledUpdateListValue)) {
-        selected = CommonUtil.listContains(widget.initDisabledUpdateListValue!,
-            (element) => CommonUtil.compareString(element, data.value));
+        selected = CommonUtil.listContains(widget.initDisabledUpdateListValue!, (element) => CommonUtil.compareString(element, data.value));
       }
     } else {
       selected = CommonUtil.compareString(widget.initValue ?? '', data.value);
@@ -296,8 +294,7 @@ class _IndexListWidgetState<T> extends State<IndexListWidget> {
           width: MediaQuery.of(context).size.width,
           height: 40,
           padding: const EdgeInsets.only(left: 16),
-          color: ColorUtil.dynamicColor(
-              Colors.grey.shade300, Colors.grey.shade700, context),
+          color: ColorUtil.dynamicColor(Colors.grey.shade300, Colors.grey.shade700, context),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -314,8 +311,7 @@ class _IndexListWidgetState<T> extends State<IndexListWidget> {
         needRebuild: true,
         ignoreDragCancel: true,
         selectTextStyle: TextStyle(fontSize: 12, color: Colors.white),
-        selectItemDecoration:
-            BoxDecoration(shape: BoxShape.circle, color: Colors.green),
+        selectItemDecoration: BoxDecoration(shape: BoxShape.circle, color: Colors.green),
         indexHintWidth: 120 / 2,
         indexHintHeight: 100 / 2,
         indexHintAlignment: Alignment.centerRight,

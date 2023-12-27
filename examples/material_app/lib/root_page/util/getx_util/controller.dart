@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 class UserModel {
   String? username;

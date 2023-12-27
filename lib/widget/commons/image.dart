@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 import 'dart:io';
 
 /// 图片组件，统一项目中的用法

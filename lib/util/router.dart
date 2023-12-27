@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 class RouterUtil {
   RouterUtil._();

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'index.dart';
+import 'my_flutter.dart';
 
 const Color _primaryColor = Color.fromARGB(255, 0, 120, 212);
 const Color _successColor = Color.fromARGB(255, 16, 185, 129);

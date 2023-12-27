@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 class ExitInterceptWidget extends StatefulWidget {
   /// 拦截用户退出应用

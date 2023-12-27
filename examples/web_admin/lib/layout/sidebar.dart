@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 import 'package:web_admin/router.dart';
 
 class SidebarWidget extends StatefulWidget {

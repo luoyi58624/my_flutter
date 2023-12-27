@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:package/index.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 const String imageUrl = 'https://images.pexels.com/photos/2286895/pexels-photo-2286895.jpeg';
 
