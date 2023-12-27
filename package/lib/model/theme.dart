@@ -13,5 +13,6 @@ class ThemeModel with _$ThemeModel {
     Color? warningColor,
     Color? errorColor,
     Color? infoColor,
+    double? appbarHeight,
   }) = _ThemeModel;
 }

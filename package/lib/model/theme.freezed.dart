@@ -21,6 +21,7 @@ mixin _$ThemeModel {
   Color? get warningColor => throw _privateConstructorUsedError;
   Color? get errorColor => throw _privateConstructorUsedError;
   Color? get infoColor => throw _privateConstructorUsedError;
+  double? get appbarHeight => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ThemeModelCopyWith<ThemeModel> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $ThemeModelCopyWith<$Res> {
       Color? successColor,
       Color? warningColor,
       Color? errorColor,
-      Color? infoColor});
+      Color? infoColor,
+      double? appbarHeight});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$ThemeModelCopyWithImpl<$Res, $Val extends ThemeModel>
     Object? warningColor = freezed,
     Object? errorColor = freezed,
     Object? infoColor = freezed,
+    Object? appbarHeight = freezed,
   }) {
     return _then(_value.copyWith(
       primaryColor: freezed == primaryColor
@@ -81,6 +84,10 @@ class _$ThemeModelCopyWithImpl<$Res, $Val extends ThemeModel>
           ? _value.infoColor
           : infoColor // ignore: cast_nullable_to_non_nullable
               as Color?,
+      appbarHeight: freezed == appbarHeight
+          ? _value.appbarHeight
+          : appbarHeight // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$ThemeModelImplCopyWith<$Res>
       Color? successColor,
       Color? warningColor,
       Color? errorColor,
-      Color? infoColor});
+      Color? infoColor,
+      double? appbarHeight});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
     Object? warningColor = freezed,
     Object? errorColor = freezed,
     Object? infoColor = freezed,
+    Object? appbarHeight = freezed,
   }) {
     return _then(_$ThemeModelImpl(
       primaryColor: freezed == primaryColor
@@ -139,6 +148,10 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
           ? _value.infoColor
           : infoColor // ignore: cast_nullable_to_non_nullable
               as Color?,
+      appbarHeight: freezed == appbarHeight
+          ? _value.appbarHeight
+          : appbarHeight // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -151,7 +164,8 @@ class _$ThemeModelImpl implements _ThemeModel {
       this.successColor,
       this.warningColor,
       this.errorColor,
-      this.infoColor});
+      this.infoColor,
+      this.appbarHeight});
 
   @override
   final Color? primaryColor;
@@ -163,10 +177,12 @@ class _$ThemeModelImpl implements _ThemeModel {
   final Color? errorColor;
   @override
   final Color? infoColor;
+  @override
+  final double? appbarHeight;
 
   @override
   String toString() {
-    return 'ThemeModel(primaryColor: $primaryColor, successColor: $successColor, warningColor: $warningColor, errorColor: $errorColor, infoColor: $infoColor)';
+    return 'ThemeModel(primaryColor: $primaryColor, successColor: $successColor, warningColor: $warningColor, errorColor: $errorColor, infoColor: $infoColor, appbarHeight: $appbarHeight)';
   }
 
   @override
@@ -183,12 +199,14 @@ class _$ThemeModelImpl implements _ThemeModel {
             (identical(other.errorColor, errorColor) ||
                 other.errorColor == errorColor) &&
             (identical(other.infoColor, infoColor) ||
-                other.infoColor == infoColor));
+                other.infoColor == infoColor) &&
+            (identical(other.appbarHeight, appbarHeight) ||
+                other.appbarHeight == appbarHeight));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, primaryColor, successColor,
-      warningColor, errorColor, infoColor);
+      warningColor, errorColor, infoColor, appbarHeight);
 
   @JsonKey(ignore: true)
   @override
@@ -203,7 +221,8 @@ abstract class _ThemeModel implements ThemeModel {
       final Color? successColor,
       final Color? warningColor,
       final Color? errorColor,
-      final Color? infoColor}) = _$ThemeModelImpl;
+      final Color? infoColor,
+      final double? appbarHeight}) = _$ThemeModelImpl;
 
   @override
   Color? get primaryColor;
@@ -215,6 +234,8 @@ abstract class _ThemeModel implements ThemeModel {
   Color? get errorColor;
   @override
   Color? get infoColor;
+  @override
+  double? get appbarHeight;
   @override
   @JsonKey(ignore: true)
   _$$ThemeModelImplCopyWith<_$ThemeModelImpl> get copyWith =>

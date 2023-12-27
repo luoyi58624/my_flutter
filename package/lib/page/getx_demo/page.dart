@@ -3,18 +3,12 @@ import 'package:get/get.dart';
 
 import 'controller.dart';
 
-class GetxDemoPage extends StatefulWidget {
+class GetxDemoPage extends StatelessWidget {
   const GetxDemoPage({super.key});
 
   @override
-  State<GetxDemoPage> createState() => _GetxDemoPageState();
-}
-
-class _GetxDemoPageState extends State<GetxDemoPage> {
-  final controller = Get.put(GetxDemoController());
-
-  @override
   Widget build(BuildContext context) {
+    final controller = Get.put(GetxDemoController());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Getx测试'),

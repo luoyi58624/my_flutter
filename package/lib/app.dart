@@ -119,6 +119,33 @@ TransitionBuilder initBuilder() => (context, child) {
     };
 
 /// 监听路由变化，将路由添加到getx管理，实现离开页面自动销毁绑定的控制器。
+/// 只有一点需要注意：Get.put在StatelessWidget中必须将放置build方法中，否则无法正确回收控制器。
+///
+/// 反例：
+/// ```dart
+/// class GetxDemoPage extends StatelessWidget {
+///   GetxDemoPage({super.key});
+///   final controller = Get.put(GetxDemoController());
+///
+///   @override
+///   Widget build(BuildContext context) {
+///     return Container();
+///   }
+/// }
+/// ```
+///
+/// 正确做法：
+/// ```dart
+/// class GetxDemoPage extends StatelessWidget {
+///   const GetxDemoPage({super.key});
+///
+///   @override
+///   Widget build(BuildContext context) {
+///     final controller = Get.put(GetxDemoController());
+///     return Container();
+///   }
+/// }
+/// ```
 class _GetXRouterObserver extends NavigatorObserver {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
