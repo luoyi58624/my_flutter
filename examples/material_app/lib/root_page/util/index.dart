@@ -18,6 +18,7 @@ class _UtilRootPageState extends State<UtilRootPage> {
   Widget build(BuildContext context) {
     List<NavPageModel> utilCellItems = [
       NavPageModel('Getx工具类测试', GetxUtilPage()),
+      // NavPageModel('GetxDemo', GetxDemoPage()),
       const NavPageModel('InheritedWidget测试', InheritedWidgetTestPage()),
     ];
     return Scaffold(

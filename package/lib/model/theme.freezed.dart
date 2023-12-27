@@ -21,10 +21,6 @@ mixin _$ThemeModel {
   Color? get warningColor => throw _privateConstructorUsedError;
   Color? get errorColor => throw _privateConstructorUsedError;
   Color? get infoColor => throw _privateConstructorUsedError;
-  bool? get useMaterial3 => throw _privateConstructorUsedError;
-  bool? get useDark => throw _privateConstructorUsedError;
-  bool? get textBold => throw _privateConstructorUsedError;
-  String? get bottomNavigationType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ThemeModelCopyWith<ThemeModel> get copyWith =>
@@ -42,11 +38,7 @@ abstract class $ThemeModelCopyWith<$Res> {
       Color? successColor,
       Color? warningColor,
       Color? errorColor,
-      Color? infoColor,
-      bool? useMaterial3,
-      bool? useDark,
-      bool? textBold,
-      String? bottomNavigationType});
+      Color? infoColor});
 }
 
 /// @nodoc
@@ -67,10 +59,6 @@ class _$ThemeModelCopyWithImpl<$Res, $Val extends ThemeModel>
     Object? warningColor = freezed,
     Object? errorColor = freezed,
     Object? infoColor = freezed,
-    Object? useMaterial3 = freezed,
-    Object? useDark = freezed,
-    Object? textBold = freezed,
-    Object? bottomNavigationType = freezed,
   }) {
     return _then(_value.copyWith(
       primaryColor: freezed == primaryColor
@@ -93,22 +81,6 @@ class _$ThemeModelCopyWithImpl<$Res, $Val extends ThemeModel>
           ? _value.infoColor
           : infoColor // ignore: cast_nullable_to_non_nullable
               as Color?,
-      useMaterial3: freezed == useMaterial3
-          ? _value.useMaterial3
-          : useMaterial3 // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      useDark: freezed == useDark
-          ? _value.useDark
-          : useDark // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      textBold: freezed == textBold
-          ? _value.textBold
-          : textBold // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      bottomNavigationType: freezed == bottomNavigationType
-          ? _value.bottomNavigationType
-          : bottomNavigationType // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -126,11 +98,7 @@ abstract class _$$ThemeModelImplCopyWith<$Res>
       Color? successColor,
       Color? warningColor,
       Color? errorColor,
-      Color? infoColor,
-      bool? useMaterial3,
-      bool? useDark,
-      bool? textBold,
-      String? bottomNavigationType});
+      Color? infoColor});
 }
 
 /// @nodoc
@@ -149,10 +117,6 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
     Object? warningColor = freezed,
     Object? errorColor = freezed,
     Object? infoColor = freezed,
-    Object? useMaterial3 = freezed,
-    Object? useDark = freezed,
-    Object? textBold = freezed,
-    Object? bottomNavigationType = freezed,
   }) {
     return _then(_$ThemeModelImpl(
       primaryColor: freezed == primaryColor
@@ -175,22 +139,6 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
           ? _value.infoColor
           : infoColor // ignore: cast_nullable_to_non_nullable
               as Color?,
-      useMaterial3: freezed == useMaterial3
-          ? _value.useMaterial3
-          : useMaterial3 // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      useDark: freezed == useDark
-          ? _value.useDark
-          : useDark // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      textBold: freezed == textBold
-          ? _value.textBold
-          : textBold // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      bottomNavigationType: freezed == bottomNavigationType
-          ? _value.bottomNavigationType
-          : bottomNavigationType // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -203,11 +151,7 @@ class _$ThemeModelImpl implements _ThemeModel {
       this.successColor,
       this.warningColor,
       this.errorColor,
-      this.infoColor,
-      this.useMaterial3,
-      this.useDark,
-      this.textBold,
-      this.bottomNavigationType});
+      this.infoColor});
 
   @override
   final Color? primaryColor;
@@ -219,18 +163,10 @@ class _$ThemeModelImpl implements _ThemeModel {
   final Color? errorColor;
   @override
   final Color? infoColor;
-  @override
-  final bool? useMaterial3;
-  @override
-  final bool? useDark;
-  @override
-  final bool? textBold;
-  @override
-  final String? bottomNavigationType;
 
   @override
   String toString() {
-    return 'ThemeModel(primaryColor: $primaryColor, successColor: $successColor, warningColor: $warningColor, errorColor: $errorColor, infoColor: $infoColor, useMaterial3: $useMaterial3, useDark: $useDark, textBold: $textBold, bottomNavigationType: $bottomNavigationType)';
+    return 'ThemeModel(primaryColor: $primaryColor, successColor: $successColor, warningColor: $warningColor, errorColor: $errorColor, infoColor: $infoColor)';
   }
 
   @override
@@ -247,28 +183,12 @@ class _$ThemeModelImpl implements _ThemeModel {
             (identical(other.errorColor, errorColor) ||
                 other.errorColor == errorColor) &&
             (identical(other.infoColor, infoColor) ||
-                other.infoColor == infoColor) &&
-            (identical(other.useMaterial3, useMaterial3) ||
-                other.useMaterial3 == useMaterial3) &&
-            (identical(other.useDark, useDark) || other.useDark == useDark) &&
-            (identical(other.textBold, textBold) ||
-                other.textBold == textBold) &&
-            (identical(other.bottomNavigationType, bottomNavigationType) ||
-                other.bottomNavigationType == bottomNavigationType));
+                other.infoColor == infoColor));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      primaryColor,
-      successColor,
-      warningColor,
-      errorColor,
-      infoColor,
-      useMaterial3,
-      useDark,
-      textBold,
-      bottomNavigationType);
+  int get hashCode => Object.hash(runtimeType, primaryColor, successColor,
+      warningColor, errorColor, infoColor);
 
   @JsonKey(ignore: true)
   @override
@@ -283,11 +203,7 @@ abstract class _ThemeModel implements ThemeModel {
       final Color? successColor,
       final Color? warningColor,
       final Color? errorColor,
-      final Color? infoColor,
-      final bool? useMaterial3,
-      final bool? useDark,
-      final bool? textBold,
-      final String? bottomNavigationType}) = _$ThemeModelImpl;
+      final Color? infoColor}) = _$ThemeModelImpl;
 
   @override
   Color? get primaryColor;
@@ -299,14 +215,6 @@ abstract class _ThemeModel implements ThemeModel {
   Color? get errorColor;
   @override
   Color? get infoColor;
-  @override
-  bool? get useMaterial3;
-  @override
-  bool? get useDark;
-  @override
-  bool? get textBold;
-  @override
-  String? get bottomNavigationType;
   @override
   @JsonKey(ignore: true)
   _$$ThemeModelImplCopyWith<_$ThemeModelImpl> get copyWith =>

@@ -4,7 +4,6 @@ import 'package:package/index.dart';
 
 import 'bottom_badge.dart';
 import 'demo/page.dart';
-import 'theme.dart';
 
 class HomeRootPage extends StatefulWidget {
   const HomeRootPage({super.key});
@@ -18,7 +17,6 @@ class _HomeRootPageState extends State<HomeRootPage> {
   Widget build(BuildContext context) {
     LoggerUtil.i('home build');
     const List<NavPageModel> cellNames = [
-      NavPageModel('主题设置', ThemePage()),
       NavPageModel('底部Badge设置', BottomBadgePage()),
     ];
     return Scaffold(
@@ -49,12 +47,12 @@ class _HomeRootPageState extends State<HomeRootPage> {
               children: [
                 ...cellNames
                     .map((e) => ListTile(
-                  title: Text(e.title),
-                  trailing: const Icon(Icons.keyboard_arrow_right_outlined),
-                  onTap: () {
-                    RouterUtil.to(e.page);
-                  },
-                ))
+                          title: Text(e.title),
+                          trailing: const Icon(Icons.keyboard_arrow_right_outlined),
+                          onTap: () {
+                            RouterUtil.to(e.page);
+                          },
+                        ))
                     .toList(),
                 ListTile(
                   title: const Text('关闭弹窗'),
@@ -164,6 +162,12 @@ class _ChildPage2 extends StatelessWidget {
                 Navigator.of(context).pop();
               },
               child: const Text('返回'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                RouterUtil.to(GetxDemoPage());
+              },
+              child: const Text('GetxDemo'),
             ),
             ElevatedButton(
               onPressed: () {

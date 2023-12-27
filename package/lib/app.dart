@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/router_report.dart';
 
 import 'package:package/index.dart';
 
@@ -32,10 +33,7 @@ class MyApp extends StatelessWidget {
     this.localizationsDelegates,
     this.supportedLocales,
     this.locale = const Locale('zh', 'CN'),
-  }) : assert(
-            (home != null && onGenerateRoute == null) ||
-                (home == null && onGenerateRoute != null),
-            'home和onGenerateRoute参数必须二选一');
+  }) : assert((home != null && onGenerateRoute == null) || (home == null && onGenerateRoute != null), 'home和onGenerateRoute参数必须二选一');
 
   /// App标题，默认空
   final String title;
@@ -76,25 +74,19 @@ class MyApp extends StatelessWidget {
   /// 默认的语言，默认为：const Locale('zh', 'CN')
   final Locale locale;
 
-  ThemeController get themeController => Get.find();
-
   @override
   Widget build(BuildContext context) {
-    var $localizationsDelegates = CommonUtil.concatArray(
-            (localizationsDelegates ?? []).toList(), _localizationsDelegates)
-        .map((e) => e);
-    var $supportedLocales = CommonUtil.concatArray(
-            (supportedLocales ?? []).toList(), _supportedLocales)
-        .map((e) => e);
+    var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
+    var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
     return MaterialApp(
       title: title,
       onGenerateRoute: onGenerateRoute ??
           (setting) {
             return CupertinoPageRoute(builder: (context) => home!);
           },
-      navigatorObservers: navigatorObservers,
+      navigatorObservers: [...navigatorObservers, _GetXRouterObserver()],
       navigatorKey: globalNavigatorKey,
-      theme: theme ?? themeController.buildMaterialThemeData(),
+      theme: theme ?? myTheme.buildThemeData(),
       darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: $localizationsDelegates,
@@ -117,8 +109,7 @@ TransitionBuilder initBuilder() => (context, child) {
               toast.init(context);
               return MediaQuery(
                 // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
-                data: MediaQuery.of(context)
-                    .copyWith(accessibleNavigation: false),
+                data: MediaQuery.of(context).copyWith(accessibleNavigation: false),
                 child: child!,
               );
             }),
@@ -126,3 +117,16 @@ TransitionBuilder initBuilder() => (context, child) {
         );
       }
     };
+
+/// 监听路由变化，将路由添加到getx管理，实现离开页面自动销毁绑定的控制器。
+class _GetXRouterObserver extends NavigatorObserver {
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    RouterReportManager.instance.reportCurrentRoute(route);
+  }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) async {
+    RouterReportManager.instance.reportRouteDispose(route);
+  }
+}

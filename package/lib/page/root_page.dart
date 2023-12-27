@@ -57,7 +57,6 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   late final RootPageController controller = Get.put(RootPageController._(widget.pages));
-  final ThemeController themeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +80,7 @@ class _RootPageState extends State<RootPage> {
             unselectedLabelStyle: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
-            selectedItemColor: themeController.primaryColor.value,
+            selectedItemColor: myTheme.primaryColor,
             selectedLabelStyle: const TextStyle(
               fontWeight: FontWeight.w900,
             ),
