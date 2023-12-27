@@ -183,11 +183,6 @@ class MyTheme {
   ThemeData buildThemeData({
     Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
   }) {
-    var pageTransitionsTheme = const PageTransitionsTheme(builders: {
-      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-    });
     var $theme = ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
@@ -197,8 +192,12 @@ class MyTheme {
     );
     return ThemeData(
       useMaterial3: true,
-      pageTransitionsTheme: pageTransitionsTheme,
-      textTheme: _materialBoldTextTheme,
+      pageTransitionsTheme: const PageTransitionsTheme(builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+      }),
+      textTheme: _TextTheme,
       // 根据主题色创建material3的主题系统
       colorScheme: ColorScheme.fromSeed(
         brightness: brightness,
@@ -221,6 +220,45 @@ class MyTheme {
     );
   }
 }
+
+const _TextTheme = TextTheme(
+  displaySmall: TextStyle(
+    fontWeight: FontWeight.w500,
+  ),
+  displayMedium: TextStyle(
+    fontWeight: FontWeight.w500,
+  ),
+  displayLarge: TextStyle(
+    fontWeight: FontWeight.w500,
+  ),
+  titleSmall: TextStyle(
+    fontWeight: FontWeight.w700,
+  ),
+  titleMedium: TextStyle(
+    fontWeight: FontWeight.w700,
+  ),
+  titleLarge: TextStyle(
+    fontWeight: FontWeight.w700,
+  ),
+  bodySmall: TextStyle(
+    fontWeight: FontWeight.w500,
+  ),
+  bodyMedium: TextStyle(
+    fontWeight: FontWeight.w500,
+  ),
+  bodyLarge: TextStyle(
+    fontWeight: FontWeight.w500,
+  ),
+  labelSmall: TextStyle(
+    fontWeight: FontWeight.w500,
+  ),
+  labelMedium: TextStyle(
+    fontWeight: FontWeight.w500,
+  ),
+  labelLarge: TextStyle(
+    fontWeight: FontWeight.w500,
+  ),
+);
 
 /// material加粗后的文字主题
 const _materialBoldTextTheme = TextTheme(
