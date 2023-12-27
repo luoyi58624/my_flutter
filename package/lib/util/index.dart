@@ -10,7 +10,6 @@ export 'http.dart';
 export 'loading.dart';
 export 'permission.dart';
 export 'toast.dart';
-export 'vibrate.dart';
 
 /// 是否为release版
 const bool isRelease = bool.fromEnvironment("dart.vm.product");
