@@ -8,10 +8,12 @@ class RouterUtil {
   static Future<T?> to<T>(
     Widget page, {
     RouteSettings? settings,
+    bool fullscreenDialog = false,
   }) async {
     return await Navigator.of(globalContext).push<T>(CupertinoPageRoute(
       builder: (context) => page,
       settings: settings,
+      fullscreenDialog: fullscreenDialog,
     ));
   }
 
