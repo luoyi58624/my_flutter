@@ -429,20 +429,23 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.0-pre"
-  multi_split_view:
-    dependency: transitive
-    description:
-      name: multi_split_view
-      sha256: d68e129bff71fc9e6b66de59e1b79deaf4b91f30940130bfbd2d704c1c713499
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.4.0"
   my_flutter:
     dependency: "direct main"
     description:
-      path: "../.."
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "32539e6b3f33cfb3803cda8271fb8a33f5f8bd97"
+      url: "https://gitee.com/luoyi666/my_flutter.git"
+    source: git
+    version: "0.0.4"
+  my_flutter_plugin:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: bb9f679c481a25121337aeb994212c776a2197cc
+      url: "https://gitee.com/luoyi666/my_flutter_plugin.git"
+    source: git
     version: "0.0.1"
   octo_image:
     dependency: transitive
@@ -810,5 +813,5 @@ packages:
     source: hosted
     version: "1.0.3"
 sdks:
-  dart: ">=3.2.0 <4.0.0"
+  dart: ">=3.2.3 <4.0.0"
   flutter: ">=3.16.0"

@@ -15,37 +15,5 @@ export 'package:get/get_utils/src/get_utils/get_utils.dart';
 export 'package:get/get_utils/src/platform/platform.dart';
 export 'package:get/get_utils/src/queue/get_queue.dart';
 
-// 底部弹窗库
-export 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
-// ios下的图标
-export 'package:cupertino_icons/cupertino_icons.dart';
-
 // 常用工具类
 export 'package:flustars/flustars.dart';
-
-// 多平台查找文件系统上的常用位置
-export 'package:path_provider/path_provider.dart';
-
-// 加密解密工具包
-export 'package:crypto/crypto.dart';
-
-// 适应平台风格的组件集合
-export 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-
-// 生成假数据
-export 'package:faker/faker.dart';
-
-// 加载动画组件集合
-export 'package:flutter_spinkit/flutter_spinkit.dart';
-
-// 给容器添加闪光动画组件
-export 'package:shimmer/shimmer.dart';
-
-// 扩展官方tabs，优化手感
-export 'package:extended_tabs/extended_tabs.dart';
-
-// 打开文件
-export 'package:open_file_plus/open_file_plus.dart';
-
-export 'package:flutter_html/flutter_html.dart';

@@ -2,8 +2,6 @@ include: package:flutter_lints/flutter.yaml
 
 # 自定义语法校验规则
 linter:
-  errors:
-    invalid_annotation_target: ignore
   rules:
     # 关闭forEach的校验。很多情况下，dart推荐你使用for循环遍历数组而不是forEach，但dart并没有说明有什么性能问题、或其他缺陷
     avoid_function_literals_in_foreach_calls: false

@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_rx/src/rx_workers/rx_workers.dart';
 import 'package:my_flutter/my_flutter.dart';
 
 class _LocalDataModel {
@@ -45,8 +46,7 @@ Rx<T> useLocalObs<T>(
     serializeFun ??= (value) => (value as Color).toHex();
     deserializeFun ??= (value) => ColorUtil.hexToColor((value)) as T;
   }
-  assert(isBaseType || (serializeFun != null && deserializeFun != null),
-      '请为响应式持久化变量[$key]提供序列化和反序列化函数');
+  assert(isBaseType || (serializeFun != null && deserializeFun != null), '请为响应式持久化变量[$key]提供序列化和反序列化函数');
   late Rx<T> $value;
   dynamic localData = localStorage.getItem(key);
   if (localData == null) {
@@ -67,11 +67,7 @@ Rx<T> useLocalObs<T>(
   }
   // 提示：当你卸载控制器后getx会自动释放它，无须手动销毁
   ever($value, (v) {
-    localStorage.setItem(
-        key,
-        jsonEncode(_LocalDataModel(
-                valueType, serializeFun == null ? v : serializeFun(v))
-            .toJson()));
+    localStorage.setItem(key, jsonEncode(_LocalDataModel(valueType, serializeFun == null ? v : serializeFun(v)).toJson()));
   });
   return $value;
 }
@@ -109,8 +105,7 @@ RxMap<String, T> useLocalMapObs<T>(
 }) {
   String valueType = T.toString();
   bool isBaseType = CommonUtil.isBaseTypeString(valueType);
-  assert(isBaseType || (serializeFun != null && deserializeFun != null),
-      '请为响应式持久化变量[$key]提供序列化和反序列化函数');
+  assert(isBaseType || (serializeFun != null && deserializeFun != null), '请为响应式持久化变量[$key]提供序列化和反序列化函数');
   late RxMap<String, T> $value;
   dynamic localData = localStorage.getItem(key);
   if (localData == null) {
@@ -127,22 +122,15 @@ RxMap<String, T> useLocalMapObs<T>(
       if (CommonUtil.isBaseTypeString(valueType)) {
         $value = mapData.cast<String, T>().obs;
       } else {
-        $value = mapData
-            .map((key, value) => MapEntry(key, deserializeFun!(value)))
-            .cast<String, T>()
-            .obs;
+        $value = mapData.map((key, value) => MapEntry(key, deserializeFun!(value))).cast<String, T>().obs;
       }
     }
   }
   ever($value, (v) {
     localStorage.setItem(
         key,
-        jsonEncode(_LocalDataModel(
-                valueType,
-                serializeFun == null
-                    ? v
-                    : v.map((key, value) => MapEntry(key, serializeFun(value))))
-            .toJson()));
+        jsonEncode(
+            _LocalDataModel(valueType, serializeFun == null ? v : v.map((key, value) => MapEntry(key, serializeFun(value)))).toJson()));
   });
   return $value;
 }

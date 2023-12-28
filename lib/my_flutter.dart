@@ -19,11 +19,7 @@ GlobalKey<NavigatorState> globalNavigatorKey = GlobalKey<NavigatorState>();
 /// 全局根节点的context，注意：嵌套导航不要使用它
 BuildContext get globalContext => globalNavigatorKey.currentContext!;
 
-/// 默认的本地存储实例，它基于get_storage，支持所有平台。默认情况下，执行[initMyFlutter]会初始化一个LocalStorage，同时，它还允许你根据tag创建多个实例，例如：
-/// ```dart
-/// var httpLocalStorage = await LocalStorage.init('http');
-/// var sessionLocalStorage = await LocalStorage.init('session');
-/// ```
+/// key-value本地存储对象
 late LocalStorage localStorage;
 
 /// 主题对象

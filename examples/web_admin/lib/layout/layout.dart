@@ -24,7 +24,7 @@ class _LayoutPageState extends State<LayoutPage> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                NavRailWidget(),
+                // NavRailWidget(),
                 SidebarWidget(
                   navigationShell: widget.navigationShell,
                 ),
