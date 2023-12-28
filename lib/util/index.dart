@@ -6,7 +6,6 @@ export 'modal_router.dart';
 export 'no_ripper.dart';
 export 'router.dart';
 export 'getx.dart';
-export 'http.dart';
 export 'loading.dart';
 export 'toast.dart';
 

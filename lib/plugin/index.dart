@@ -15,9 +15,6 @@ export 'package:get/get_utils/src/get_utils/get_utils.dart';
 export 'package:get/get_utils/src/platform/platform.dart';
 export 'package:get/get_utils/src/queue/get_queue.dart';
 
-// 网络请求库
-export 'package:dio/dio.dart';
-
 // 底部弹窗库
 export 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 

@@ -1,8 +1,5 @@
 library my_flutter;
 
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'my_flutter.dart';
@@ -37,8 +34,6 @@ late MyTheme myTheme;
 Future<void> initMyFlutter({
   ThemeModel? themeModel,
 }) async {
-  // 取消验证ssl证书
-  if (!kIsWeb) HttpOverrides.global = GlobalHttpOverrides();
   localStorage = await LocalStorage.init();
   myTheme = MyTheme(themeModel);
 }

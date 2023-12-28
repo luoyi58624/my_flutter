@@ -6,19 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get_utils/src/platform/platform.dart';
 import 'package:path/path.dart' as p;
-import 'package:uuid/uuid.dart';
 import 'package:html/parser.dart' as htmlparser;
 
 import '../common/modal.dart';
-
-/// uuid生成实例
-///
-/// 示例：
-/// ```dart
-/// uuid.v1();  // Generate a v1 (time-based) id
-/// uuid.v4();  // Generate a v4 (random) id
-/// ```
-const _uuid = Uuid();
 
 /// 图片后缀
 const imageSuffix = ['jpg', 'jpeg', 'png', 'gif'];
@@ -437,11 +427,6 @@ class CommonUtil {
   static String htmlToText(String html) {
     final document = htmlparser.parse(html);
     return htmlparser.parse(document.body?.text).documentElement?.text ?? '';
-  }
-
-  /// 生成uuid
-  static String uuid() {
-    return _uuid.v4().replaceAll('-', '');
   }
 
   /// 判断文件名是否是图片
