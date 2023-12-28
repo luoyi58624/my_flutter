@@ -8,7 +8,6 @@ export 'router.dart';
 export 'getx.dart';
 export 'http.dart';
 export 'loading.dart';
-export 'permission.dart';
 export 'toast.dart';
 
 /// 是否为release版

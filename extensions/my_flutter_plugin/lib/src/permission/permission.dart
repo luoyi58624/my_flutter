@@ -1,6 +1,7 @@
+import 'package:my_flutter/my_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'toast.dart';
+export 'package:permission_handler/permission_handler.dart';
 
 class PermissionUtil {
   PermissionUtil._();

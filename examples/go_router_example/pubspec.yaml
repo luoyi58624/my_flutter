@@ -14,7 +14,10 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   go_router: ^13.0.0
-
+  my_flutter:
+    git:
+      url: https://gitee.com/luoyi666/my_flutter.git
+      ref: v0.0.4
 
 dev_dependencies:
   flutter_test:

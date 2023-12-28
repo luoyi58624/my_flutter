@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:my_flutter/my_flutter.dart';
 
 FToast toast = FToast();
 
@@ -23,7 +24,7 @@ class ToastUtil {
     _buildToast(
       _OtherToastWidget(
         title: title,
-        backgroundColor: const Color.fromARGB(255, 0, 120, 212),
+        backgroundColor: myTheme.primaryColor,
       ),
       duration,
     );
@@ -34,7 +35,7 @@ class ToastUtil {
     _buildToast(
       _OtherToastWidget(
         title: title,
-        backgroundColor: const Color.fromARGB(255, 16, 185, 129),
+        backgroundColor: myTheme.successColor,
       ),
       duration,
     );
@@ -45,7 +46,7 @@ class ToastUtil {
     _buildToast(
       _OtherToastWidget(
         title: title,
-        backgroundColor: const Color.fromARGB(255, 245, 158, 11),
+        backgroundColor: myTheme.warningColor,
       ),
       duration,
     );
@@ -56,7 +57,7 @@ class ToastUtil {
     _buildToast(
       _OtherToastWidget(
         title: title,
-        backgroundColor: const Color.fromARGB(255, 239, 68, 68),
+        backgroundColor: myTheme.errorColor,
       ),
       duration,
     );
@@ -67,7 +68,7 @@ class ToastUtil {
     _buildToast(
       _OtherToastWidget(
         title: title,
-        backgroundColor: const Color.fromARGB(255, 127, 137, 154),
+        backgroundColor: myTheme.infoColor,
       ),
       duration,
     );
