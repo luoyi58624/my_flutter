@@ -192,6 +192,9 @@ class MyTheme {
     );
     return ThemeData(
       useMaterial3: true,
+      // 解决web上material按钮外边距为0问题，与移动端的效果保持一致
+      materialTapTargetSize: MaterialTapTargetSize.padded,
+      visualDensity: VisualDensity.standard,
       pageTransitionsTheme: const PageTransitionsTheme(builders: {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
