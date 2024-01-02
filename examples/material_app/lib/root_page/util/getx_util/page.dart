@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:my_flutter/my_flutter.dart';
+import 'package:material_app/global.dart';
 
 import 'controller.dart';
 

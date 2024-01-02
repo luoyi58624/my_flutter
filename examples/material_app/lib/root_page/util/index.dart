@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_app/root_page/util/local_storage_test.dart';
 import 'package:my_flutter/my_flutter.dart';
 
 import 'getx_util/page.dart';
@@ -20,6 +21,7 @@ class _UtilRootPageState extends State<UtilRootPage> {
       NavPageModel('Getx工具类测试', GetxUtilPage()),
       // NavPageModel('GetxDemo', GetxDemoPage()),
       const NavPageModel('InheritedWidget测试', InheritedWidgetTestPage()),
+      const NavPageModel('本地存储测试', LocalStorageTestPage()),
     ];
     return Scaffold(
       appBar: AppBar(

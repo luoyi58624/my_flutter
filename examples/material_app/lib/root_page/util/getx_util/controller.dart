@@ -27,10 +27,10 @@ class UserModel {
 }
 
 class GetxUtilController extends GetxController {
-  final count = useLocalObs(0, 'count');
+  final count = useLocalObs(0, 'getx_test_count');
   final userModel = useLocalObs(
     UserModel(),
-    'userModel',
+    'getx_test_userModel',
     serializeFun: (value) => jsonEncode(value.toJson()),
     deserializeFun: (value) => UserModel.fromJson(jsonDecode(value)),
   );

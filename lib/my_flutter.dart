@@ -1,8 +1,10 @@
 library my_flutter;
 
 import 'package:flutter/widgets.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'my_flutter.dart';
+import 'util/use_local_obs.dart';
 
 // flutter官方国际化库
 export 'package:flutter_localizations/flutter_localizations.dart';
@@ -26,7 +28,7 @@ export 'theme.dart';
 export 'common/index.dart';
 export 'model/index.dart';
 export 'page/index.dart';
-export 'util/index.dart';
+export 'util/index.dart' hide obsLocalStorage;
 export 'widget/index.dart';
 
 /// 全局根节点导航key
@@ -42,10 +44,12 @@ late LocalStorage localStorage;
 late MyTheme myTheme;
 
 /// 初始化
-/// * themeModel 自定义主题，你也可以直接通过ThemeController.of修改主题
+/// * themeModel 自定义主题
 Future<void> initMyFlutter({
   ThemeModel? themeModel,
 }) async {
+  await Hive.initFlutter();
   localStorage = await LocalStorage.init();
+  obsLocalStorage = await LocalStorage.init('local_obs');
   myTheme = MyTheme(themeModel);
 }

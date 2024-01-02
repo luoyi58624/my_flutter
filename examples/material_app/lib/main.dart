@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/my_flutter.dart';
 
+import 'global.dart';
 import 'root_page/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initMyFlutter(themeModel: const ThemeModel(primaryColor: Colors.cyan));
+  await initMyFlutter();
   runApp(const RestartAppWidget(child: _MyApp()));
 }
 

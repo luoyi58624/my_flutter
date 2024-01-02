@@ -560,6 +560,13 @@ class CommonUtil {
   static void delayed(int milliseconds, void Function() fun) {
     Future.delayed(Duration(milliseconds: milliseconds), fun);
   }
+
+  /// 当flutter渲染完毕元素后再执行异步逻辑
+  static void nextTick(Future<void> Function() fun) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await fun();
+    });
+  }
 }
 
 bool _compareResult(CompareType compareType, num result) {
