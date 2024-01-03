@@ -26,7 +26,6 @@ class MyTheme {
   late bool translucenceStatusBar;
 
   MyTheme([ThemeModel? _]) {
-    LoggerUtil.i(_?.primaryColor);
     primaryColor = _?.primaryColor ?? _primaryColor;
     successColor = _?.successColor ?? _successColor;
     warningColor = _?.warningColor ?? _warningColor;
@@ -186,7 +185,6 @@ class MyTheme {
   ThemeData buildThemeData({
     Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
   }) {
-    LoggerUtil.i(primaryColor);
     var $theme = ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
