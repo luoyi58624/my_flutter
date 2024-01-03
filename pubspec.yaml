@@ -17,7 +17,6 @@ dependencies:
   collection: ^1.18.0
   flustars: ^2.0.1
   fluttertoast: ^8.2.4
-  get_storage: ^2.1.1
   logger: ^2.0.2+1
   path: ^1.8.3
   html: ^0.15.4
