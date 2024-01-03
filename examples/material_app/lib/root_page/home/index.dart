@@ -15,7 +15,6 @@ class HomeRootPage extends StatefulWidget {
 class _HomeRootPageState extends State<HomeRootPage> {
   @override
   Widget build(BuildContext context) {
-    LoggerUtil.i('home build');
     const List<NavPageModel> cellNames = [
       NavPageModel('底部Badge设置', BottomBadgePage()),
     ];

@@ -141,6 +141,7 @@ TransitionBuilder _initBuilder() => (context, child) {
 ///
 ///   @override
 ///   Widget build(BuildContext context) {
+///     // Getx不会重复注入相同的控制器，所以不必担心此代码会影响程序的正常运行
 ///     final controller = Get.put(GetxDemoController());
 ///     return Container();
 ///   }

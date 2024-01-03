@@ -82,11 +82,6 @@ class CommonUtil {
     return (value is num || value is String || value is bool);
   }
 
-  /// 判断变量是否不是基本数据类型
-  static bool isNotBaseType(dynamic value) {
-    return !isBaseType(value);
-  }
-
   /// 检查传入的类型字符串是否是基本类型字符串
   static bool isBaseTypeString(String typeString) {
     return baseTypeString.contains(typeString);
