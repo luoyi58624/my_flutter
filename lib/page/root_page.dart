@@ -78,11 +78,11 @@ class _RootPageState extends State<RootPage> {
             selectedFontSize: 12,
             iconSize: 26,
             unselectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
             ),
             selectedItemColor: myTheme.primaryColor,
             selectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w700,
             ),
             type: BottomNavigationBarType.fixed,
             items: widget.pages

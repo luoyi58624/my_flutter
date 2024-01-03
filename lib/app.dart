@@ -34,7 +34,10 @@ class MyApp extends StatelessWidget {
     this.supportedLocales,
     this.locale = const Locale('zh', 'CN'),
     this.builder,
-  }) : assert((home != null && onGenerateRoute == null) || (home == null && onGenerateRoute != null), 'home和onGenerateRoute参数必须二选一');
+  }) : assert(
+            (home != null && onGenerateRoute == null) ||
+                (home == null && onGenerateRoute != null),
+            'home和onGenerateRoute参数必须二选一');
 
   /// App标题，默认空
   final String title;
@@ -79,8 +82,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
-    var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
+    var $localizationsDelegates = CommonUtil.concatArray(
+            (localizationsDelegates ?? []).toList(), _localizationsDelegates)
+        .map((e) => e);
+    var $supportedLocales = CommonUtil.concatArray(
+            (supportedLocales ?? []).toList(), _supportedLocales)
+        .map((e) => e);
     return MaterialApp(
       title: title,
       onGenerateRoute: onGenerateRoute ??
@@ -113,17 +120,26 @@ TransitionBuilder _initBuilder(TransitionBuilder? builder) => (context, child) {
               toast.init(context);
               return MediaQuery(
                 // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
-                data: MediaQuery.of(context).copyWith(accessibleNavigation: false),
+                data: MediaQuery.of(context)
+                    .copyWith(accessibleNavigation: false),
                 child: Material(
                   child: CupertinoTheme(
                     data: CupertinoThemeData(
                       primaryColor: myTheme.primaryColor,
                       textTheme: CupertinoTextThemeData(
-                        textStyle: textTheme.textStyle.copyWith(fontWeight: FontWeight.w500),
-                        tabLabelTextStyle: textTheme.tabLabelTextStyle.copyWith(fontSize: 12),
-                        navActionTextStyle: textTheme.navActionTextStyle.copyWith(
+                        textStyle: textTheme.textStyle.copyWith(
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'NotoSansSC',
+                        ),
+                        tabLabelTextStyle: textTheme.tabLabelTextStyle.copyWith(
+                          fontSize: 12,
+                          fontFamily: 'NotoSansSC',
+                        ),
+                        navActionTextStyle:
+                            textTheme.navActionTextStyle.copyWith(
                           fontWeight: FontWeight.w500,
                           color: myTheme.primaryColor,
+                          fontFamily: 'NotoSansSC',
                         ),
                       ),
                     ),

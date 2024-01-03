@@ -109,23 +109,20 @@ class _ListPageState extends State<_ListPage> {
       ),
       body: Obx(() {
         LoggerUtil.i('list build');
-        return CupertinoScrollbar(
+        return CustomScrollView(
           controller: scrollController,
-          child: CustomScrollView(
-            controller: scrollController,
-            slivers: [
-              SuperSliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => ListTile(
-                    onTap: () {},
-                    title: Text(
-                        '${controller.userList[index]['userId']} - ${controller.userList[index]['username']} '),
-                  ),
-                  childCount: controller.userList.length,
+          slivers: [
+            SuperSliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => ListTile(
+                  onTap: () {},
+                  title: Text(
+                      '${controller.userList[index]['userId']} - ${controller.userList[index]['username']} '),
                 ),
-              )
-            ],
-          ),
+                childCount: controller.userList.length,
+              ),
+            )
+          ],
         );
       }),
     );
@@ -170,16 +167,14 @@ class _ListPage2State extends State<_ListPage2> {
           ),
         ],
       ),
-      body: CupertinoScrollbar(
-        child: ListView.builder(
-          itemCount: userList.length,
-          shrinkWrap: true,
-          cacheExtent: 9999999999999,
-          itemBuilder: (context, index) => ListTile(
-            onTap: () {},
-            title: Text(
-                '${userList[index]['userId']} - ${userList[index]['username']} '),
-          ),
+      body: ListView.builder(
+        itemCount: userList.length,
+        shrinkWrap: true,
+        cacheExtent: 9999999999999,
+        itemBuilder: (context, index) => ListTile(
+          onTap: () {},
+          title: Text(
+              '${userList[index]['userId']} - ${userList[index]['username']} '),
         ),
       ),
     );

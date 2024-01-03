@@ -208,6 +208,8 @@ class MyTheme {
         brightness: brightness,
         seedColor: primaryColor,
       ),
+      fontFamily: 'NotoSansSC',
+      // fontFamily: GetPlatform.isWindows ? "微软雅黑" : null,
       splashFactory: InkRipple.splashFactory,
       cardTheme: const CardTheme(
         surfaceTintColor: Colors.transparent,
