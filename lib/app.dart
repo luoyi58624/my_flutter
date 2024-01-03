@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
     this.localizationsDelegates,
     this.supportedLocales,
     this.locale = const Locale('zh', 'CN'),
+    this.builder,
   }) : assert((home != null && onGenerateRoute == null) || (home == null && onGenerateRoute != null), 'home和onGenerateRoute参数必须二选一');
 
   /// App标题，默认空
@@ -74,6 +75,8 @@ class MyApp extends StatelessWidget {
   /// 默认的语言，默认为：const Locale('zh', 'CN')
   final Locale locale;
 
+  final TransitionBuilder? builder;
+
   @override
   Widget build(BuildContext context) {
     var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
@@ -92,13 +95,13 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: $localizationsDelegates,
       supportedLocales: $supportedLocales,
       locale: locale,
-      builder: _initBuilder(),
+      builder: _initBuilder(builder),
     );
   }
 }
 
 /// MaterialApp、CupertinoApp的 builder 参数，初始化全局toast、解决modal_bottom_sheet在高版本安卓系统上动画丢失问题
-TransitionBuilder _initBuilder() => (context, child) {
+TransitionBuilder _initBuilder(TransitionBuilder? builder) => (context, child) {
       _initContext ??= context;
       if (_initContext != context) {
         return child!;
@@ -110,7 +113,7 @@ TransitionBuilder _initBuilder() => (context, child) {
               return MediaQuery(
                 // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
                 data: MediaQuery.of(context).copyWith(accessibleNavigation: false),
-                child: child!,
+                child: builder == null ? child! : builder(context, child),
               );
             }),
           ],
