@@ -1,5 +1,6 @@
 library my_flutter;
 
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -53,4 +54,9 @@ Future<void> initMyFlutter({
   localStorage = await LocalStorage.init();
   obsLocalStorage = await LocalStorage.init('local_obs');
   myTheme = MyTheme(themeModel);
+  if (myTheme.translucenceStatusBar) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
+  } else {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
+  }
 }

@@ -23,6 +23,7 @@ class MyTheme {
   late Color errorColor;
   late Color infoColor;
   late double appbarHeight;
+  late bool translucenceStatusBar;
 
   MyTheme([ThemeModel? _]) {
     primaryColor = _?.primaryColor ?? _primaryColor;
@@ -31,6 +32,7 @@ class MyTheme {
     errorColor = _?.errorColor ?? _errorColor;
     infoColor = _?.infoColor ?? _infoColor;
     appbarHeight = _?.appbarHeight ?? 56;
+    translucenceStatusBar = _?.translucenceStatusBar ?? false;
   }
 
   Color baseColor(BuildContext context, {ColorMode? mode}) {
