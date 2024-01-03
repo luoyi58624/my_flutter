@@ -49,6 +49,7 @@ late MyTheme myTheme;
 Future<void> initMyFlutter({
   ThemeModel? themeModel,
 }) async {
+  LoggerUtil.i(themeModel?.primaryColor);
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   localStorage = await LocalStorage.init();

@@ -106,6 +106,7 @@ TransitionBuilder _initBuilder(TransitionBuilder? builder) => (context, child) {
       if (_initContext != context) {
         return child!;
       } else {
+        var textTheme = const CupertinoThemeData().textTheme;
         return Overlay(
           initialEntries: [
             OverlayEntry(builder: (context) {
@@ -113,7 +114,22 @@ TransitionBuilder _initBuilder(TransitionBuilder? builder) => (context, child) {
               return MediaQuery(
                 // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
                 data: MediaQuery.of(context).copyWith(accessibleNavigation: false),
-                child: builder == null ? child! : builder(context, child),
+                child: Material(
+                  child: CupertinoTheme(
+                    data: CupertinoThemeData(
+                      primaryColor: myTheme.primaryColor,
+                      textTheme: CupertinoTextThemeData(
+                        textStyle: textTheme.textStyle.copyWith(fontWeight: FontWeight.w500),
+                        tabLabelTextStyle: textTheme.tabLabelTextStyle.copyWith(fontSize: 12),
+                        navActionTextStyle: textTheme.navActionTextStyle.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: myTheme.primaryColor,
+                        ),
+                      ),
+                    ),
+                    child: builder == null ? child! : builder(context, child),
+                  ),
+                ),
               );
             }),
           ],
