@@ -1,4 +1,0 @@
-include: package:my_flutter/flutter.yaml
-
-linter:
-  rules:
