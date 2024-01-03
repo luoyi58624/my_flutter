@@ -16,7 +16,7 @@ class _MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MyApp(
       home: RootPage(
-        pages: materialRootPages,
+        pages: rootPages,
       ),
     );
   }

@@ -27,7 +27,6 @@ dependency_overrides:
   my_flutter:
     path: ../../
 
-
 flutter:
   uses-material-design: true
   assets:

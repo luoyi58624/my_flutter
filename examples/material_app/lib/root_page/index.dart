@@ -7,7 +7,7 @@ import 'my/index.dart';
 import 'template/index.dart';
 import 'util/index.dart';
 
-const materialRootPages = [
+const rootPages = [
   RootPageModel('首页', '/', HomeRootPage(), icon: Icons.home),
   RootPageModel('组件', '/component', ComponentRootPage(), icon: Icons.token_outlined),
   RootPageModel('工具', '/util', UtilRootPage(), icon: Icons.grid_view),

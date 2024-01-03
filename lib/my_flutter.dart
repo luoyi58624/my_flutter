@@ -48,6 +48,7 @@ late MyTheme myTheme;
 Future<void> initMyFlutter({
   ThemeModel? themeModel,
 }) async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   localStorage = await LocalStorage.init();
   obsLocalStorage = await LocalStorage.init('local_obs');
