@@ -23,9 +23,6 @@ export 'package:get/get_utils/src/get_utils/get_utils.dart';
 export 'package:get/get_utils/src/platform/platform.dart';
 export 'package:get/get_utils/src/queue/get_queue.dart';
 
-// ListView增强插件，解决不定高子项滚动条错位bug、拖动滚动条滚动性能低bug
-export 'package:super_sliver_list/super_sliver_list.dart';
-
 export 'app.dart';
 export 'theme.dart';
 export 'common/index.dart';
