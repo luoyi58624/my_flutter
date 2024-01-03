@@ -429,14 +429,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.0.0-release-candidate-5"
-  get_storage:
-    dependency: transitive
-    description:
-      name: get_storage
-      sha256: "39db1fffe779d0c22b3a744376e86febe4ade43bf65e06eab5af707dc84185a2"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.1.1"
   glob:
     dependency: transitive
     description:
@@ -635,7 +627,7 @@ packages:
       path: "../.."
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.5"
   my_flutter_plugin:
     dependency: "direct main"
     description:
@@ -986,6 +978,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.0"
+  super_sliver_list:
+    dependency: "direct main"
+    description:
+      name: super_sliver_list
+      sha256: "6729ea1f44c678978e9f3121de4f2cbf2feaaa49d1fb8a0a69c05c4db2cdeb86"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.8"
   sync_scroll_library:
     dependency: transitive
     description:

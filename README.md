@@ -16,7 +16,7 @@
 - 打包ipa（ios -> ad-hoc包，给测试机型使用）
 
 > flutter build ipa --release --export-method=ad-hoc
-
+                                                              
 - 安装打包好的app
 
 > flutter install

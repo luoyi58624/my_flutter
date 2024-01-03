@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_app/global.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 
 import 'controller.dart';
 
@@ -53,13 +54,19 @@ class GetxUtilPage extends StatelessWidget {
   }
 }
 
-class _ListPage extends StatelessWidget {
+class _ListPage extends StatefulWidget {
   const _ListPage();
 
   @override
-  Widget build(BuildContext context) {
-    final GetxUtilController controller = Get.find();
+  State<_ListPage> createState() => _ListPageState();
+}
 
+class _ListPageState extends State<_ListPage> {
+  final GetxUtilController controller = Get.find();
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('响应式缓存列表'),
@@ -73,7 +80,7 @@ class _ListPage extends StatelessWidget {
           IconButton(
             onPressed: () {
               int length = controller.userList.length;
-              for (int i = length; i < length + 500; i++) {
+              for (int i = length; i < length + 10000; i++) {
                 controller.userList.add({
                   'userId': i + 1,
                   'username': faker.person.firstName(),
@@ -94,15 +101,21 @@ class _ListPage extends StatelessWidget {
       ),
       body: Obx(() {
         LoggerUtil.i('list build');
-        return Scrollbar(
-          child: ListView.builder(
-            itemCount: controller.userList.length,
-            // shrinkWrap: true,
-            // cacheExtent: 9999999999999,
-            itemBuilder: (context, index) => ListTile(
-              onTap: () {},
-              title: Text('${controller.userList[index]['userId']} - ${controller.userList[index]['username']} '),
-            ),
+        return CupertinoScrollbar(
+          controller: scrollController,
+          child: CustomScrollView(
+            controller: scrollController,
+            slivers: [
+              SuperSliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) => ListTile(
+                    onTap: () {},
+                    title: Text('${controller.userList[index]['userId']} - ${controller.userList[index]['username']} '),
+                  ),
+                  childCount: controller.userList.length,
+                ),
+              )
+            ],
           ),
         );
       }),

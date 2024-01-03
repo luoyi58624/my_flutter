@@ -1,6 +1,6 @@
 name: my_flutter
 description: "A new Flutter project."
-version: 1.0.5
+version: 1.0.7
 publish_to: none
 
 environment:
@@ -24,6 +24,7 @@ dependencies:
   hive_flutter: ^2.0.0-dev
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
+  super_sliver_list: ^0.0.8
 
 dev_dependencies:
   flutter_test:
