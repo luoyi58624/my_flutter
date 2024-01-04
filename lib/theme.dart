@@ -24,6 +24,8 @@ class MyTheme {
   late Color infoColor;
   late double appbarHeight;
   String? fontFamily;
+  late FontWeight defaultFontWeight;
+  late bool enableRipple;
   late bool translucenceStatusBar;
 
   MyTheme([ThemeModel? _]) {
@@ -34,8 +36,105 @@ class MyTheme {
     infoColor = _?.infoColor ?? _infoColor;
     appbarHeight = _?.appbarHeight ?? 56;
     fontFamily = _?.fontFamily;
+    defaultFontWeight = _?.defaultFontWeight ?? FontWeight.w500;
+    enableRipple = _?.enableRipple ?? true;
     translucenceStatusBar = _?.translucenceStatusBar ?? false;
   }
+
+  /// 构建App主题数据，如果你要构建以黑暗模式为主的应用、或者为App添加黑暗模式，那么你可以调用此方法快速构建相应的主题。
+  ///
+  /// 提示：默认情况下App只会创建亮色主题。
+  ThemeData buildThemeData({
+    Brightness brightness = Brightness.light, // 指定亮色主题或黑色主题
+  }) {
+    ColorScheme colorScheme = ColorScheme.fromSeed(
+      brightness: brightness,
+      seedColor: primaryColor,
+    );
+    var $theme = ThemeData(useMaterial3: true, colorScheme: colorScheme);
+    return ThemeData(
+      useMaterial3: true,
+      // 解决web上material按钮外边距为0问题，与移动端的效果保持一致
+      materialTapTargetSize: MaterialTapTargetSize.padded,
+      visualDensity: VisualDensity.standard,
+      // 统一页面过渡动画，为了保证ios的兼容性(手指滑动页面返回)，必须以ios过渡动画为主
+      pageTransitionsTheme: const PageTransitionsTheme(builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+      }),
+      // 根据主题色创建material3的主题系统
+      colorScheme: colorScheme,
+      fontFamily: fontFamily,
+      textTheme: _textTheme,
+      splashFactory: enableRipple ? InkRipple.splashFactory : noRipperFactory,
+      cardTheme: const CardTheme(
+        surfaceTintColor: Colors.transparent,
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+      ),
+      expansionTileTheme: ExpansionTileThemeData(
+        textColor: $theme.primaryColor,
+        shape: Border.all(width: 0, style: BorderStyle.none),
+        collapsedShape: Border.all(width: 0, style: BorderStyle.none),
+      ),
+      appBarTheme: $theme.appBarTheme.copyWith(
+        centerTitle: true,
+        backgroundColor: brightness == Brightness.light ? Colors.white : Colors.black,
+        titleTextStyle: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: brightness == Brightness.light ? Colors.grey.shade900 : Colors.grey.shade100,
+        ),
+        iconTheme: IconThemeData(
+          color: brightness == Brightness.light ? Colors.grey.shade900 : Colors.grey.shade100,
+        ),
+      ),
+    );
+  }
+
+  /// material文字主题
+  get _textTheme => TextTheme(
+        displaySmall: TextStyle(
+          fontWeight: defaultFontWeight,
+        ),
+        displayMedium: TextStyle(
+          fontWeight: defaultFontWeight,
+        ),
+        displayLarge: TextStyle(
+          fontWeight: defaultFontWeight,
+        ),
+        titleSmall: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+        titleMedium: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+        titleLarge: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+        bodySmall: TextStyle(
+          fontWeight: defaultFontWeight,
+        ),
+        bodyMedium: TextStyle(
+          fontWeight: defaultFontWeight,
+        ),
+        bodyLarge: TextStyle(
+          fontWeight: defaultFontWeight,
+        ),
+        labelSmall: TextStyle(
+          fontWeight: defaultFontWeight,
+        ),
+        labelMedium: TextStyle(
+          fontWeight: defaultFontWeight,
+        ),
+        labelLarge: TextStyle(
+          fontWeight: defaultFontWeight,
+        ),
+      );
 
   Color baseColor(BuildContext context, {ColorMode? mode}) {
     return dynamicColor(
@@ -181,61 +280,5 @@ class MyTheme {
     ColorMode? mode,
   }) {
     return ColorUtil.dynamicColor(lightColor, darkColor, context, mode: mode);
-  }
-
-  /// 构建material主题
-  ThemeData buildThemeData({
-    Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
-  }) {
-    var $theme = ThemeData(
-      useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(
-        brightness: brightness,
-        seedColor: primaryColor,
-      ),
-    );
-    return ThemeData(
-      useMaterial3: true,
-      // 解决web上material按钮外边距为0问题，与移动端的效果保持一致
-      materialTapTargetSize: MaterialTapTargetSize.padded,
-      visualDensity: VisualDensity.standard,
-      pageTransitionsTheme: const PageTransitionsTheme(builders: {
-        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-      }),
-      // 根据主题色创建material3的主题系统
-      colorScheme: ColorScheme.fromSeed(
-        brightness: brightness,
-        seedColor: primaryColor,
-      ),
-      fontFamily: fontFamily,
-      splashFactory: InkRipple.splashFactory,
-      cardTheme: const CardTheme(
-        surfaceTintColor: Colors.transparent,
-      ),
-      inputDecorationTheme: const InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
-        ),
-      ),
-      expansionTileTheme: ExpansionTileThemeData(
-        textColor: $theme.primaryColor,
-        shape: Border.all(width: 0, style: BorderStyle.none),
-        collapsedShape: Border.all(width: 0, style: BorderStyle.none),
-      ),
-      appBarTheme: $theme.appBarTheme.copyWith(
-        centerTitle: true,
-        backgroundColor: brightness == Brightness.light ? Colors.white : Colors.black,
-        titleTextStyle: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: brightness == Brightness.light ? Colors.grey.shade900 : Colors.grey.shade100,
-        ),
-        iconTheme: IconThemeData(
-          color: brightness == Brightness.light ? Colors.grey.shade900 : Colors.grey.shade100,
-        ),
-      ),
-    );
   }
 }

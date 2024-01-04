@@ -21,7 +21,7 @@ const _supportedLocales = [
 ];
 
 class MyApp extends StatelessWidget {
-  /// 以[MaterialApp]构建应用程序
+  /// 以[MaterialApp]构建应用程序，同时对[Cupertino]组件做了主题兼容处理，你无需使用[CupertinoApp]构建应用
   const MyApp({
     super.key,
     this.title = '',
@@ -108,13 +108,15 @@ class MyApp extends StatelessWidget {
                 return MediaQuery(
                   // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
                   data: MediaQuery.of(context).copyWith(accessibleNavigation: false),
+                  // 解决使用cupertino组件时文字异常
                   child: Material(
+                    // 注入默认的cupertino主题
                     child: CupertinoTheme(
                       data: CupertinoThemeData(
                         primaryColor: myTheme.primaryColor,
                         textTheme: CupertinoTextThemeData(
                           textStyle: textTheme.textStyle.copyWith(
-                            fontWeight: FontWeight.w500,
+                            fontWeight: myTheme.defaultFontWeight,
                             fontFamily: myTheme.fontFamily,
                           ),
                           tabLabelTextStyle: textTheme.tabLabelTextStyle.copyWith(
@@ -122,7 +124,7 @@ class MyApp extends StatelessWidget {
                             fontFamily: myTheme.fontFamily,
                           ),
                           navActionTextStyle: textTheme.navActionTextStyle.copyWith(
-                            fontWeight: FontWeight.w500,
+                            fontWeight: myTheme.defaultFontWeight,
                             color: myTheme.primaryColor,
                             fontFamily: myTheme.fontFamily,
                           ),
