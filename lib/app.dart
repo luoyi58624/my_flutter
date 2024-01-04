@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
     this.localizationsDelegates,
     this.supportedLocales,
     this.locale = const Locale('zh', 'CN'),
-    this.fontFamily,
     this.builder,
   }) : assert((home != null && onGenerateRoute == null) || (home == null && onGenerateRoute != null), 'home和onGenerateRoute参数必须二选一');
 
@@ -76,8 +75,6 @@ class MyApp extends StatelessWidget {
   /// 默认的语言，默认为：const Locale('zh', 'CN')
   final Locale locale;
 
-  final String? fontFamily;
-
   final TransitionBuilder? builder;
 
   @override
@@ -92,7 +89,7 @@ class MyApp extends StatelessWidget {
           },
       navigatorObservers: [...navigatorObservers, _GetXRouterObserver()],
       navigatorKey: globalNavigatorKey,
-      theme: theme ?? myTheme.buildThemeData(fontFamily: fontFamily),
+      theme: theme ?? myTheme.buildThemeData(),
       darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: $localizationsDelegates,
@@ -118,16 +115,16 @@ class MyApp extends StatelessWidget {
                         textTheme: CupertinoTextThemeData(
                           textStyle: textTheme.textStyle.copyWith(
                             fontWeight: FontWeight.w500,
-                            fontFamily: fontFamily,
+                            fontFamily: myTheme.fontFamily,
                           ),
                           tabLabelTextStyle: textTheme.tabLabelTextStyle.copyWith(
                             fontSize: 12,
-                            fontFamily: fontFamily,
+                            fontFamily: myTheme.fontFamily,
                           ),
                           navActionTextStyle: textTheme.navActionTextStyle.copyWith(
                             fontWeight: FontWeight.w500,
                             color: myTheme.primaryColor,
-                            fontFamily: fontFamily,
+                            fontFamily: myTheme.fontFamily,
                           ),
                         ),
                       ),

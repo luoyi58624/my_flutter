@@ -5,7 +5,12 @@ import 'root_page/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initMyFlutter(themeModel: ThemeModel(primaryColor: Colors.blue));
+  await initMyFlutter(
+    themeModel: ThemeModel(
+      primaryColor: Colors.blue,
+      fontFamily: 'NotoSansSC',
+    ),
+  );
   runApp(const RestartAppWidget(child: _MyApp()));
 }
 
@@ -15,7 +20,6 @@ class _MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyApp(
-      fontFamily: 'NotoSansSC',
       darkTheme: myTheme.buildThemeData(brightness: Brightness.dark),
       home: const RootPage(
         pages: rootPages,
