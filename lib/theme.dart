@@ -1,3 +1,4 @@
+import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -184,6 +185,7 @@ class MyTheme {
   /// 构建material主题
   ThemeData buildThemeData({
     Brightness brightness = Brightness.light, // 强制指定亮色主题或黑色主题
+    String? fontFamily,
   }) {
     var $theme = ThemeData(
       useMaterial3: true,
@@ -202,14 +204,13 @@ class MyTheme {
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
         TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
       }),
-      textTheme: _TextTheme,
+      // textTheme: _textTheme,
       // 根据主题色创建material3的主题系统
       colorScheme: ColorScheme.fromSeed(
         brightness: brightness,
         seedColor: primaryColor,
       ),
-      fontFamily: 'NotoSansSC',
-      // fontFamily: GetPlatform.isWindows ? "微软雅黑" : null,
+      fontFamily: fontFamily,
       splashFactory: InkRipple.splashFactory,
       cardTheme: const CardTheme(
         surfaceTintColor: Colors.transparent,
@@ -224,11 +225,23 @@ class MyTheme {
         shape: Border.all(width: 0, style: BorderStyle.none),
         collapsedShape: Border.all(width: 0, style: BorderStyle.none),
       ),
+      appBarTheme: $theme.appBarTheme.copyWith(
+        centerTitle: true,
+        backgroundColor: brightness == Brightness.light ? Colors.white : Colors.black,
+        titleTextStyle: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: brightness == Brightness.light ? Colors.grey.shade900 : Colors.grey.shade100,
+        ),
+        iconTheme: IconThemeData(
+          color: brightness == Brightness.light ? Colors.grey.shade900 : Colors.grey.shade100,
+        ),
+      ),
     );
   }
 }
 
-const _TextTheme = TextTheme(
+const _textTheme = TextTheme(
   displaySmall: TextStyle(
     fontWeight: FontWeight.w500,
   ),
@@ -239,13 +252,13 @@ const _TextTheme = TextTheme(
     fontWeight: FontWeight.w500,
   ),
   titleSmall: TextStyle(
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
   ),
   titleMedium: TextStyle(
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
   ),
   titleLarge: TextStyle(
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
   ),
   bodySmall: TextStyle(
     fontWeight: FontWeight.w500,
@@ -264,57 +277,5 @@ const _TextTheme = TextTheme(
   ),
   labelLarge: TextStyle(
     fontWeight: FontWeight.w500,
-  ),
-);
-
-/// material加粗后的文字主题
-const _materialBoldTextTheme = TextTheme(
-  displaySmall: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
-  ),
-  displayMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 15,
-  ),
-  displayLarge: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 16,
-  ),
-  titleSmall: TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 16,
-  ),
-  titleMedium: TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 18,
-  ),
-  titleLarge: TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 20,
-  ),
-  bodySmall: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
-  ),
-  bodyMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 15,
-  ),
-  bodyLarge: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 16,
-  ),
-  labelSmall: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 13,
-  ),
-  labelMedium: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
-  ),
-  labelLarge: TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 15,
   ),
 );

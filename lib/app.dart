@@ -33,11 +33,9 @@ class MyApp extends StatelessWidget {
     this.localizationsDelegates,
     this.supportedLocales,
     this.locale = const Locale('zh', 'CN'),
+    this.fontFamily,
     this.builder,
-  }) : assert(
-            (home != null && onGenerateRoute == null) ||
-                (home == null && onGenerateRoute != null),
-            'home和onGenerateRoute参数必须二选一');
+  }) : assert((home != null && onGenerateRoute == null) || (home == null && onGenerateRoute != null), 'home和onGenerateRoute参数必须二选一');
 
   /// App标题，默认空
   final String title;
@@ -78,16 +76,14 @@ class MyApp extends StatelessWidget {
   /// 默认的语言，默认为：const Locale('zh', 'CN')
   final Locale locale;
 
+  final String? fontFamily;
+
   final TransitionBuilder? builder;
 
   @override
   Widget build(BuildContext context) {
-    var $localizationsDelegates = CommonUtil.concatArray(
-            (localizationsDelegates ?? []).toList(), _localizationsDelegates)
-        .map((e) => e);
-    var $supportedLocales = CommonUtil.concatArray(
-            (supportedLocales ?? []).toList(), _supportedLocales)
-        .map((e) => e);
+    var $localizationsDelegates = CommonUtil.concatArray((localizationsDelegates ?? []).toList(), _localizationsDelegates).map((e) => e);
+    var $supportedLocales = CommonUtil.concatArray((supportedLocales ?? []).toList(), _supportedLocales).map((e) => e);
     return MaterialApp(
       title: title,
       onGenerateRoute: onGenerateRoute ??
@@ -96,62 +92,57 @@ class MyApp extends StatelessWidget {
           },
       navigatorObservers: [...navigatorObservers, _GetXRouterObserver()],
       navigatorKey: globalNavigatorKey,
-      theme: theme ?? myTheme.buildThemeData(),
+      theme: theme ?? myTheme.buildThemeData(fontFamily: fontFamily),
       darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: $localizationsDelegates,
       supportedLocales: $supportedLocales,
       locale: locale,
-      builder: _initBuilder(builder),
+      builder: (context, child) {
+        _initContext ??= context;
+        if (_initContext != context) {
+          return child!;
+        } else {
+          var textTheme = const CupertinoThemeData().textTheme;
+          return Overlay(
+            initialEntries: [
+              OverlayEntry(builder: (context) {
+                toast.init(context);
+                return MediaQuery(
+                  // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
+                  data: MediaQuery.of(context).copyWith(accessibleNavigation: false),
+                  child: Material(
+                    child: CupertinoTheme(
+                      data: CupertinoThemeData(
+                        primaryColor: myTheme.primaryColor,
+                        textTheme: CupertinoTextThemeData(
+                          textStyle: textTheme.textStyle.copyWith(
+                            fontWeight: FontWeight.w500,
+                            fontFamily: fontFamily,
+                          ),
+                          tabLabelTextStyle: textTheme.tabLabelTextStyle.copyWith(
+                            fontSize: 12,
+                            fontFamily: fontFamily,
+                          ),
+                          navActionTextStyle: textTheme.navActionTextStyle.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: myTheme.primaryColor,
+                            fontFamily: fontFamily,
+                          ),
+                        ),
+                      ),
+                      child: builder == null ? child! : builder!(context, child),
+                    ),
+                  ),
+                );
+              }),
+            ],
+          );
+        }
+      },
     );
   }
 }
-
-/// MaterialApp、CupertinoApp的 builder 参数，初始化全局toast、解决modal_bottom_sheet在高版本安卓系统上动画丢失问题
-TransitionBuilder _initBuilder(TransitionBuilder? builder) => (context, child) {
-      _initContext ??= context;
-      if (_initContext != context) {
-        return child!;
-      } else {
-        var textTheme = const CupertinoThemeData().textTheme;
-        return Overlay(
-          initialEntries: [
-            OverlayEntry(builder: (context) {
-              toast.init(context);
-              return MediaQuery(
-                // 解决modal_bottom_sheet在高版本安卓系统上动画丢失
-                data: MediaQuery.of(context)
-                    .copyWith(accessibleNavigation: false),
-                child: Material(
-                  child: CupertinoTheme(
-                    data: CupertinoThemeData(
-                      primaryColor: myTheme.primaryColor,
-                      textTheme: CupertinoTextThemeData(
-                        textStyle: textTheme.textStyle.copyWith(
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'NotoSansSC',
-                        ),
-                        tabLabelTextStyle: textTheme.tabLabelTextStyle.copyWith(
-                          fontSize: 12,
-                          fontFamily: 'NotoSansSC',
-                        ),
-                        navActionTextStyle:
-                            textTheme.navActionTextStyle.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: myTheme.primaryColor,
-                          fontFamily: 'NotoSansSC',
-                        ),
-                      ),
-                    ),
-                    child: builder == null ? child! : builder(context, child),
-                  ),
-                ),
-              );
-            }),
-          ],
-        );
-      }
-    };
 
 /// 监听路由变化，将路由添加到getx管理，实现离开页面自动销毁绑定的控制器。
 /// 只有一点需要注意：Get.put在StatelessWidget中必须将放置build方法中，否则无法正确回收控制器。

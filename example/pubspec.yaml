@@ -35,3 +35,8 @@ flutter:
     - family: iconfont
       fonts:
         - asset: assets/iconfont.ttf
+    - family: NotoSansSC
+      fonts:
+        - asset: assets/fonts/NotoSansSC-Black.ttf
+        - asset: assets/fonts/NotoSansSC-Bold.ttf
+        - asset: assets/fonts/NotoSansSC-Medium.ttf

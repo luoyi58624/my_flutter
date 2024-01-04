@@ -7,6 +7,9 @@ class ThemeModel {
   Color? errorColor;
   Color? infoColor;
 
+  /// 自定义全局字体，当你遇到flutter字体渲染问题时将会使用它
+  String? fontFamily;
+
   /// appbar高度
   double? appbarHeight;
 
@@ -21,6 +24,7 @@ class ThemeModel {
     this.warningColor,
     this.errorColor,
     this.infoColor,
+    this.fontFamily,
     this.appbarHeight,
     this.translucenceStatusBar,
   });

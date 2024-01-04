@@ -27,6 +27,7 @@ dependencies:
   json_annotation: ^4.8.1
   device_info_plus: ^9.1.1
   google_fonts: ^6.1.0
+  chinese_font_library: ^1.1.0
 
 
 dev_dependencies:
@@ -37,18 +38,5 @@ dev_dependencies:
   freezed: ^2.4.6
   json_serializable: ^6.7.1
 
-
 flutter:
   uses-material-design: true
-  fonts:
-    - family: NotoSansSC
-      fonts:
-        - asset: lib/fonts/NotoSansSC-Black.ttf
-        - asset: lib/fonts/NotoSansSC-Bold.ttf
-        - asset: lib/fonts/NotoSansSC-ExtraBold.ttf
-        - asset: lib/fonts/NotoSansSC-ExtraLight.ttf
-        - asset: lib/fonts/NotoSansSC-Light.ttf
-        - asset: lib/fonts/NotoSansSC-Medium.ttf
-        - asset: lib/fonts/NotoSansSC-Regular.ttf
-        - asset: lib/fonts/NotoSansSC-SemiBold.ttf
-        - asset: lib/fonts/NotoSansSC-Thin.ttf
