@@ -13,9 +13,6 @@ export 'package:flutter_localizations/flutter_localizations.dart';
 // flutter官方collection库，扩展集合函数
 export 'package:collection/collection.dart';
 
-export 'package:device_info_plus/device_info_plus.dart';
-export 'package:google_fonts/google_fonts.dart';
-
 // get状态管理，但排除路由功能，建议只把get当做一个管理全局状态的库，不要全盘接受get的全套解决方案，
 // 毕竟此库只有作者一个维护，flutter的路由是一个很复杂的模块，我个人比较反感get将路由和状态耦合在一起的方案。
 export 'package:get/get_core/get_core.dart';
@@ -58,10 +55,8 @@ Future<void> initMyFlutter({
   obsLocalStorage = await LocalStorage.init('local_obs');
   myTheme = MyTheme(themeModel);
   if (myTheme.translucenceStatusBar) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 200)));
   } else {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0)));
   }
 }

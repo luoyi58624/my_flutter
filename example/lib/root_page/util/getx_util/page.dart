@@ -49,14 +49,6 @@ class GetxUtilPage extends StatelessWidget {
           },
           child: const Text('普通列表页面'),
         ),
-        ElevatedButton(
-          onPressed: () async {
-            DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-            AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-            LoggerUtil.i(androidInfo.manufacturer);
-          },
-          child: const Text('普通列表页面'),
-        ),
       ]),
     );
   }
@@ -116,8 +108,7 @@ class _ListPageState extends State<_ListPage> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) => ListTile(
                   onTap: () {},
-                  title: Text(
-                      '${controller.userList[index]['userId']} - ${controller.userList[index]['username']} '),
+                  title: Text('${controller.userList[index]['userId']} - ${controller.userList[index]['username']} '),
                 ),
                 childCount: controller.userList.length,
               ),
@@ -173,8 +164,7 @@ class _ListPage2State extends State<_ListPage2> {
         cacheExtent: 9999999999999,
         itemBuilder: (context, index) => ListTile(
           onTap: () {},
-          title: Text(
-              '${userList[index]['userId']} - ${userList[index]['username']} '),
+          title: Text('${userList[index]['userId']} - ${userList[index]['username']} '),
         ),
       ),
     );
