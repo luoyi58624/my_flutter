@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'form.dart';
+import '../../../my_flutter.dart';
 
 class FormItemInheritedWidget extends InheritedWidget {
   const FormItemInheritedWidget({
@@ -12,8 +12,7 @@ class FormItemInheritedWidget extends InheritedWidget {
   final String? required;
 
   static FormItemInheritedWidget? of(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<FormItemInheritedWidget>();
+    return context.dependOnInheritedWidgetOfExactType<FormItemInheritedWidget>();
   }
 
   @override
@@ -118,10 +117,7 @@ class FormItemWidget extends StatefulWidget {
 
 class _FormItemWidgetState extends State<FormItemWidget> {
   /// 获取上下文的表单排版，左右布局或上下布局
-  LabelPosition get _labelPosition =>
-      widget.labelPosition ??
-      FormInheritedWidget.of(context)?.labelPosition ??
-      LabelPosition.left;
+  LabelPosition get _labelPosition => widget.labelPosition ?? FormInheritedWidget.of(context)?.labelPosition ?? LabelPosition.left;
 
   /// 表单标签和表单组件的排版组件
   Widget get _formItemWidget {
@@ -176,14 +172,10 @@ class _FormItemWidgetState extends State<FormItemWidget> {
         FormInheritedWidget.of(context)?.labelStyle ??
         TextStyle(
             fontSize: labelFontSize[FormInheritedWidget.of(context)?.size],
-            fontWeight: FormInheritedWidget.of(context)?.labelBold ?? false
-                ? FontWeight.w600
-                : FontWeight.w500);
+            fontWeight: FormInheritedWidget.of(context)?.labelBold ?? false ? FontWeight.bold : myTheme.defaultFontWeight);
     AlignmentGeometry labelAlignment = Alignment.centerLeft;
     if (!isColumn) {
-      LabelAlign $labelAlign = widget.labelAlign ??
-          FormInheritedWidget.of(context)?.labelAlign ??
-          LabelAlign.start;
+      LabelAlign $labelAlign = widget.labelAlign ?? FormInheritedWidget.of(context)?.labelAlign ?? LabelAlign.start;
       switch ($labelAlign) {
         case LabelAlign.start:
           labelAlignment = Alignment.centerLeft;
@@ -197,15 +189,12 @@ class _FormItemWidgetState extends State<FormItemWidget> {
       }
     }
 
-    double labelVerticalPadding =
-        (inputPadding[FormInheritedWidget.of(context)?.size] ??
-            labelFontSize[FormSize.medium]!);
+    double labelVerticalPadding = (inputPadding[FormInheritedWidget.of(context)?.size] ?? labelFontSize[FormSize.medium]!);
 
     return [
       if (widget.label != null)
         SizedBox(
-          width:
-              widget.labelWidget ?? FormInheritedWidget.of(context)?.labelWidth,
+          width: widget.labelWidget ?? FormInheritedWidget.of(context)?.labelWidth,
           child: Padding(
             padding: EdgeInsets.fromLTRB(
               _labelPosition == LabelPosition.left ? 0 : 0,

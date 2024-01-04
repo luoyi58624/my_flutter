@@ -54,9 +54,9 @@ class BadgeWidget extends StatelessWidget {
     }
   }
 
-  TextStyle get textStyle => const TextStyle(
+  TextStyle get textStyle => TextStyle(
         fontSize: 12,
-        fontWeight: FontWeight.w500,
+        fontWeight: myTheme.defaultFontWeight,
       );
 
   /// 让徽章填充样式更加好看，默认情况下徽章给人的感官没有对齐

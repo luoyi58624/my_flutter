@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_flutter/my_flutter.dart';
 
-import 'form.dart';
-
 /// 通用文本框组件
 class FormTextFieldWidget extends StatefulWidget {
   /// 组件默认的文本框，四周有带有边框
@@ -316,7 +314,7 @@ class FormTextFieldWidgetState extends State<FormTextFieldWidget> {
         fontSize: widget.size != null
             ? labelFontSize[widget.size]
             : labelFontSize[FormInheritedWidget.of(context)?.size] ?? labelFontSize[FormSize.medium]!,
-        fontWeight: FontWeight.w500,
+        fontWeight: myTheme.defaultFontWeight,
       );
 
   @override
@@ -381,7 +379,7 @@ class FormTextFieldWidgetState extends State<FormTextFieldWidget> {
           fontSize: widget.size != null
               ? hintFontSize[widget.size]
               : hintFontSize[FormInheritedWidget.of(context)?.size] ?? hintFontSize[FormSize.medium]!,
-          fontWeight: FontWeight.w500,
+          fontWeight: myTheme.defaultFontWeight,
           color: Colors.grey,
         ),
         errorMaxLines: 3,
@@ -391,7 +389,7 @@ class FormTextFieldWidgetState extends State<FormTextFieldWidget> {
                   ? hintFontSize[widget.size]
                   : hintFontSize[FormInheritedWidget.of(context)?.size] ?? hintFontSize[FormSize.medium]!)! -
               2,
-          fontWeight: FontWeight.w500,
+          fontWeight: myTheme.defaultFontWeight,
         ),
         prefixIcon: widget.prefixIcon != null
             ? Icon(

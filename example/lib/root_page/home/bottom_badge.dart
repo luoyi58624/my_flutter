@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/my_flutter.dart';
+
+import '../../plugins.dart';
 
 class BottomBadgePage extends StatefulWidget {
   const BottomBadgePage({super.key});

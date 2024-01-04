@@ -77,8 +77,8 @@ class _RootPageState extends State<RootPage> {
             unselectedFontSize: 12,
             selectedFontSize: 12,
             iconSize: 26,
-            unselectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.w500,
+            unselectedLabelStyle: TextStyle(
+              fontWeight: myTheme.defaultFontWeight,
             ),
             selectedItemColor: myTheme.primaryColor,
             selectedLabelStyle: const TextStyle(

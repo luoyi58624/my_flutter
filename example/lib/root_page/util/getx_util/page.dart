@@ -1,8 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:super_sliver_list/super_sliver_list.dart';
 
 import '../../../plugins.dart';
 import 'controller.dart';

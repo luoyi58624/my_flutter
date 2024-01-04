@@ -65,7 +65,7 @@ class MyCupertinoListTile extends StatelessWidget {
       leading: leading,
       title: Text(
         title,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        style: TextStyle(fontSize: 16, fontWeight: myTheme.defaultFontWeight),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       additionalInfo: additionalInfo,

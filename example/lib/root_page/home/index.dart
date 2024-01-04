@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_flutter/my_flutter.dart';
 
+import '../../plugins.dart';
 import 'bottom_badge.dart';
 import 'demo/page.dart';
 
