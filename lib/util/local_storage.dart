@@ -13,7 +13,10 @@ class LocalStorage<D> {
   /// var sessionLocalStorage = await LocalStorage.init('session');
   /// ```
   static Future<LocalStorage<D>> init<D>([String? tag]) async {
-    return LocalStorage._().._storage = await Hive.openBox(tag ?? 'default');
+    var box = await Hive.openBox<D>(tag ?? 'default');
+    // 清除过期key
+    Future.delayed(Duration.zero, () {});
+    return LocalStorage._().._storage = box;
   }
 
   /// 设置本地数据，提示：[Hive]支持存储对象，当你需要
