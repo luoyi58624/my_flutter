@@ -11,3 +11,6 @@ export 'use_local_obs.dart';
 
 /// 是否为release版
 const bool isRelease = bool.fromEnvironment("dart.vm.product");
+
+/// 获取当前时间的毫秒
+int get currentMilliseconds => DateTime.now().millisecondsSinceEpoch;

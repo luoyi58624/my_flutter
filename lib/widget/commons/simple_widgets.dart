@@ -31,6 +31,7 @@ IndexedWidgetBuilder buildSeparatorWidget({
 
 Widget buildListViewDemo() {
   return ListView.builder(
+    // itemExtentBuilder: ,
     itemBuilder: (context, index) => ListTile(
       onTap: () {},
       title: Text('列表-${index + 1}'),
@@ -107,3 +108,7 @@ Widget _buildCell(BuildContext context, List<NavPageModel> cellItems) {
         .toList(),
   );
 }
+//
+// Widget buildCupertinoScrollbar(){
+//
+// }

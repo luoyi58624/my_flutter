@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'hive_model/index.dart';
 import 'plugins.dart';
 import 'root_page/index.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await initMyFlutter(
     themeModel: ThemeModel(
       primaryColor: Colors.blue,
       fontFamily: 'NotoSansSC',
     ),
   );
+  registerModelAdapter();
   runApp(const RestartAppWidget(child: _MyApp()));
 }
 

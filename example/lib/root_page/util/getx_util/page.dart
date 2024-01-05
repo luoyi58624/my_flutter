@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../plugins.dart';
@@ -82,6 +83,7 @@ class _ListPageState extends State<_ListPage> {
                 controller.userList.add({
                   'userId': i + 1,
                   'username': faker.person.firstName(),
+                  'height': Random().nextInt(150) + 30,
                 });
               }
               // List<Map<String, dynamic>> userList = [];
@@ -99,19 +101,24 @@ class _ListPageState extends State<_ListPage> {
       ),
       body: Obx(() {
         LoggerUtil.i('list build');
-        return CustomScrollView(
+        return CupertinoScrollbar(
           controller: scrollController,
-          slivers: [
-            SuperSliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => ListTile(
-                  onTap: () {},
-                  title: Text('${controller.userList[index]['userId']} - ${controller.userList[index]['username']} '),
+          child: CustomScrollView(
+            controller: scrollController,
+            slivers: [
+              SuperSliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) => Container(
+                    height: CommonUtil.safeDouble(controller.userList[index]['height']),
+                    color: Colors.grey.shade100,
+                    margin: const EdgeInsets.symmetric(vertical: 4),
+                    child: Text('${controller.userList[index]['userId']} - ${controller.userList[index]['username']} '),
+                  ),
+                  childCount: controller.userList.length,
                 ),
-                childCount: controller.userList.length,
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         );
       }),
     );
@@ -126,7 +133,9 @@ class _ListPage2 extends StatefulWidget {
 }
 
 class _ListPage2State extends State<_ListPage2> {
+  final ScrollController scrollController = ScrollController();
   List<Map<String, dynamic>> userList = [];
+  bool enableItemExtent = false;
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +143,14 @@ class _ListPage2State extends State<_ListPage2> {
       appBar: AppBar(
         title: const Text('列表2'),
         actions: [
+          Switch(
+            value: enableItemExtent,
+            onChanged: (value) {
+              setState(() {
+                enableItemExtent = value;
+              });
+            },
+          ),
           IconButton(
             onPressed: () {
               userList.clear();
@@ -144,10 +161,11 @@ class _ListPage2State extends State<_ListPage2> {
           IconButton(
             onPressed: () {
               int length = userList.length;
-              for (int i = length; i < length + 500; i++) {
+              for (int i = length; i < length + 1000; i++) {
                 userList.add({
                   'userId': i + 1,
                   'username': faker.person.firstName(),
+                  'height': Random().nextInt(150) + 30,
                 });
               }
               setState(() {});
@@ -156,13 +174,19 @@ class _ListPage2State extends State<_ListPage2> {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: userList.length,
-        shrinkWrap: true,
-        cacheExtent: 9999999999999,
-        itemBuilder: (context, index) => ListTile(
-          onTap: () {},
-          title: Text('${userList[index]['userId']} - ${userList[index]['username']} '),
+      body: CupertinoScrollbar(
+        controller: scrollController,
+        child: ListView.builder(
+          controller: scrollController,
+          itemCount: userList.length,
+          // itemExtent: enableItemExtent ? 56 : null,
+          itemExtentBuilder: enableItemExtent ? (index, _) => CommonUtil.safeDouble(userList[index]['height']) : null,
+          itemBuilder: (context, index) => Container(
+            height: CommonUtil.safeDouble(userList[index]['height']),
+            color: Colors.grey.shade100,
+            margin: const EdgeInsets.symmetric(vertical: 4),
+            child: Text('${userList[index]['userId']} - ${userList[index]['username']} '),
+          ),
         ),
       ),
     );
