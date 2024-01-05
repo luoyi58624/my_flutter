@@ -2,10 +2,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../my_flutter.dart';
 
-/// 存储设置了过期时间的数据库，value为过期时间戳
+/// 存储设置了过期时间的数据库，key为存储库标签tag + 存储key，value为过期时间戳
 Box<int>? _expireDataBox;
 
-/// 获取过期key，由存储库标签tag + 存储key组成
+/// 获取过期key
 String _getExpireKey(String tag, String key) {
   return '${tag}_$key';
 }

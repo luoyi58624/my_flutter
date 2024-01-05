@@ -14,6 +14,7 @@ class _LocalDataModel {
   /// 示例：
   /// * 30分钟后过期：DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 30
   /// * 2024年1月1日过期：DateTime(2024, 1, 1).millisecondsSinceEpoch
+  // LocalStorage虽然已经支持设置过期时间，但此处的实现在它之前，因为并不影响目前的逻辑，所以暂时不更改它
   late int expireDateTime;
 
   /// 存储的数据
