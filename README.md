@@ -36,3 +36,15 @@
 - 运行代码生成器
 
 > flutter pub run build_runner build
+
+- 添加指定平台
+> flutter create --platforms=windows,macos,linux,web
+
+- android minsdk>23需要手动在android下设置以下属性才能压缩安装包
+```
+packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+```.

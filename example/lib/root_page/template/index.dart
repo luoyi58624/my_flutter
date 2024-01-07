@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../plugins.dart';
+import 'child.dart';
 
 class TemplateRootPage extends StatefulWidget {
   const TemplateRootPage({super.key});
@@ -21,11 +23,35 @@ class TemplateRootPageState extends State<TemplateRootPage> {
   @override
   Widget build(BuildContext context) {
     // LoggerUtil.i('build');
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('模版列表'),
+    return CupertinoPageScaffold(
+      child: CustomScrollView(
+        slivers: [
+          const ExtendedCupertinoSliverNavigationBar(
+            largeTitle: Text(
+              '模板列表',
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: fontDemo,
+          )
+        ],
       ),
-      body: buildCenterColumn([
+    );
+  }
+
+  Widget get fontDemo => buildCenterColumn([
+        ElevatedButton(
+          onPressed: () {
+            RouterUtil.to(const TemaplteChildPage());
+          },
+          child: const Text('下一页'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            RouterUtil.to(const TemaplteChildPage2());
+          },
+          child: const Text('下一页2'),
+        ),
         const Text(
           '西那卡塞吸机你显卡xanjsxnkjasnxkjansxk行啊就开心阿珂',
           style: TextStyle(
@@ -80,7 +106,5 @@ class TemplateRootPageState extends State<TemplateRootPage> {
             fontWeight: FontWeight.w900,
           ),
         ),
-      ]),
-    );
-  }
+      ]);
 }
