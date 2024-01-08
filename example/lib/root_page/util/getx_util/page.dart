@@ -79,11 +79,12 @@ class _ListPageState extends State<_ListPage> {
           IconButton(
             onPressed: () {
               int length = controller.userList.length;
-              for (int i = length; i < length + 10000; i++) {
+              for (int i = length; i < length + 100000; i++) {
                 controller.userList.add({
                   'userId': i + 1,
                   'username': faker.person.firstName(),
-                  'height': Random().nextInt(150) + 30,
+                  'height': Random().nextInt(150) + 50,
+                  'image': faker.image.image(random: true),
                 });
               }
               // List<Map<String, dynamic>> userList = [];
@@ -111,8 +112,16 @@ class _ListPageState extends State<_ListPage> {
                   (context, index) => Container(
                     height: CommonUtil.safeDouble(controller.userList[index]['height']),
                     color: Colors.grey.shade100,
+                    padding: const EdgeInsets.all(8),
                     margin: const EdgeInsets.symmetric(vertical: 4),
-                    child: Text('${controller.userList[index]['userId']} - ${controller.userList[index]['username']} '),
+                    child: Row(
+                      children: [
+                        ImageWidget(
+                          url: controller.userList[index]['image'],
+                        ),
+                        Text('${controller.userList[index]['userId']} - ${controller.userList[index]['username']} '),
+                      ],
+                    ),
                   ),
                   childCount: controller.userList.length,
                 ),

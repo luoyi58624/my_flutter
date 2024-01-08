@@ -8,7 +8,7 @@ void main() async {
   await initMyFlutter(
     themeModel: ThemeModel(
       primaryColor: Colors.blue,
-      // fontFamily: 'NotoSansSC',
+      fontFamily: 'NotoSansSC',
     ),
   );
   registerModelAdapter();

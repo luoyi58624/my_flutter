@@ -1,5 +1,6 @@
 import 'package:example/plugins.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class TemaplteChildPage extends StatelessWidget {
   const TemaplteChildPage({super.key});
@@ -15,8 +16,11 @@ class TemaplteChildPage extends StatelessWidget {
         // previousPageTitle: 'Back',
       ),
       child: Center(
-        child: Text('hello'),
-      )
+        child: Text(
+          'hello 你好',
+          style: TextStyle(backgroundColor: Colors.red, fontSize: 24),
+        ),
+      ),
     );
   }
 }
@@ -35,8 +39,38 @@ class TemaplteChildPage2 extends StatelessWidget {
         ),
         child: Center(
           child: Text('hello'),
-        )
-    );
+        ));
   }
 }
 
+class TemplateChildPage3 extends StatelessWidget {
+  const TemplateChildPage3({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('子页面3'),
+      ),
+      body: buildCenterColumn([
+        const Text(
+          'hello 你好',
+          style: TextStyle(backgroundColor: Colors.red, fontSize: 24),
+          strutStyle: StrutStyle(
+              // forceStrutHeight: true,
+              ),
+        ),
+        SizedBox(
+          height: 18,
+        ),
+        const Text(
+          'hello 你好',
+          style: TextStyle(backgroundColor: Colors.red, fontSize: 24),
+          strutStyle: StrutStyle(
+            forceStrutHeight: true,
+          ),
+        ),
+      ]),
+    );
+  }
+}

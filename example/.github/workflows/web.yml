@@ -1,0 +1,34 @@
+name: build web page
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+#    branches:
+#      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.5'
+          channel: 'stable'
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
+          cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
+          architecture: x64
+      - name: build flutter for web
+      - run: |
+          flutter --version
+          flutter pub get
+          flutter build web --web-renderer=html
+      - name: Deploy Web
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: flutter_web_pages
+          folder: build/web
+          clean: true

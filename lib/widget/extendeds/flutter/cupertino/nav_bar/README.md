@@ -1,0 +1,2 @@
+_BackLabel设置strutStyle属性forceStrutHeight=true，解决返回按钮和文字没有对齐问题。
+注意：如果你使用Sliver，那么你也要使用ExtendedCupertinoSliverNavigationBar，否则没有Hero动画

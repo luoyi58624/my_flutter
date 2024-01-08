@@ -52,6 +52,12 @@ class TemplateRootPageState extends State<TemplateRootPage> {
           },
           child: const Text('下一页2'),
         ),
+        ElevatedButton(
+          onPressed: () {
+            RouterUtil.to(const TemplateChildPage3());
+          },
+          child: const Text('下一页3'),
+        ),
         const Text(
           '西那卡塞吸机你显卡xanjsxnkjasnxkjansxk行啊就开心阿珂',
           style: TextStyle(

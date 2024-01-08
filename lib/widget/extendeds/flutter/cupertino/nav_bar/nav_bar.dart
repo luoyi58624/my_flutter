@@ -1540,12 +1540,9 @@ class _BackLabel extends StatelessWidget {
       previousTitle,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(
-        fontWeight: myTheme.defaultFontWeight,
+      strutStyle: const StrutStyle(
+        forceStrutHeight: true,
       ),
-      // strutStyle: StrutStyle(
-      //   forceStrutHeight: true,
-      // ),
     );
 
     if (previousTitle.length > 12) {

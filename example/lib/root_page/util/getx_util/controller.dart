@@ -28,8 +28,11 @@ class UserModel {
 
 class GetxUtilController extends GetxController {
   final count = useLocalObs(0, 'getx_test_count');
-  final userList = useLocalListObs<Map<String, dynamic>>([], 'getx_user_list',
-      expireDateTimeFun: () => DateTime.now().millisecondsSinceEpoch + 1000 * 5);
+  final userList = useLocalListObs<Map<String, dynamic>>(
+    [],
+    'getx_user_list',
+    // expireDateTimeFun: () => DateTime.now().millisecondsSinceEpoch + 1000 * 5,
+  );
   final userModel = useLocalObs(
     UserModel(),
     'getx_test_userModel',
