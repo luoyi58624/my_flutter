@@ -22,7 +22,7 @@ jobs:
           cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
           architecture: x64
       - name: build flutter for web
-      - run: sh ./scripts/example.sh
+      - run: sh ./script/example.sh
       - name: Deploy Web
         uses: JamesIves/github-pages-deploy-action@v4
         with:
