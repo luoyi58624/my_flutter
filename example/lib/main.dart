@@ -5,12 +5,7 @@ import 'plugins.dart';
 import 'root_page/index.dart';
 
 void main() async {
-  await initMyFlutter(
-    themeModel: ThemeModel(
-      primaryColor: Colors.blue,
-      fontFamily: 'NotoSansSC',
-    ),
-  );
+  await initMyFlutter();
   registerModelAdapter();
   runApp(const RestartAppWidget(child: _MyApp()));
 }

@@ -12,9 +12,6 @@ dependencies:
   my_flutter_plugin:
     git:
       url: https://gitee.com/luoyi666/my_flutter_plugin.git
-  my_flutter_fonts:
-    git:
-      url: https://gitee.com/luoyi666/my_flutter_fonts.git
   extended_image: ^8.2.0
   hive: ^3.0.0-dev
   hive_flutter: ^2.0.0-dev
@@ -37,8 +34,3 @@ flutter:
     - family: iconfont
       fonts:
         - asset: assets/iconfont.ttf
-    - family: NotoSansSC
-      fonts:
-        - asset: packages/my_flutter_fonts/chinese/NotoSansSC-Black.ttf
-        - asset: packages/my_flutter_fonts/chinese/NotoSansSC-Bold.ttf
-        - asset: packages/my_flutter_fonts/chinese/NotoSansSC-Medium.ttf

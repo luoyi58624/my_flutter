@@ -116,13 +116,13 @@ Widget _buildCell(BuildContext context, List<NavPageModel> cellItems) {
 //
 // }
 
-/// 构建ios滚动条，如果是web
+/// 构建ios滚动条，如果是桌面端(包括桌面端web)，则不使用ios滚动条，因为会冲突
 Widget buildCupertinoScrollbar({
   required Widget child,
   ScrollController? controller,
   bool thumbVisibility = false, // 是否一直显示滚动条
 }) {
-  if (kIsWeb || GetPlatform.isDesktop) {
+  if (GetPlatform.isDesktop) {
     return child;
   } else {
     return CupertinoScrollbar(

@@ -23,6 +23,7 @@ class TemplateRootPageState extends State<TemplateRootPage> {
   @override
   Widget build(BuildContext context) {
     // LoggerUtil.i('build');
+    LoggerUtil.i(GetPlatform.isDesktop);
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: [
