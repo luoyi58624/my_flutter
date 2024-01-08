@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../plugins.dart';
@@ -183,7 +182,7 @@ class _ListPage2State extends State<_ListPage2> {
           ),
         ],
       ),
-      body: CupertinoScrollbar(
+      body: buildCupertinoScrollbar(
         controller: scrollController,
         child: ListView.builder(
           controller: scrollController,

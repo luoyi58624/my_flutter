@@ -10,7 +10,7 @@ String _getExpireKey(String tag, String key) {
   return '${tag}_$key';
 }
 
-/// 简单key-value键值存储库，基于[Hive]，支持所有平台。
+/// 简单key-value键值存储库，基于[Hive]，支持所有平台(包括web，基于IndexedDB)。
 /// 提示：泛型 T 支持指定基础类型、List、Map、以及任意Object对象，但是有两点需要注意：
 /// * List、Map的泛型只能是dynamic，否则重启应用再次加载数据会出现类型转换错误，这是dart的类型系统限制，即使是[Hive]也做不到帮你自动转回指定的类型，取出数据后你需要自己手动转换数据类型。
 /// * 存储Object对象你必须实现适配器，具体操作请自行查看[Hive]文档：https://docs.hivedb.dev/#/custom-objects/type_adapters，或者查看example的示例代码。
@@ -91,6 +91,8 @@ class LocalStorage<T> {
   }
 }
 
+/// 对[Hive]的LazyBox进行的封装，使用方式与LocalStorage完全一致，只不过所有操作变为异步(async、await)。
+///
 /// LocalStorage会将所有数据一次性全部加载进内存，所以你不应该将它用来存储大量数据，若你要存储大量数据，请改用LazyLocalStorage，
 /// 它只会一次加载所有的key到内存中，然后根据你访问的key异步读取磁盘中的value，所以获取数据将变成异步操作。
 class LazyLocalStorage<T> {

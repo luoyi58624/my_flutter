@@ -7,10 +7,12 @@ class RouterUtil {
   /// 跳转到新页面
   static Future<T?> to<T>(
     Widget page, {
+    // 如果你使用了嵌套导航，那么必须传递当前context
+    BuildContext? context,
     RouteSettings? settings,
     bool fullscreenDialog = false,
   }) async {
-    return await Navigator.of(globalContext).push<T>(CupertinoPageRoute(
+    return await Navigator.of(context ?? globalContext).push<T>(CupertinoPageRoute(
       builder: (context) => page,
       settings: settings,
       fullscreenDialog: fullscreenDialog,
@@ -19,21 +21,23 @@ class RouterUtil {
 
   /// 返回上一页
   static void back<T>({
+    BuildContext? context,
     T? data,
     int backNum = 1,
   }) async {
     for (int i = 0; i < backNum; i++) {
-      Navigator.of(globalContext).pop(data);
+      Navigator.of(context ?? globalContext).pop(data);
     }
   }
 
   /// 重定向页面，先跳转新页面，再删除之前的页面
   static Future<T?> redirect<T>(
     Widget page, {
+    BuildContext? context,
     RouteSettings? settings,
   }) async {
     return await Navigator.of(
-      globalContext,
+      context ?? globalContext,
     ).pushReplacement(CupertinoPageRoute(
       builder: (context) => page,
       settings: settings,
@@ -49,9 +53,10 @@ class RouterUtil {
   static void pushUntil(
     Widget page,
     String routePath, {
+    BuildContext? context,
     RouteSettings? settings,
   }) async {
-    Navigator.of(globalContext).pushAndRemoveUntil(
+    Navigator.of(context ?? globalContext).pushAndRemoveUntil(
       CupertinoPageRoute(
         builder: (context) => page,
         settings: settings,
@@ -61,15 +66,21 @@ class RouterUtil {
   }
 
   /// 原理和pushUntil一样，只不过这是退出到指定位置
-  static void popUntil(String routePath) async {
-    Navigator.of(globalContext).popUntil(
+  static void popUntil(
+    String routePath, {
+    BuildContext? context,
+  }) async {
+    Navigator.of(context ?? globalContext).popUntil(
       ModalRoute.withName(routePath),
     );
   }
 
   /// 进入新的页面并删除之前所有路
-  static void pushAndPopAll(Widget page) async {
-    Navigator.of(globalContext).pushAndRemoveUntil(
+  static void pushAndPopAll(
+    Widget page, {
+    BuildContext? context,
+  }) async {
+    Navigator.of(context ?? globalContext).pushAndRemoveUntil(
       CupertinoPageRoute(
         builder: (context) => page,
       ),

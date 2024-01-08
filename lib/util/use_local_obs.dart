@@ -14,7 +14,6 @@ class _LocalDataModel {
   /// 示例：
   /// * 30分钟后过期：DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 30
   /// * 2024年1月1日过期：DateTime(2024, 1, 1).millisecondsSinceEpoch
-  // LocalStorage虽然已经支持设置过期时间，但此处的实现在它之前，因为并不影响目前的逻辑，所以暂时不更改它
   late int expireDateTime;
 
   /// 存储的数据
@@ -61,6 +60,8 @@ typedef ExpireDateTimeFun = int Function();
 /// * expireDateTimeFun - 过期时间函数，默认返回-1，表示永不过期，每次更新变量时都会调用此函数，注意：只有卸载控制器再重新加载时才会生效
 /// * serializeFun - 序列化函数，如果你传入的是对象，你必须将其转换为字符串才能缓存在本地
 /// * deserializeFun - 反序列化函数，将本地存储的字符串转回目标对象
+///
+/// 提示：LocalStorage的实现做了增强(基于Hive的对象序列化、过期时间)，但响应式变量的实现没有适配，后续应该也不会对其更改了。
 Rx<T> useLocalObs<T>(
   T value,
   String key, {
