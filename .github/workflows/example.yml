@@ -1,4 +1,4 @@
-name: build web page
+name: build example web page
 
 on:
   push:
@@ -16,10 +16,13 @@ jobs:
           flutter-version: '3.16.5'
           channel: 'stable'
           architecture: x64
+          cache: true
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
+          cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
       - run: sh ./script/example.sh
       - name: Deploy Web
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: flutter_web_pages
-          folder: build/web
+          folder: example/build/web
           clean: true
