@@ -2,10 +2,10 @@ name: build web page
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
-#    branches:
-#      - master
+#    tags:
+#      - 'v*.*.*'
+    branches:
+      - master
 
 jobs:
   build:
@@ -22,10 +22,7 @@ jobs:
           cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
           architecture: x64
       - name: build flutter for web
-      - run: |
-          flutter --version
-          flutter pub get
-          flutter build web --web-renderer=html
+      - run: sh ./scripts/example.sh
       - name: Deploy Web
         uses: JamesIves/github-pages-deploy-action@v4
         with:
