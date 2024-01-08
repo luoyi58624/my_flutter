@@ -102,7 +102,7 @@ class _ListPageState extends State<_ListPage> {
       ),
       body: Obx(() {
         LoggerUtil.i('list build');
-        return CupertinoScrollbar(
+        return buildCupertinoScrollbar(
           controller: scrollController,
           child: CustomScrollView(
             controller: scrollController,

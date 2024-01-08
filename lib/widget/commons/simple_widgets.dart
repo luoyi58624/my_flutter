@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../common/modal.dart';
 import '../../util/router.dart';
@@ -112,3 +115,20 @@ Widget _buildCell(BuildContext context, List<NavPageModel> cellItems) {
 // Widget buildCupertinoScrollbar(){
 //
 // }
+
+/// 构建ios滚动条，如果是web
+Widget buildCupertinoScrollbar({
+  required Widget child,
+  ScrollController? controller,
+  bool thumbVisibility = false, // 是否一直显示滚动条
+}) {
+  if (kIsWeb || GetPlatform.isDesktop) {
+    return child;
+  } else {
+    return CupertinoScrollbar(
+      controller: controller,
+      thumbVisibility: thumbVisibility,
+      child: child,
+    );
+  }
+}
