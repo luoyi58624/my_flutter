@@ -4,6 +4,7 @@ export 'local_storage.dart';
 export 'logger.dart';
 export 'modal.dart';
 export 'no_ripper.dart';
+export 'platform.dart';
 export 'router.dart';
 export 'loading.dart';
 export 'toast.dart';
