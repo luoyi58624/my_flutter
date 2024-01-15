@@ -26,6 +26,6 @@ class LoggerUtil {
   }
 
   static void e(dynamic message, [dynamic title]) {
-    _logger.w(message, error: title);
+    _logger.e(message, error: title);
   }
 }
